@@ -1,11 +1,8 @@
 @extends($activeTemplate.'layouts.frontend')
 @section('content')
-<div class="container">
+<div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-7 col-xl-5">
-            <div class="text-end">
-                <a href="{{ route('home') }}" class="fw-bold home-link"> <i class="las la-long-arrow-alt-left"></i> @lang('Go to Home')</a>
-            </div>
             <div class="d-flex justify-content-center">
                 <div class="verification-code-wrapper">
                     <div class="verification-area">

@@ -1,6 +1,6 @@
 @extends($activeTemplate .'layouts.frontend')
 @section('content')
-<div class="container">
+<div class="container py-5">
     <div class="d-flex justify-content-center">
         <div class="verification-code-wrapper">
             <div class="verification-area">

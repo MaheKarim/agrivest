@@ -1,29 +1,19 @@
+@php
+    $socialLinks = getContent('social_icon.element',false, orderById:true);
+@endphp
 <header class="header" id="header">
     <div class="header-top d-none d-lg-block">
         <div class="container">
             <div class="header-top-wrapper">
                 <div class="header-top__item one">
                     <ul class="social-list">
+                        @foreach ($socialLinks as $socialLink)
                         <li class="social-list__item">
-                            <a href="https://www.facebook.com" class="social-list__link active">
-                                <i class="fab fa-facebook-f"></i>
+                            <a href="{{ @$socialLink->data_values->url }}" class="social-list__link" target="_blank">
+                               @php echo @$socialLink->data_values->social_icon @endphp
                             </a>
                         </li>
-                        <li class="social-list__item">
-                            <a href="https://www.twitter.com" class="social-list__link">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="social-list__item">
-                            <a href="https://www.linkedin.com" class="social-list__link">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </li>
-                        <li class="social-list__item">
-                            <a href="https://www.pinterest.com" class="social-list__link">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
 
@@ -133,7 +123,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
+                                <a class="nav-link" href="{{ route('home') }}">@lang('Home')</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.html">About</a>
@@ -145,7 +135,7 @@
                                 <a class="nav-link" href="blog.html">Blogs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="{{ route('contact') }}">@lang('Contact')</a>
                             </li>
                         </ul>
                     </div>
@@ -166,9 +156,15 @@
                         </ul>
 
 
-                        <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.register') }}">
-                            @lang('Register')
-                        </a>
+                        @if(auth()->check())
+                            <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.register') }}">
+                                @lang('Dashboard')
+                            </a>
+                        @else
+                            <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.register') }}">
+                                @lang('Register')
+                            </a>
+                        @endif
                     </div>
                 </div>
             </nav>
