@@ -8,10 +8,16 @@
           <chats>
             <list>
               <chat>
-                <internalId value="f054919f-bae4-425e-a181-11e0ce429caf" />
+                <internalId value="21b52fc6-2194-4f7d-b105-b4011de69d45" />
               </chat>
               <chat>
-                <internalId value="ab7ae937-afb5-46bd-a95e-0d93b693110f" />
+                <internalId value="19e258d7-1579-43a5-bcff-9fa0a1553ec3" />
+              </chat>
+              <chat>
+                <internalId value="67a939ef-378b-4cb5-96d9-da3192411395" />
+              </chat>
+              <chat>
+                <internalId value="b2327f3f-a085-46c9-908a-3407fccbd5e2" />
               </chat>
             </list>
           </chats>

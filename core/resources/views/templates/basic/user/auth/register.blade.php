@@ -1,7 +1,7 @@
-@extends($activeTemplate . 'layouts.frontend')
-@section('content')
+@extends($activeTemplate . 'layouts.app')
+@section('main-content')
     @if (gs('registration'))
-    <div class="container">
+    {{-- <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-7 col-xl-6">
                 <div class="text-end">
@@ -92,7 +92,89 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    <section class="account">
+        <div class="account-left bg-img" data-background-image="{{ asset($activeTemplateTrue."images/thumbs/account-thumb.jpg")}}">
+            <a class="account-logo" href="{{ route('home') }}">
+                <img src="{{ siteLogo() }}" alt="Logo">
+            </a>
+        </div>
+        <div class="account-right">
+            <form class="account-form verify-gcaptcha disableSubmission" action="{{ route('user.register') }}" method="POST">
+                @csrf
+                <div class="account-form__header">
+                    <a class="account-logo d-lg-none" href="{{ route('home') }}">
+                        <img src="{{ siteLogo() }}" alt="Logo">
+                    </a>
+
+                    <div class="account-form-headings">
+                        <span class="account-form-headings__subtitle">@lang('Welcome')</span>
+                        <h5 class="account-form-headings__title">@lang('Register')</h5>
+                    </div>
+                </div>
+
+                <div class="account-form__body">
+                    <div class="row gy-3">
+                        @if (session()->get('reference') != null)
+                        <div class="col-sm-12">
+                            <label class="form-label form--label" for="referenceBy">@lang('Reference by')</label>
+                            <input class="form-control form--control" type="text" name="referBy" id="referenceBy" value="{{ session()->get('reference') }}" readonly>
+                        </div>
+                        @endif
+
+                        <div class="col-sm-6">
+                            <label class="form-label form--label">@lang('First Name')</label>
+                            <input class="form-control form--control" type="text"  name="firstname" value="{{old("firstname")}}" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label form--label">@lang('Last Name')</label>
+                            <input class="form-control form--control" type="text" name="lastname" value="{{old("lastname")}}" required>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="form-label form--label">@lang('E-Mail Address')</label>
+                            <input class="form-control form--control checkUser" type="email" name="email" value="{{ old('email') }}"
+                                   required>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label class="form--label">@lang('Password')</label>
+                            <div class="input-group input--group input--group-password">
+                                <input class="form-control form--control" type="password" placeholder="Password">
+                                <button class="input-group-text input-group-btn" type="button">
+                                    <i  class="fas fa-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="form-check form--check">
+                                    <input class="form-check-input" type="checkbox" value="all" id="remember-me">
+                                    <label class="form-check-label" for="remember-me">Remember me</label>
+                                </div>
+
+                                <a class="account-form__link" href="#">Forget Password</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-sm-12">
+                            <button class="btn btn--lg btn--base btn--action w-100" type="submit">
+                                Create Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-form__footer">
+                    @include($activeTemplate . 'partials.social_login')
+
+                    <p class="account-form__cta-text">
+                        Don't have on account? <a class="account-form__link" href="registration.html">Sign Up</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
 
     <div class="modal fade" id="existModalCenter" tabindex="-1" role="dialog" aria-labelledby="existModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -159,5 +241,5 @@
             })(jQuery);
         </script>
     @endpush
-    
+
 @endif

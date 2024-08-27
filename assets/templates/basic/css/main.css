@@ -8305,3 +8305,7 @@ textarea.form--control {
 
 /* ========================== Dashboard CSS End ============================= */
 /*# sourceMappingURL=main.css.map */
+
+.form-group{
+    margin-bottom: 1rem;
+}
