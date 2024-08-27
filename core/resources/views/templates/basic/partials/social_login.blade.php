@@ -1,5 +1,6 @@
 @php
     $credential = gs('socialite_credentials');
+    $text = request()->routeIs('user.register') ? 'Sign Up' : 'Sign In';
 @endphp
 @if (
     @$credential->facebook->status == Status::ENABLE ||
@@ -7,7 +8,7 @@
         @$credential->linkedin->status == Status::ENABLE)
     <div class="account-form-social-login">
         <span class="account-form-social-login__title">
-            @lang('Or Sign In With Social Media')
+            @lang('Or '. $text . ' With Social Media')
         </span>
 
         <div class="account-social-login">

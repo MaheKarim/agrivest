@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/agrivest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/agrivest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/logo_icon/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo_icon/favicon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/logo_icon/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo_icon/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/color.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/css/color.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/fontawesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/images/facebook.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/images/google.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/images/linkdin.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/SiteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/frontend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/frontend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/social_login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/social_login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/register.blade.php" afterDir="false" />
@@ -252,7 +234,7 @@
       <option name="presentableId" value="Default" />
       <updated>1724765162068</updated>
       <workItem from="1724765163880" duration="857000" />
-      <workItem from="1724767122398" duration="674000" />
+      <workItem from="1724767122398" duration="3161000" />
     </task>
     <servers />
   </component>

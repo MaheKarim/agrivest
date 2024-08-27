@@ -12,7 +12,7 @@
                 @csrf
                 <div class="account-form__header">
                     <a class="account-logo d-lg-none" href="{{route('home')}}">
-                        <img src="{{ siteLogo() }}" alt="">
+                        <img src="{{ siteLogo() }}" alt="Logo">
                     </a>
                     <div class="account-form-headings">
                         <span class="account-form-headings__subtitle">@lang('Welcome back')</span>
@@ -27,7 +27,7 @@
                             value="{{ old('username') }}" required>
                     </div>
                     <div class="form-group">
-                        <label class="form--label" for="">@lang('Password')</label>
+                        <label class="form--label">@lang('Password')</label>
                         <div class="input-group input--group input--group-password">
                             <input class="form-control form--control" type="password" name="password" required>
                             <button class="input-group-text input-group-btn" type="button">
