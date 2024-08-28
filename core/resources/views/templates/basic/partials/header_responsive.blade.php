@@ -38,12 +38,14 @@
                                         </button>
 
                                         <div class="dropdown-menu">
-                                            @foreach ($languages as $language)
-                                                <a class="dropdown-item" href="{{ route('lang', $language->code) }}">
+                                            @foreach ($languages as $lang)
+                                                <a class="dropdown-item" href="{{ route('lang', $lang->code) }}">
                                                     <img class="dropdown-flag"
-                                                         src="{{ getImage(getFilePath('language') . '/' . $language->image, getFileSize('language')) }}"
+                                                         src="{{ getImage(getFilePath('language') . '/' . $lang->image, getFileSize('language')) }}"
                                                          alt="@lang('Language Flag')">
-                                                    <span>{{ __($selectedLang->name) }}</span>
+                                                    <span>
+                                                        {{ __($lang->name) }}
+                                                    </span>
                                                 </a>
                                             @endforeach
                                         </div>

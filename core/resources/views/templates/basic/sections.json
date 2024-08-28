@@ -157,7 +157,7 @@
            "subheading": "text",
             "button_name": "text",
             "button_url": "text"
-        } , "element": {
+        }, "element": {
             "images": {
                 "image": {
                     "size": "96x96"
@@ -166,6 +166,50 @@
             "name": "text",
             "date": "text",
             "modal": true
+        }
+    },
+    "project": {
+        "builder": true,
+        "name": "Project Section",
+        "content": {
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text"
+        }
+    },
+    "brand": {
+        "builder": true,
+        "name": "Brand Section",
+        "element": {
+            "images": {
+                "image": {
+                    "size": "140x40"
+                }
+            },
+            "modal": true
+        }
+    },
+    "blog": {
+        "builder": true,
+        "name": "Blog Section",
+        "content": {
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text"
+        },
+        "element": {
+            "images":{
+                "image":{
+                    "size":"966x450",
+                    "thumb":"416x268",
+                    "small_thumb":"200x200"
+                }
+            },
+            "title": "text",
+            "slug":"title",
+            "description": "textarea-nic",
+            "modal": false,
+            "seo":true
         }
     },
     "service": {
@@ -239,27 +283,6 @@
             "subheading":"text",
             "button_name":"text",
             "button_url":"text"
-        }
-    },
-    "blog": {
-        "builder": true,
-        "name": "Blog Section",
-        "content": {
-            "heading": "text",
-            "subheading": "text"
-        },
-        "element": {
-            "images":{
-                "image":{
-                    "size":"728x465",
-                    "thumb":"120x80"
-                }
-            },
-            "title": "text",
-            "slug":"title",
-            "description": "textarea-nic",
-            "modal": false,
-            "seo":true
         }
     },
     "subscribe": {

@@ -114,12 +114,22 @@ class SiteController extends Controller
         return back();
     }
 
+    public function blogs()
+    {
+        $blogs     = Frontend::where('tempname', activeTemplateName())->where('data_keys', 'blog.element')->latest()->paginate(getPaginate(12));
+        $pageTitle = 'Blogs';
+        $page      = Page::where('tempname', activeTemplate())->where('slug', 'blog')->first();
+        $sections  = $page->secs;
+        return view('Template::blog', compact('blogs', 'pageTitle', 'sections'));
+    }
+
     public function blogDetails($slug){
         $blog = Frontend::where('slug',$slug)->where('data_keys','blog.element')->firstOrFail();
         $pageTitle = $blog->data_values->title;
         $seoContents = $blog->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('blog',$seoContents->image,getFileSize('seo'),true) : null;
-        return view('Template::blog_details',compact('blog','pageTitle','seoContents','seoImage'));
+        $latestBlogs = Frontend::where('tempname', activeTemplateName())->where('data_keys', 'blog.element')->latest()->limit(6)->get();
+        return view('Template::blog_details',compact('blog','pageTitle','seoContents','seoImage','latestBlogs'));
     }
 
 

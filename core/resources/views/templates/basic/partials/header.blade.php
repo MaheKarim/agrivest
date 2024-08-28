@@ -63,7 +63,7 @@
                                         <img class="dropdown-flag"
                                              src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
                                              alt="@lang('Language Flag')">
-                                        <span>{{ __($selectedLang->name) }}</span>
+                                        <span>{{ __($lang->name) }}</span>
                                     </a>
                                 @endforeach
                             </div>
