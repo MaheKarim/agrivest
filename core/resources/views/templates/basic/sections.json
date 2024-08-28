@@ -139,24 +139,33 @@
             "modal": true
         }
     },
-    "about": {
+    "upcoming_offer": {
         "builder": true,
-        "name": "About Us",
+        "name": "UpComing Offer Section",
         "content": {
-            "images":{
-                "background_image":{
-                    "size":"500x500",
-                    "thumb":"100x100"
-                },
-                "about_image":{
-                    "size":"500x500",
-                    "thumb":"100x100"
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text"
+        }
+    },
+    "award": {
+        "builder": true,
+        "name": "Award Section",
+        "content": {
+           "small_heading": "text",
+           "heading": "text",
+           "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        } , "element": {
+            "images": {
+                "image": {
+                    "size": "96x96"
                 }
             },
-            "heading": "text",
-            "subheading": "text",
-            "description": "textarea",
-            "about_icon": "icon"
+            "name": "text",
+            "date": "text",
+            "modal": true
         }
     },
     "service": {
