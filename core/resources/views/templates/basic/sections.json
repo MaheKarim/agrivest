@@ -122,13 +122,20 @@
         "builder": true,
         "name": "FAQ Section",
         "content": {
+            "images": {
+                "image": {
+                    "size": "1920x646"
+                }
+            },
+            "small_heading": "text",
             "heading": "text",
-            "subheading": "text"
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
         },
         "element": {
             "question": "text",
             "answer": "textarea",
-            "icon":"icon",
             "modal": true
         }
     },
