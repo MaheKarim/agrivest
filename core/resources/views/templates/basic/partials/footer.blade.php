@@ -31,7 +31,7 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                 </div>
                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 order-3 order-lg-2">
                     <div class="footer-item">
-                        <h6 class="footer-item__title">@lang('Offers')</h6>
+                        <h6 class="footer-item__title">@lang('Others Pages')</h6>
                         <ul class="footer-menu">
                             <li class="footer-menu__item">
                                 <a class="footer-menu__link" href="{{ route('home') }}">@lang('Home')</a>
@@ -50,13 +50,13 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                         <h6 class="footer-item__title">@lang('Learn More')</h6>
                         <ul class="footer-menu">
                             <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">How to work</a>
+                                <a class="footer-menu__link" href="#">@lang('How to work')</a>
                             </li>
                             <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">Coverage area</a>
+                                <a class="footer-menu__link" href="#">@lang('Coverage area')</a>
                             </li>
                             <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">Common</a>
+                                <a class="footer-menu__link" href="#">@lang('Common')</a>
                             </li>
                         </ul>
                     </div>
