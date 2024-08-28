@@ -14,7 +14,7 @@
                     @csrf
                     <div class="account-form__header">
                         <a class="account-logo d-lg-none" href="{{ route('home') }}">
-                            <img src="{{ siteLogo() }}" alt="Logo">
+                            <img src="{{ siteLogo('dark') }}" alt="Logo">
                         </a>
 
                         <div class="account-form-headings">

@@ -49,7 +49,7 @@
         "route_name": "admin.seo"
     },
     "manage_frontend": {
-        "keyword": ["frontend","template","manage frontend", "frontend contents", "frontend settings", "about us","banner","contact","faq","social icons","section settings","subscribe"],
+        "keyword": ["frontend","template","manage frontend", "frontend contents", "frontend settings", "award","banner section","contact us","faq","social icons","brand settings","blog", "invest section", "our offer section", "our vision section", "project section", "registration disable", "social icons", "testimonial section", "up coming feature section", "why we are section"],
         "title": "Manage Frontend",
         "subtitle": "Control all of the frontend contents of the system.",
         "icon": "la la-html5",

@@ -67,13 +67,7 @@
                             <a class="nav-link" href="{{ route('home') }}">@lang('Home')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="offers.html">Offers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="blog.html">Blogs</a>
+                            <a class="nav-link" href="{{ route('blogs') }}">@lang('Blogs')</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contact') }}">@lang('Contact')</a>

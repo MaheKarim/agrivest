@@ -1,7 +1,7 @@
 @php
-    $policyPages = getContent('policy_pages.element', orderById: true);
+    $policyPages = getContent('policy_pages.element',true);
     $contactInfo = getContent('contact_us.content', true);
-    $appStores = getContent('contact_us.element', true);
+    $appStores = getContent('contact_us.element', orderById: true);
     $socialIcons = getContent('social_icon.element', orderById: true);
 @endphp
 <footer class="footer">
@@ -20,7 +20,8 @@
 
                             <div class="footer-item__app-link-wrapper">
                                 @foreach($appStores as $store)
-                                    <a class="footer-item__app-link" href="{{ @$store->data_values->link }}">
+                                    <a class="footer-item__app-link" href="{{ @$store->data_values->link }}"
+                                       target="_blank">
                                         <img src="{{ frontendImage('contact_us',@$store->data_values->image, '143x43') }}" alt="@lang('App Image')">
                                     </a>
                                 @endforeach
@@ -57,7 +58,6 @@
                             <li class="footer-menu__item">
                                 <a class="footer-menu__link" href="#">Common</a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -67,7 +67,9 @@
                         <ul class="footer-menu">
                             @foreach($policyPages as $page)
                                 <li class="footer-menu__item">
-                                    <a class="footer-menu__link" href="{{ route('policy.pages', slug(@$policy->data_values->slug)) }}">{{ __(@$policy->data_values->title) }}</a>
+                                    <a class="footer-menu__link" href="{{ route('policy.pages', slug(@$policy->data_values->slug)) }}">
+                                        {{ __(@$policy->data_values->title) }}
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
@@ -96,7 +98,6 @@
                                     {{ __(@$contactInfo->data_values->email_address) }}
                                 </a>
                             </li>
-
                         </ul>
 
                         <div class="footer-item__social-links">

@@ -1,6 +1,6 @@
 @php
     $blogContent = getContent('blog.content', true);
-    $blogsElement = getContent('blog.element', false, 3, orderById: true);
+    $blogs = getContent('blog.element', false, 3, orderById: true);
 @endphp
 <section class="our-blogs pt-60 pb-120 bg--white">
     <div class="container">

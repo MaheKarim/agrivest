@@ -1,4 +1,4 @@
-@foreach($blogsElement as $blog)
+@foreach($blogs as $blog)
 <div class="col-sm-6 col-lg-4">
     <article class="card card--blog">
         <a href="{{ route('blog.details', $blog->slug) }}" class="card-thumb">

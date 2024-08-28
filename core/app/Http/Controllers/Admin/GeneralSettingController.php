@@ -61,7 +61,6 @@ class GeneralSettingController extends Controller
         return view('admin.setting.configuration', compact('pageTitle'));
     }
 
-
     public function systemConfigurationSubmit(Request $request)
     {
         $general = gs();
@@ -82,7 +81,6 @@ class GeneralSettingController extends Controller
         return back()->withNotify($notify);
     }
 
-
     public function logoIcon()
     {
         $pageTitle = 'Logo & Favicon';
@@ -96,9 +94,18 @@ class GeneralSettingController extends Controller
             'favicon' => ['image',new FileTypeValidate(['png'])],
         ]);
         $path = getFilePath('logoIcon');
+
         if ($request->hasFile('logo')) {
             try {
                 fileUploader($request->logo,$path,filename:'logo.png');
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Couldn\'t upload the logo'];
+                return back()->withNotify($notify);
+            }
+        }
+        if ($request->hasFile('logo_dark')) {
+            try {
+                fileUploader($request->logo_dark,$path,filename:'logo_dark.png');
             } catch (\Exception $exp) {
                 $notify[] = ['error', 'Couldn\'t upload the logo'];
                 return back()->withNotify($notify);
