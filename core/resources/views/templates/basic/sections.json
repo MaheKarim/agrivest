@@ -212,50 +212,6 @@
             "seo":true
         }
     },
-    "service": {
-        "builder": true,
-        "name": "Service Section",
-        "content": {
-            "select":{
-                "name":"trx_type",
-                "options":{
-                  "deposit":"Deposit",
-                  "withdraw":"Withdraw"
-                }
-            },
-            "heading": "text",
-            "subheading": "text"
-        },
-        "element": {
-            "select":{
-                "name":"trx_type",
-                "options":{
-                  "deposit":"Deposit",
-                  "withdraw":"Withdraw"
-                }
-            },
-            "service_icon": "icon",
-            "title": "text",
-            "description": "textarea",
-            "modal": false
-        }
-    },
-    "counter": {
-        "builder": true,
-        "name": "Counter Section",
-        "content": {
-            "heading": "text",
-            "subheading": "text"
-        },
-        "element": {
-            "title": "text",
-            "counter_digit": "text",
-            "sub_title": "text",
-            "counter_icon": "icon",
-            "counter_icon_2": "icon",
-            "modal": false
-        }
-    },
     "policy_pages": {
         "builder": true,
         "no_selection":true,
@@ -285,14 +241,6 @@
             "button_url":"text"
         }
     },
-    "subscribe": {
-        "builder": true,
-        "name": "Subscribe Section",
-        "content": {
-            "heading": "text",
-            "subheading": "text"
-        }
-    },
     "social_icon": {
         "builder": true,
         "no_selection": true,
@@ -309,14 +257,24 @@
         "no_selection": true,
         "name": "Contact Us",
         "content": {
-            "title": "text",
             "short_details": "text",
+            "address": "text",
             "email_address": "text",
-            "contact_details": "text",
             "contact_number": "text",
+            "before_green_text": "text",
+            "green_text": "text",
+            "after_green_text": "text",
             "latitude": "text",
-            "longitude": "text",
-            "website_footer": "textarea-nic"
+            "longitude": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "143x43"
+                }
+            },
+            "link": "text",
+            "modal": true
         }
     },
     "kyc": {
