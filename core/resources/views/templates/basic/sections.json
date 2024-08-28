@@ -10,7 +10,7 @@
                 }
             },
             "heading": "text",
-            "green_text": "text",
+            "color_text": "text",
             "subheading": "text",
             "left_button_name": "text",
             "left_button_url_": "text",

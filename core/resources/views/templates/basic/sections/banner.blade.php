@@ -2,14 +2,14 @@
   $bannerContent = getContent('banner.content',true);
   $bannerElement = getContent('banner.element',null, orderById:true);
 @endphp
-<section class="banner-section bg-img" data-background-image="{{ frontendImage('banner',@$bannerContent->data_values->image) }}">
+<section class="banner-section bg-img" data-background-image="{{ frontendImage('banner',@$bannerContent->data_values->image,'1920x950') }}">
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7">
                 <div class="banner-content">
                     <h1 class="banner-content__title">{{ __(@$bannerContent->data_values->heading) }}</h1>
                     <p class="banner-content__desc">
-                        <span>{{ __(@$bannerContent->data_values->green_text) }}</span> {{ __(@$bannerContent->data_values->subheading) }}
+                        <span>{{ __(@$bannerContent->data_values->color_text) }}</span> {{ __(@$bannerContent->data_values->subheading) }}
                     </p>
 
                     <div class="banner-content__button">

@@ -50,25 +50,27 @@
                                    value="{{ old('email') }}" required>
                         </div>
 
-                        <div class="form-group">
-                            <label class="form--label">@lang('Password')</label>
-                            <div class="input-group input--group input--group-password">
-                                <input
-                                    class="form-control form--control @if (gs('secure_password')) secure-password @endif"
-                                    type="password" name="password" required>
-                                <button class="input-group-text input-group-btn" type="button">
-                                    <i class="fas fa-eye-slash"></i>
-                                </button>
+                        <div class="d-flex justify-content-between gap-2">
+                            <div class="form-group">
+                                <label class="form--label">@lang('Password')</label>
+                                <div class="input-group input--group input--group-password">
+                                    <input
+                                        class="form-control form--control @if (gs('secure_password')) secure-password @endif"
+                                        type="password" name="password" required>
+                                    <button class="input-group-text input-group-btn" type="button">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form--label">@lang('Confirm Password')</label>
-                            <div class="input-group input--group input--group-password">
-                                <input class="form-control form--control" type="password" name="password_confirmation"
-                                       required>
-                                <button class="input-group-text input-group-btn" type="button">
-                                    <i class="fas fa-eye-slash"></i>
-                                </button>
+                            <div class="form-group">
+                                <label class="form--label">@lang('Confirm Password')</label>
+                                <div class="input-group input--group input--group-password">
+                                    <input class="form-control form--control" type="password" name="password_confirmation"
+                                           required>
+                                    <button class="input-group-text input-group-btn" type="button">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <x-captcha/>
@@ -93,9 +95,9 @@
                                             @endforeach
                                         </span>
                                     </div>
-                                    @endif
                                 </div>
                             </div>
+                            @endif
 
                             <div class="form-group">
                                 <button class="btn btn--lg btn--base btn--action w-100" type="submit">
