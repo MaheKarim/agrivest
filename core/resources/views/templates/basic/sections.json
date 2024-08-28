@@ -22,6 +22,30 @@
             "text": "text"
         }
     },
+    "why_we": {
+      "builder": true,
+        "name": "Why We Are Section",
+        "content": {
+            "images":{
+                "image": {
+                    "size": "666x556"
+                },
+                "icon_image": {
+                    "size": "24x24"
+                }
+            },
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text",
+            "video_link": "text"
+        },
+        "element": {
+            "text": "text",
+            "modal": true
+        }
+    },
     "feature": {
         "builder": true,
         "name": "Feature Section",
