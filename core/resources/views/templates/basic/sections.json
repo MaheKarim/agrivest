@@ -98,25 +98,38 @@
             "modal": true
         }
     },
-    "feature": {
+    "testimonial": {
         "builder": true,
-        "name": "Feature Section",
+        "name": "Testimonial Section",
+        "content": {
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text"
+        }, "element": {
+            "images": {
+                "image": {
+                    "size": "80x80"
+                }
+            },
+            "name": "text",
+            "designation": "text",
+            "country": "text",
+            "description": "textarea",
+            "modal": true
+        }
+    },
+    "faq": {
+        "builder": true,
+        "name": "FAQ Section",
         "content": {
             "heading": "text",
             "subheading": "text"
         },
         "element": {
-            "title": "text",
-            "description": "textarea",
-            "feature_icon": "icon",
-            "select":{
-                "name":"trx_type",
-                "options":{
-                  "deposit":"Deposit",
-                  "withdraw":"Withdraw"
-                }
-            },
-            "modal": false
+            "question": "text",
+            "answer": "textarea",
+            "icon":"icon",
+            "modal": true
         }
     },
     "about": {
@@ -210,20 +223,6 @@
             "subheading":"text",
             "button_name":"text",
             "button_url":"text"
-        }
-    },
-    "faq": {
-        "builder": true,
-        "name": "FAQ Section",
-        "content": {
-            "heading": "text",
-            "subheading": "text"
-        },
-        "element": {
-            "question": "text",
-            "answer": "textarea",
-            "icon":"icon",
-            "modal": true
         }
     },
     "blog": {
