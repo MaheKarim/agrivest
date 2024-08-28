@@ -64,7 +64,7 @@
             "small_heading": "text",
             "heading": "text",
             "subheading": "text"
-        } , "element": {
+        }, "element": {
             "images": {
                 "image": {
                     "size": "40x40"
@@ -86,7 +86,6 @@
             "small_heading": "text",
             "heading": "text",
             "subheading": "text"
-
         }, "element": {
             "title": "text",
             "description": "textarea",
@@ -201,8 +200,7 @@
             "images":{
                 "image":{
                     "size":"966x450",
-                    "thumb":"416x268",
-                    "small_thumb":"200x200"
+                    "thumb":"416x268"
                 }
             },
             "title": "text",
@@ -264,8 +262,7 @@
             "before_green_text": "text",
             "green_text": "text",
             "after_green_text": "text",
-            "latitude": "text",
-            "longitude": "text"
+            "map": "text"
         },
         "element": {
             "images": {
@@ -285,6 +282,15 @@
             "required": "text",
             "pending": "text",
             "reject": "text"
+        }
+    },
+    "top_bar": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Top Bar",
+        "element": {
+            "text": "text",
+            "modal": true
         }
     }
 }

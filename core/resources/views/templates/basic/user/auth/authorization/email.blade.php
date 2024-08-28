@@ -1,6 +1,7 @@
 @extends($activeTemplate .'layouts.frontend')
 @section('content')
-<div class="container py-5">
+    <section class="py-120">
+        <div class="container">
     <div class="d-flex justify-content-center">
         <div class="verification-code-wrapper">
             <div class="verification-area">
@@ -26,6 +27,7 @@
         </div>
     </div>
 </div>
+    </section>
 @endsection
 @push('script')
     <script>

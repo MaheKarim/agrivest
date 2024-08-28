@@ -1,5 +1,6 @@
 @php
     $socialLinks = getContent('social_icon.element',false, orderById:true);
+    $topbarContents = getContent('top_bar.element',null, orderById:true);
 @endphp
 <header class="header" id="header">
     <div class="header-top d-none d-lg-block">
@@ -19,12 +20,11 @@
                 </div>
 
                 <div class="header-top__item two">
+                    @foreach ($topbarContents as $item)
                     <p class="header-top__text">
-                        <span>Get more profit</span> by invest in OX farming industry
+                        {{ __($item->data_values->text) }}
                     </p>
-                    <p class="header-top__text">
-                        Happy Investment with us in <span>7.5% ROI</span>
-                    </p>
+                    @endforeach
                 </div>
 
                 <div class="header-top__item three">

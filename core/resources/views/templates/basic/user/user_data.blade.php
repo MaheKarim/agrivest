@@ -1,6 +1,7 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
-    <div class="container py-4">
+    <section class="user-section py-120">
+        <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-7 col-xl-5">
                 <div class="card custom--card">
@@ -75,6 +76,7 @@
             </div>
         </div>
     </div>
+    </section>
 @endsection
 
 @push('style-lib')

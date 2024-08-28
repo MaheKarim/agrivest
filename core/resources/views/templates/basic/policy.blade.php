@@ -1,12 +1,9 @@
 @extends($activeTemplate.'layouts.frontend')
 @section('content')
-<section class="py-5">
+<section class="blogs py-120 bg--white">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="text-end">
-                    <a href="{{ route('home') }}" class="fw-bold home-link"> <i class="las la-long-arrow-alt-left"></i> @lang('Go to Home')</a>
-                </div>
                 <div class="card custom--card">
                     <div class="card-header">
                         <h5 class="card-title">{{ __($pageTitle) }}</h5>

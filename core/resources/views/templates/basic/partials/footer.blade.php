@@ -1,8 +1,8 @@
 @php
-    $policyPages = getContent('policy_pages.element',true);
-    $contactInfo = getContent('contact_us.content', true);
-    $appStores = getContent('contact_us.element', orderById: true);
-    $socialIcons = getContent('social_icon.element', orderById: true);
+$policyPages = getContent('policy_pages.element', false, orderById:true);
+$contactInfo = getContent('contact_us.content', true);
+$appStores = getContent('contact_us.element', orderById: true);
+$socialIcons = getContent('social_icon.element', orderById: true);
 @endphp
 <footer class="footer">
     <div class="footer-top py-120">
@@ -67,8 +67,8 @@
                         <ul class="footer-menu">
                             @foreach($policyPages as $page)
                                 <li class="footer-menu__item">
-                                    <a class="footer-menu__link" href="{{ route('policy.pages', slug(@$policy->data_values->slug)) }}">
-                                        {{ __(@$policy->data_values->title) }}
+                                    <a class="footer-menu__link" href="{{ route('policy.pages', $page->slug) }}" target="_blank">
+                                        {{ __(@$page->data_values->title) }}
                                     </a>
                                 </li>
                             @endforeach

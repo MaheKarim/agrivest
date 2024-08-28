@@ -9,7 +9,7 @@
 
             <div class="navbar-right">
                 <a class="navbar-brand logo d-block d-lg-none order-1" href="{{ route('home') }}">
-                    <img src="{{ siteLogo() }}" alt="logo">
+                    <img src="{{ siteLogo() }}" alt="@lang('logo')">
                 </a>
                 <button class="navbar-toggler header-button order-3 order-lg-2" type="button"
                         data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false">
@@ -21,7 +21,6 @@
                     <ul class="navbar-nav nav-menu ms-auto align-items-lg-center">
                         <li class="nav-item">
                             <div class="d-flex flex-wrap justify-content-between align-items-center">
-
 
                                 @if (gs('multi_language'))
                                     @php
@@ -66,6 +65,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">@lang('Home')</a>
                         </li>
+                        @foreach($pages as $page)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ $page->slug }}">{{__($page->name)}}</a>
+                            </li>
+                        @endforeach
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('blogs') }}">@lang('Blogs')</a>
                         </li>

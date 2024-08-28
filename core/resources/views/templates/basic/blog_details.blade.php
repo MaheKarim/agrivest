@@ -6,7 +6,7 @@
 			<div class="col-lg-8 col-xl-9">
                 <div class="blog-details__wrapper">
                     <div class="blog-details__thumb">
-                        <img src="{{ frontendImage('blog',@$blog->data_values->image,'728x465') }}" class="w-100 mb-3" alt="Blog">
+                        <img src="{{ frontendImage('blog',@$blog->data_values->image,'966x450') }}" class="w-100 mb-3" alt="Blog">
                     </div>
                 <h1 class="blog-details__title">
                      {{__($blog->data_values->title)}}
@@ -57,7 +57,7 @@
                             @foreach ($latestBlogs as $blog)
                                 <li class="blog-list-item">
                                     <a class="blog-list-item__thumb" href="{{ route('blog.details', $blog->slug) }}">
-                                        <img class="blog-list-item__thumb" src="{{ frontendImage('blog', $blog->data_values->image, '120x77') }}" alt="Blog">
+                                        <img class="blog-list-item__thumb" src="{{ frontendImage('blog','thumb_' .$blog->data_values->image, '120x77') }}" alt="@lang('Blog')">
                                     </a>
                                     <div class="blog-list-item__content">
                                         <h6 class="blog-list-item__title">
