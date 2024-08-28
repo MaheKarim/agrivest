@@ -34,13 +34,13 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                         <h6 class="footer-item__title">@lang('Offers')</h6>
                         <ul class="footer-menu">
                             <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">Ago Farm</a>
+                                <a class="footer-menu__link" href="{{ route('home') }}">@lang('Home')</a>
                             </li>
                             <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">Vegetable Farm</a>
+                                <a class="footer-menu__link" href="{{ route('blogs') }}">@lang('Blogs')</a>
                             </li>
                             <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">Poultry Farm</a>
+                                <a class="footer-menu__link" href="{{ route('contact') }}">@lang('Contact')</a>
                             </li>
                         </ul>
                     </div>
