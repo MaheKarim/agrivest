@@ -7,10 +7,10 @@
             <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
                 <div class="section-heading">
                     <div class="section-heading__sec-name">
-                        <img class="me-2" src="{{ asset($activeTemplateTrue.'images/icons/leaf.png') }}"
+                        <img class="me-2" src="{{ siteFavicon() }}"
                              alt="@lang('Global Icon')">
                         <span>{{ __(@$ourOfferContent->data_values->small_heading) }}</span>
-                        <img class="ms-2" src="{{ asset($activeTemplateTrue.'images/icons/leaf.png') }}"
+                        <img class="ms-2" src="{{ siteFavicon() }}"
                              alt="@lang('Global Icon')">
                     </div>
                     <h3 class="section-heading__title">{{ __(@$ourOfferContent->data_values->heading) }}</h3>

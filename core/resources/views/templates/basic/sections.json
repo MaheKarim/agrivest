@@ -57,6 +57,47 @@
             "button_url": "text"
         }
     },
+    "our_vision": {
+        "builder": true,
+        "name": "Our Vision Section",
+        "content": {
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text"
+        } , "element": {
+            "images": {
+                "image": {
+                    "size": "40x40"
+                }
+            },
+            "text": "text",
+            "modal": true
+        }
+    },
+    "invest": {
+        "builder": true,
+        "name": "Invest Section",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "507x669"
+                }
+            },
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text"
+
+        }, "element": {
+            "title": "text",
+            "description": "textarea",
+            "images": {
+                "icon": {
+                    "size": "25x37"
+                }
+            },
+            "modal": true
+        }
+    },
     "feature": {
         "builder": true,
         "name": "Feature Section",
