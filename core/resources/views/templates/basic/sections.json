@@ -6,12 +6,20 @@
         "content": {
             "images":{
                 "image":{
-                    "size":"500x500",
-                    "thumb":"100x100"
+                    "size":"1920x950"
                 }
             },
             "heading": "text",
-            "subheading": "text"
+            "green_text": "text",
+            "subheading": "text",
+            "left_button_name": "text",
+            "left_button_url_": "text",
+            "right_button_name": "text",
+            "right_button_url": "text"
+        }, "element": {
+            "modal": true,
+            "number": "number",
+            "text": "text"
         }
     },
     "feature": {
