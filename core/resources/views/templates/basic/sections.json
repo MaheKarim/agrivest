@@ -46,6 +46,17 @@
             "modal": true
         }
     },
+    "our_offer": {
+        "builder": true,
+        "name": "Our Offer Section",
+        "content": {
+           "small_heading": "text",
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        }
+    },
     "feature": {
         "builder": true,
         "name": "Feature Section",
