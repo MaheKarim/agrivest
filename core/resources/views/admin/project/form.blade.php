@@ -19,9 +19,11 @@
                    required>
         </div>
         <div class="form-group">
-            <label>@lang('Slug')</label>
-            <input type="text" class="form-control" name="slug" value="{{ old('slug') }}" placeholder="@lang('Slug')"
-                   required>
+            <div class="d-flex justify-content-between">
+                <label> @lang('Slug')</label>
+                <div class="slug-verification d-none"></div>
+            </div>
+            <input type="text" class="form-control" name="slug" value="{{ old('slug') }}" required>
         </div>
         <div class="form-group">
             <label>@lang('Project Goal')</label>

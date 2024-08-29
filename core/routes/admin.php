@@ -50,6 +50,13 @@ Route::middleware('admin')->group(function () {
         Route::get('download-attachments/{file_hash}', 'downloadAttachment')->name('download.attachment');
     });
 
+    // Manage Time
+    Route::controller('ManageTimeController')->name('time.')->prefix('time')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::post('store/{id?}', 'store')->name('store');
+        Route::post('status/{id?}', 'status')->name('status');
+    });
+
     // Manage Project
     Route::controller('ManageProjectController')->name('project.')->prefix('project')->group(function(){
         Route::get('/', 'index')->name('index');
