@@ -21,7 +21,7 @@
                         @foreach ($bannerElement as $element)
                         <li class="counterup-list-item">
                             <h4 class="counterup-list-item__number">
-                                <div class="odometer" data-odometer-stop="{{ __(@$element->data_values->number) }}"></div>@lang('+')
+                                <div class="odometer" data-odometer-stop="{{ __(@$element->data_values->number) }}"></div>
                             </h4>
                             <span class="counterup-list-item__text">{{ __(@$element->data_values->text) }}</span>
                         </li>

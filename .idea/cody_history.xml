@@ -47,6 +47,12 @@
                 </messages>
                 <updatedAt value="2024-08-28T19:50:16.5314641" />
               </chat>
+              <chat>
+                <internalId value="20248ad5-e855-49f6-9d92-f5b5a24b09e1" />
+              </chat>
+              <chat>
+                <internalId value="5cbb1bb2-1f3c-4aec-ab99-e5abb9e72ca7" />
+              </chat>
             </list>
           </chats>
         </AccountData>

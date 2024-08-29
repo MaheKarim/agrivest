@@ -14,19 +14,6 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                             <img src="{{ siteLogo() }}" alt="@lang('Site Logo')">
                         </a>
                         <p class="footer-item__desc">{{ __(@$contactInfo->data_values->short_details) }}</p>
-
-                        <div class="footer-item__downloads">
-                            <p class="title">{{__(@$contactInfo->data_values->before_green_text)}} <span>{{__(@$contactInfo->data_values->green_text)}}</span>{{__(@$contactInfo->data_values->after_green_text)}}</p>
-
-                            <div class="footer-item__app-link-wrapper">
-                                @foreach($appStores as $store)
-                                    <a class="footer-item__app-link" href="{{ @$store->data_values->link }}"
-                                       target="_blank">
-                                        <img src="{{ frontendImage('contact_us',@$store->data_values->image, '143x43') }}" alt="@lang('App Image')">
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 order-3 order-lg-2">

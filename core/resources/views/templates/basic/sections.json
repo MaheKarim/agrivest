@@ -18,7 +18,7 @@
             "right_button_url": "text"
         }, "element": {
             "modal": true,
-            "number": "number",
+            "number": "text",
             "text": "text"
         }
     },
@@ -259,19 +259,7 @@
             "address": "text",
             "email_address": "text",
             "contact_number": "text",
-            "before_green_text": "text",
-            "green_text": "text",
-            "after_green_text": "text",
             "map": "text"
-        },
-        "element": {
-            "images": {
-                "image": {
-                    "size": "143x43"
-                }
-            },
-            "link": "text",
-            "modal": true
         }
     },
     "kyc": {
