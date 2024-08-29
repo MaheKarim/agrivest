@@ -7,6 +7,7 @@ use App\Models\AdminNotification;
 use App\Models\Frontend;
 use App\Models\Language;
 use App\Models\Page;
+use App\Models\Project;
 use App\Models\SupportMessage;
 use App\Models\SupportTicket;
 use Carbon\Carbon;
@@ -132,7 +133,6 @@ class SiteController extends Controller
         return view('Template::blog_details',compact('blog','pageTitle','seoContents','seoImage','latestBlogs'));
     }
 
-
     public function cookieAccept(){
         Cookie::queue('gdpr_cookie',gs('site_name') , 43200);
     }
@@ -181,6 +181,14 @@ class SiteController extends Controller
         }
         $maintenance = Frontend::where('data_keys','maintenance.data')->first();
         return view('Template::maintenance',compact('pageTitle','maintenance'));
+    }
+
+    public function projects()
+    {
+        $pageTitle = 'Projects';
+        $projects = Project::active()->latest()->paginate(getPaginate());
+
+        return view('Template::projects.all_projects', compact('pageTitle', 'projects'));
     }
 
 }

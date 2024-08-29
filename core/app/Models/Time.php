@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Time extends Model
 {
     use GlobalStatus;
+
+
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
 }

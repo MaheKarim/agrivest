@@ -4,10 +4,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('admin.project.store') }}" method="POST">
+                    <form action="{{ route('admin.project.store', $project->id ?? null) }}" method="POST">
                         @csrf
                         @include('admin.project.form')
-                        <button type="submit" class="btn btn--primary w-100 h-45">@lang('Submit')</button>
+                        <button type="submit" class="btn btn--primary w-100 h-45">
+                            {{ isset($project) && $project->id ? __('Update Project') : __('Create Project') }}
+                        </button>
                     </form>
                 </div>
             </div>
@@ -27,6 +29,7 @@
                 // TODO:: Not Less Than 0 Er Calculation No Finished
                 // TODO:: Fraction Niye Kaj Korte Hbe
                 // TODO:: Share Amount & Count Read Only Korte Hbe Sathe d-none Korte Hbe
+
 
                 function clearIfGoalEmpty(goal) {
                     if (goal === '') {

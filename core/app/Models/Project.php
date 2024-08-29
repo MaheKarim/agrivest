@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-use GlobalStatus;
+    use GlobalStatus;
+
+    public function time()
+    {
+        return $this->belongsTo(Time::class);
+    }
 }

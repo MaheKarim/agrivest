@@ -65,6 +65,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">@lang('Home')</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('projects') }}">@lang('Projects')</a>
+                        </li>
                         @foreach($pages as $page)
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ $page->slug }}">{{__($page->name)}}</a>

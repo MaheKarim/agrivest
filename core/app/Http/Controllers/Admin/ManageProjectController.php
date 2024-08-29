@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Time;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
 
@@ -22,16 +23,25 @@ class ManageProjectController extends Controller
     public function create()
     {
         $pageTitle = 'New Project';
+        $times = Time::active()->get();
 
-        return view('admin.project.create', compact('pageTitle'));
+        return view('admin.project.create', compact('pageTitle', 'times'));
     }
 
-    public function store(Request $request, $id = 0)
+    public function edit($id)
+    {
+        $pageTitle = 'Edit Project';
+        $project = Project::findOrFail($id);
+        $times = Time::active()->get();
+
+        return view('admin.project.create', compact('pageTitle', 'project', 'times'));
+    }
+
+    public function store(Request $request, $id=0)
     {
         $request->validate([
             'title' => 'required|string|max:191',
             'goal' => 'required|numeric|min:1',
-//            'image' => 'required|image',new FileTypeValidate(['jpg','jpeg','png']),
             'description' => 'required|string',
             'share_amount' => 'required|numeric|min:1',
             'share_count' => 'required|numeric|min:1',
@@ -40,7 +50,6 @@ class ManageProjectController extends Controller
             'map_url' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-//            'capital_back' => 'required|numeric|in:0,1',
             'maturity_time' => 'required|numeric|min:1',
         ]);
 
@@ -62,24 +71,25 @@ class ManageProjectController extends Controller
             }
         }
 
-        $project = new Project();
         $project->title = $request->title;
         $project->slug = $request->slug;
         $project->goal = $request->goal;
-        $project->share_amount = $request->share_amount;
         $project->share_count = $request->share_count;
-        $project->roi_amount = $request->roi_amount;
+        $project->share_amount = $request->share_amount;
         $project->roi_percentage = $request->roi_percentage;
-        $project->description = $request->description;
-        $project->map_url = $request->map_url;
+        $project->roi_amount = $request->roi_amount;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
-//        $project->capital_back = $request->capital_back;
         $project->maturity_time = $request->maturity_time;
-
-
+        $project->time_id = $request->time_id;
+        $project->return_interval = $request->return_interval;
+        $project->return_timespan = $request->return_timespan;
+        $project->map_url = $request->map_url;
+        $project->capital_back = $request->capital_back;
+        $project->description = $request->description;
 
         $project->save();
+
         return redirect()->route('admin.project.index')->withNotify($notify);
     }
 

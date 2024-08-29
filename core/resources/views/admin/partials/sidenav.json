@@ -30,20 +30,7 @@
         "title": "Time Settings",
         "icon": "las la-clock",
         "menu_active": "admin.time*",
-        "submenu": [
-            {
-                "keyword": [
-                    "All Timezone",
-                    "Timezone",
-                    "Timezone management",
-                    "Timezone control",
-                    "Timezone activity"
-                ],
-                "title": "All Timezone",
-                "route_name": "admin.time.index",
-                "menu_active": "admin.time.index"
-            }
-        ]
+        "route_name": "admin.time.index"
     },
     "manage_projects": {
         "title": "Manage Projects",

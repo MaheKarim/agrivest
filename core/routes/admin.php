@@ -61,8 +61,8 @@ Route::middleware('admin')->group(function () {
     Route::controller('ManageProjectController')->name('project.')->prefix('project')->group(function(){
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
-        Route::get('edit/{id?}', 'store')->name('edit');
         Route::post('store/{id?}', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
         Route::get('project/check-slug/{id?}', 'checkSlug')->name('check.slug');
     });
 

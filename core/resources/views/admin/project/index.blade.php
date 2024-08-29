@@ -13,6 +13,7 @@
                                 <th>@lang('Start Date - End Date')</th>
                                 <th>@lang('Share Count - Share Amount')</th>
                                 <th>@lang('ROI % - ROI Amount')</th>
+                                <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
                             </thead>
@@ -45,9 +46,14 @@
                                         {{ showAmount($project->roi_amount) }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.project.edit', $project->id) }}" class="icon-btn mr-2"
-                                           data-toggle="tooltip" data-original-title="@lang('Edit')"><i
-                                                    class="las la-edit"></i></a>
+                                        @php echo $project->statusBadge @endphp
+                                    </td>
+                                    <td>
+                                        <div class="button--group">
+                                            <a href="{{ route('admin.project.edit', $project->id) }}" class="btn btn-sm btn-outline--primary">
+                                                <i class="las la-pen"></i> @lang('Edit')
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty

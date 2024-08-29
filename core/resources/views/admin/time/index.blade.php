@@ -91,9 +91,12 @@
                                    placeholder="@lang(' Name')" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <label>@lang('Hours')</label>
+                            <label>@lang('Time in Hours')</label>
+                            <div class="input-group">
                             <input name="hours" type="text" class="form-control bg--white pe-2"
                                    placeholder="@lang('Hours')" autocomplete="off" required>
+                                <span class="input-group-text">@lang('Hours')</span>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
