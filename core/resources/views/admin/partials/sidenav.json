@@ -26,6 +26,25 @@
         "route_name": "admin.dashboard",
         "menu_active": "admin.dashboard"
     },
+    "manage_projects": {
+        "title": "Manage Projects",
+        "icon": "las la-project-diagram",
+        "menu_active": "admin.project*",
+        "submenu": [{
+                "keyword": [
+                    "all projects",
+                    "Manage Projects",
+                    "Project management",
+                    "Project control",
+                    "Project status",
+                    "Project activity"
+                ],
+                "title": "All Projects",
+                "route_name": "admin.project.index",
+                "menu_active": "admin.project.index*"
+            }
+        ]
+    },
     "manage_users": {
         "title": "Manage Users",
         "icon": "las la-users",

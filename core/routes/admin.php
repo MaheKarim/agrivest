@@ -50,6 +50,15 @@ Route::middleware('admin')->group(function () {
         Route::get('download-attachments/{file_hash}', 'downloadAttachment')->name('download.attachment');
     });
 
+    // Manage Project
+    Route::controller('ManageProjectController')->name('project.')->prefix('project')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::get('edit/{id?}', 'store')->name('edit');
+        Route::post('store/{id?}', 'store')->name('store');
+        Route::get('project/check-slug/{id?}', 'checkSlug')->name('check.slug');
+    });
+
     // Users Manager
     Route::controller('ManageUsersController')->name('users.')->prefix('users')->group(function(){
         Route::get('/', 'allUsers')->name('all');
@@ -112,7 +121,6 @@ Route::middleware('admin')->group(function () {
         });
     });
 
-
     // DEPOSIT SYSTEM
     Route::controller('DepositController')->prefix('deposit')->name('deposit.')->group(function(){
         Route::get('all/{user_id?}', 'deposit')->name('list');
@@ -126,7 +134,6 @@ Route::middleware('admin')->group(function () {
         Route::post('approve/{id}', 'approve')->name('approve');
 
     });
-
 
     // WITHDRAW SYSTEM
     Route::name('withdraw.')->prefix('withdraw')->group(function(){
@@ -162,7 +169,6 @@ Route::middleware('admin')->group(function () {
         Route::get('email/detail/{id}', 'emailDetails')->name('email.details');
     });
 
-
     // Admin Support
     Route::controller('SupportTicketController')->prefix('ticket')->name('ticket.')->group(function(){
         Route::get('/', 'tickets')->name('index');
@@ -175,7 +181,6 @@ Route::middleware('admin')->group(function () {
         Route::get('download/{attachment_id}', 'ticketDownload')->name('download');
         Route::post('delete/{id}', 'ticketDelete')->name('delete');
     });
-
 
     // Language Manager
     Route::controller('LanguageController')->prefix('language')->name('language.')->group(function(){
@@ -190,6 +195,7 @@ Route::middleware('admin')->group(function () {
         Route::post('update/key/{id}', 'updateLanguageJson')->name('update.key');
         Route::get('get-keys', 'getKeys')->name('get.key');
     });
+
 
     Route::controller('GeneralSettingController')->group(function(){
 
@@ -251,7 +257,6 @@ Route::middleware('admin')->group(function () {
         Route::post('schedule/log/flush/{id}', 'logFlush')->name('log.flush');
     });
 
-
     //KYC setting
     Route::controller('KycController')->group(function(){
         Route::get('kyc-setting','setting')->name('kyc.setting');
@@ -297,7 +302,6 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id}', 'status')->name('status');
     });
 
-
     //System Information
     Route::controller('SystemController')->name('system.')->prefix('system')->group(function(){
         Route::get('info','systemInfo')->name('info');
@@ -309,10 +313,8 @@ Route::middleware('admin')->group(function () {
         Route::get('system-update/log','systemUpdateLog')->name('update.log');
     });
 
-
     // SEO
     Route::get('seo', 'FrontendController@seoEdit')->name('seo');
-
 
     // Frontend
     Route::name('frontend.')->prefix('frontend')->group(function () {

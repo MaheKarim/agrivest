@@ -79,6 +79,10 @@ class FileInfo
         $data['pushConfig'] = [
             'path'      => 'assets/admin',
         ];
+        $data['project'] = [
+            'path'      => 'assets/images/project',
+            'size'      => '691x422',
+        ];
         return $data;
 	}
 
