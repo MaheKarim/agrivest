@@ -32,3 +32,41 @@
         </div>
     </div>
 </section>
+@push('script')
+    <script>
+        (function($) {
+            "use strict";
+            function InitOdometer() {
+                $('.odometer').each(function (index, element) {
+
+                    var odometer = new Odometer({
+                        el: element,
+                        value: 0,
+                    })
+
+                    odometer.update($(element).data('odometer-stop'))
+
+                    $(element).isInViewport(function (status) {
+
+                        if (status === 'entered') {
+                            odometer.update($(element).data('odometer-stop'))
+                        }
+
+                        if (status === 'leaved') {
+                            odometer.update(0)
+                        }
+                    })
+                });
+            }
+
+            $(window).on('load', InitOdometer);
+        })(jQuery);
+    </script>
+@endpush
+@push('style-lib')
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/odometer.css') }}">
+@endpush
+
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/odometer.min.js') }}"></script>
+@endpush

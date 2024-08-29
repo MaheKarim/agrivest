@@ -80,138 +80,6 @@
     /* ==================== Password Toggle JS End ========================= */
     
     /* ==================== Slick Slider JS Start ========================== */
-    $('.feedback-slider').slick({
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      speed: 2000,
-      dots: true,
-      pauseOnHover: true,
-      arrows: false,
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-          }
-        }
-      ],
-    })
-
-    $('.offer-slider').slick({
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      speed: 1000,
-      arrows: true,
-      prevArrow: '<button type="button" class="slick-prev"><i class="las la-arrow-left"></i></button>',
-      nextArrow: '<button type="button" class="slick-next"><i class="las la-arrow-right"></i></button>',
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 3,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 2,
-          }
-        },
-        {
-          breakpoint: 576,
-          settings: {
-            slidesToShow: 2,
-            arrows: false,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 425,
-          settings: {
-            slidesToShow: 1,
-            arrows: false,
-            dots: true
-          }
-        }
-      ],
-    })
-
-    $('.project-slider').slick({
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      speed: 1000,
-      arrows: true,
-      prevArrow: '<button type="button" class="slick-prev"><i class="las la-arrow-left"></i></button>',
-      nextArrow: '<button type="button" class="slick-next"><i class="las la-arrow-right"></i></button>',
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 3,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 2,
-          }
-        },
-        {
-          breakpoint: 576,
-          settings: {
-            slidesToShow: 2,
-            arrows: false,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 425,
-          settings: {
-            slidesToShow: 1,
-            arrows: false,
-            dots: true
-          }
-        }
-      ],
-    })
-
-    $('.brands-slider').slick({
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      speed: 1000,
-      dots: false,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 1000,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 5,
-          }
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 4,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 3,
-          }
-        },
-        {
-          breakpoint: 425,
-          settings: {
-            slidesToShow: 2,
-          }
-        }
-      ]
-    })
 
     $('.testimonial-slider').slick({
       slidesToShow: 2,
@@ -313,12 +181,6 @@
       $(sidebarClose).on('click', hideSidebar);
     });
     /* ==================== Offcanvas Sidebar JS End ========================== */
-
-    // ==================== Play Button Lightbox Open JS Start ====================
-    $('.play-btn').magnificPopup({
-      type: 'iframe',
-    });
-    // ==================== Play Button Lightbox Open JS End ======================
 
     // ==================== Navbar Horizontal Scrolling JS Start ==================
     $('.nav-horizontal').each(function (index, nav) {
@@ -452,29 +314,6 @@
   /* ==================== Preloader JS End ======================= */
 
   /* ==================== Initialize Odometer JS Start ===================== */
-  function InitOdometer() {
-    $('.odometer').each(function (index, element) {
 
-      var odometer = new Odometer({
-        el: element,
-        value: 0,
-      })
-
-      odometer.update($(element).data('odometer-stop'))
-
-      $(element).isInViewport(function (status) {
-
-        if (status === 'entered') {
-          odometer.update($(element).data('odometer-stop'))
-        }
-
-        if (status === 'leaved') {
-          odometer.update(0)
-        }
-      })
-    });
-  }
-
-  $(window).on('load', InitOdometer);
   /* ==================== Initialize Odometer JS End ======================= */
 })(jQuery);

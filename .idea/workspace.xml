@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/templates/basic/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/banner.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/banner.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/brand.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/brand.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/project.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/project.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/testimonial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/testimonial.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/upcoming_offer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/upcoming_offer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/why_we.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/why_we.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +242,7 @@
       <workItem from="1724767122398" duration="5892000" />
       <workItem from="1724814068728" duration="32289000" />
       <workItem from="1724852983941" duration="2014000" />
-      <workItem from="1724903122219" duration="778000" />
+      <workItem from="1724903122219" duration="2164000" />
     </task>
     <servers />
   </component>

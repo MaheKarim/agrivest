@@ -114,3 +114,57 @@
         </div>
     </div>
 </section>
+@push('script')
+    <script>
+        (function ($) {
+            "use strict";
+            $('.offer-slider').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                speed: 1000,
+                arrows: true,
+                prevArrow: '<button type="button" class="slick-prev"><i class="las la-arrow-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="las la-arrow-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 2,
+                            arrows: false,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 425,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false,
+                            dots: true
+                        }
+                    }
+                ],
+            })
+        })(jQuery);
+    </script>
+@endpush
+@if(!app()->offsetExists('slick_load'))
+    @push('style-lib')
+        <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
+    @endpush
+    @push('script-lib')
+        <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+    @endpush
+    @php app()->offsetSet('slick_load', true) @endphp
+@endif

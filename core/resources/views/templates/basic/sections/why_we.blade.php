@@ -39,3 +39,21 @@
         </div>
     </div>
 </section>
+
+@push('script')
+    <script>
+        (function ($) {
+            "use strict";
+            $('.play-btn').magnificPopup({
+                type: 'iframe',
+            });
+        })(jQuery);
+    </script>
+@endpush
+
+@push('style-lib')
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/magnific-popup.css') }}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/magnific-popup.min.js') }}"></script>
+@endpush
