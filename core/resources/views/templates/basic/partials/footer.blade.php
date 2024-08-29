@@ -18,7 +18,7 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                 </div>
                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 order-3 order-lg-2">
                     <div class="footer-item">
-                        <h6 class="footer-item__title">@lang('Others Pages')</h6>
+                        <h6 class="footer-item__title">@lang('Quick Links')</h6>
                         <ul class="footer-menu">
                             <li class="footer-menu__item">
                                 <a class="footer-menu__link" href="{{ route('home') }}">@lang('Home')</a>

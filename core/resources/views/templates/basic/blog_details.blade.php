@@ -24,22 +24,22 @@
                         <h6 class="blog-details-share__title">@lang('Share This')</h6>
                         <ul class="social-list">
                             <li class="social-list__item">
-                                <a href="https://www.facebook.com" class="social-list__link flex-center">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" class="social-list__link flex-center">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                             </li>
                             <li class="social-list__item">
-                                <a href="https://www.twitter.com" class="social-list__link flex-center active">
+                                <a  href="https://twitter.com/intent/tweet?text= {{ __(strLimit($blog->data_values->title, 150)) }}&amp;url={{ urlencode(url()->current()) }}" class="social-list__link flex-center">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                             </li>
                             <li class="social-list__item">
-                                <a href="https://www.linkedin.com" class="social-list__link flex-center">
+                                <a  href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ urlencode(url()->current()) }}&amp;title={{ __(strLimit($blog->data_values->title, 150)) }}&amp;summary={{ __(strLimit(strip_tags(@$blog->data_values->description_nic), 300)) }}" class="social-list__link flex-center">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                             </li>
                             <li class="social-list__item">
-                                <a href="https://www.pinterest.com" class="social-list__link flex-center">
+                                <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(url()->current()) }}&description={{ __(@$blog->data_values->title) }}&media={{ frontendImage('blog', $blog->data_values->image, '966x450') }}" class="social-list__link flex-center">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
