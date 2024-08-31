@@ -74,6 +74,12 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id}', 'status')->name('status');
     });
 
+    Route::controller('ManageFaqController')->name('project.faq.')->prefix('project/faq')->group(function () {
+        Route::get('add/{id}', 'addFaq')->name('add');
+        Route::post('store/{id?}', 'storeFaq')->name('store');
+        Route::post('status/{id}', 'faqStatus')->name('status');
+    });
+
     // Users Manager
     Route::controller('ManageUsersController')->name('users.')->prefix('users')->group(function(){
         Route::get('/', 'allUsers')->name('all');

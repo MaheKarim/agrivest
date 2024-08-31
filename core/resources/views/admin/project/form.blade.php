@@ -107,7 +107,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label>@lang('Time')</label>
             <select class="form-control select2" name="time_id" data-search="false" required>
@@ -119,8 +119,7 @@
             </select>
         </div>
     </div>
-
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label>@lang('Return Interval')</label>
             <div class="input-group">
@@ -129,7 +128,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label>@lang('Return Timespan')</label>
             <div class="input-group">
@@ -138,15 +137,20 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <label>@lang('Return Type')</label>
+        <select class="form-control select2" name="return_type" data-search="false" required>
+            <option value="" selected disabled>@lang('Select Return Type')</option>
+            <option
+                value="high_return" @selected(old('return_type', @$project->return_type) == 'high_return')>@lang('High Return')</option>
+            <option
+                value="long_duration" @selected(old('return_type', @$project->return_type) == 'long_duration')>@lang('Long Duration')</option>
+            <option
+                value="short_duration" @selected(old('return_type', @$project->return_type) == 'short_duration')>@lang('Short Duration')</option>
+        </select>
+    </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label>@lang('Google Map Embed URL')</label>
-            <input type="text" class="form-control" name="map_url" value="{{ old('map_url', @$project->map_url) }}"
-                   required>
-        </div>
-    </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>@lang('Category')</label>
@@ -161,12 +165,20 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
+            <label>@lang('Google Map Embed URL')</label>
+            <input type="text" class="form-control" name="map_url" value="{{ old('map_url', @$project->map_url) }}"
+                   required>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
             <label>@lang('Capital Back')</label>
             <input type="checkbox" data-width="100%" data-onstyle="-success" data-offstyle="-danger"
                    data-bs-toggle="toggle" data-on="@lang('Yes')" data-off="@lang('No')" name="capital_back"
                    value="1" @if(old('capital_back', @$project->capital_back)) checked @endif>
         </div>
     </div>
+
 </div>
 <div class="form-group">
     <label>@lang('Description')</label>

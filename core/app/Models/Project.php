@@ -22,4 +22,9 @@ class Project extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class, 'project_id', 'id');
+    }
 }

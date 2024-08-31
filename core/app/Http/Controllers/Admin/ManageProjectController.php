@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Faq;
 use App\Models\Project;
 use App\Models\Time;
 use App\Rules\FileTypeValidate;
@@ -117,6 +118,7 @@ class ManageProjectController extends Controller
         $project->return_timespan = $request->return_timespan;
         $project->map_url = $request->map_url;
         $project->capital_back = $request->capital_back;
+        $project->return_type = $request->return_type;
         $project->description = $request->description;
         $project->gallery        = $gallery;
         $project->save();

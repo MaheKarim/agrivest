@@ -83,13 +83,15 @@
                                         <div class="offcanvas-sidebar-block__content">
                                             <ul class="offcanvas-sidebar-list">
                                                 @foreach($categories as $category)
-                                                <li class="offcanvas-sidebar-list__item">
-                                                    <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
-                                                               id="category-1">
-                                                        <label class="form-check-label" for="category-1">{{ __($category->name) }}</label>
-                                                    </div>
-                                                </li>
+                                                    <li class="offcanvas-sidebar-list__item">
+                                                        <div class="form-check form--check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   value="{{ $category->id }}"
+                                                                   id="category-1">
+                                                            <label class="form-check-label"
+                                                                   for="category-1">{{ __($category->name) }}</label>
+                                                        </div>
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -99,7 +101,7 @@
                                 <div class="offcanvas-sidebar-block">
                                     <button class="offcanvas-sidebar-block__btn" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#offcanvas-sidebar-collapse-2" aria-expanded="true">
-                                        <span class="offcanvas-sidebar-block__title">Time Duration</span>
+                                        <span class="offcanvas-sidebar-block__title">@lang('Time Duration')</span>
                                     </button>
 
                                     <div class="collapse show" id="offcanvas-sidebar-collapse-2">
@@ -107,29 +109,26 @@
                                             <ul class="offcanvas-sidebar-list">
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
+                                                        <input class="form-check-input" type="checkbox" value="high_return"
                                                                id="time-duration-1">
-                                                        <label class="form-check-label" for="time-duration-1">High
-                                                            Return</label>
-                                                        <span class="form-check-total">15,021</span>
+                                                        <label class="form-check-label" for="time-duration-1">@lang('High
+                                                            Return')</label>
                                                     </div>
                                                 </li>
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
+                                                        <input class="form-check-input" type="checkbox" value="long_duration"
                                                                id="time-duration-2">
-                                                        <label class="form-check-label" for="time-duration-2">Long
-                                                            Duration</label>
-                                                        <span class="form-check-total">12</span>
+                                                        <label class="form-check-label" for="time-duration-2">@lang('Long
+                                                            Duration')</label>
                                                     </div>
                                                 </li>
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
+                                                        <input class="form-check-input" type="checkbox" value="short_duration"
                                                                id="time-duration-3">
-                                                        <label class="form-check-label" for="time-duration-3">Short
-                                                            Duration</label>
-                                                        <span class="form-check-total">147</span>
+                                                        <label class="form-check-label" for="time-duration-3">@lang('Short
+                                                            Duration')</label>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -139,7 +138,7 @@
 
                                 <div class="offcanvas-sidebar-block">
                                     <button class="btn btn--lg btn-outline--base w-100" type="submit">
-                                        Filter Now
+                                       @lang('Filter Now')
                                     </button>
                                 </div>
                             </form>
@@ -159,12 +158,15 @@
                                         </a>
 
                                         <a class="card-thumb" href="{{ route('project.details', $project->slug) }}">
-                                            <img src="{{ getImage(getFilePath('project').'/'. $project->image, getFileSize('project')) }}" alt="">
+                                            <img
+                                                src="{{ getImage(getFilePath('project').'/'. $project->image, getFileSize('project')) }}"
+                                                alt="">
                                         </a>
 
                                         <div class="card-offer">
                                             <span class="card-offer__label">@lang('ROI')</span>
-                                            <span class="card-offer__percentage">{{ __(getAmount($project->roi_percentage)) }}@lang('%')</span>
+                                            <span
+                                                class="card-offer__percentage">{{ __(getAmount($project->roi_percentage)) }}@lang('%')</span>
                                         </div>
                                     </div>
 
@@ -176,13 +178,16 @@
                                         <div class="card-content">
                                             <div class="card-content__wrapper">
                                                 <span class="card-content__label">@lang('Per Share')</span>
-                                                <div class="card-content__price">{{ __(showAmount($project->share_amount)) }}</div>
+                                                <div
+                                                    class="card-content__price">{{ __(showAmount($project->share_amount)) }}</div>
                                             </div>
-                                            <a href="{{ route('project.details', $project->slug) }}" class="btn btn--xsm btn--outline">@lang('Book Now')</a>
+                                            <a href="{{ route('project.details', $project->slug) }}"
+                                               class="btn btn--xsm btn--outline">@lang('Book Now')</a>
                                         </div>
                                         <div class="card-bottom">
                                             <span class="card-bottom__unit">@lang('Remaining:') 10 Units</span>
-                                            <span class="card-bottom__duration">{{ __(diffForHumans($project->end_date)) }}</span>
+                                            <span
+                                                class="card-bottom__duration">{{ __(diffForHumans($project->end_date)) }}</span>
                                         </div>
                                     </div>
                                 </article>

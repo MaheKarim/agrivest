@@ -22,7 +22,9 @@
                                 <tr>
                                     <td>
                                         <div class="user">
-                                            <div class="thumb"><img src="{{ getImage(getFilePath('project') .'/'. $project->image,getFileSize('project')) }}" alt="{{ __($project->title) }}" class="plugin_bg"></div>
+                                            <div class="thumb"><img
+                                                    src="{{ getImage(getFilePath('project') .'/'. $project->image,getFileSize('project')) }}"
+                                                    alt="{{ __($project->title) }}" class="plugin_bg"></div>
                                             <span class="name">{{ __(Str::limit($project->title, 20)) }}</span>
                                         </div>
                                     </td>
@@ -50,24 +52,33 @@
                                     </td>
                                     <td>
                                         <div class="button-group">
-                                            <a href="{{ route('admin.project.edit', $project->id) }}" class="btn btn-sm btn-outline--primary">
+                                            <a href="{{ route('admin.project.edit', $project->id) }}"
+                                               class="btn btn-sm btn-outline--primary">
                                                 <i class="las la-pen"></i> @lang('Edit')
                                             </a>
-                                            @if ($project->status == Status::ENABLE)
-                                                <button
-                                                    class="btn btn-sm btn-outline--danger ms-1 confirmationBtn"
-                                                    data-question="@lang('Are you sure to disable this project?')"
-                                                    data-action="{{ route('admin.project.status',$project->id) }}">
-                                                    <i class="la la-eye-slash"></i> @lang('Disable')
-                                                </button>
-                                            @else
-                                                <button
-                                                    class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
-                                                    data-question="@lang('Are you sure to enable this project?')"
-                                                    data-action="{{ route('admin.project.status',$project->id) }}">
-                                                    <i class="la la-eye"></i> @lang('Enable')
-                                                </button>
-                                            @endif
+
+                                            <button class="btn btn-sm btn-outline--primary" data-bs-toggle="dropdown">
+                                                <i class="las la-ellipsis-v"></i> @lang('Action')
+                                            </button>
+
+                                            <div class="dropdown-menu p-0">
+                                                @if ($project->status == Status::ENABLE)
+                                                    <button class="dropdown-item confirmationBtn"
+                                                            data-action="{{ route('admin.project.status', $project->id) }}"
+                                                            data-question="@lang('Are you sure to enable this product?')">
+                                                        <i class="la la-eye-slash"></i> @lang('Disable')
+                                                    </button>
+                                                @else
+                                                    <button
+                                                        class="dropdown-item confirmationBtn"
+                                                        data-question="@lang('Are you sure to enable this project?')"
+                                                        data-action="{{ route('admin.project.status',$project->id) }}">
+                                                        <i class="la la-eye"></i> @lang('Enable')
+                                                    </button>
+                                                @endif
+                                                    <a class="dropdown-item" href="{{ route('admin.project.faq.add', $project->id) }}"
+                                                   ><i class="la la-question-circle"></i> @lang('FAQ')</a>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -92,7 +103,7 @@
 @endsection
 
 @push('breadcrumb-plugins')
-    <x-search-form placeholder="Title" />
-    <a class="btn btn-sm btn-outline--primary"  href="{{ route('admin.project.create') }}" type="button"><i
-                class="las la-plus"></i> @lang('Add New')</a>
+    <x-search-form placeholder="Title"/>
+    <a class="btn btn-sm btn-outline--primary" href="{{ route('admin.project.create') }}" type="button"><i
+            class="las la-plus"></i> @lang('Add New')</a>
 @endpush

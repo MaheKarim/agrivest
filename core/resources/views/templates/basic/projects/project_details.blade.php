@@ -94,31 +94,28 @@
                         <div class="offer-details-block">
                             <h5 class="offer-details-block__title">@lang('Frequently Asked Questions')</h5>
                             <div id="faq-accordion" class="accordion custom--accordion">
-                                <div class="accordion-item active">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#faq-accordion-question-3" aria-expanded="true"
-                                                aria-controls="faq-accordion-question-3">
-                                            How to Investment?
-                                        </button>
-                                    </h2>
-                                    <div id="faq-accordion-question-3" class="accordion-collapse collapse show"
-                                         data-bs-parent="#faq-accordion">
-                                        <div class="accordion-body">
-                                            <p class="accordion-text">
-                                                The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-                                                below for those interested. Sections 1.10.32 and 1.10.33 from "de
-                                                Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact
-                                                original form, accompanied there are many variations of passages of
-                                                Lorem Ipsum available, but the majority have suffered alteration in some
-                                                form, by injected humour, or randomised words which don't look even
-                                                slightly believable.
-                                            </p>
+                                @foreach($project->faqs as $index => $faq)
+                                    <div class="accordion-item {{ $index == 0 ? 'active' : '' }}">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#faq-accordion-question-{{ $index }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                                                    aria-controls="faq-accordion-question-{{ $index }}">
+                                                {{ __($faq->question) }}
+                                            </button>
+                                        </h2>
+                                        <div id="faq-accordion-question-{{ $index }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
+                                             data-bs-parent="#faq-accordion">
+                                            <div class="accordion-body">
+                                                <p class="accordion-text">
+                                                    {{ __($faq->answer) }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4">
