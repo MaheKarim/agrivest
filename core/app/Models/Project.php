@@ -25,6 +25,6 @@ class Project extends Model
 
     public function faqs()
     {
-        return $this->hasMany(Faq::class, 'project_id', 'id');
+        return $this->hasMany(Faq::class, 'project_id', 'id')->active();
     }
 }

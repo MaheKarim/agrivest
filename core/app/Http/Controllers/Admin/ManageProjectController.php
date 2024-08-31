@@ -26,8 +26,9 @@ class ManageProjectController extends Controller
     {
         $pageTitle = 'New Project';
         $times = Time::active()->get();
+        $categories = Category::active()->get();
 
-        return view('admin.project.create', compact('pageTitle', 'times'));
+        return view('admin.project.create', compact('pageTitle', 'times', 'categories'));
     }
 
     public function edit($id)

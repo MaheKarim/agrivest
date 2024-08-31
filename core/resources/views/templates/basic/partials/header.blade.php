@@ -28,21 +28,6 @@
                 </div>
 
                 <div class="header-top__item three">
-                    <ul class="badge-btn-list">
-                        <li class="badge-btn-list__item">
-                            <a href="favourite-offers.html" class="badge-btn-list__link">
-                                <i class="fas fa-heart"></i>
-                                <span class="badge badge--dark">2</span>
-                            </a>
-                        </li>
-                        <li class="badge-btn-list__item">
-                            <a href="#" class="badge-btn-list__link">
-                                <i class="fas fa-bell"></i>
-                                <span class="badge badge--dark">2</span>
-                            </a>
-                        </li>
-                    </ul>
-
                     @if (gs('multi_language'))
                         @php
                             $languages = App\Models\Language::all();

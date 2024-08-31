@@ -184,15 +184,6 @@
                                                 </li>
                                                 <li class="detail-list-item">
                                                     <span
-                                                        class="detail-list-item__label">@lang('Insurance Amount')</span>
-                                                    <span class="detail-list-item__value text--base">(+)$0.00</span>
-                                                </li>
-                                                <li class="detail-list-item">
-                                                    <span class="detail-list-item__label">@lang('Discount')</span>
-                                                    <span class="detail-list-item__value text--base">(-)$0.00</span>
-                                                </li>
-                                                <li class="detail-list-item">
-                                                    <span
                                                         class="detail-list-item__label">@lang('Total Payable Amount')</span>
                                                     <span class="detail-list-item__value">$30,000.00</span>
                                                 </li>
@@ -216,12 +207,10 @@
         </div>
     </section>
 @endsection
-@if(!app()->offsetExists('slick_load'))
-    @push('style-lib')
-        <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
-    @endpush
-    @push('script-lib')
-        <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
-    @endpush
-    @php app()->offsetSet('slick_load', true) @endphp
-@endif
+
+@push('style-lib')
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+@endpush

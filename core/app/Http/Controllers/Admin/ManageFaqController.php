@@ -13,10 +13,7 @@ class ManageFaqController extends Controller
     {
         $faqs = Faq::where('project_id', $id)->with('project')->paginate(getPaginate());
         $project = Project::findOrFail($id);
-        $pageTitle = 'Add Project FAQ';
-        if ($faqs->isNotEmpty()) {
-            $pageTitle .= ' for ' . $faqs->first()->project->title;
-        }
+        $pageTitle = 'Add Project FAQ for  ' . $project->title;;
 
         return view('admin.project.faq', compact('pageTitle', 'faqs', 'project'));
     }

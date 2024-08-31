@@ -145,10 +145,6 @@
                             <div class="col-sm-6 col-xl-4 single-project">
                                 <article class="card card--offer style-two">
                                     <div class="card-header">
-                                        <a class="btn-favourite" type="button" href="#">
-                                            <i class="fas fa-heart"></i>
-                                        </a>
-
                                         <a class="card-thumb" href="{{ route('project.details', $project->slug) }}">
                                             <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
                                                 alt="">
@@ -218,7 +214,7 @@
 
             $(".list-grid-btn").on('click',function(e){
                 const listGridClass=$(this).data("list-grid-class");
-                
+
                 // $(".single-project").removeClass().addClass(listGridClass)
             });
         })(jQuery)
