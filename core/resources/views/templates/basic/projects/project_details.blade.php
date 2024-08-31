@@ -68,7 +68,7 @@
                             </li>
                             <li class="offer-details-meta__item">
                                 <span class="label">@lang('Remaining')</span>
-                                <span class="value">05 Units</span>
+                                <span class="value">{{ __(getAmount($project->available_share)) }} @lang('Units')</span>
                             </li>
                         </ul>
 
@@ -159,7 +159,7 @@
                                 </div>
 
                                 <div class="payment-form__block">
-                                    <button class="btn btn--lg btn--base w-100" type="submit">
+                                    <button type="button" class="btn btn--lg btn--base w-100" data-bs-toggle="modal" data-bs-target="#paymentModalLabel">
                                         @lang('Book Now')
                                     </button>
                                 </div>
@@ -176,11 +176,11 @@
                                             <ul class="detail-list">
                                                 <li class="detail-list-item">
                                                     <span class="detail-list-item__label">@lang('Unite Price')</span>
-                                                    <span class="detail-list-item__value">$30,000.00</span>
+                                                    <span class="detail-list-item__value">{{ __(showAmount($project->amount)) }}</span>
                                                 </li>
                                                 <li class="detail-list-item">
                                                     <span class="detail-list-item__label">@lang('Total Price')</span>
-                                                    <span class="detail-list-item__value">$16,000.00</span>
+                                                    <span class="detail-list-item__value">{{ __(showAmount($project->goal)) }}</span>
                                                 </li>
                                                 <li class="detail-list-item">
                                                     <span
@@ -189,7 +189,7 @@
                                                 </li>
                                                 <li class="detail-list-item">
                                                     <span class="detail-list-item__label">@lang('Earning(%)')</span>
-                                                    <span class="detail-list-item__value">7.5%</span>
+                                                    <span class="detail-list-item__value">{{ __(showAmount($project->roi_percentage)) }}</span>
                                                 </li>
                                                 <li class="detail-list-item">
                                                     <span class="detail-list-item__label">@lang('Total Earning')</span>
@@ -206,6 +206,7 @@
             </div>
         </div>
     </section>
+    @include($activeTemplate.'projects.buy-modal')
 @endsection
 
 @push('style-lib')

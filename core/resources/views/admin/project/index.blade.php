@@ -11,7 +11,7 @@
                                 <th>@lang('Title')</th>
                                 <th>@lang('Goal')</th>
                                 <th>@lang('Start Date - End Date')</th>
-                                <th>@lang('Share Count - Share Amount')</th>
+                                <th>@lang('Share Count - Available Share')</th>
                                 <th>@lang('ROI % - ROI Amount')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
@@ -38,10 +38,9 @@
                                         {{ showDateTime($project->end_date) }}
                                     </td>
                                     <td>
-                                        {{ getAmount($project->share_count) }}
-                                        <br>
-                                        {{ showAmount($project->share_amount) }}
+                                        {{ getAmount($project->share_count) }} / <b class="required">{{ $project->available_share }}</b>
                                     </td>
+
                                     <td>
                                         {{ showAmount($project->roi_percentage) }} %
                                         <br>

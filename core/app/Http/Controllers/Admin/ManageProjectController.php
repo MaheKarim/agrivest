@@ -77,6 +77,7 @@ class ManageProjectController extends Controller
             $notify[] = ['success', 'Project updated successfully'];
         } else {
             $project = new Project();
+            $project->available_share = $request->share_count;
             $notify[] = ['success', 'Project created successfully'];
         }
 
