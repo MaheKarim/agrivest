@@ -1,12 +1,8 @@
 @extends($activeTemplate . 'layouts.frontend')
 
 @section('content')
-    <section class="breadcrumb py-70 bg-img"
-             data-background-image="{{ asset($activeTemplate.'images/bg.jpg') }}">
-        <div class="container">
-            <h1 class="breadcrumb__title">{{ $pageTitle }}</h1>
-        </div>
-    </section>
+
+    @include($activeTemplate . 'partials.breadcrumb')
 
     <section class="offers-page py-120">
         <div class="container">
@@ -194,11 +190,11 @@
                                         </a>
 
                                         <a class="card-thumb" href="offer-details.html">
-                                            <img src="{{ asset($activeTemplateTrue.'projects/project-1.png') }}" alt="">
+                                            <img src="{{ getImage(getFilePath('project').'/'. $project->image, getFileSize('project')) }}" alt="">
                                         </a>
 
                                         <div class="card-offer">
-                                            <span class="card-offer__label">ROI</span>
+                                            <span class="card-offer__label">@lang('ROI')</span>
                                             <span class="card-offer__percentage">{{ __(getAmount($project->roi_percentage)) }}@lang('%')</span>
                                         </div>
                                     </div>
@@ -210,14 +206,14 @@
 
                                         <div class="card-content">
                                             <div class="card-content__wrapper">
-                                                <span class="card-content__label">Per Share</span>
-                                                <div class="card-content__price">$30,000.00</div>
+                                                <span class="card-content__label">@lang('Per Share')</span>
+                                                <div class="card-content__price">{{ __(showAmount($project->share_amount)) }}</div>
                                             </div>
-                                            <a href="offer-details.html" class="btn btn--xsm btn--outline">Book Now</a>
+                                            <a href="offer-details.html" class="btn btn--xsm btn--outline">@lang('Book Now')</a>
                                         </div>
                                         <div class="card-bottom">
-                                            <span class="card-bottom__unit">Remaining: 10 Units</span>
-                                            <span class="card-bottom__duration">5 months</span>
+                                            <span class="card-bottom__unit">@lang('Remaining:') 10 Units</span>
+                                            <span class="card-bottom__duration">{{ __(diffForHumans($project->end_date)) }}</span>
                                         </div>
                                     </div>
                                 </article>

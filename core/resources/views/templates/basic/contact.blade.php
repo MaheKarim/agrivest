@@ -3,6 +3,8 @@
     $contactInfo = getContent('contact_us.content',true);
 @endphp
 @section('content')
+    @include($activeTemplate . 'partials.breadcrumb')
+
     <section class="contact-page py-120 bg--white">
         <div class="container">
             <div class="row justify-content-center">

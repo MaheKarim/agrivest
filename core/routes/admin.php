@@ -64,6 +64,7 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id?}', 'store')->name('store');
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::get('project/check-slug/{id?}', 'checkSlug')->name('check.slug');
+        Route::post('status/{id}', 'status')->name('status');
     });
 
     // Users Manager

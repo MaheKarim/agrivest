@@ -34,11 +34,21 @@ class ManageProjectController extends Controller
         $project = Project::findOrFail($id);
         $times = Time::active()->get();
 
-        return view('admin.project.create', compact('pageTitle', 'project', 'times'));
+        $galleries  = [];
+
+        foreach ($project->gallery ?? [] as $key => $gallery) {
+            $img['id']   = $gallery;
+            $img['src']  = getImage(getFilePath('projectGallery') . '/' . $gallery);
+            $galleries[] = $img;
+        }
+
+        return view('admin.project.create', compact('pageTitle', 'project', 'times', 'galleries'));
     }
 
     public function store(Request $request, $id=0)
     {
+        $isRequired = $id ? 'nullable' : 'required';
+
         $request->validate([
             'title' => 'required|string|max:191',
             'goal' => 'required|numeric|min:1',
@@ -51,6 +61,9 @@ class ManageProjectController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'maturity_time' => 'required|numeric|min:1',
+            'image'     => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'gallery'   => "$isRequired|array|min:0|max:4",
+            'gallery.*'  => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
         ]);
 
         if ($id) {
@@ -71,6 +84,19 @@ class ManageProjectController extends Controller
             }
         }
 
+        $gallery = $id ? $project->gallery : [];
+
+        if ($request->hasFile('gallery')) {
+            foreach ($request->gallery as $singleImage) {
+                try {
+                    $gallery[] = fileUploader($singleImage, getFilePath('projectGallery'), getFileSize('projectGallery'));
+                } catch (\Exception $exp) {
+                    $notify[] = ['error', 'Couldn\'t upload your product gallery image'];
+                    return back()->withNotify($notify);
+                }
+            }
+        }
+
         $project->title = $request->title;
         $project->slug = $request->slug;
         $project->goal = $request->goal;
@@ -87,12 +113,11 @@ class ManageProjectController extends Controller
         $project->map_url = $request->map_url;
         $project->capital_back = $request->capital_back;
         $project->description = $request->description;
-
+        $project->gallery        = $gallery;
         $project->save();
 
         return redirect()->route('admin.project.index')->withNotify($notify);
     }
-
 
     public function checkSlug($id = null){
         $page = Project::where('slug',request()->slug);
@@ -103,5 +128,10 @@ class ManageProjectController extends Controller
         return response()->json([
             'exists'=>$exist
         ]);
+    }
+
+    public function status($id)
+    {
+        return Project::changeStatus($id);
     }
 }

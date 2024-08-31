@@ -9,6 +9,10 @@ class Project extends Model
 {
     use GlobalStatus;
 
+    protected $casts = [
+        'gallery'  => 'array'
+    ];
+
     public function time()
     {
         return $this->belongsTo(Time::class);

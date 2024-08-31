@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/breadcrumb.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/blog_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/blog_details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/policy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/policy.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Constants/FileInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Constants/FileInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Models/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Models/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/blog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/blog.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/contact.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/all_projects.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/all_projects.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/routes/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/routes/admin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,21 +206,22 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.CodyAccountHistoryMigration": "true",
+    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
+    "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyProjectSettingsMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/laragon/www/agrivest/assets/admin/css",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/core/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
@@ -237,7 +248,8 @@
       <workItem from="1724767122398" duration="5892000" />
       <workItem from="1724814068728" duration="32289000" />
       <workItem from="1724852983941" duration="2014000" />
-      <workItem from="1724903122219" duration="4557000" />
+      <workItem from="1724903122219" duration="32595000" />
+      <workItem from="1725079535835" duration="9804000" />
     </task>
     <servers />
   </component>

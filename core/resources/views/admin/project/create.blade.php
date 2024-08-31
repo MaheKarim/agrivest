@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('admin.project.store', $project->id ?? null) }}" method="POST">
+                    <form action="{{ route('admin.project.store', $project->id ?? null) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @include('admin.project.form')
                         <button type="submit" class="btn btn--primary w-100 h-45">
@@ -20,12 +20,51 @@
 @push('breadcrumb-plugins')
     <x-back route="{{ route('admin.project.index') }}" />
 @endpush
+@push('style-lib')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/daterangepicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/image-uploader.min.css') }}">
+@endpush
+
+@push('script-lib')
+    <script src="{{ asset('assets/admin/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/daterangepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/image-uploader.min.js') }}"></script>
+@endpush
 
 @push('script')
     <script>
         (function ($) {
             "use strict";
             $(document).ready(function () {
+                // Date ranger Start here
+                $('input[name="start_date"],input[name="end_date"]').daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    minYear: 1950,
+                    maxYear: parseInt(moment().format('YYYY'),10),
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    }
+                });
+                // Image Uploader Gallery Start Here
+                let preloaded = [];
+                @if (!empty($galleries))
+                    preloaded = @json($galleries);
+                @endif
+                console.log(); // Check if this logs the correct data
+
+                $('.input-images').imageUploader({
+                    preloaded: preloaded,
+                    imagesInputName: 'gallery',
+                    preloadedInputName: 'old',
+                    maxFiles: 4
+                });
+                $(document).on('input', 'input[name="gallery[]"]', function() {
+                    var fileUpload = $("input[type='file']");
+                    if (parseInt(fileUpload.get(0).files.length) > 4) {
+                        notify('error', 'You can only upload 4 images');
+                    }
+                });
                 // TODO:: Not Less Than 0 Er Calculation No Finished
                 // TODO:: Fraction Niye Kaj Korte Hbe
                 // TODO:: Share Amount & Count Read Only Korte Hbe Sathe d-none Korte Hbe
@@ -174,9 +213,6 @@
                 $('.roi_amount, .goal').on('input', function(e) {
                     calculateRoiPercentage();
                 });
-
-
-
 
                 // Slug Code
                 $('.buildSlug').on('click', function() {

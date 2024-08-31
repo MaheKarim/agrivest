@@ -49,10 +49,25 @@
                                         @php echo $project->statusBadge @endphp
                                     </td>
                                     <td>
-                                        <div class="button--group">
+                                        <div class="button-group">
                                             <a href="{{ route('admin.project.edit', $project->id) }}" class="btn btn-sm btn-outline--primary">
                                                 <i class="las la-pen"></i> @lang('Edit')
                                             </a>
+                                            @if ($project->status == Status::ENABLE)
+                                                <button
+                                                    class="btn btn-sm btn-outline--danger ms-1 confirmationBtn"
+                                                    data-question="@lang('Are you sure to disable this project?')"
+                                                    data-action="{{ route('admin.project.status',$project->id) }}">
+                                                    <i class="la la-eye-slash"></i> @lang('Disable')
+                                                </button>
+                                            @else
+                                                <button
+                                                    class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
+                                                    data-question="@lang('Are you sure to enable this project?')"
+                                                    data-action="{{ route('admin.project.status',$project->id) }}">
+                                                    <i class="la la-eye"></i> @lang('Enable')
+                                                </button>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -73,6 +88,7 @@
             </div>
         </div>
     </div>
+    <x-confirmation-modal/>
 @endsection
 
 @push('breadcrumb-plugins')

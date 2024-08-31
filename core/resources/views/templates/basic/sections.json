@@ -280,5 +280,17 @@
             "text": "text",
             "modal": true
         }
+    },
+    "breadcrumb_image": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Breadcrumb Image",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "1920x174"
+                }
+            }
+        }
     }
 }
