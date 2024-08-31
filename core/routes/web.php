@@ -22,6 +22,12 @@ Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(
 
 Route::get('app/deposit/confirm/{hash}', 'Gateway\PaymentController@appDepositConfirm')->name('deposit.app.confirm');
 
+
+Route::controller('ProjectController')->group(function () {
+    Route::get('projects', 'projects')->name('projects');
+    Route::get('project/{slug}', 'projectDetails')->name('project.details');
+});
+
 Route::controller('SiteController')->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/contact', 'contactSubmit');
@@ -38,9 +44,6 @@ Route::controller('SiteController')->group(function () {
 
     Route::get('placeholder-image/{size}', 'placeholderImage')->withoutMiddleware('maintenance')->name('placeholder.image');
     Route::get('maintenance-mode','maintenance')->withoutMiddleware('maintenance')->name('maintenance');
-
-    // Frontend Pages
-    Route::get('projects', 'projects')->name('projects');
 
     Route::get('/{slug}', 'pages')->name('pages');
     Route::get('/', 'index')->name('home');

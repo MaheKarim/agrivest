@@ -110,7 +110,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label>@lang('Time')</label>
-            <select class="form-control select2" name="time_id" data-search="false">
+            <select class="form-control select2" name="time_id" data-search="false" required>
                 <option value="" selected disabled>@lang('Select Time')</option>
                 @foreach ($times as $time)
                     <option value="{{ $time->id }}" @selected(old('time_id', $project->time_id ?? null) == $time->id)>
@@ -140,14 +140,26 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
-            <label>@lang('Google Map URL')</label>
+            <label>@lang('Google Map Embed URL')</label>
             <input type="text" class="form-control" name="map_url" value="{{ old('map_url', @$project->map_url) }}"
                    required>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>@lang('Category')</label>
+            <select class="form-control select2" name="category_id" data-search="true" required>
+                <option value="" selected disabled>@lang('Select Category')</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @selected(old('category_id', $project->category_id ?? null) == $category->id)>
+                        {{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
         <div class="form-group">
             <label>@lang('Capital Back')</label>
             <input type="checkbox" data-width="100%" data-onstyle="-success" data-offstyle="-danger"

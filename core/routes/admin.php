@@ -57,6 +57,13 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id?}', 'status')->name('status');
     });
 
+
+    Route::controller('CategoryController')->name('category.')->prefix('category')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::post('store/{id?}', 'store')->name('store');
+        Route::post('status/{id?}', 'status')->name('status');
+    });
+
     // Manage Project
     Route::controller('ManageProjectController')->name('project.')->prefix('project')->group(function(){
         Route::get('/', 'index')->name('index');

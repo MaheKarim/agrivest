@@ -32,6 +32,12 @@
         "menu_active": "admin.time*",
         "route_name": "admin.time.index"
     },
+    "manage_category": {
+        "title": "Manage Category",
+        "icon": "las la-list",
+        "menu_active": "admin.category*",
+        "route_name": "admin.category.index"
+    },
     "manage_projects": {
         "title": "Manage Projects",
         "icon": "las la-project-diagram",

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Project;
 use App\Models\Time;
 use App\Rules\FileTypeValidate;
@@ -33,6 +34,7 @@ class ManageProjectController extends Controller
         $pageTitle = 'Edit Project';
         $project = Project::findOrFail($id);
         $times = Time::active()->get();
+        $categories = Category::active()->get();
 
         $galleries  = [];
 
@@ -42,7 +44,7 @@ class ManageProjectController extends Controller
             $galleries[] = $img;
         }
 
-        return view('admin.project.create', compact('pageTitle', 'project', 'times', 'galleries'));
+        return view('admin.project.create', compact('pageTitle', 'project', 'times', 'galleries', 'categories'));
     }
 
     public function store(Request $request, $id=0)
@@ -62,8 +64,10 @@ class ManageProjectController extends Controller
             'end_date' => 'required|date',
             'maturity_time' => 'required|numeric|min:1',
             'image'     => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'gallery'   => "$isRequired|array|min:0|max:4",
+            'gallery'   => "$isRequired|array|min:0|max:5",
             'gallery.*'  => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'category_id' => "$isRequired|exists:categories,id",
+            'time_id' => "$isRequired|exists:times,id",
         ]);
 
         if ($id) {
@@ -108,6 +112,7 @@ class ManageProjectController extends Controller
         $project->end_date = $request->end_date;
         $project->maturity_time = $request->maturity_time;
         $project->time_id = $request->time_id;
+        $project->category_id = $request->category_id;
         $project->return_interval = $request->return_interval;
         $project->return_timespan = $request->return_timespan;
         $project->map_url = $request->map_url;

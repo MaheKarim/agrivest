@@ -76,53 +76,21 @@
                                 <div class="offcanvas-sidebar-block">
                                     <button class="offcanvas-sidebar-block__btn" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#offcanvas-sidebar-collapse-1" aria-expanded="true">
-                                        <span class="offcanvas-sidebar-block__title">Category</span>
+                                        <span class="offcanvas-sidebar-block__title">@lang('Category')</span>
                                     </button>
 
                                     <div class="collapse show" id="offcanvas-sidebar-collapse-1">
                                         <div class="offcanvas-sidebar-block__content">
                                             <ul class="offcanvas-sidebar-list">
+                                                @foreach($categories as $category)
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
+                                                        <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
                                                                id="category-1">
-                                                        <label class="form-check-label" for="category-1">All</label>
-                                                        <span class="form-check-total">15,021</span>
+                                                        <label class="form-check-label" for="category-1">{{ __($category->name) }}</label>
                                                     </div>
                                                 </li>
-                                                <li class="offcanvas-sidebar-list__item">
-                                                    <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
-                                                               id="category-2">
-                                                        <label class="form-check-label" for="category-2">Cow</label>
-                                                        <span class="form-check-total">12</span>
-                                                    </div>
-                                                </li>
-                                                <li class="offcanvas-sidebar-list__item">
-                                                    <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
-                                                               id="category-3">
-                                                        <label class="form-check-label"
-                                                               for="category-3">Vegtable</label>
-                                                        <span class="form-check-total">147</span>
-                                                    </div>
-                                                </li>
-                                                <li class="offcanvas-sidebar-list__item">
-                                                    <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
-                                                               id="category-4">
-                                                        <label class="form-check-label" for="category-4">Fish</label>
-                                                        <span class="form-check-total">608</span>
-                                                    </div>
-                                                </li>
-                                                <li class="offcanvas-sidebar-list__item">
-                                                    <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox" value="all"
-                                                               id="category-5">
-                                                        <label class="form-check-label" for="category-5">Goat</label>
-                                                        <span class="form-check-total">56</span>
-                                                    </div>
-                                                </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -179,6 +147,7 @@
                     </aside>
                 </div>
 
+
                 <div class="col-lg-8 col-xl-9">
                     <div class="row gy-4">
                         @foreach($projects as $project)
@@ -189,7 +158,7 @@
                                             <i class="fas fa-heart"></i>
                                         </a>
 
-                                        <a class="card-thumb" href="offer-details.html">
+                                        <a class="card-thumb" href="{{ route('project.details', $project->slug) }}">
                                             <img src="{{ getImage(getFilePath('project').'/'. $project->image, getFileSize('project')) }}" alt="">
                                         </a>
 
@@ -201,7 +170,7 @@
 
                                     <div class="card-body">
                                         <h6 class="card-title">
-                                            <a href="offer-details.html">{{__($project->title)}}</a>
+                                            <a href="{{ route('project.details', $project->slug) }}">{{__($project->title)}}</a>
                                         </h6>
 
                                         <div class="card-content">
@@ -209,7 +178,7 @@
                                                 <span class="card-content__label">@lang('Per Share')</span>
                                                 <div class="card-content__price">{{ __(showAmount($project->share_amount)) }}</div>
                                             </div>
-                                            <a href="offer-details.html" class="btn btn--xsm btn--outline">@lang('Book Now')</a>
+                                            <a href="{{ route('project.details', $project->slug) }}" class="btn btn--xsm btn--outline">@lang('Book Now')</a>
                                         </div>
                                         <div class="card-bottom">
                                             <span class="card-bottom__unit">@lang('Remaining:') 10 Units</span>
@@ -234,3 +203,12 @@
         </div>
     </section>
 @endsection
+@if(!app()->offsetExists('slick_load'))
+    @push('style-lib')
+        <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
+    @endpush
+    @push('script-lib')
+        <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+    @endpush
+    @php app()->offsetSet('slick_load', true) @endphp
+@endif

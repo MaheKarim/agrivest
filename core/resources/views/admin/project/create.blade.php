@@ -57,12 +57,12 @@
                     preloaded: preloaded,
                     imagesInputName: 'gallery',
                     preloadedInputName: 'old',
-                    maxFiles: 4
+                    maxFiles: 5
                 });
                 $(document).on('input', 'input[name="gallery[]"]', function() {
                     var fileUpload = $("input[type='file']");
-                    if (parseInt(fileUpload.get(0).files.length) > 4) {
-                        notify('error', 'You can only upload 4 images');
+                    if (parseInt(fileUpload.get(0).files.length) > 5) {
+                        notify('error', 'You can only upload 5 images');
                     }
                 });
                 // TODO:: Not Less Than 0 Er Calculation No Finished
