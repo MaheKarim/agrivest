@@ -316,7 +316,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item"
-                            href="{{ route('user.deposit.index') }}">@lang('Deposit Money')</a>
+                            href="#">@lang('Deposit Money')</a>
                             <a class="dropdown-item"
                             href="{{ route('user.deposit.history') }}">@lang('Deposit
                                     Log')</a>
