@@ -25,6 +25,7 @@ Route::get('app/deposit/confirm/{hash}', 'Gateway\PaymentController@appDepositCo
 
 Route::controller('ProjectController')->group(function () {
     Route::get('projects', 'projects')->name('projects');
+    Route::post('check-quantity', 'checkQuantity')->name('check.quantity');
     Route::get('project/{slug}', 'projectDetails')->name('project.details');
 });
 

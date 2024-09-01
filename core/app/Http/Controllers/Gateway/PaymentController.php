@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function deposit()
+    public function deposit($projectId)
     {
         $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
             $gate->where('status', Status::ENABLE);
@@ -23,14 +23,13 @@ class PaymentController extends Controller
         return view('Template::user.payment.deposit', compact('gatewayCurrency', 'pageTitle'));
     }
 
-    public function depositInsert(Request $request)
+    public function depositInsert(Request $request,$projectId)
     {
         $request->validate([
             'amount' => 'required|numeric|gt:0',
             'gateway' => 'required',
             'currency' => 'required',
         ]);
-
 
         $user = auth()->user();
         $gate = GatewayCurrency::whereHas('method', function ($gate) {
@@ -67,7 +66,6 @@ class PaymentController extends Controller
         session()->put('Track', $data->trx);
         return to_route('user.deposit.confirm');
     }
-
 
     public function appDepositConfirm($hash)
     {

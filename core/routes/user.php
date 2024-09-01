@@ -80,7 +80,6 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::post('change-password', 'submitPassword');
             });
 
-
             // Withdraw
             Route::controller('WithdrawController')->prefix('withdraw')->name('withdraw')->group(function(){
                 Route::middleware('kyc')->group(function(){
@@ -91,15 +90,20 @@ Route::middleware('auth')->name('user.')->group(function () {
                 });
                 Route::get('history', 'withdrawLog')->name('.history');
             });
+
+            // Invest Controller
+            Route::controller('InvestController')->prefix('invest')->name('invest.')->group(function(){
+                Route::post('/order', 'order')->name('order');
+            });
         });
 
         // Payment
         Route::prefix('deposit')->name('deposit.')->controller('Gateway\PaymentController')->group(function(){
-            Route::any('/', 'deposit')->name('index');
-            Route::post('insert', 'depositInsert')->name('insert');
+            Route::post('insert/{projectId}', 'depositInsert')->name('insert');
             Route::get('confirm', 'depositConfirm')->name('confirm');
             Route::get('manual', 'manualDepositConfirm')->name('manual.confirm');
             Route::post('manual', 'manualDepositUpdate')->name('manual.update');
+            Route::any('/{projectId}', 'deposit')->name('index');
         });
     });
 });

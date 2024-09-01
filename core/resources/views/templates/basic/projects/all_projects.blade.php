@@ -173,7 +173,7 @@
                                                 class="btn btn--xsm btn--outline">@lang('Book Now')</a>
                                         </div>
                                         <div class="card-bottom">
-                                            <span class="card-bottom__unit">@lang('Remaining:') 10 Units</span>
+                                            <span class="card-bottom__unit">@lang('Remaining:') {{ __($project->available_share) }} @lang('Units')</span>
                                             <span
                                                 class="card-bottom__duration">{{ __(diffForHumans($project->end_date)) }}</span>
                                         </div>
