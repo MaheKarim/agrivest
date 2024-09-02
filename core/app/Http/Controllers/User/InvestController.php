@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Invest;
 use App\Models\Project;
@@ -43,6 +44,10 @@ class InvestController extends Controller
         $invest->total_share = $totalShare;
         $invest->save();
 
-        return redirect()->route('user.home')->with('success', 'Investment has been placed successfully');
+        if ($request->payment_type == Status::PAYMENT_ONLINE) {
+            return redirect()->route('user.deposit.index', $invest->id);
+        }
+        $notify[] = ['success', 'Investment has been placed successfully'];
+        return redirect()->route('user.home')->withNotify($notify);
     }
 }

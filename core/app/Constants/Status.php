@@ -40,4 +40,7 @@ class Status{
     const CUR_TEXT = 2;
     const CUR_SYM = 3;
 
+    const PAYMENT_ONLINE = 1;
+    const PAYMENT_WALLET = 2;
+
 }

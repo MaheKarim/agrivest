@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invest extends Model
 {
-    use HasFactory;
+    public function deposit()
+    {
+        return $this->hasOne(Deposit::class, 'order_id');
+    }
+
 }

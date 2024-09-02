@@ -3,7 +3,7 @@
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <form action="{{ route('user.deposit.insert') }}" method="post" class="deposit-form">
+                <form action="{{ route('user.deposit.insert', $invest->id) }}" method="post" class="deposit-form">
                     @csrf
                     <input type="hidden" name="currency">
                     <div class="gateway-card">
@@ -15,27 +15,30 @@
                                 <div class="payment-system-list is-scrollable gateway-option-list">
                                     @foreach ($gatewayCurrency as $data)
                                         <label for="{{ titleToKey($data->name) }}"
-                                            class="payment-item @if ($loop->index > 4) d-none @endif gateway-option">
+                                               class="payment-item @if ($loop->index > 4) d-none @endif gateway-option">
                                             <div class="payment-item__info">
                                                 <span class="payment-item__check"></span>
                                                 <span class="payment-item__name">{{ __($data->name) }}</span>
                                             </div>
                                             <div class="payment-item__thumb">
                                                 <img class="payment-item__thumb-img"
-                                                    src="{{ getImage(getFilePath('gateway') . '/' . $data->method->image) }}"
-                                                    alt="@lang('payment-thumb')">
+                                                     src="{{ getImage(getFilePath('gateway') . '/' . $data->method->image) }}"
+                                                     alt="@lang('payment-thumb')">
                                             </div>
-                                            <input class="payment-item__radio gateway-input" id="{{ titleToKey($data->name) }}" hidden
-                                                data-gateway='@json($data)' type="radio" name="gateway" value="{{ $data->method_code }}"
-                                                @checked(old('gateway',$loop->first) == $data->method_code)
-                                                data-min-amount="{{ showAmount($data->min_amount) }}"
-                                                data-max-amount="{{ showAmount($data->max_amount) }}">
+                                            <input class="payment-item__radio gateway-input"
+                                                   id="{{ titleToKey($data->name) }}" hidden
+                                                   data-gateway='@json($data)' type="radio" name="gateway"
+                                                   value="{{ $data->method_code }}"
+                                                   @checked(old('gateway',$loop->first) == $data->method_code)
+                                                   data-min-amount="{{ showAmount($data->min_amount) }}"
+                                                   data-max-amount="{{ showAmount($data->max_amount) }}">
                                         </label>
                                     @endforeach
                                     @if ($gatewayCurrency->count() > 4)
                                         <button type="button" class="payment-item__btn more-gateway-option">
                                             <p class="payment-item__btn-text">@lang('Show All Payment Options')</p>
-                                            <span class="payment-item__btn__icon"><i class="fas fa-chevron-down"></i></span>
+                                            <span class="payment-item__btn__icon"><i
+                                                    class="fas fa-chevron-down"></i></span>
                                         </button>
                                     @endif
                                 </div>
@@ -49,8 +52,13 @@
                                         <div class="deposit-info__input">
                                             <div class="deposit-info__input-group input-group">
                                                 <span class="deposit-info__input-group-text">{{ gs('cur_sym') }}</span>
-                                                <input type="text" class="form-control form--control amount" name="amount"
-                                                    placeholder="@lang('00.00')" value="{{ old('amount') }}" autocomplete="off">
+                                                <input type="text" class="form-control form--control amount"
+                                                       name="amount"
+                                                       placeholder="@lang('00.00')"
+                                                       value="{{ getAmount(@$invest->total_price) }}"
+                                                       autocomplete="off"
+                                                    {{ $invest ? 'readonly' : '' }}
+                                                >
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +77,9 @@
                                     <div class="deposit-info">
                                         <div class="deposit-info__title">
                                             <p class="text has-icon">@lang('Processing Charge')
-                                                <span data-bs-toggle="tooltip" title="@lang('Processing charge for payment gateways')" class="proccessing-fee-info"><i
+                                                <span data-bs-toggle="tooltip"
+                                                      title="@lang('Processing charge for payment gateways')"
+                                                      class="proccessing-fee-info"><i
                                                         class="las la-info-circle"></i> </span>
                                             </p>
                                         </div>
@@ -113,7 +123,8 @@
                                         </div>
                                     </div>
                                     <div class="d-none crypto-message mb-3">
-                                        @lang('Conversion with') <span class="gateway-currency"></span> @lang('and final value will Show on next step')
+                                        @lang('Conversion with') <span
+                                            class="gateway-currency"></span> @lang('and final value will Show on next step')
                                     </div>
                                     <button type="submit" class="btn btn--base w-100" disabled>
                                         @lang('Confirm Deposit')
@@ -134,21 +145,21 @@
 @push('script')
     <script>
         "use strict";
-        (function($) {
+        (function ($) {
 
             var amount = parseFloat($('.amount').val() || 0);
             var gateway, minAmount, maxAmount;
 
 
-            $('.amount').on('input', function(e) {
+            $('.amount').on('input', function (e) {
                 amount = parseFloat($(this).val());
                 if (!amount) {
-                   amount = 0;
+                    amount = 0;
                 }
                 calculation();
             });
 
-            $('.gateway-input').on('change', function(e) {
+            $('.gateway-input').on('change', function (e) {
                 gatewayChange();
             });
 
@@ -168,7 +179,7 @@
 
             gatewayChange();
 
-            $(".more-gateway-option").on("click", function(e) {
+            $(".more-gateway-option").on("click", function (e) {
                 let paymentList = $(".gateway-option-list");
                 paymentList.find(".gateway-option").removeClass("d-none");
                 $(this).addClass('d-none');
@@ -226,7 +237,7 @@
             }
 
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             })
             $('.gateway-input').change();
