@@ -14,7 +14,7 @@ class ProjectController extends Controller
         $categories = Category::active()->get();
         $projects = Project::active()->latest()->paginate(getPaginate());
 
-        return view('Template::projects.all_projects', compact('pageTitle', 'projects','categories'));
+        return view('Template::projects.all_projects', compact('pageTitle', 'projects', 'categories'));
     }
 
 
@@ -23,15 +23,17 @@ class ProjectController extends Controller
         $pageTitle = 'Project Details';
         $project = Project::where('slug', $slug)->firstOrFail();
 
+        session()->put('project', [
+            'id' => $project->id,
+        ]);
         return view('Template::projects.project_details', compact('pageTitle', 'project'));
-
     }
 
 
     public function checkQuantity(Request $request)
     {
         $projectId = $request->input('project_id');
-        $requestedQuantity = (int) $request->input('quantity');
+        $requestedQuantity = (int)$request->input('quantity');
 
         $project = Project::findOrFail($projectId);
 

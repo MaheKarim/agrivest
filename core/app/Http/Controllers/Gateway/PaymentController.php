@@ -11,12 +11,10 @@ use App\Models\GatewayCurrency;
 use App\Models\Invest;
 use App\Models\Transaction;
 use App\Models\User;
-use App\Traits\OrderConfirmation;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    use OrderConfirmation;
 
     public static function userDataUpdate($deposit, $isManual = null)
     {
@@ -25,8 +23,10 @@ class PaymentController extends Controller
             $deposit->save();
 
             $user = User::find($deposit->user_id);
-            $user->balance += $deposit->amount;
-            $user->save();
+            if ($deposit->invest_id == 0) {
+                $user->balance += $deposit->amount;
+                $user->save();
+            }
 
             $methodName = $deposit->methodName();
 
@@ -36,9 +36,14 @@ class PaymentController extends Controller
             $transaction->post_balance = $user->balance;
             $transaction->charge = $deposit->charge;
             $transaction->trx_type = '+';
-            $transaction->details = 'Deposit Via ' . $methodName;
+            if ($deposit->invest_id == 0) {
+                $transaction->details = 'Deposit Via ' . $methodName;
+                $transaction->remark = 'deposit';
+            } else {
+                $transaction->details = 'Payment Via ' . $methodName;
+                $transaction->remark = 'payment';
+            }
             $transaction->trx = $deposit->trx;
-            $transaction->remark = 'deposit';
             $transaction->save();
 
             if (!$isManual) {
@@ -60,32 +65,131 @@ class PaymentController extends Controller
                 'post_balance' => showAmount($user->balance)
             ]);
 
-            $invest = Invest::where('user_id', $deposit->user_id)->where('payment_status', Status::PAYMENT_INITIATE)->findOrFail($deposit->invest_id);
-            static::transactionCreate($invest, $user, $deposit);
+            if ($deposit->invest_id != 0) {
+                $invest = $deposit->invest;
+                self::confirmOrder($invest, $deposit, $user);
+            }
         }
     }
 
-    public function deposit($investId)
+    public static function confirmOrder($invest, $deposit = null, $user = null)
+    {
+        $user = $invest->user;
+        $projectName = $invest->project->title;
+        if (!$deposit || $deposit->invest_id == 0 || $invest->payment_type == Status::PAYMENT_WALLET) {
+            $user->balance -= $invest->total_price;
+            $user->save();
+        }
+
+        // Decrement the available shares in the Project model
+        $project = $invest->project;
+        $project->available_share -= $invest->quantity;
+        $project->save();
+
+        $methodName = $deposit ? $deposit->methodName() : 'Wallet';
+
+        $transaction = new Transaction();
+        $transaction->user_id = $invest->user_id;
+        $transaction->amount = $invest->total_price;
+        $transaction->post_balance = $user->balance;
+        $transaction->charge = 0;
+        $transaction->trx_type = '-';
+        $transaction->trx = $deposit ? $deposit->trx : $invest->invest_no;
+        if ($deposit && $deposit->invest_id != 0) {
+            $transaction->details = 'Payment Via ' . $methodName;
+            $transaction->remark = 'payment';
+        } elseif ($deposit && $deposit->invest_id == 0) {
+            $transaction->details = 'Deposit Via ' . $methodName;
+            $transaction->remark = 'deposit';
+        } else {
+            $transaction->details = 'Payment Via Wallet';
+            $transaction->remark = 'wallet_payment';
+        }
+        $transaction->save();
+
+        //send confirmation email to user
+        notify($invest->user, 'ORDER_CONFIRMED', [
+            'trx' => $transaction->trx,
+            'order_number' => $invest->id,
+            'event_name' => $invest->project->title,
+            'start_date' => $invest->project->start_date,
+            'end_date' => $invest->project->end_date,
+            'price' => showAmount($invest->price),
+            'quantity' => $invest->quantity,
+            'total_price' => showAmount($invest->total_price),
+        ]);
+
+
+//        $transaction = new Transaction();
+//        $transaction->amount = $invest->total_price;
+//        $transaction->post_balance = $user->balance;
+//        $transaction->charge = 0;
+//        $transaction->trx_type = '+';
+//        $transaction->details = "Payment Completed for $projectName, project purchased by $user->username";
+//        $transaction->trx = $deposit->trx;
+//        $transaction->remark = 'order_payment';
+//        $transaction->save();
+
+//        notify($invest->user, 'ORDER_RECEIVED', [
+//            'trx' => $transaction->trx,
+//            'order_number' => $invest->id,
+//            'event_name' => $invest->project->title,
+//            'start_date' => $invest->project->start_date,
+//            'end_date' => $invest->project->end_date,
+//            'quantity' => $invest->quantity,
+//            'total_price' => showAmount($invest->total_price),
+//        ]);
+
+        //change order status
+        $invest->payment_status = Status::PAYMENT_SUCCESS;
+        $invest->status = Status::VERIFIED;
+        $invest->save();
+    }
+
+    public function deposit(Request $request, $investId = 0)
     {
         $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
             $gate->where('status', Status::ENABLE);
         })->with('method')->orderby('name')->get();
         $pageTitle = 'Deposit Methods';
-        $invest = Invest::where('user_id', auth()->id())->where('payment_status', Status::PAYMENT_INITIATE)->findOrFail($investId);
+        $invest = null;
+
+        if ($investId) {
+            $pageTitle = 'Payment Methods';
+            $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
+                $gate->where('status', Status::ENABLE);
+            })->with('method')->orderby('name')->get();
+            $invest = Invest::where('id', $investId)->where('user_id', auth()->id())->where('payment_status', Status::PAYMENT_INITIATE)->first();
+
+            if (!$invest) {
+                $notify[] = ['error', 'You can not make payment for this order'];
+                return to_route('user.home')->withNotify($notify);
+            }
+        }
         return view('Template::user.payment.deposit', compact('gatewayCurrency', 'pageTitle', 'invest'));
     }
 
-    public function depositInsert(Request $request, $investId)
+    public function depositInsert(Request $request, $investId = 0)
     {
+        $isRequired = $investId && $request->gateway == "2" ? 'nullable' : 'required';
         $request->validate([
             'amount' => 'required|numeric|gt:0',
             'gateway' => 'required',
-            'currency' => 'required',
+            'currency' => $isRequired,
         ]);
 
-        $invest = Invest::where('user_id', auth()->id())->where('payment_status', Status::PAYMENT_INITIATE)->findOrFail($investId);
-
         $user = auth()->user();
+        if ($investId) {
+            $invest = Invest::where('user_id', auth()->id())->where('payment_status', Status::PAYMENT_INITIATE)->firstOrFail();
+            $gate = GatewayCurrency::whereHas('method', function ($gate) {
+                $gate->where('status', Status::ENABLE);
+            })->where('method_code', $request->gateway)->where('currency', $request->currency)->first();
+            if ($gate->min_amount > $invest->total_price || $gate->max_amount < $invest->total_price) {
+                $notify[] = ['error', 'Please follow deposit limit'];
+                return back()->withNotify($notify);
+            }
+        }
+
         $gate = GatewayCurrency::whereHas('method', function ($gate) {
             $gate->where('status', Status::ENABLE);
         })->where('method_code', $request->gateway)->where('currency', $request->currency)->first();
@@ -94,44 +198,36 @@ class PaymentController extends Controller
             return back()->withNotify($notify);
         }
 
-        if ($gate->min_amount > $invest->total_price || $gate->max_amount < $invest->total_price) {
+        if ($gate->min_amount > $request->amount || $gate->max_amount < $request->amount) {
             $notify[] = ['error', 'Please follow deposit limit'];
             return back()->withNotify($notify);
         }
 
-        $charge = $gate->fixed_charge + ($invest->total_price * $gate->percent_charge / 100);
-        $payable = $invest->total_price + $charge;
+        $charge = $gate->fixed_charge + ($request->amount * $gate->percent_charge / 100);
+        $payable = $request->amount + $charge;
         $finalAmount = $payable * $gate->rate;
 
         $data = new Deposit();
         $data->user_id = $user->id;
-        $data->invest_id = $invest->id ?? 0;
+        $data->invest_id = $investId ?? 0;
         $data->method_code = $gate->method_code;
         $data->method_currency = strtoupper($gate->currency);
-        $data->amount = $request->amount;
+        if ($investId) {
+            $data->amount = $invest->total_price;
+        } else {
+            $data->amount = $request->amount;
+        }
         $data->charge = $charge;
         $data->rate = $gate->rate;
         $data->final_amount = $finalAmount;
         $data->btc_amount = 0;
         $data->btc_wallet = "";
-        $data->trx = getTrx();
+
+        $data->trx = $investId ? $invest->invest_no : getTrx();
+
         $data->success_url = urlPath('user.deposit.history');
         $data->failed_url = urlPath('user.deposit.history');
         $data->save();
-        session()->put('Track', $data->trx);
-        return to_route('user.deposit.confirm');
-    }
-
-    public function appDepositConfirm($hash)
-    {
-        try {
-            $id = decrypt($hash);
-        } catch (\Exception $ex) {
-            abort(404);
-        }
-        $data = Deposit::where('id', $id)->where('status', Status::PAYMENT_INITIATE)->orderBy('id', 'DESC')->firstOrFail();
-        $user = User::findOrFail($data->user_id);
-        auth()->login($user);
         session()->put('Track', $data->trx);
         return to_route('user.deposit.confirm');
     }
@@ -140,7 +236,10 @@ class PaymentController extends Controller
     {
         $track = session()->get('Track');
         $deposit = Deposit::where('trx', $track)->where('status', Status::PAYMENT_INITIATE)->orderBy('id', 'DESC')->with('gateway')->firstOrFail();
-
+        if (!$deposit) {
+            $notify[] = ['error', 'Invalid request'];
+            return back()->withNotify($notify);
+        }
         if ($deposit->method_code >= 1000) {
             return to_route('user.deposit.manual.confirm');
         }
@@ -224,6 +323,5 @@ class PaymentController extends Controller
         $notify[] = ['success', 'You have deposit request has been taken'];
         return to_route('user.deposit.history')->withNotify($notify);
     }
-
 
 }

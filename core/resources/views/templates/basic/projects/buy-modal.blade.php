@@ -15,11 +15,11 @@
                     <input type="hidden" name="total_price" id="modal_total_price" value="">
                     <input type="hidden" name="unit_price" id="modal_unit_price" value="{{ $project->share_amount }}">
                     <input type="hidden" name="total_earning" id="modal_total_earning" value="">
-                    <input type="hidden" name="payment_type" id="payment_type" value="1">
+                    <input type="hidden" name="payment_type" id="payment_type" value="">
 
-                    <input type="hidden" name="payment_type" id="payment_type" value="1">
                     <div class="payment-options-wrapper mb-3">
-                        <div class="payment-options" data-payment-type="1">
+
+                        <div class="payment-options" data-payment-type="2">
                             <span class="active-badge"><i class="las la-check"></i></span>
                             <img src="{{ getImage($activeTemplateTrue . '/images/wallet.png') }}"
                                  alt="@lang('Payment Option Image')">
@@ -28,7 +28,8 @@
                                 <p>@lang('Payment completed instantly with one click if sufficient balance is available')</p>
                             </div>
                         </div>
-                        <div class="payment-options active" data-payment-type="2">
+
+                        <div class="payment-options" data-payment-type="1">
                             <span class="active-badge"><i class="las la-check"></i></span>
                             <img src="{{ getImage($activeTemplateTrue . '/images/credit-card.png') }}"
                                  alt="@lang('Payment Option Image')">

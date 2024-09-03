@@ -1,5 +1,5 @@
 <?php
 
 return [
-    // 'home'=>'contact'
+    'project.details' => false
 ];

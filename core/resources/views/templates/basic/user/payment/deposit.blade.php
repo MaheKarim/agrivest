@@ -1,15 +1,24 @@
 @extends($activeTemplate . 'layouts.master')
+@php
+    $investId = null;
+           if ($invest) {
+               $investId = $invest->id;
+               $amount = $invest->total_price;
+           } else {
+               $amount = old('amount');
+           }
+@endphp
 @section('content')
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <form action="{{ route('user.deposit.insert', $invest->id) }}" method="post" class="deposit-form">
+                <form action="{{ route('user.deposit.insert', $investId) }}" method="post" class="deposit-form">
                     @csrf
                     <input type="hidden" name="currency">
                     <div class="gateway-card">
                         <div class="row justify-content-center gy-sm-4 gy-3">
                             <div class="col-12">
-                                <h5 class="payment-card-title">@lang('Deposit')</h5>
+                                <h5 class="payment-card-title">{{ $pageTitle }}</h5>
                             </div>
                             <div class="col-lg-6">
                                 <div class="payment-system-list is-scrollable gateway-option-list">
@@ -55,9 +64,9 @@
                                                 <input type="text" class="form-control form--control amount"
                                                        name="amount"
                                                        placeholder="@lang('00.00')"
-                                                       value="{{ getAmount(@$invest->total_price) }}"
                                                        autocomplete="off"
-                                                    {{ $invest ? 'readonly' : '' }}
+                                                       value="{{ getAmount($amount) }}"
+                                                       @if($invest) readonly @endif
                                                 >
                                             </div>
                                         </div>
@@ -127,7 +136,11 @@
                                             class="gateway-currency"></span> @lang('and final value will Show on next step')
                                     </div>
                                     <button type="submit" class="btn btn--base w-100" disabled>
-                                        @lang('Confirm Deposit')
+                                        @if($investId)
+                                            @lang('Confirm Payment')
+                                        @else
+                                            @lang('Confirm Deposit')
+                                        @endif
                                     </button>
                                     <div class="info-text pt-3">
                                         <p class="text">@lang('Ensuring your funds grow safely through our secure deposit process with world-class payment options.')</p>

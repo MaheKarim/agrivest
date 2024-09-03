@@ -93,17 +93,17 @@ Route::middleware('auth')->name('user.')->group(function () {
 
             // Invest Controller
             Route::controller('InvestController')->prefix('invest')->name('invest.')->group(function () {
-                Route::post('/order', 'order')->name('order');
+                Route::post('/store', 'order')->name('order');
             });
         });
 
         // Payment
         Route::prefix('deposit')->name('deposit.')->controller('Gateway\PaymentController')->group(function () {
-            Route::post('insert/{investId}', 'depositInsert')->name('insert');
+            Route::post('insert/{investId?}', 'depositInsert')->name('insert');
             Route::get('confirm', 'depositConfirm')->name('confirm');
             Route::get('manual', 'manualDepositConfirm')->name('manual.confirm');
             Route::post('manual', 'manualDepositUpdate')->name('manual.update');
-            Route::any('/{investId}', 'deposit')->name('index');
+            Route::any('/{investId?}', 'deposit')->name('index');
         });
     });
 });

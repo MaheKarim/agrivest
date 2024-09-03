@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/clear', function(){
+Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 });
 
@@ -19,8 +19,6 @@ Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(
     Route::post('close/{id}', 'closeTicket')->name('close');
     Route::get('download/{attachment_id}', 'ticketDownload')->name('download');
 });
-
-Route::get('app/deposit/confirm/{hash}', 'Gateway\PaymentController@appDepositConfirm')->name('deposit.app.confirm');
 
 
 Route::controller('ProjectController')->group(function () {
@@ -44,7 +42,7 @@ Route::controller('SiteController')->group(function () {
     Route::get('policy/{slug}', 'policyPages')->name('policy.pages');
 
     Route::get('placeholder-image/{size}', 'placeholderImage')->withoutMiddleware('maintenance')->name('placeholder.image');
-    Route::get('maintenance-mode','maintenance')->withoutMiddleware('maintenance')->name('maintenance');
+    Route::get('maintenance-mode', 'maintenance')->withoutMiddleware('maintenance')->name('maintenance');
 
     Route::get('/{slug}', 'pages')->name('pages');
     Route::get('/', 'index')->name('home');

@@ -19,46 +19,53 @@ class Deposit extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function invest()
+    {
+        return $this->belongsTo(Invest::class, 'invest_id');
+    }
+
+
     public function gateway()
     {
         return $this->belongsTo(Gateway::class, 'method_code', 'code');
     }
 
-    public function methodName(){
+    public function methodName()
+    {
         if ($this->method_code < 5000) {
             $methodName = @$this->gatewayCurrency()->name;
-        }else{
+        } else {
             $methodName = 'Google Pay';
         }
         return $methodName;
     }
 
-    public function statusBadge(): Attribute
-    {
-        return new Attribute(function(){
-            $html = '';
-            if($this->status == Status::PAYMENT_PENDING){
-                $html = '<span class="badge badge--warning">'.trans('Pending').'</span>';
-            }
-            elseif($this->status == Status::PAYMENT_SUCCESS && $this->method_code >= 1000 && $this->method_code <= 5000){
-                $html = '<span><span class="badge badge--success">'.trans('Approved').'</span><br>'.diffForHumans($this->updated_at).'</span>';
-            }
-            elseif($this->status == Status::PAYMENT_SUCCESS && ($this->method_code < 1000 || $this->method_code >= 5000)){
-                $html = '<span class="badge badge--success">'.trans('Succeed').'</span>';
-            }
-            elseif($this->status == Status::PAYMENT_REJECT){
-                $html = '<span><span class="badge badge--danger">'.trans('Rejected').'</span><br>'.diffForHumans($this->updated_at).'</span>';
-            }else{
-                $html = '<span class="badge badge--dark">'.trans('Initiated').'</span>';
-            }
-            return $html;
-        });
-    }
-
-    // scope
     public function gatewayCurrency()
     {
         return GatewayCurrency::where('method_code', $this->method_code)->where('currency', $this->method_currency)->first();
+    }
+
+    // scope
+
+    public function statusBadge()
+    : Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+            if ($this->status == Status::PAYMENT_PENDING) {
+                $html = '<span class="badge badge--warning">' . trans('Pending') . '</span>';
+            } elseif ($this->status == Status::PAYMENT_SUCCESS && $this->method_code >= 1000 && $this->method_code <= 5000) {
+                $html = '<span><span class="badge badge--success">' . trans('Approved') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
+            } elseif ($this->status == Status::PAYMENT_SUCCESS && ($this->method_code < 1000 || $this->method_code >= 5000)) {
+                $html = '<span class="badge badge--success">' . trans('Succeed') . '</span>';
+            } elseif ($this->status == Status::PAYMENT_REJECT) {
+                $html = '<span><span class="badge badge--danger">' . trans('Rejected') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
+            } else {
+                $html = '<span class="badge badge--dark">' . trans('Initiated') . '</span>';
+            }
+            return $html;
+        });
     }
 
     public function baseCurrency()
@@ -68,17 +75,17 @@ class Deposit extends Model
 
     public function scopePending($query)
     {
-        return $query->where('method_code','>=',1000)->where('status', Status::PAYMENT_PENDING);
+        return $query->where('method_code', '>=', 1000)->where('status', Status::PAYMENT_PENDING);
     }
 
     public function scopeRejected($query)
     {
-        return $query->where('method_code','>=',1000)->where('status', Status::PAYMENT_REJECT);
+        return $query->where('method_code', '>=', 1000)->where('status', Status::PAYMENT_REJECT);
     }
 
     public function scopeApproved($query)
     {
-        return $query->where('method_code','>=',1000)->where('method_code','<',5000)->where('status', Status::PAYMENT_SUCCESS);
+        return $query->where('method_code', '>=', 1000)->where('method_code', '<', 5000)->where('status', Status::PAYMENT_SUCCESS);
     }
 
     public function scopeSuccessful($query)
