@@ -66,7 +66,7 @@
                             </button>
                         </div>
                         <div class="offcanvas-sidebar__body">
-                            <form action="">
+                            <form id="filterForm">
                                 <div class="offcanvas-sidebar-block">
                                     <button class="offcanvas-sidebar-block__btn" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#offcanvas-sidebar-collapse-1" aria-expanded="true">
@@ -79,9 +79,11 @@
                                                     <li class="offcanvas-sidebar-list__item">
                                                         <div class="form-check form--check">
                                                             <input class="form-check-input" type="checkbox"
-                                                                   value="{{ $category->id }}" id="category-1">
+                                                                   name="category[]"
+                                                                   value="{{ $category->id }}"
+                                                                   id="category-{{$category->id}}">
                                                             <label class="form-check-label"
-                                                                   for="category-1">{{ __($category->name) }}</label>
+                                                                   for="category-{{$category->id}}">{{ __($category->name) }}</label>
                                                         </div>
                                                     </li>
                                                 @endforeach
@@ -105,8 +107,7 @@
                                                                value="high_return"
                                                                id="time-duration-1">
                                                         <label class="form-check-label"
-                                                               for="time-duration-1">@lang('High
-                                                                                                                                                                                    Return')</label>
+                                                               for="time-duration-1">@lang('High Return')</label>
                                                     </div>
                                                 </li>
                                                 <li class="offcanvas-sidebar-list__item">
@@ -114,8 +115,7 @@
                                                         <input class="form-check-input" type="checkbox"
                                                                value="long_duration" id="time-duration-2">
                                                         <label class="form-check-label"
-                                                               for="time-duration-2">@lang('Long
-                                                                                                                                                                                    Duration')</label>
+                                                               for="time-duration-2">@lang('Long Duration')</label>
                                                     </div>
                                                 </li>
                                                 <li class="offcanvas-sidebar-list__item">
@@ -123,8 +123,7 @@
                                                         <input class="form-check-input" type="checkbox"
                                                                value="short_duration" id="time-duration-3">
                                                         <label class="form-check-label"
-                                                               for="time-duration-3">@lang('Short
-                                                                                                                                                                                    Duration')</label>
+                                                               for="time-duration-3">@lang('Short Duration')</label>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -144,14 +143,7 @@
                 <div class="col-lg-8 col-xl-9">
                     @include($activeTemplate.'.projects.project', ['projects' => $projects])
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#"><i class="las la-arrow-left"></i></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i class="las la-arrow-right"></i></a>
-                        </li>
+                        {{ paginateLinks($projects) }}
                     </ul>
                 </div>
             </div>
@@ -176,7 +168,7 @@
                     $.ajax({
                         url: "{{ route('project.filter') }}",
                         type: 'GET',
-                        data: $('#searchForm').serialize(),
+                        data: $('#searchForm').serialize() + '&' + $('#filterForm').serialize(),
                         success: function (response) {
                             $("#singleProject").html(response.view);
                         },
@@ -188,6 +180,9 @@
 
                 $('#searchForm').on('submit', function (e) {
                     e.preventDefault();
+                    fetchProjects();
+                });
+                $('#filterForm input[name="category[]"]').on('change', function () {
                     fetchProjects();
                 });
 

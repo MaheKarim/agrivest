@@ -12,7 +12,7 @@ class ProjectController extends Controller
     {
         $pageTitle = 'Projects';
         $categories = Category::active()->get();
-        $projects = Project::active()->latest()->paginate(getPaginate());
+        $projects = Project::active()->latest()->paginate(getPaginate(3));
 
         return view('Template::projects.all_projects', compact('pageTitle', 'projects', 'categories'));
     }
@@ -53,19 +53,24 @@ class ProjectController extends Controller
     {
         $pageTitle = 'Projects';
         $categories = Category::active()->get();
-
         $projects = Project::active();
 
-        if ($request->has('search') && !empty($request->search)) {
-            $projects->where('title', 'like', '%' . $request->search . '%');
+        $search = $request->has('search') ? $request->search : '';
+        if (!empty($search)) {
+            $projects->where('title', 'like', '%' . $search . '%');
         }
 
+        // Category filter
         if ($request->has('category') && !empty($request->category)) {
-            $projects->where('category_id', $request->category);
+            if (is_array($request->category)) {
+                $projects->whereIn('category_id', $request->category);
+            } else {
+                $projects->where('category_id', $request->category);
+            }
         }
 
         $projects = $projects->latest()->paginate(getPaginate());
-        
+
         return response()->json([
             'view' => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
             'totalProjects' => $projects->total(),
