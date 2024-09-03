@@ -104,26 +104,29 @@
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
                                                         <input class="form-check-input" type="checkbox"
+                                                               name="return_type[]"
                                                                value="high_return"
-                                                               id="time-duration-1">
+                                                               id="high_return">
                                                         <label class="form-check-label"
-                                                               for="time-duration-1">@lang('High Return')</label>
+                                                               for="high_return">@lang('High Return')</label>
                                                     </div>
                                                 </li>
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
                                                         <input class="form-check-input" type="checkbox"
-                                                               value="long_duration" id="time-duration-2">
+                                                               name="return_type[]"
+                                                               value="long_duration" id="long_duration">
                                                         <label class="form-check-label"
-                                                               for="time-duration-2">@lang('Long Duration')</label>
+                                                               for="long_duration">@lang('Long Duration')</label>
                                                     </div>
                                                 </li>
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
                                                         <input class="form-check-input" type="checkbox"
-                                                               value="short_duration" id="time-duration-3">
+                                                               name="return_type[]"
+                                                               value="short_duration" id="short_duration">
                                                         <label class="form-check-label"
-                                                               for="time-duration-3">@lang('Short Duration')</label>
+                                                               for="short_duration">@lang('Short Duration')</label>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -142,9 +145,11 @@
                 </div>
                 <div class="col-lg-8 col-xl-9">
                     @include($activeTemplate.'.projects.project', ['projects' => $projects])
-                    <ul class="pagination">
-                        {{ paginateLinks($projects) }}
-                    </ul>
+                    @if($projects->hasPages())
+                        <ul class="pagination">
+                            {{ paginateLinks($projects) }}
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>

@@ -69,6 +69,7 @@ class ProjectController extends Controller
             }
         }
 
+
         $projects = $projects->latest()->paginate(getPaginate());
 
         return response()->json([
