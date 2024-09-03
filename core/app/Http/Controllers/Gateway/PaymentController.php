@@ -81,7 +81,6 @@ class PaymentController extends Controller
             $user->save();
         }
 
-        // Decrement the available shares in the Project model
         $project = $invest->project;
         $project->available_share -= $invest->quantity;
         $project->save();
@@ -107,7 +106,6 @@ class PaymentController extends Controller
         }
         $transaction->save();
 
-        //send confirmation email to user
         notify($invest->user, 'ORDER_CONFIRMED', [
             'trx' => $transaction->trx,
             'order_number' => $invest->id,
@@ -119,28 +117,6 @@ class PaymentController extends Controller
             'total_price' => showAmount($invest->total_price),
         ]);
 
-
-//        $transaction = new Transaction();
-//        $transaction->amount = $invest->total_price;
-//        $transaction->post_balance = $user->balance;
-//        $transaction->charge = 0;
-//        $transaction->trx_type = '+';
-//        $transaction->details = "Payment Completed for $projectName, project purchased by $user->username";
-//        $transaction->trx = $deposit->trx;
-//        $transaction->remark = 'order_payment';
-//        $transaction->save();
-
-//        notify($invest->user, 'ORDER_RECEIVED', [
-//            'trx' => $transaction->trx,
-//            'order_number' => $invest->id,
-//            'event_name' => $invest->project->title,
-//            'start_date' => $invest->project->start_date,
-//            'end_date' => $invest->project->end_date,
-//            'quantity' => $invest->quantity,
-//            'total_price' => showAmount($invest->total_price),
-//        ]);
-
-        //change order status
         $invest->payment_status = Status::PAYMENT_SUCCESS;
         $invest->status = Status::VERIFIED;
         $invest->save();
