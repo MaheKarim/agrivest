@@ -17,7 +17,6 @@ class ProjectController extends Controller
         return view('Template::projects.all_projects', compact('pageTitle', 'projects', 'categories'));
     }
 
-
     public function projectDetails($slug)
     {
         $pageTitle = 'Project Details';
@@ -26,9 +25,9 @@ class ProjectController extends Controller
         session()->put('project', [
             'id' => $project->id,
         ]);
+
         return view('Template::projects.project_details', compact('pageTitle', 'project'));
     }
-
 
     public function checkQuantity(Request $request)
     {
@@ -48,5 +47,29 @@ class ProjectController extends Controller
             'status' => 'success',
             'message' => 'Requested quantity is available.',
         ]);
+    }
+
+    public function filter(Request $request)
+    {
+        $pageTitle = 'Projects';
+        $categories = Category::active()->get();
+
+        $projects = Project::active();
+
+        if ($request->has('search') && !empty($request->search)) {
+            $projects->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->has('category') && !empty($request->category)) {
+            $projects->where('category_id', $request->category);
+        }
+
+        $projects = $projects->latest()->paginate(getPaginate());
+        
+        return response()->json([
+            'view' => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
+            'totalProjects' => $projects->total(),
+        ]);
+
     }
 }

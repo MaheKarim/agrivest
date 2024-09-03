@@ -25,6 +25,7 @@ Route::controller('ProjectController')->group(function () {
     Route::get('projects', 'projects')->name('projects');
     Route::post('check-quantity', 'checkQuantity')->name('check.quantity');
     Route::get('project/{slug}', 'projectDetails')->name('project.details');
+    Route::get('project-filter', 'filter')->name('project.filter');
 });
 
 Route::controller('SiteController')->group(function () {
