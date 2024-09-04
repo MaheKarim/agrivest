@@ -10,21 +10,21 @@ trait GlobalStatus
     public static function changeStatus($id, $column = 'status')
     {
         $modelName = get_class();
-        $query     = $modelName::findOrFail($id);
+        $query = $modelName::findOrFail($id);
         if ($query->$column == Status::ENABLE) {
             $query->$column = Status::DISABLE;
         } else {
             $query->$column = Status::ENABLE;
         }
-        $message       = keyToTitle($column). ' changed successfully';
+        $message = keyToTitle($column) . ' changed successfully';
 
         $query->save();
         $notify[] = ['success', $message];
         return back()->withNotify($notify);
     }
 
-
-    public function statusBadge(): Attribute
+    public function statusBadge()
+    : Attribute
     {
         return new Attribute(
             get: fn () => $this->badgeData(),

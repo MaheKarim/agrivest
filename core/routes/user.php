@@ -83,7 +83,7 @@ Route::middleware('auth')->name('user.')->group(function () {
             // Withdraw
             Route::controller('WithdrawController')->prefix('withdraw')->name('withdraw')->group(function () {
                 Route::middleware('kyc')->group(function () {
-                    Route::get('/', 'withdrawMoney');
+                    Route::get('/', 'withdrawMoney')->name('index');
                     Route::post('/', 'withdrawStore')->name('.money');
                     Route::get('preview', 'withdrawPreview')->name('.preview');
                     Route::post('preview', 'withdrawSubmit')->name('.submit');

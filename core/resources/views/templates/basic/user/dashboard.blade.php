@@ -333,13 +333,11 @@
                         <th>@lang('Project')</th>
                         <th>@lang('Duration')</th>
                         <th>@lang('Amount')</th>
-                        <th>@lang('Gateway')</th>
                         <th>@lang('Status')</th>
                         <th>@lang('Action')</th>
                     </tr>
                     </thead>
                     <tbody>
-
                     @foreach($invests as $invest)
                         <tr>
                             <td>
@@ -352,9 +350,8 @@
                                 {{ __($invest->project->maturity_time) }} @lang('Months')
                             </td>
                             <td>{{ __(showAmount($invest->total_price)) }}</td>
-                            <td>Paypal</td>
                             <td>
-                                <span class="badge badge--status badge--success">running</span>
+                                @php echo $invest->statusBadge @endphp
                             </td>
                             <td>
                                 <div class="action-buttons">
@@ -384,36 +381,31 @@
                     <ul class="amount-detail mt-3">
                         <li class="amount-detail-item">
                             <span class="amount-detail-item__label">@lang('Total Paid')</span>
-                            <span class="amount-detail-item__value">$30,000</span>
+                            <span class="amount-detail-item__value">{{ __(showAmount($invest->total_price)) }}</span>
                         </li>
                         <li class="amount-detail-item">
                             <span class="amount-detail-item__label">@lang('Total Earning')</span>
-                            <span class="amount-detail-item__value">$30,000</span>
+                            <span class="amount-detail-item__value">{{ __(showAmount($invest->total_earning)) }}</span>
                         </li>
                     </ul>
 
                     <ul class="detail-list mt-4">
                         <li class="detail-list-item">
                             <span class="detail-list-item__label">@lang('Unite Price')</span>
-                            <span class="detail-list-item__value">$30,000.00</span>
+                            <span class="detail-list-item__value">{{ __(showAmount($invest->unit_price)) }}</span>
                         </li>
                         <li class="detail-list-item">
-                            <span class="detail-list-item__label">Total Price</span>
-                            <span class="detail-list-item__value">$16,000.00</span>
+                            <span class="detail-list-item__label">@lang('Total Price')</span>
+                            <span class="detail-list-item__value">{{ __(showAmount($invest->total_price)) }}</span>
                         </li>
 
-
                         <li class="detail-list-item">
-                            <span class="detail-list-item__label">Total Payable Amount</span>
-                            <span class="detail-list-item__value">$30,000.00</span>
+                            <span class="detail-list-item__label">@lang('Earning(%)')</span>
+                            <span class="detail-list-item__value">{{__(getAmount($invest->roi_percentage))}}%</span>
                         </li>
                         <li class="detail-list-item">
-                            <span class="detail-list-item__label">Earning(%)</span>
-                            <span class="detail-list-item__value">7.5%</span>
-                        </li>
-                        <li class="detail-list-item">
-                            <span class="detail-list-item__label">Total Earning</span>
-                            <span class="detail-list-item__value">$1728,000.00</span>
+                            <span class="detail-list-item__label">@lang('Total Earning')</span>
+                            <span class="detail-list-item__value">{{ __(showAmount($invest->total_earning)) }}</span>
                         </li>
                     </ul>
                 </div>
