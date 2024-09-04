@@ -67,26 +67,14 @@
 
                 <div class="collapse" id="offcanvas-sidebar-withdraw-collapse">
                     <ul class="offcanvas-sidebar-submenu" {{ menuActive('user.withdraw*') }}>
+                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.withdraw') }}">
+                            <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.withdraw') }}">
+                                @lang('Withdraw Money')
+                            </a>
+                        </li>
                         <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.withdraw.history') }}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.withdraw.history') }}">
                                 @lang('Withdraw History')
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="offcanvas-sidebar-menu__item">
-                <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#offcanvas-sidebar-support-collapse" aria-expanded="false" type="button">
-                    <i class="fas fa-headset"></i>
-                    <span>@lang('Support System')</span>
-                </button>
-
-                <div class="collapse" id="offcanvas-sidebar-support-collapse">
-                    <ul class="offcanvas-sidebar-submenu">
-                        <li class="offcanvas-sidebar-submenu__item ">
-                            <a class="offcanvas-sidebar-submenu__link" href="#">
-                                @lang('Support Tickets')
                             </a>
                         </li>
                     </ul>
@@ -99,6 +87,29 @@
                     <span>@lang('Transactions')</span>
                 </a>
             </li>
+            <li class="offcanvas-sidebar-menu__item">
+                <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#offcanvas-sidebar-support-collapse" aria-expanded="false" type="button">
+                    <i class="fas fa-headset"></i>
+                    <span>@lang('Support Ticket')</span>
+                </button>
+
+                <div class="collapse" id="offcanvas-sidebar-support-collapse">
+                    <ul class="offcanvas-sidebar-submenu">
+                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('ticket.open') }}">
+                            <a class="offcanvas-sidebar-submenu__link" href="{{ route('ticket.open') }}">
+                                @lang('Create New')
+                            </a>
+                        </li>
+                        <li class="offcanvas-sidebar-submenu__item ">
+                            <a class="offcanvas-sidebar-submenu__link" href="{{ route('ticket.index') }}">
+                                @lang('My Tickets')
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li class="offcanvas-sidebar-menu__item">
                 <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
                         data-bs-target="#offcanvas-sidebar-settings-collapse" aria-expanded="false" type="button">
@@ -118,8 +129,8 @@
                                 @lang('Change Password')
                             </a>
                         </li>
-                        <li class="offcanvas-sidebar-submenu__item">
-                            <a class="offcanvas-sidebar-submenu__link" href="#">
+                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.twofactor') }}">
+                            <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.twofactor') }}">
                                 @lang('Enable 2FA')
                             </a>
                         </li>

@@ -10,16 +10,13 @@
 @endphp
 @section('content')
     <div class="dashboard-inner__block">
-        <div class="row justify-content-center gy-3">
+        <div class="row">
             <div class="col-lg-9">
                 <form action="{{ route('user.deposit.insert', $investId) }}" method="post" class="deposit-form">
                     @csrf
                     <input type="hidden" name="currency">
                     <div class="gateway-card">
                         <div class="row justify-content-center gy-sm-4 gy-3">
-                            <div class="col-12">
-                                <h5 class="payment-card-title">{{ $pageTitle }}</h5>
-                            </div>
                             <div class="col-lg-6">
                                 <div class="payment-system-list is-scrollable gateway-option-list">
                                     @foreach ($gatewayCurrency as $data)

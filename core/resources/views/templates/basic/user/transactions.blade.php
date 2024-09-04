@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="flex-grow-1 select2-parent">
                                     <label class="form-label d-block">@lang('Type')</label>
-                                    <select name="trx_type" class="form-select form--control select2-basic"
+                                    <select name="trx_type" class="form-select form--control select2"
                                             data-minimum-results-for-search="-1">
                                         <option value="">@lang('All')</option>
                                         <option value="+" @selected(request()->trx_type == '+')>@lang('Plus')</option>
@@ -44,8 +44,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="card custom--card">
-                    <div class="card-body p-0">
+                <div class="dashboard-card">
+                    <div class="dashboard-card__body">
                         <div class="table-responsive">
                             <table class="table custom--table">
                                 <thead>
@@ -111,4 +111,10 @@
             width: 100% !important;
         }
     </style>
+@endpush
+@push('style-lib')
+    <link rel="stylesheet" href="{{ asset('assets/global/css/select2.min.css') }}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset('assets/global/js/select2.min.js') }}"></script>
 @endpush

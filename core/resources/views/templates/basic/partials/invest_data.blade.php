@@ -47,6 +47,9 @@
                 @endforeach
                 </tbody>
             </table>
+            @if(!request()->routeIs('user.dashboard') && $invests instanceof \Illuminate\Contracts\Pagination\Paginator)
+                {{ paginateLinks($invests) }}
+            @endif
         </div>
     </div>
 </div>

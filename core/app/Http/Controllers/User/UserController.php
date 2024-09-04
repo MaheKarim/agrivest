@@ -15,6 +15,15 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function projects()
+    {
+        $pageTitle = 'My Projects';
+        $user = auth()->user();
+        $invests = $user->invests()->latest()->paginate(getPaginate());
+
+        return view('Template::user.projects', compact('pageTitle', 'invests'));
+    }
+
     public function home()
     {
         $pageTitle = 'Dashboard';
@@ -245,16 +254,6 @@ class UserController extends Controller
         header('Content-Disposition: attachment; filename="' . $title);
         header("Content-Type: " . $mimetype);
         return readfile($filePath);
-    }
-
-
-    public function projects()
-    {
-        $pageTitle = 'My Projects';
-        $user = auth()->user();
-        $invests = $user->invests()->latest()->get();
-
-        return view('Template::user.projects', compact('pageTitle', 'invests'));
     }
 
 }

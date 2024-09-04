@@ -27,7 +27,7 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="projects.html">@lang('See all')</a>
+                        <a class="btn btn--xxsm btn--outline" href="{{ route('user.projects') }}">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
@@ -73,7 +73,7 @@
                                     fill="hsl(var(--base))"/>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="projects.html">@lang('See all')</a>
+                        <a class="btn btn--xxsm btn--outline" href="{{ route('user.projects') }}">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
@@ -126,7 +126,8 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xsm btn--outline" href="transactions.html">@lang('See all')</a>
+                        <a class="btn btn--xsm btn--outline"
+                           href="{{ route('user.transactions') }}">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
@@ -188,7 +189,8 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="transactions.html">@lang('See all')</a>
+                        <a class="btn btn--xsm btn--outline"
+                           href="{{ route('user.transactions') }}">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
@@ -237,7 +239,7 @@
                                     fill="hsl(var(--base))"/>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline"
+                        <a class="btn btn--xsm btn--outline"
                            href="{{ route('user.deposit.history') }}">@lang('See all')</a>
                     </div>
 
@@ -287,7 +289,8 @@
                                     fill="hsl(var(--base))"/>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="withdraw.html">@lang('See all')</a>
+                        <a class="btn btn--xsm btn--outline"
+                           href="{{ route('user.withdraw.history') }}">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
