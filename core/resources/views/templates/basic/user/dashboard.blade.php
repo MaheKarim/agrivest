@@ -27,12 +27,12 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="projects.html">See all</a>
+                        <a class="btn btn--xxsm btn--outline" href="projects.html">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">Total Booking Project</span>
-                        <h5 class="dashboard-analytics-card__total">45</h5>
+                        <span class="dashboard-analytics-card__name">@lang('Total Booking Project')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __($invests->count()) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
@@ -73,12 +73,12 @@
                                     fill="hsl(var(--base))"/>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="projects.html">See all</a>
+                        <a class="btn btn--xxsm btn--outline" href="projects.html">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">Complete Project</span>
-                        <h5 class="dashboard-analytics-card__total">35</h5>
+                        <span class="dashboard-analytics-card__name">@lang('Complete Project')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __($investData['completed']) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
@@ -126,12 +126,12 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="transactions.html">See all</a>
+                        <a class="btn btn--xxsm btn--outline" href="transactions.html">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">Total Invest</span>
-                        <h5 class="dashboard-analytics-card__total">$28,1000.00</h5>
+                        <span class="dashboard-analytics-card__name">@lang('Total Invest')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __(showAmount($investData['total_invest'])) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
@@ -188,12 +188,12 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="transactions.html">See all</a>
+                        <a class="btn btn--xxsm btn--outline" href="transactions.html">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">My Profit Amount</span>
-                        <h5 class="dashboard-analytics-card__total">$358,0000.00</h5>
+                        <span class="dashboard-analytics-card__name">@lang('My Profit Amount')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __(showAmount($investData['total_earning'])) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
@@ -237,12 +237,12 @@
                                     fill="hsl(var(--base))"/>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="deposite.html">See all</a>
+                        <a class="btn btn--xxsm btn--outline" href="deposite.html">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">Total Deposit</span>
-                        <h5 class="dashboard-analytics-card__total">$28,1000.00</h5>
+                        <span class="dashboard-analytics-card__name">@lang('Total Deposit')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __(showAmount($investData['total_deposit'])) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
@@ -286,12 +286,12 @@
                                     fill="hsl(var(--base))"/>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="withdraw.html">See all</a>
+                        <a class="btn btn--xxsm btn--outline" href="withdraw.html">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">Total Withdraw</span>
-                        <h5 class="dashboard-analytics-card__total">$358,0000.00</h5>
+                        <span class="dashboard-analytics-card__name">@lang('Total Withdraw')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __(showAmount($investData['total_withdraw'])) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
@@ -323,159 +323,49 @@
     <div class="dashboard-inner__block">
         <div class="dashboard-card">
             <div class="dashboard-card__header">
-                <h6 class="dashboard-card__title">Latest Booking Projects</h6>
+                <h6 class="dashboard-card__title">@lang('Latest Booking Projects')</h6>
                 <input class="form-control form--control" type="date" name="" id="">
             </div>
             <div class="dashboard-card__body">
                 <table class="table table--responsive--sm">
                     <thead>
                     <tr>
-                        <th>Project</th>
-                        <th>Duration</th>
-                        <th>Amount</th>
-                        <th>Gateway</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>@lang('Project')</th>
+                        <th>@lang('Duration')</th>
+                        <th>@lang('Amount')</th>
+                        <th>@lang('Gateway')</th>
+                        <th>@lang('Status')</th>
+                        <th>@lang('Action')</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td data-label="Project">
-                            <div class="td-wrapper">
-                                <div>Invest for Caw Farm</div>
-                                <span>Units: 2 x $15000</span>
-                            </div>
-                        </td>
-                        <td data-label="Duration">
-                            6 Months
-                        </td>
-                        <td data-label="Amount">$30,000.00</td>
-                        <td data-label="Gateway">Paypal</td>
-                        <td data-label="Status">
 
-
-                            <span class="badge badge--status badge--warning">running</span>
-
-
-                        </td>
-                        <td data-label="Action">
-                            <div class="action-buttons">
-                                <button type="button" class="btn btn--xxsm btn--outline action-btn"
-                                        data-bs-toggle="modal" data-bs-target="#projects-modal">
-                                    Details
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Project">
-                            <div class="td-wrapper">
-                                <div>Local Duck Farm</div>
-                                <span>Units: 2 x $15000</span>
-                            </div>
-                        </td>
-                        <td data-label="Duration">
-                            8 Months
-                        </td>
-                        <td data-label="Amount">$30,000.00</td>
-                        <td data-label="Gateway">Paypal</td>
-                        <td data-label="Status">
-
-                            <span class="badge badge--status badge--success">completed</span>
-
-
-                        </td>
-                        <td data-label="Action">
-                            <div class="action-buttons">
-                                <button type="button" class="btn btn--xxsm btn--outline action-btn"
-                                        data-bs-toggle="modal" data-bs-target="#projects-modal">
-                                    Details
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Project">
-                            <div class="td-wrapper">
-                                <div>Vegetable Farming</div>
-                                <span>Units: 3 x $15000</span>
-                            </div>
-                        </td>
-                        <td data-label="Duration">
-                            12 Months
-                        </td>
-                        <td data-label="Amount">$45,000.00</td>
-                        <td data-label="Gateway">Paypal</td>
-                        <td data-label="Status">
-
-                            <span class="badge badge--status badge--success">completed</span>
-
-
-                        </td>
-                        <td data-label="Action">
-                            <div class="action-buttons">
-                                <button type="button" class="btn btn--xxsm btn--outline action-btn"
-                                        data-bs-toggle="modal" data-bs-target="#projects-modal">
-                                    Details
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Project">
-                            <div class="td-wrapper">
-                                <div>Ox Farm</div>
-                                <span>Units: 3 x $15000</span>
-                            </div>
-                        </td>
-                        <td data-label="Duration">
-                            10 Months
-                        </td>
-                        <td data-label="Amount">$45,000.00</td>
-                        <td data-label="Gateway">Paypal</td>
-                        <td data-label="Status">
-
-                            <span class="badge badge--status badge--success">completed</span>
-
-
-                        </td>
-                        <td data-label="Action">
-                            <div class="action-buttons">
-                                <button type="button" class="btn btn--xxsm btn--outline action-btn"
-                                        data-bs-toggle="modal" data-bs-target="#projects-modal">
-                                    Details
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Project">
-                            <div class="td-wrapper">
-                                <div>Poultry Farm</div>
-                                <span>Units: 3 x $15000</span>
-                            </div>
-                        </td>
-                        <td data-label="Duration">
-                            10 Months
-                        </td>
-                        <td data-label="Amount">$45,000.00</td>
-                        <td data-label="Gateway">Paypal</td>
-                        <td data-label="Status">
-
-                            <span class="badge badge--status badge--success">completed</span>
-
-
-                        </td>
-                        <td data-label="Action">
-                            <div class="action-buttons">
-                                <button type="button" class="btn btn--xxsm btn--outline action-btn"
-                                        data-bs-toggle="modal" data-bs-target="#projects-modal">
-                                    Details
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
+                    @foreach($invests as $invest)
+                        <tr>
+                            <td>
+                                <div class="td-wrapper">
+                                    <div>{{ __($invest->project->title) }}</div>
+                                    <span>@lang('Units:') {{ __($invest->quantity) }} x {{__(showAmount($invest->unit_price))}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                {{ __($invest->project->maturity_time) }} @lang('Months')
+                            </td>
+                            <td>{{ __(showAmount($invest->total_price)) }}</td>
+                            <td>Paypal</td>
+                            <td>
+                                <span class="badge badge--status badge--success">running</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button type="button" class="btn btn--xxsm btn--outline action-btn"
+                                            data-bs-toggle="modal" data-bs-target="#projects-modal">
+                                        @lang('Details')
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -489,36 +379,30 @@
                         <i class="fas fa-times"></i>
                     </button>
 
-                    <h6 class="modal-title">Payment Details</h6>
+                    <h6 class="modal-title">@lang('Payment Details')</h6>
 
                     <ul class="amount-detail mt-3">
                         <li class="amount-detail-item">
-                            <span class="amount-detail-item__label">Total Payable</span>
+                            <span class="amount-detail-item__label">@lang('Total Paid')</span>
                             <span class="amount-detail-item__value">$30,000</span>
                         </li>
                         <li class="amount-detail-item">
-                            <span class="amount-detail-item__label">Total Earning</span>
+                            <span class="amount-detail-item__label">@lang('Total Earning')</span>
                             <span class="amount-detail-item__value">$30,000</span>
                         </li>
                     </ul>
 
                     <ul class="detail-list mt-4">
                         <li class="detail-list-item">
-                            <span class="detail-list-item__label">Unite Price</span>
+                            <span class="detail-list-item__label">@lang('Unite Price')</span>
                             <span class="detail-list-item__value">$30,000.00</span>
                         </li>
                         <li class="detail-list-item">
                             <span class="detail-list-item__label">Total Price</span>
                             <span class="detail-list-item__value">$16,000.00</span>
                         </li>
-                        <li class="detail-list-item">
-                            <span class="detail-list-item__label">Insurance Amount</span>
-                            <span class="detail-list-item__value text--base">(+)$0.00</span>
-                        </li>
-                        <li class="detail-list-item">
-                            <span class="detail-list-item__label">Discount</span>
-                            <span class="detail-list-item__value text--base">(-)$0.00</span>
-                        </li>
+
+
                         <li class="detail-list-item">
                             <span class="detail-list-item__label">Total Payable Amount</span>
                             <span class="detail-list-item__value">$30,000.00</span>

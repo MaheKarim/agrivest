@@ -11,6 +11,7 @@
     <link href="{{ asset('assets/global/css/all.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/global/css/line-awesome.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
 
     @stack('style-lib')
 
@@ -62,6 +63,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('assets/global/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
 
 <script src="{{ asset($activeTemplateTrue . 'js/viewport.jquery.js') }}"></script>
 

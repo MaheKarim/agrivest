@@ -2,7 +2,8 @@
 
 namespace App\Constants;
 
-class Status{
+class Status
+{
 
     const ENABLE = 1;
     const DISABLE = 0;
@@ -18,14 +19,14 @@ class Status{
     const PAYMENT_PENDING = 2;
     const PAYMENT_REJECT = 3;
 
-    CONST TICKET_OPEN = 0;
-    CONST TICKET_ANSWER = 1;
-    CONST TICKET_REPLY = 2;
-    CONST TICKET_CLOSE = 3;
+    const TICKET_OPEN = 0;
+    const TICKET_ANSWER = 1;
+    const TICKET_REPLY = 2;
+    const TICKET_CLOSE = 3;
 
-    CONST PRIORITY_LOW = 1;
-    CONST PRIORITY_MEDIUM = 2;
-    CONST PRIORITY_HIGH = 3;
+    const PRIORITY_LOW = 1;
+    const PRIORITY_MEDIUM = 2;
+    const PRIORITY_HIGH = 3;
 
     const USER_ACTIVE = 1;
     const USER_BAN = 0;
@@ -42,5 +43,11 @@ class Status{
 
     const PAYMENT_ONLINE = 1;
     const PAYMENT_WALLET = 2;
+
+    const INVEST_PENDING = 0;
+    const INVEST_ACCEPT = 1;
+    const INVEST_RUNNING = 2;
+    const INVEST_COMPLETED = 3;
+    const INVEST_CANCELED = 9;
 
 }

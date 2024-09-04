@@ -19,7 +19,24 @@ class UserController extends Controller
     {
         $pageTitle = 'Dashboard';
         $user = auth()->user();
-        return view('Template::user.dashboard', compact('pageTitle', 'user'));
+        $invests = $user->invests()->latest()->take(5)->get();
+        $investData['completed'] = $user->invests()->completed()->count();
+        $investData['total_invest'] = $user->invests()->totalInvest();
+        $investData['total_earning'] = $user->invests()->totalEarn();
+        $investData['total_deposit'] = $user->deposits()->directDeposit()->sum('amount');
+        $investData['total_withdraw'] = $user->withdrawals()->approved()->sum('amount');
+
+        return view('Template::user.dashboard', compact('pageTitle', 'user', 'invests', 'investData'));
+    }
+
+    public function transactions()
+    {
+        $pageTitle = 'Transactions';
+        $remarks = Transaction::distinct('remark')->orderBy('remark')->get('remark');
+
+        $transactions = Transaction::where('user_id', auth()->id())->searchable(['trx'])->filter(['trx_type', 'remark'])->orderBy('id', 'desc')->paginate(getPaginate());
+
+        return view('Template::user.transactions', compact('pageTitle', 'transactions', 'remarks'));
     }
 
     public function depositHistory(Request $request)
@@ -76,16 +93,6 @@ class UserController extends Controller
             $notify[] = ['error', 'Wrong verification code'];
         }
         return back()->withNotify($notify);
-    }
-
-    public function transactions()
-    {
-        $pageTitle = 'Transactions';
-        $remarks = Transaction::distinct('remark')->orderBy('remark')->get('remark');
-
-        $transactions = Transaction::where('user_id', auth()->id())->searchable(['trx'])->filter(['trx_type', 'remark'])->orderBy('id', 'desc')->paginate(getPaginate());
-
-        return view('Template::user.transactions', compact('pageTitle', 'transactions', 'remarks'));
     }
 
     public function kycForm()

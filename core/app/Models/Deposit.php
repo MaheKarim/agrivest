@@ -97,4 +97,9 @@ class Deposit extends Model
     {
         return $query->where('status', Status::PAYMENT_INITIATE);
     }
+
+    public function scopeDirectDeposit($query)
+    {
+        return $query->where('invest_id', '==', 0);
+    }
 }

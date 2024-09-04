@@ -1,3 +1,6 @@
+@php
+    $user = auth()->user();
+@endphp
 <aside id="dashboard-offcanvas-sidebar" class="offcanvas-sidebar offcanvas-sidebar--dashboard">
     <div class="offcanvas-sidebar__header">
         <div class="user-info">
@@ -60,12 +63,12 @@
                 <div class="collapse" id="offcanvas-sidebar-menu-collapse">
                     <ul class="offcanvas-sidebar-submenu">
                         <li class="offcanvas-sidebar-submenu__item">
-                            <a class="offcanvas-sidebar-submenu__link" href="edit-profile.html">
+                            <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.profile.setting') }}">
                                 @lang('Edit Profile')
                             </a>
                         </li>
                         <li class="offcanvas-sidebar-submenu__item">
-                            <a class="offcanvas-sidebar-submenu__link" href="#">
+                            <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.change.password') }}">
                                 @lang('Change Password')
                             </a>
                         </li>

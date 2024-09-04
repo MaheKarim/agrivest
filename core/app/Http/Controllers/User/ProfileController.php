@@ -13,7 +13,7 @@ class ProfileController extends Controller
     {
         $pageTitle = "Profile Setting";
         $user = auth()->user();
-        return view('Template::user.profile_setting', compact('pageTitle','user'));
+        return view('Template::user.profile_setting', compact('pageTitle', 'user'));
     }
 
     public function submitProfile(Request $request)
@@ -21,12 +21,22 @@ class ProfileController extends Controller
         $request->validate([
             'firstname' => 'required|string',
             'lastname' => 'required|string',
-        ],[
-            'firstname.required'=>'The first name field is required',
-            'lastname.required'=>'The last name field is required'
+        ], [
+            'firstname.required' => 'The first name field is required',
+            'lastname.required' => 'The last name field is required'
         ]);
 
         $user = auth()->user();
+
+        if ($request->hasFile('image')) {
+            try {
+                $old = $user->image;
+                $user->image = fileUploader($request->image, getFilePath('userProfile'), getFileSize('userProfile'), $old);
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Couldn\'t upload your image'];
+                return back()->withNotify($notify);
+            }
+        }
 
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
@@ -57,7 +67,7 @@ class ProfileController extends Controller
 
         $request->validate([
             'current_password' => 'required',
-            'password' => ['required','confirmed',$passwordValidation]
+            'password' => ['required', 'confirmed', $passwordValidation]
         ]);
 
         $user = auth()->user();

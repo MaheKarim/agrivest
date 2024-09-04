@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="navbar-left">
                 <a class="navbar-brand logo" href="{{ route('home') }}">
-                    <img src="{{ siteLogo() }}" alt="logo">
+                    <img src="{{ siteLogo() }}" alt="@lang('logo')">
                 </a>
             </div>
 
@@ -82,26 +82,53 @@
                     </ul>
                 </div>
                 <div class="navbar-buttons order-2 order-lg-4">
-                    <ul class="badge-btn-list style-two d-flex d-lg-none">
-                        <li class="badge-btn-list__item">
-                            <a href="favourite-offers.html" class="badge-btn-list__link">
-                                <i class="fas fa-heart"></i>
-                                <span class="badge badge--dark">2</span>
-                            </a>
-                        </li>
-                        <li class="badge-btn-list__item">
-                            <a href="#" class="badge-btn-list__link">
-                                <i class="fas fa-bell"></i>
-                                <span class="badge badge--dark">2</span>
-                            </a>
-                        </li>
-                    </ul>
-
-
+                    
                     @if(auth()->check())
-                        <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.home') }}">
-                            @lang('Dashboard')
-                        </a>
+                        @php
+                            $user = auth()->user();
+                        @endphp
+                        <div class="dropdown dropdown--user">
+                            <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img
+                                    src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                                    alt="@lang('User Image')">
+                            </div>
+
+                            <div class="dropdown-menu dropdown-menu-end ">
+                                <div class="user-info">
+                                    <div class="user-info__thumb">
+                                        <img
+                                            src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                                            alt="@lang('User Image')">
+                                    </div>
+
+                                    <div class="user-info__content">
+                                        <h6 class="user-info__name">{{ $user->fullName }}</h6>
+                                        <span class="user-info__email">{{ $user->email }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown-item-wrapper">
+                                    <a class="dropdown-item" href="{{ route('user.home') }}">
+                                        <i class="fas fa-chart-simple"></i>
+                                        <span>@lang('Dashboard')</span>
+                                    </a>
+
+                                    <a class="dropdown-item" href="projects.html">
+                                        <i class="fas fa-table-list"></i>
+                                        <span>@lang('My Projects')</span>
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('user.profile.setting') }}">
+                                        <i class="fas fa-user-circle"></i>
+                                        <span>@lang('My Profile')</span>
+                                    </a>
+                                    <a class="dropdown-item logout" href="{{ route('user.logout') }}">
+                                        <i class="fas fa-sign-out"></i>
+                                        <span>@lang('Logout')</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     @else
                         <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.register') }}">
                             @lang('Register')
