@@ -70,6 +70,8 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('transactions', 'transactions')->name('transactions');
 
                 Route::post('add-device-token', 'addDeviceToken')->name('add.device.token');
+
+                Route::get('projects', 'projects')->name('projects');
             });
 
             //Profile setting

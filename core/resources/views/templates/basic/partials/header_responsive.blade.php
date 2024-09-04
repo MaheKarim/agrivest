@@ -82,7 +82,7 @@
                     </ul>
                 </div>
                 <div class="navbar-buttons order-2 order-lg-4">
-                    
+
                     @if(auth()->check())
                         @php
                             $user = auth()->user();
@@ -114,7 +114,7 @@
                                         <span>@lang('Dashboard')</span>
                                     </a>
 
-                                    <a class="dropdown-item" href="projects.html">
+                                    <a class="dropdown-item" href="{{ route('user.projects') }}">
                                         <i class="fas fa-table-list"></i>
                                         <span>@lang('My Projects')</span>
                                     </a>

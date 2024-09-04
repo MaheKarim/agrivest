@@ -205,7 +205,6 @@ class UserController extends Controller
         return to_route('user.home');
     }
 
-
     public function addDeviceToken(Request $request)
     {
 
@@ -246,6 +245,16 @@ class UserController extends Controller
         header('Content-Disposition: attachment; filename="' . $title);
         header("Content-Type: " . $mimetype);
         return readfile($filePath);
+    }
+
+
+    public function projects()
+    {
+        $pageTitle = 'My Projects';
+        $user = auth()->user();
+        $invests = $user->invests()->latest()->get();
+
+        return view('Template::user.projects', compact('pageTitle', 'invests'));
     }
 
 }

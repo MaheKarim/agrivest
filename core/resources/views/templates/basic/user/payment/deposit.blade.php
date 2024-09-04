@@ -9,8 +9,8 @@
            }
 @endphp
 @section('content')
-    <div class="container ">
-        <div class="row justify-content-center">
+    <div class="dashboard-inner__block">
+        <div class="row justify-content-center gy-3">
             <div class="col-lg-9">
                 <form action="{{ route('user.deposit.insert', $investId) }}" method="post" class="deposit-form">
                     @csrf

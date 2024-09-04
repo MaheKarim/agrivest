@@ -126,7 +126,7 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="transactions.html">@lang('See all')</a>
+                        <a class="btn btn--xsm btn--outline" href="transactions.html">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
@@ -237,7 +237,8 @@
                                     fill="hsl(var(--base))"/>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="deposite.html">@lang('See all')</a>
+                        <a class="btn btn--xxsm btn--outline"
+                           href="{{ route('user.deposit.history') }}">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
@@ -319,97 +320,5 @@
             </div>
         </div>
     </div>
-
-    <div class="dashboard-inner__block">
-        <div class="dashboard-card">
-            <div class="dashboard-card__header">
-                <h6 class="dashboard-card__title">@lang('Latest Booking Projects')</h6>
-                <input class="form-control form--control" type="date" name="" id="">
-            </div>
-            <div class="dashboard-card__body">
-                <table class="table table--responsive--sm">
-                    <thead>
-                    <tr>
-                        <th>@lang('Project')</th>
-                        <th>@lang('Duration')</th>
-                        <th>@lang('Amount')</th>
-                        <th>@lang('Status')</th>
-                        <th>@lang('Action')</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($invests as $invest)
-                        <tr>
-                            <td>
-                                <div class="td-wrapper">
-                                    <div>{{ __($invest->project->title) }}</div>
-                                    <span>@lang('Units:') {{ __($invest->quantity) }} x {{__(showAmount($invest->unit_price))}}</span>
-                                </div>
-                            </td>
-                            <td>
-                                {{ __($invest->project->maturity_time) }} @lang('Months')
-                            </td>
-                            <td>{{ __(showAmount($invest->total_price)) }}</td>
-                            <td>
-                                @php echo $invest->statusBadge @endphp
-                            </td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button type="button" class="btn btn--xxsm btn--outline action-btn"
-                                            data-bs-toggle="modal" data-bs-target="#projects-modal">
-                                        @lang('Details')
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="projects-modal" class="modal modal--dashboard fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="btn--close style-two" data-bs-dismiss="modal">
-                        <i class="fas fa-times"></i>
-                    </button>
-
-                    <h6 class="modal-title">@lang('Payment Details')</h6>
-
-                    <ul class="amount-detail mt-3">
-                        <li class="amount-detail-item">
-                            <span class="amount-detail-item__label">@lang('Total Paid')</span>
-                            <span class="amount-detail-item__value">{{ __(showAmount($invest->total_price)) }}</span>
-                        </li>
-                        <li class="amount-detail-item">
-                            <span class="amount-detail-item__label">@lang('Total Earning')</span>
-                            <span class="amount-detail-item__value">{{ __(showAmount($invest->total_earning)) }}</span>
-                        </li>
-                    </ul>
-
-                    <ul class="detail-list mt-4">
-                        <li class="detail-list-item">
-                            <span class="detail-list-item__label">@lang('Unite Price')</span>
-                            <span class="detail-list-item__value">{{ __(showAmount($invest->unit_price)) }}</span>
-                        </li>
-                        <li class="detail-list-item">
-                            <span class="detail-list-item__label">@lang('Total Price')</span>
-                            <span class="detail-list-item__value">{{ __(showAmount($invest->total_price)) }}</span>
-                        </li>
-
-                        <li class="detail-list-item">
-                            <span class="detail-list-item__label">@lang('Earning(%)')</span>
-                            <span class="detail-list-item__value">{{__(getAmount($invest->roi_percentage))}}%</span>
-                        </li>
-                        <li class="detail-list-item">
-                            <span class="detail-list-item__label">@lang('Total Earning')</span>
-                            <span class="detail-list-item__value">{{ __(showAmount($invest->total_earning)) }}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include($activeTemplate.'partials.invest_data')
 @endsection

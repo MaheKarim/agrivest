@@ -30,19 +30,20 @@
             </li>
 
             <li class="offcanvas-sidebar-menu__item">
-                <a class="offcanvas-sidebar-menu__link" href="projects.html">
+                <a class="offcanvas-sidebar-menu__link {{ menuActive('user.projects*') }}"
+                   href="{{ route('user.projects') }}">
                     <i class="fas fa-table-list"></i>
                     <span>@lang('My Projects')</span>
                 </a>
             </li>
             <li class="offcanvas-sidebar-menu__item">
                 <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#offcanvas-sidebar-menu-collapse" aria-expanded="false" type="button">
+                        data-bs-target="#offcanvas-sidebar-deposit-collapse" aria-expanded="false" type="button">
                     <i class="fas fa-file-invoice-dollar"></i>
                     <span>@lang('Deposit')</span>
                 </button>
 
-                <div class="collapse" id="offcanvas-sidebar-menu-collapse">
+                <div class="collapse" id="offcanvas-sidebar-deposit-collapse">
                     <ul class="offcanvas-sidebar-submenu" {{ menuActive('user.deposit*') }}>
                         <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.deposit.index') }}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.deposit.index') }}">
@@ -59,19 +60,13 @@
             </li>
             <li class="offcanvas-sidebar-menu__item">
                 <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#offcanvas-sidebar-menu-collapse" aria-expanded="false" type="button">
+                        data-bs-target="#offcanvas-sidebar-withdraw-collapse" aria-expanded="false" type="button">
                     <i class="fas fa-building-columns"></i>
                     <span>@lang('Withdraw')</span>
                 </button>
 
-                <div class="collapse" id="offcanvas-sidebar-menu-collapse">
+                <div class="collapse" id="offcanvas-sidebar-withdraw-collapse">
                     <ul class="offcanvas-sidebar-submenu" {{ menuActive('user.withdraw*') }}>
-                        {{--                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.withdraw.index') }}">--}}
-                        {{--                            <a class="offcanvas-sidebar-submenu__link"--}}
-                        {{--                               href="{{ route('user.withdraw.index') }}">--}}
-                        {{--                                @lang('Withdraw Now')--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
                         <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.withdraw.history') }}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.withdraw.history') }}">
                                 @lang('Withdraw History')
@@ -82,29 +77,23 @@
             </li>
             <li class="offcanvas-sidebar-menu__item">
                 <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#offcanvas-sidebar-menu-collapse" aria-expanded="false" type="button">
-                    <i class="fas fa-building-columns"></i>
+                        data-bs-target="#offcanvas-sidebar-support-collapse" aria-expanded="false" type="button">
+                    <i class="fas fa-headset"></i>
                     <span>@lang('Support System')</span>
                 </button>
 
-                <div class="collapse" id="offcanvas-sidebar-menu-collapse">
-                    <ul class="offcanvas-sidebar-submenu" {{ menuActive('user.withdraw*') }}>
-                        {{--                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.withdraw.index') }}">--}}
-                        {{--                            <a class="offcanvas-sidebar-submenu__link"--}}
-                        {{--                               href="{{ route('user.withdraw.index') }}">--}}
-                        {{--                                @lang('Withdraw Now')--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
-                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.withdraw.history') }}">
-                            <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.withdraw.history') }}">
-                                @lang('Withdraw History')
+                <div class="collapse" id="offcanvas-sidebar-support-collapse">
+                    <ul class="offcanvas-sidebar-submenu">
+                        <li class="offcanvas-sidebar-submenu__item ">
+                            <a class="offcanvas-sidebar-submenu__link" href="#">
+                                @lang('Support Tickets')
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
             <li class="offcanvas-sidebar-menu__item">
-                <a class="offcanvas-sidebar-menu__link {{ menuActive('user.transactions') }}"
+                <a class="offcanvas-sidebar-menu__link {{ menuActive('user.transactions*') }}"
                    href="{{ route('user.transactions') }}">
                     <i class="fas fa-clock-rotate-left"></i>
                     <span>@lang('Transactions')</span>
@@ -112,12 +101,12 @@
             </li>
             <li class="offcanvas-sidebar-menu__item">
                 <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#offcanvas-sidebar-menu-collapse" aria-expanded="false" type="button">
+                        data-bs-target="#offcanvas-sidebar-settings-collapse" aria-expanded="false" type="button">
                     <i class="fas fa-gear"></i>
                     <span>@lang('Settings')</span>
                 </button>
 
-                <div class="collapse" id="offcanvas-sidebar-menu-collapse">
+                <div class="collapse" id="offcanvas-sidebar-settings-collapse">
                     <ul class="offcanvas-sidebar-submenu" {{ menuActive('user.*') }}>
                         <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.profile.setting') }}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.profile.setting') }}">
