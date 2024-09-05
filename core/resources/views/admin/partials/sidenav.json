@@ -26,6 +26,12 @@
         "route_name": "admin.dashboard",
         "menu_active": "admin.dashboard"
     },
+    "manage_invest": {
+        "title": "Manage Investments",
+        "icon": "las la-hand-holding-usd",
+        "menu_active": "admin.invest*",
+        "route_name": "admin.invest.index"
+    },
     "time_settings": {
         "title": "Time Settings",
         "icon": "las la-clock",

@@ -1,14 +1,13 @@
 <div class="dashboard-inner__block">
     <div class="dashboard-card">
         <div class="dashboard-card__header">
-            <h6 class="dashboard-card__title">My Projects</h6>
+            <h6 class="dashboard-card__title">@lang('My Projects')</h6>
             <input class="form-control form--control" type="date" name="" id="">
         </div>
         <div class="dashboard-card__body">
             <table class="table table--responsive--sm">
                 <thead>
                 <tr>
-                    <th>@lang('Project ID')</th>
                     <th>@lang('Project')</th>
                     <th>@lang('Duration')</th>
                     <th>@lang('Amount')</th>
@@ -19,9 +18,6 @@
                 <tbody>
                 @foreach($invests as $invest)
                     <tr>
-                        <td>
-                            {{ $invest->invest_no }}
-                        </td>
                         <td>
                             <div class="td-wrapper">
                                 <div>{{ __($invest->project->title) }}</div>

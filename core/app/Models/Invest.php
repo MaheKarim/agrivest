@@ -62,4 +62,34 @@ class Invest extends Model
         }
         return $html;
     }
+
+    public function paymentTypeBadge()
+    : Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+            if ($this->payment_type == Status::PAYMENT_WALLET) {
+                $html = '<span class="badge badge--info">' . trans('Wallet') . '</span>';
+            } else {
+                $html = '<span class="badge badge--primary">' . trans('Online') . '</span>';
+            }
+
+            return $html;
+        });
+    }
+
+    public function paymentStatusBadge()
+    : Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+            if ($this->payment_status == Status::PAYMENT_SUCCESS) {
+                $html = '<span class="badge badge--success">' . trans('Success') . '</span>';
+            } else {
+                $html = '<span class="badge badge--warning">' . trans('Pending') . '</span>';
+            }
+
+            return $html;
+        });
+    }
 }
