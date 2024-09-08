@@ -2,7 +2,6 @@
     <div class="dashboard-card">
         <div class="dashboard-card__header">
             <h6 class="dashboard-card__title">@lang('My Projects')</h6>
-            <input class="form-control form--control" type="date" name="" id="">
         </div>
         <div class="dashboard-card__body">
             <table class="table table--responsive--sm">
@@ -16,7 +15,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($invests as $invest)
+                @forelse($invests as $invest)
                     <tr>
                         <td>
                             <div class="td-wrapper">
@@ -33,14 +32,20 @@
                         </td>
                         <td>
                             <div class="action-buttons">
-                                <button type="button" class="btn btn--xxsm btn--outline action-btn"
+                                <button type="button" class="btn btn--xsm btn--outline action-btn"
                                         data-bs-toggle="modal" data-bs-target="#projects-modal">
                                     @lang('Details')
                                 </button>
                             </div>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="100%">
+                            <div class="text-center">@lang('No data found!')</div>
+                        </td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
             @if(!request()->routeIs('user.dashboard') && $invests instanceof \Illuminate\Contracts\Pagination\Paginator)
@@ -62,33 +67,33 @@
                 <ul class="amount-detail mt-3">
                     <li class="amount-detail-item">
                         <span class="amount-detail-item__label">@lang('Total Paid')</span>
-                        <span class="amount-detail-item__value">{{ __(showAmount($invest->total_price)) }}</span>
+                        <span class="amount-detail-item__value">{{ __(showAmount(@$invest->total_price)) }}</span>
                     </li>
                     <li class="amount-detail-item">
                         <span class="amount-detail-item__label">@lang('Total Earning')</span>
                         <span class="amount-detail-item__value" id="totalEarning"
-                              data-total-earning="{{ $invest->total_earning }}">{{ __(showAmount($invest->total_earning)) }}</span>
+                              data-total-earning="{{ @$invest->total_earning }}">{{ __(showAmount(@$invest->total_earning)) }}</span>
                     </li>
                 </ul>
 
                 <ul class="detail-list mt-4">
                     <li class="detail-list-item">
                         <span class="detail-list-item__label">@lang('Unite Price')</span>
-                        <span class="detail-list-item__value">{{ __(showAmount($invest->unit_price)) }}</span>
+                        <span class="detail-list-item__value">{{ __(showAmount(@$invest->unit_price)) }}</span>
                     </li>
                     <li class="detail-list-item">
                         <span class="detail-list-item__label">@lang('Total Price')</span>
-                        <span class="detail-list-item__value">{{ __(showAmount($invest->total_price)) }}</span>
+                        <span class="detail-list-item__value">{{ __(showAmount(@$invest->total_price)) }}</span>
                     </li>
 
                     <li class="detail-list-item">
                         <span class="detail-list-item__label">@lang('Earning(%)')</span>
-                        <span class="detail-list-item__value">{{__(getAmount($invest->roi_percentage))}}%</span>
+                        <span class="detail-list-item__value">{{__(getAmount(@$invest->roi_percentage))}}%</span>
                     </li>
                     <li class="detail-list-item">
                         <span class="detail-list-item__label">@lang('Total Earning')</span>
                         <span class="detail-list-item__value"
-                        >{{ __(showAmount($invest->total_earning)) }}</span>
+                        >{{ __(showAmount(@$invest->total_earning)) }}</span>
                     </li>
                 </ul>
             </div>

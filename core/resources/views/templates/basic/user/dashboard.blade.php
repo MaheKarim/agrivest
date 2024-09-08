@@ -3,6 +3,40 @@
 @section('content')
     <div class="dashboard-inner__block">
         <div class="row gy-3">
+            <div class="col-xsm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                @php
+                    $kyc = getContent('kyc.content', true);
+                @endphp
+                @if (auth()->user()->kv == Status::KYC_UNVERIFIED && auth()->user()->kyc_rejection_reason)
+                    <div class="alert alert-danger" role="alert">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="alert-heading">@lang('KYC Documents Rejected')</h4>
+                            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#kycRejectionReason">@lang('Show Reason')</button>
+                        </div>
+                        <hr>
+                        <p class="mb-0">{{ __(@$kyc->data_values->reject) }} <a
+                                href="{{ route('user.kyc.form') }}">@lang('Click Here to Re-submit Documents')</a>.</p>
+                        <br>
+                        <a href="{{ route('user.kyc.data') }}">@lang('See KYC Data')</a>
+                    </div>
+                @elseif(auth()->user()->kv == Status::KYC_UNVERIFIED)
+                    <div class="alert alert-info" role="alert">
+                        <h4 class="alert-heading">@lang('KYC Verification required')</h4>
+                        <hr>
+                        <p class="mb-0">{{ __(@$kyc->data_values->required) }}
+                            <a href="{{ route('user.kyc.form') }}">@lang('Click Here to Submit Documents')</a>
+                        </p>
+                    </div>
+                @elseif(auth()->user()->kv == Status::KYC_PENDING)
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">@lang('KYC Verification pending')</h4>
+                        <hr>
+                        <p class="mb-0">{{ __(@$kyc->data_values->pending) }} <a
+                                href="{{ route('user.kyc.data') }}">@lang('See KYC Data')</a></p>
+                    </div>
+                @endif
+            </div>
             <div class="col-xsm-6 col-sm-6 col-md-4 col-lg-6 col-xl-4">
                 <div class="dashboard-analytics-card">
                     <div class="dashboard-analytics-card__top">
@@ -27,12 +61,11 @@
                                 </defs>
                             </svg>
                         </div>
-                        <a class="btn btn--xxsm btn--outline" href="{{ route('user.projects') }}">@lang('See all')</a>
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">@lang('Total Booking Project')</span>
-                        <h5 class="dashboard-analytics-card__total">{{ __($invests->count()) }}</h5>
+                        <span class="dashboard-analytics-card__name">@lang('Total Balance')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __(showAmount($user->balance)) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
@@ -77,8 +110,8 @@
                     </div>
 
                     <div class="dashboard-analytics-card__content">
-                        <span class="dashboard-analytics-card__name">@lang('Complete Project')</span>
-                        <h5 class="dashboard-analytics-card__total">{{ __($investData['completed']) }}</h5>
+                        <span class="dashboard-analytics-card__name">@lang('Total Invested Projects')</span>
+                        <h5 class="dashboard-analytics-card__total">{{ __($invests->count()) }}</h5>
                     </div>
 
                     <div class="dashboard-analytics-card__overlay-icon">
