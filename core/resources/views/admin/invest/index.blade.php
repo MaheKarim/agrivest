@@ -11,7 +11,6 @@
                             <tr>
                                 <th>@lang('ID')</th>
                                 <th>@lang('Project Name')</th>
-                                <th>@lang('Achieved') - @lang('Goal')</th>
                                 <th>@lang('Payment Status')</th>
                                 <th>@lang('Order Status')</th>
                                 <th>@lang('Created At')</th>
@@ -23,17 +22,6 @@
                                 <tr>
                                     <td>{{ __($invest->invest_no) }}</td>
                                     <td>{{ __($invest->project->title) }}</td>
-                                    <td>
-                                        <div class="progress-wrapper">
-                                            <div class="progress">
-                                                <div class="progress-bar bg--{{ $invest->status }}" role="progressbar"
-                                                     style="width: {{ 100 - (($invest->project->available_share / $invest->project->share_count) * 100) }}%;"
-                                                     aria-valuenow="{{ getAmount($invest->project->share_count - $invest->project->available_share) }}"
-                                                     aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
                                     <td>@php echo $invest->paymentStatusBadge @endphp</td>
                                     <td>@php echo $invest->statusBadge @endphp</td>
                                     <td>{{ showDateTime($invest->created_at) }}</td>

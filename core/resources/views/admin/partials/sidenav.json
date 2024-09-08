@@ -481,19 +481,6 @@
             }
         ]
     },
-    "subscriber": {
-        "keyword": [
-            "subscriber",
-            "subscribers",
-            "Subscription management",
-            "Subscriber list",
-            "Subscriber activity"
-        ],
-        "title": "Subscribers",
-        "icon": "las la-thumbs-up",
-        "route_name": "admin.subscriber.index",
-        "menu_active": "admin.subscriber.*"
-    },
     "system_setting": {
         "keyword": [
             "System Setting",

@@ -5,12 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/invest_data.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/invest_data.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/kyc/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/kyc/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/kyc/info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/kyc/info.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/project/66d2e34e0ac601725096782.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/project/66d2e34e0eba01725096782.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/GeneralSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/GeneralSettingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/SubscriberController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/SystemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/SystemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Models/Subscriber.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/invest/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/invest/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/partials/sidenav.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/partials/sidenav.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/subscriber/index.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/subscriber/send_email.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/cookie_card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/cookie_card.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/routes/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/routes/admin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +283,7 @@
       <workItem from="1725711184677" duration="431000" />
       <workItem from="1725778874305" duration="56000" />
       <workItem from="1725778943420" duration="10000" />
-      <workItem from="1725800801641" duration="1138000" />
+      <workItem from="1725800801641" duration="3407000" />
     </task>
     <servers />
   </component>

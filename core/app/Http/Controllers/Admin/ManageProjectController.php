@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Faq;
 use App\Models\Project;
 use App\Models\Time;
 use App\Rules\FileTypeValidate;
@@ -38,18 +37,18 @@ class ManageProjectController extends Controller
         $times = Time::active()->get();
         $categories = Category::active()->get();
 
-        $galleries  = [];
+        $galleries = [];
 
         foreach ($project->gallery ?? [] as $key => $gallery) {
-            $img['id']   = $gallery;
-            $img['src']  = getImage(getFilePath('projectGallery') . '/' . $gallery);
+            $img['id'] = $gallery;
+            $img['src'] = getImage(getFilePath('projectGallery') . '/' . $gallery);
             $galleries[] = $img;
         }
 
         return view('admin.project.create', compact('pageTitle', 'project', 'times', 'galleries', 'categories'));
     }
 
-    public function store(Request $request, $id=0)
+    public function store(Request $request, $id = 0)
     {
         $isRequired = $id ? 'nullable' : 'required';
 
@@ -65,9 +64,9 @@ class ManageProjectController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'maturity_time' => 'required|numeric|min:1',
-            'image'     => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'gallery'   => "$isRequired|array|min:0|max:5",
-            'gallery.*'  => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'image' => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'gallery' => "$isRequired|array|min:0|max:4",
+            'gallery.*' => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
             'category_id' => "$isRequired|exists:categories,id",
             'time_id' => "$isRequired|exists:times,id",
         ]);
@@ -75,6 +74,15 @@ class ManageProjectController extends Controller
         if ($id) {
             $project = Project::findOrFail($id);
             $notify[] = ['success', 'Project updated successfully'];
+            $imageToRemove = $request->old ? array_values(removeElement($project->gallery, $request->old)) : $project->gallery;
+
+            if ($imageToRemove != null && count($imageToRemove)) {
+                foreach ($imageToRemove as $singleImage) {
+                    fileManager()->removeFile(getFilePath('projectGallery') . '/' . $singleImage);
+                }
+
+                $project->gallery = removeElement($project->gallery, $imageToRemove);
+            }
         } else {
             $project = new Project();
             $project->available_share = $request->share_count;
@@ -122,20 +130,21 @@ class ManageProjectController extends Controller
         $project->capital_back = $request->capital_back;
         $project->return_type = $request->return_type;
         $project->description = $request->description;
-        $project->gallery        = $gallery;
+        $project->gallery = $gallery;
         $project->save();
 
         return redirect()->route('admin.project.index')->withNotify($notify);
     }
 
-    public function checkSlug($id = null){
-        $page = Project::where('slug',request()->slug);
+    public function checkSlug($id = null)
+    {
+        $page = Project::where('slug', request()->slug);
         if ($id) {
-            $page = $page->where('id','!=',$id);
+            $page = $page->where('id', '!=', $id);
         }
         $exist = $page->exists();
         return response()->json([
-            'exists'=>$exist
+            'exists' => $exist
         ]);
     }
 

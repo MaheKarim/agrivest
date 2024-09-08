@@ -13,62 +13,67 @@ use Laramin\Utility\VugiChugi;
 
 class SystemController extends Controller
 {
-    public function systemInfo(){
+    public function systemInfo()
+    {
         $laravelVersion = app()->version();
         $timeZone = config('app.timezone');
         $pageTitle = 'Application Information';
-        return view('admin.system.info',compact('pageTitle', 'laravelVersion','timeZone'));
+        return view('admin.system.info', compact('pageTitle', 'laravelVersion', 'timeZone'));
     }
 
-    public function optimize(){
+    public function optimize()
+    {
         $pageTitle = 'Clear System Cache';
-        return view('admin.system.optimize',compact('pageTitle'));
+        return view('admin.system.optimize', compact('pageTitle'));
     }
 
-    public function optimizeClear(){
+    public function optimizeClear()
+    {
         Artisan::call('optimize:clear');
-        $notify[] = ['success','Cache cleared successfully'];
+        $notify[] = ['success', 'Cache cleared successfully'];
         return back()->withNotify($notify);
     }
 
-    public function systemServerInfo(){
+    public function systemServerInfo()
+    {
         $currentPHP = phpversion();
         $pageTitle = 'Server Information';
         $serverDetails = $_SERVER;
-        return view('admin.system.server',compact('pageTitle', 'currentPHP', 'serverDetails'));
+        return view('admin.system.server', compact('pageTitle', 'currentPHP', 'serverDetails'));
     }
 
-    public function systemUpdate() {
+    public function systemUpdate()
+    {
         $pageTitle = 'System Updates';
-        return view('admin.system.update',compact('pageTitle'));
+        return view('admin.system.update', compact('pageTitle'));
     }
 
-
-    public function systemUpdateProcess(){
+    public function systemUpdateProcess()
+    {
         if (gs('system_customized')) {
             return response()->json([
-                'status'=>'error',
-                'message'=>[
+                'status' => 'error',
+                'message' => [
                     'The system already customized. You can\'t update the project'
                 ]
             ]);
         }
 
 
-        if (version_compare(systemDetails()['version'],gs('available_version'),'==')) {
+        if (version_compare(systemDetails()['version'], gs('available_version'), '==')) {
             return response()->json([
-                'status'=>'info',
-                'message'=>[
+                'status' => 'info',
+                'message' => [
                     'The system is currently up to date'
                 ]
             ]);
         }
 
 
-        if(!extension_loaded('zip')){
+        if (!extension_loaded('zip')) {
             return response()->json([
-                'status'=>'error',
-                'message'=>[
+                'status' => 'error',
+                'message' => [
                     'Zip Extension is required to update the system'
                 ]
             ]);
@@ -77,8 +82,8 @@ class SystemController extends Controller
         $purchasecode = env('PURCHASECODE');
         if (!$purchasecode) {
             return response()->json([
-                'status'=>'error',
-                'message'=>[
+                'status' => 'error',
+                'message' => [
                     'Invalid request. Please contact with support'
                 ]
             ]);
@@ -86,31 +91,31 @@ class SystemController extends Controller
 
         $website = @$_SERVER['HTTP_HOST'] . @$_SERVER['REQUEST_URI'] . ' - ' . env("APP_URL");
 
-        $response = CurlRequest::curlPostContent(VugiChugi::upman(),[
-            'purchasecode'=>$purchasecode,
-            'product'=>systemDetails()['name'],
-            'version'=>systemDetails()['version'],
-            'website'=>$website,
+        $response = CurlRequest::curlPostContent(VugiChugi::upman(), [
+            'purchasecode' => $purchasecode,
+            'product' => systemDetails()['name'],
+            'version' => systemDetails()['version'],
+            'website' => $website,
         ]);
 
         $response = json_decode($response);
-        if($response->status == 'error'){
+        if ($response->status == 'error') {
             return response()->json([
-                'status'=>'error',
-                'message'=>$response->message->error
+                'status' => 'error',
+                'message' => $response->message->error
             ]);
         }
 
-        if($response->remark == 'already_updated'){
+        if ($response->remark == 'already_updated') {
             return response()->json([
-                'status'=>'info',
-                'message'=>$response->message->success
+                'status' => 'info',
+                'message' => $response->message->success
             ]);
         }
 
         $directory = 'core/temp/';
         $files = [];
-        foreach($response->data->files as $key => $fileUrl){
+        foreach ($response->data->files as $key => $fileUrl) {
 
             $opts = [
                 "http" => [
@@ -120,51 +125,51 @@ class SystemController extends Controller
             ];
 
             $context = stream_context_create($opts);
-            $fileContent = file_get_contents($fileUrl,false,$context);
+            $fileContent = file_get_contents($fileUrl, false, $context);
 
-            if(@json_decode($fileContent)->status == 'error'){
+            if (@json_decode($fileContent)->status == 'error') {
                 return response()->json([
-                    'status'=>'error',
-                    'message'=>@json_decode($fileContent)->message->error
+                    'status' => 'error',
+                    'message' => @json_decode($fileContent)->message->error
                 ]);
             }
-            file_put_contents($directory.$key.'.zip',$fileContent);
+            file_put_contents($directory . $key . '.zip', $fileContent);
             $files[$key] = $fileContent;
         }
 
         $fileNames = array_keys($files);
-        foreach($fileNames as $fileName){
-            $rand    = Str::random(10);
-            $dir     = base_path('temp/' . $rand);
-            $extract = $this->extractZip(base_path('temp/' . $fileName.'.zip'), $dir);
+        foreach ($fileNames as $fileName) {
+            $rand = Str::random(10);
+            $dir = base_path('temp/' . $rand);
+            $extract = $this->extractZip(base_path('temp/' . $fileName . '.zip'), $dir);
 
             if ($extract == false) {
                 $this->removeDir($dir);
                 return response()->json([
-                    'status'=>'error',
-                    'message'=>['Something went wrong while extracting the update']
+                    'status' => 'error',
+                    'message' => ['Something went wrong while extracting the update']
                 ]);
             }
 
             if (!file_exists($dir . '/config.json')) {
                 $this->removeDir($dir);
                 return response()->json([
-                    'status'=>'error',
-                    'message'=>['Config file not found']
+                    'status' => 'error',
+                    'message' => ['Config file not found']
                 ]);
             }
 
             $getConfig = file_get_contents($dir . '/config.json');
-            $config    = json_decode($getConfig);
+            $config = json_decode($getConfig);
 
-            $this->removeFile($directory . '/' . $fileName.'.zip');
+            $this->removeFile($directory . '/' . $fileName . '.zip');
 
             $mainFile = $dir . '/update.zip';
             if (!file_exists($mainFile)) {
                 $this->removeDir($dir);
                 return response()->json([
-                    'status'=>'error',
-                    'message'=>['Something went wrong while patching the update']
+                    'status' => 'error',
+                    'message' => ['Something went wrong while patching the update']
                 ]);
             }
 
@@ -173,11 +178,10 @@ class SystemController extends Controller
             $extract = $this->extractZip(base_path('temp/' . $rand . '/update.zip'), base_path('../'));
             if ($extract == false) {
                 return response()->json([
-                    'status'=>'error',
-                    'message'=>['Something went wrong while extracting the update']
+                    'status' => 'error',
+                    'message' => ['Something went wrong while extracting the update']
                 ]);
             }
-
 
 
             //Execute database
@@ -196,15 +200,9 @@ class SystemController extends Controller
         }
         Artisan::call('optimize:clear');
         return response()->json([
-            'status'=>'success',
-            'message'=>['System updated successfully']
+            'status' => 'success',
+            'message' => ['System updated successfully']
         ]);
-    }
-
-    public function systemUpdateLog(){
-        $pageTitle = 'System Update Log';
-        $updates = UpdateLog::orderBy('id','desc')->paginate(getPaginate());
-        return view('admin.system.update_log',compact('pageTitle','updates'));
     }
 
     protected function extractZip($file, $extractTo)
@@ -215,14 +213,20 @@ class SystemController extends Controller
             return false;
         }
 
-        for( $i = 0 ; $i < $zip->numFiles ; $i++ ) {
-            if ( $zip->getNameIndex( $i ) != '/' && $zip->getNameIndex( $i ) != '__MACOSX/_' ) {
-                $zip->extractTo( $extractTo, array($zip->getNameIndex($i)) );
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            if ($zip->getNameIndex($i) != '/' && $zip->getNameIndex($i) != '__MACOSX/_') {
+                $zip->extractTo($extractTo, array($zip->getNameIndex($i)));
             }
         }
 
         $zip->close();
         return true;
+    }
+
+    protected function removeDir($location)
+    {
+        $fileManager = new FileManager();
+        $fileManager->removeDirectory($location);
     }
 
     protected function removeFile($path)
@@ -231,9 +235,10 @@ class SystemController extends Controller
         $fileManager->removeFile($path);
     }
 
-    protected function removeDir($location)
+    public function systemUpdateLog()
     {
-        $fileManager = new FileManager();
-        $fileManager->removeDirectory($location);
+        $pageTitle = 'System Update Log';
+        $updates = UpdateLog::orderBy('id', 'desc')->paginate(getPaginate());
+        return view('admin.system.update_log', compact('pageTitle', 'updates'));
     }
 }
