@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Invest;
 use App\Models\Project;
 use App\Models\Time;
 use App\Rules\FileTypeValidate;
@@ -16,7 +18,6 @@ class ManageProjectController extends Controller
     {
         $pageTitle = 'All Projects';
         $projects = Project::orderByDesc('id')->searchable('title')->paginate(getPaginate());
-
 
         return view('admin.project.index', compact('pageTitle', 'projects'));
     }
@@ -69,6 +70,9 @@ class ManageProjectController extends Controller
             'gallery.*' => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
             'category_id' => "$isRequired|exists:categories,id",
             'time_id' => "$isRequired|exists:times,id",
+            'return_type' => 'required|in:1,2',
+            'return_interval' => 'required_if:return_type,2|numeric|min:1',
+            'repeat_times' => 'required_if:return_type,2|numeric|min:1',
         ]);
 
         if ($id) {
@@ -123,14 +127,15 @@ class ManageProjectController extends Controller
         $project->end_date = $request->end_date;
         $project->maturity_time = $request->maturity_time;
         $project->time_id = $request->time_id;
-        $project->category_id = $request->category_id;
         $project->return_interval = $request->return_interval;
-        $project->return_timespan = $request->return_timespan;
+        $project->repeat_times = $request->repeat_times;
+        $project->capital_back = $request->capital_back ?? Status::NO;
+        $project->return_type = $request->return_type == Status::REPEAT ? Status::REPEAT : Status::LIFETIME;
+        $project->category_id = $request->category_id;
         $project->map_url = $request->map_url;
-        $project->capital_back = $request->capital_back;
-        $project->return_type = $request->return_type;
         $project->description = $request->description;
         $project->gallery = $gallery;
+        $project->featured = $request->featured;
         $project->save();
 
         return redirect()->route('admin.project.index')->withNotify($notify);
@@ -151,5 +156,12 @@ class ManageProjectController extends Controller
     public function status($id)
     {
         return Project::changeStatus($id);
+    }
+
+    public function investHistory($id)
+    {
+        $pageTitle = 'Invest History of ' . Project::findOrFail($id)->title;
+        $invests = Invest::where('project_id', $id)->with('project', 'user')->orderBy('id', 'desc')->paginate(getPaginate());
+        return view('admin.project.invest_history', compact('pageTitle', 'invests'));
     }
 }

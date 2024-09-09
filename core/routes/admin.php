@@ -80,6 +80,7 @@ Route::middleware('admin')->group(function () {
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::get('project/check-slug/{id?}', 'checkSlug')->name('check.slug');
         Route::post('status/{id}', 'status')->name('status');
+        Route::get('invest/history/{id}', 'investHistory')->name('investHistory');
     });
 
     Route::controller('ManageFaqController')->name('project.faq.')->prefix('project/faq')->group(function () {

@@ -761,3 +761,9 @@ button .spinner-border {
     align-items: center;
     gap: 5px;
 }
+
+label.required:after {
+    content: '*';
+    color: #DC3545 !important;
+    margin-left: 2px;
+}

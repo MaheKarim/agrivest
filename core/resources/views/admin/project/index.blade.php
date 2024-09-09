@@ -38,7 +38,8 @@
                                         {{ showDateTime($project->end_date) }}
                                     </td>
                                     <td>
-                                        {{ getAmount($project->share_count) }} / <b class="required">{{ $project->available_share }}</b>
+                                        {{ getAmount($project->share_count) }} / <b
+                                            class="required">{{ $project->available_share }}</b>
                                     </td>
 
                                     <td>
@@ -75,8 +76,12 @@
                                                         <i class="la la-eye"></i> @lang('Enable')
                                                     </button>
                                                 @endif
-                                                    <a class="dropdown-item" href="{{ route('admin.project.faq.add', $project->id) }}"
-                                                   ><i class="la la-question-circle"></i> @lang('FAQ')</a>
+                                                <a class="dropdown-item"
+                                                   href="{{ route('admin.project.faq.add', $project->id) }}"
+                                                ><i class="la la-question-circle"></i> @lang('FAQ')</a>
+                                                <a class="dropdown-item"
+                                                   href="{{ route('admin.project.investHistory', $project->id) }}">
+                                                    <i class="la la-users"></i> @lang('Investors')</a>
                                             </div>
                                         </div>
                                     </td>

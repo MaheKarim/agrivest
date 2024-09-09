@@ -91,21 +91,17 @@
             $('.cookies-card').removeClass('hide')
         }, 2000);
 
-        var inputElements = $('[type=text],select,textarea');
+        var inputElements = $('[type=text],[type=password],select,textarea');
         $.each(inputElements, function (index, element) {
             element = $(element);
             element.closest('.form-group').find('label').attr('for', element.attr('name'));
             element.attr('id', element.attr('name'))
         });
 
-        $.each($('input, select, textarea'), function (i, element) {
-            var elementType = $(element);
-            if (elementType.attr('type') != 'checkbox') {
-                if (element.hasAttribute('required')) {
-                    $(element).closest('.form-group').find('label').addClass('required');
-                }
+        $.each($('input:not([type=checkbox]):not([type=hidden]), select, textarea'), function (i, element) {
+            if (element.hasAttribute('required')) {
+                $(element).closest('.form-group').find('label').addClass('required');
             }
-
         });
 
         let disableSubmission = false;

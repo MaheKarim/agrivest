@@ -1,53 +1,60 @@
 @extends('admin.layouts.app')
 
 @section('panel')
-<div class="row">
+    <div class="row">
 
-    <div class="col-lg-12">
-        <div class="show-filter mb-3 text-end">
-            <button type="button" class="btn btn-outline--primary showFilterBtn btn-sm"><i class="las la-filter"></i> @lang('Filter')</button>
-        </div>
-        <div class="card responsive-filter-card mb-4">
-            <div class="card-body">
-                <form>
-                    <div class="d-flex flex-wrap gap-4">
-                        <div class="flex-grow-1">
-                            <label>@lang('TRX/Username')</label>
-                            <input type="search" name="search" value="{{ request()->search }}" class="form-control">
-                        </div>
-                        <div class="flex-grow-1">
-                            <label>@lang('Type')</label>
-                            <select name="trx_type" class="form-control select2" data-minimum-results-for-search="-1">
-                                <option value="">@lang('All')</option>
-                                <option value="+" @selected(request()->trx_type == '+')>@lang('Plus')</option>
-                                <option value="-" @selected(request()->trx_type == '-')>@lang('Minus')</option>
-                            </select>
-                        </div>
-                        <div class="flex-grow-1">
-                            <label>@lang('Remark')</label>
-                            <select class="form-control select2" data-minimum-results-for-search="-1" name="remark">
-                                <option value="">@lang('All')</option>
-                                @foreach($remarks as $remark)
-                                <option value="{{ $remark->remark }}" @selected(request()->remark == $remark->remark)>{{ __(keyToTitle($remark->remark)) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="flex-grow-1">
-                            <label>@lang('Date')</label>
-                            <input name="date" type="search" class="datepicker-here form-control bg--white pe-2 date-range" placeholder="@lang('Start Date - End Date')" autocomplete="off" value="{{ request()->date }}">
-                        </div>
-                        <div class="flex-grow-1 align-self-end">
-                            <button class="btn btn--primary w-100 h-45"><i class="fas fa-filter"></i> @lang('Filter')</button>
-                        </div>
-                    </div>
-                </form>
+        <div class="col-lg-12">
+            <div class="show-filter mb-3 text-end">
+                <button type="button" class="btn btn-outline--primary showFilterBtn btn-sm"><i
+                        class="las la-filter"></i> @lang('Filter')</button>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-body p-0">
-                <div class="table-responsive--sm table-responsive">
-                    <table class="table table--light style--two">
-                        <thead>
+            <div class="card responsive-filter-card mb-4">
+                <div class="card-body">
+                    <form>
+                        <div class="d-flex flex-wrap gap-4">
+                            <div class="flex-grow-1">
+                                <label>@lang('TRX/Username')</label>
+                                <input type="search" name="search" value="{{ request()->search }}" class="form-control">
+                            </div>
+                            <div class="flex-grow-1">
+                                <label>@lang('Type')</label>
+                                <select name="trx_type" class="form-control select2"
+                                        data-minimum-results-for-search="-1">
+                                    <option value="">@lang('All')</option>
+                                    <option value="+" @selected(request()->trx_type == '+')>@lang('Plus')</option>
+                                    <option value="-" @selected(request()->trx_type == '-')>@lang('Minus')</option>
+                                </select>
+                            </div>
+                            <div class="flex-grow-1">
+                                <label>@lang('Remark')</label>
+                                <select class="form-control select2" data-minimum-results-for-search="-1" name="remark">
+                                    <option value="">@lang('All')</option>
+                                    @foreach($remarks as $remark)
+                                        <option
+                                            value="{{ $remark->remark }}" @selected(request()->remark == $remark->remark)>{{ __(keyToTitle($remark->remark)) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="flex-grow-1">
+                                <label>@lang('Date')</label>
+                                <input name="date" type="search"
+                                       class="datepicker-here form-control bg--white pe-2 date-range"
+                                       placeholder="@lang('Start Date - End Date')" autocomplete="off"
+                                       value="{{ request()->date }}">
+                            </div>
+                            <div class="flex-grow-1 align-self-end">
+                                <button class="btn btn--primary w-100 h-45"><i
+                                        class="fas fa-filter"></i> @lang('Filter')</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive--sm table-responsive">
+                        <table class="table table--light style--two">
+                            <thead>
                             <tr>
                                 <th>@lang('User')</th>
                                 <th>@lang('TRX')</th>
@@ -56,8 +63,8 @@
                                 <th>@lang('Post Balance')</th>
                                 <th>@lang('Details')</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             @forelse($transactions as $trx)
                                 <tr>
                                     <td>
@@ -75,7 +82,8 @@
                                     </td>
 
                                     <td class="budget">
-                                        <span class="fw-bold @if($trx->trx_type == '+')text--success @else text--danger @endif">
+                                        <span
+                                            class="fw-bold @if($trx->trx_type == '+')text--success @else text--danger @endif">
                                             {{ $trx->trx_type }} {{showAmount($trx->amount)}}
                                         </span>
                                     </td>
@@ -92,18 +100,18 @@
                                 </tr>
                             @endforelse
 
-                    </tbody>
-                </table><!-- table end -->
-            </div>
+                            </tbody>
+                        </table><!-- table end -->
+                    </div>
+                </div>
+                @if($transactions->hasPages())
+                    <div class="card-footer py-4">
+                        {{ paginateLinks($transactions) }}
+                    </div>
+                @endif
+            </div><!-- card end -->
         </div>
-        @if($transactions->hasPages())
-        <div class="card-footer py-4">
-            {{ paginateLinks($transactions) }}
-        </div>
-        @endif
-    </div><!-- card end -->
-</div>
-</div>
+    </div>
 
 @endsection
 
@@ -118,7 +126,7 @@
 
 @push('script')
     <script>
-        (function($){
+        (function ($) {
             "use strict"
 
             const datePicker = $('.date-range').daterangepicker({

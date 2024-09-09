@@ -7,9 +7,9 @@
                 <div class="dashboard-card__header">
                     <div class="user-info">
                         <div class="user-info__thumb">
-                            <img
-                                src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
-                                alt="@lang('User Profile Image')">
+                            <img id="image-preview"
+                                 src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                                 alt="@lang('User Profile Image')">
 
                             <div class="user-thumb-edit">
                                 <input class="d-none" type="file" name="image" accept=".png, .jpg, .jpeg"
@@ -85,3 +85,17 @@
         </form>
     </div>
 @endsection
+@push('script')
+    <script>
+        document.getElementById('user-thumb-edit-input').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('image-preview').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endpush

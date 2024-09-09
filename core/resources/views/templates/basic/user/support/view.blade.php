@@ -32,7 +32,7 @@
                                 <button type="button" class="btn btn-dark btn-sm addAttachment my-2"><i
                                         class="fas fa-plus"></i> @lang('Add Attachment') </button>
                                 <p class="mb-2"><span
-                                        class="text--info">@lang('Max 5 files can be uploaded | Maximum upload size is '.convertToReadableSize(ini_get('upload_max_filesize')) .' | Allowed File Extensions: .jpg, .jpeg, .png, .pdf, .doc, .docx')</span>
+                                        class="text--base">@lang('Max 5 files can be uploaded | Maximum upload size is '.convertToReadableSize(ini_get('upload_max_filesize')) .' | Allowed File Extensions: .jpg, .jpeg, .png, .pdf, .doc, .docx')</span>
                                 </p>
                                 <div class="row fileUploadsContainer">
                                 </div>
@@ -52,7 +52,7 @@
                 <div class="card-body">
                     @forelse($messages as $message)
                         @if($message->admin_id == 0)
-                            <div class="row border border-primary border-radius-3 my-3 py-3 mx-2">
+                            <div class="row border border--base border-radius-3 my-3 py-3 mx-2">
                                 <div class="col-md-3 border-end text-end">
                                     <h5 class="my-3">{{ $message->ticket->name }}</h5>
                                 </div>

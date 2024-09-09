@@ -63,6 +63,11 @@ class Invest extends Model
         return $html;
     }
 
+    public function scopeRunning($query)
+    {
+        return $query->where('status', Status::INVEST_RUNNING);
+    }
+
     public function paymentTypeBadge()
     : Attribute
     {

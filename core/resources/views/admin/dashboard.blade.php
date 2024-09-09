@@ -197,280 +197,36 @@
         </div>
     </div>
 
-
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="success"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="warning"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="danger"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="primary"
-            />
-        </div><!-- dashboard-w1 end -->
-    </div><!-- row end-->
-
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-2 col-lg-4 col-sm-6">
-            <x-widget
-                style="5"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="primary"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-2 col-lg-4 col-sm-6">
-            <x-widget
-                style="5"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="1"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-2 col-lg-4 col-sm-6">
-            <x-widget
-                style="5"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="2"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-2 col-lg-4 col-sm-6">
-            <x-widget
-                style="5"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="3"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-2 col-lg-4 col-sm-6">
-            <x-widget
-                style="5"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="4"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-2 col-lg-4 col-sm-6">
-            <x-widget
-                style="5"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="5"
-            />
-        </div><!-- dashboard-w1 end -->
-    </div><!-- row end-->
-
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="success"
-                outline="true"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="warning"
-                outline="true"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="danger"
-                outline="true"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="primary"
-                outline="true"
-            />
-        </div><!-- dashboard-w1 end -->
-    </div><!-- row end-->
-
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="primary"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="1"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="14"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="#"
-                icon="las la-users"
-                title="Demo"
-                value="xxx"
-                bg="19"
-            />
-        </div><!-- dashboard-w1 end -->
-    </div><!-- row end-->
-
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="success"
-                type="2"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="warning"
-                type="2"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="danger"
-                type="2"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="7"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
-                bg="primary"
-                type="2"
-            />
-        </div><!-- dashboard-w1 end -->
-    </div>
-
     <div class="row mb-none-30 mt-30">
         <div class="col-xl-6 mb-30">
             <div class="card">
-              <div class="card-body">
-                <div class="d-flex flex-wrap justify-content-between">
-                    <h5 class="card-title">@lang('Deposit & Withdraw Report')</h5>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <h5 class="card-title">@lang('Deposit & Withdraw Report')</h5>
 
-                    <div id="dwDatePicker" class="border p-1 cursor-pointer rounded">
-                        <i class="la la-calendar"></i>&nbsp;
-                        <span></span> <i class="la la-caret-down"></i>
+                        <div id="dwDatePicker" class="border p-1 cursor-pointer rounded">
+                            <i class="la la-calendar"></i>&nbsp;
+                            <span></span> <i class="la la-caret-down"></i>
+                        </div>
                     </div>
+                    <div id="dwChartArea"></div>
                 </div>
-                <div id="dwChartArea"> </div>
-              </div>
             </div>
-          </div>
+        </div>
         <div class="col-xl-6 mb-30">
             <div class="card">
-              <div class="card-body">
-                <div class="d-flex flex-wrap justify-content-between">
-                    <h5 class="card-title">@lang('Transactions Report')</h5>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <h5 class="card-title">@lang('Transactions Report')</h5>
 
-                    <div id="trxDatePicker" class="border p-1 cursor-pointer rounded">
-                        <i class="la la-calendar"></i>&nbsp;
-                        <span></span> <i class="la la-caret-down"></i>
+                        <div id="trxDatePicker" class="border p-1 cursor-pointer rounded">
+                            <i class="la la-calendar"></i>&nbsp;
+                            <span></span> <i class="la la-caret-down"></i>
+                        </div>
                     </div>
-                </div>
 
-                <div id="transactionChartArea"></div>
-              </div>
+                    <div id="transactionChartArea"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -557,9 +313,9 @@
             document.querySelector("#dwChartArea"),
             @json(__(gs('cur_text'))),
             [{
-                    name: 'Deposited',
-                    data: []
-                },
+                name: 'Deposited',
+                data: []
+            },
                 {
                     name: 'Withdrawn',
                     data: []
@@ -571,9 +327,9 @@
         let trxChart = lineChart(
             document.querySelector("#transactionChartArea"),
             [{
-                    name: "Plus Transactions",
-                    data: []
-                },
+                name: "Plus Transactions",
+                data: []
+            },
                 {
                     name: "Minus Transactions",
                     data: []
@@ -593,7 +349,7 @@
             const url = @json(route('admin.chart.deposit.withdraw'));
 
             $.get(url, data,
-                function(data, status) {
+                function (data, status) {
                     if (status == 'success') {
                         dwChart.updateSeries(data.data);
                         dwChart.updateOptions({
@@ -617,7 +373,7 @@
 
 
             $.get(url, data,
-                function(data, status) {
+                function (data, status) {
                     if (status == 'success') {
 
 
@@ -631,7 +387,6 @@
                 }
             );
         }
-
 
 
         $('#dwDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText('#dwDatePicker span', start, end));

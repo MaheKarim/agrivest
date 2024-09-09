@@ -26,13 +26,25 @@
             </div>
             <input type="text" class="form-control" name="slug" value="{{ old('slug', @$project->slug) }}" required>
         </div>
-        <div class="form-group">
-            <label>@lang('Project Goal')</label>
-            <div class="input-group">
-                <input type="number" class="form-control goal" name="goal" step="0"
-                       value="{{ old('goal', getAmount(@$project->goal)) }}"
-                       placeholder="@lang('10000')" required>
-                <span class="input-group-text">{{ gs('cur_text') }}</span>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>@lang('Project Goal')</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control goal" name="goal" step="0"
+                               value="{{ old('goal', getAmount(@$project->goal)) }}"
+                               placeholder="@lang('10000')" required>
+                        <span class="input-group-text">{{ gs('cur_text') }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">@lang('Featured')</label>
+                    <input type="checkbox" data-width="100%" data-onstyle="-success" data-offstyle="-danger"
+                           data-bs-toggle="toggle" data-on="@lang('Yes')" data-off="@lang('No')" name="featured"
+                           value="1" @if(old('featured', @$project->featured)) checked @endif>
+                </div>
             </div>
         </div>
     </div>
@@ -107,7 +119,17 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-6 return-type-wrapper">
+        <label>@lang('Return Type')</label>
+        <select class="form-control select2" name="return_type" data-search="false" required>
+            <option value="" selected disabled>@lang('Select Return Type')</option>
+            <option
+                value="-1" @selected(old('return_type', @$project->return_type) == -1 ? 'selected' : '')>@lang('Lifetime')</option>
+            <option
+                value="2" @selected(old('return_type', @$project->return_type) == 2 ? 'selected': '')>@lang('Repeat')</option>
+        </select>
+    </div>
+    <div class="col-md-6 time-settings-wrapper">
         <div class="form-group">
             <label>@lang('Time')</label>
             <select class="form-control select2" name="time_id" data-search="false" required>
@@ -119,36 +141,25 @@
             </select>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 return_interval">
         <div class="form-group">
             <label>@lang('Return Interval')</label>
             <div class="input-group">
                 <input type="number" class="form-control return_interval" name="return_interval"
-                       value="{{ old('return_interval', @$project->return_interval) }}" step="0" required>
+                       value="{{ old('return_interval', @$project->return_interval) }}" step="0">
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 return_timespan">
         <div class="form-group">
-            <label>@lang('Return Timespan')</label>
+            <label>@lang('Return Repeat Times')</label>
             <div class="input-group">
-                <input type="number" class="form-control return_timespan" name="return_timespan"
-                       value="{{ old('return_timespan', @$project->return_timespan) }}" step="0" required>
+                <input type="number" class="form-control return_timespan" name="repeat_times"
+                       value="{{ old('repeat_times', @$project->repeat_times) }}" step="0">
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <label>@lang('Return Type')</label>
-        <select class="form-control select2" name="return_type" data-search="false" required>
-            <option value="" selected disabled>@lang('Select Return Type')</option>
-            <option
-                value="high_return" @selected(old('return_type', @$project->return_type) == 'high_return')>@lang('High Return')</option>
-            <option
-                value="long_duration" @selected(old('return_type', @$project->return_type) == 'long_duration')>@lang('Long Duration')</option>
-            <option
-                value="short_duration" @selected(old('return_type', @$project->return_type) == 'short_duration')>@lang('Short Duration')</option>
-        </select>
-    </div>
+
 </div>
 <div class="row">
     <div class="col-md-4">
@@ -157,7 +168,8 @@
             <select class="form-control select2" name="category_id" data-search="true" required>
                 <option value="" selected disabled>@lang('Select Category')</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" @selected(old('category_id', $project->category_id ?? null) == $category->id)>
+                    <option
+                        value="{{ $category->id }}" @selected(old('category_id', $project->category_id ?? null) == $category->id)>
                         {{ $category->name }}</option>
                 @endforeach
             </select>
@@ -180,6 +192,7 @@
     </div>
 
 </div>
+
 <div class="form-group">
     <label>@lang('Description')</label>
     <textarea rows="5" class="form-control nicEdit"

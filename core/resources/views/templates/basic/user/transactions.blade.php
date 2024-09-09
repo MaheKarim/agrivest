@@ -37,7 +37,7 @@
                                     </select>
                                 </div>
                                 <div class="flex-grow-1 align-self-end">
-                                    <button class="btn btn-primary w-100"><i class="las la-filter"></i> @lang('Filter')
+                                    <button class="btn btn--base w-100"><i class="las la-filter"></i> @lang('Filter')
                                     </button>
                                 </div>
                             </div>

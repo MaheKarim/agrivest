@@ -48,11 +48,17 @@ class Status
     const INVEST_ACCEPT = 1;
     const INVEST_RUNNING = 2;
     const INVEST_COMPLETED = 3;
+
+    const INVEST_CLOSED = 4;
     const INVEST_CANCELED = 9;
+    const CAPITAL_BACK = 1;
 
     const ORDER_PENDING = 0;
     const ORDER_ACCEPT = 1;
     const ORDER_RUNNING = 2;
     const ORDER_COMPLETED = 3;
     const ORDER_CANCELLED = 9;
+
+    const LIFETIME = 1;
+    const REPEAT = 2;
 }

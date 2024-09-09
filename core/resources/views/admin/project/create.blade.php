@@ -65,9 +65,39 @@
                         notify('error', 'You can only upload 4 images');
                     }
                 });
-                // TODO:: Not Less Than 0 Er Calculation No Finished
-                // TODO:: Fraction Niye Kaj Korte Hbe
-                // TODO:: Share Amount & Count Read Only Korte Hbe Sathe d-none Korte Hbe
+
+                $('.return_interval').hide();
+                $('.return_timespan').hide();
+
+                function toggleFields() {
+                    var returnType = $('select[name="return_type"]').val();
+                    if (returnType == '1') {
+                        $('#return_interval').closest('.form-group').hide();
+                        $('#repeat_times').closest('.form-group').hide();
+                        $('#return_interval').removeAttr('required');
+                        $('#repeat_times').removeAttr('required');
+
+                        $('.return-type-wrapper').removeClass('col-md-4').addClass('col-md-6');
+                        $('.time-settings-wrapper').removeClass('col-md-4').addClass('col-md-6');
+                    } else if (returnType == '2') {
+                        $('#return_interval').closest('.form-group').show();
+                        $('#repeat_times').closest('.form-group').show();
+                        $('#return_interval').attr('required', 'required');
+                        $('#repeat_times').attr('required', 'required');
+                        $('.return_interval').show();
+                        $('.return_timespan').show();
+                        $('.return-type-wrapper').removeClass('col-md-6').addClass('col-md-3');
+                        $('.time-settings-wrapper').removeClass('col-md-6').addClass('col-md-3');
+                    }
+                }
+
+                // Call the function on page load
+                toggleFields();
+
+                // Call the function every time the return type changes
+                $('select[name="return_type"]').change(function () {
+                    toggleFields();
+                });
 
 
                 function clearIfGoalEmpty(goal) {
