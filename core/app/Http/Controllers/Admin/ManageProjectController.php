@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\Time;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ManageProjectController extends Controller
 {
@@ -116,6 +117,10 @@ class ManageProjectController extends Controller
             }
         }
 
+        $investEndDate = Carbon::parse($request->end_date);
+        $maturityMonths = (int)$request->maturity_time;
+        $matureDate = $investEndDate->addMonths($maturityMonths);
+
         $project->title = $request->title;
         $project->slug = $request->slug;
         $project->goal = $request->goal;
@@ -126,6 +131,7 @@ class ManageProjectController extends Controller
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
         $project->maturity_time = $request->maturity_time;
+        $project->maturity_date = $matureDate;
         $project->time_id = $request->time_id;
         $project->return_interval = $request->return_interval;
         $project->repeat_times = $request->repeat_times;
@@ -163,5 +169,43 @@ class ManageProjectController extends Controller
         $pageTitle = 'Invest History of ' . Project::findOrFail($id)->title;
         $invests = Invest::where('project_id', $id)->with('project', 'user')->orderBy('id', 'desc')->paginate(getPaginate());
         return view('admin.project.invest_history', compact('pageTitle', 'invests'));
+    }
+
+    public function frontendSEO($id)
+    {
+        $key = 'Manage Project SEO';
+        $data = Project::findOrFail($id);
+        $pageTitle = 'SEO Configuration';
+        return view('admin.project.seo', compact('pageTitle', 'key', 'data'));
+    }
+
+    public function updateSEO(Request $request, $id)
+    {
+        $request->validate([
+            'image' => ['nullable', new FileTypeValidate(['jpeg', 'jpg', 'png'])]
+        ]);
+
+        $data = Project::findOrFail($id);
+        $image = @$data->seo_content->image;
+        if ($request->hasFile('image')) {
+            try {
+                $path = 'assets/images/frontend/project/seo';
+                $image = fileUploader($request->image, $path, getFileSize('seo'), @$data->seo_content->image);
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Couldn\'t upload the image'];
+                return back()->withNotify($notify);
+            }
+        }
+        $data->seo_content = [
+            'image' => $image,
+            'description' => $request->description,
+            'social_title' => $request->social_title,
+            'social_description' => $request->social_description,
+            'keywords' => $request->keywords,
+        ];
+        $data->save();
+
+        $notify[] = ['success', 'SEO content updated successfully'];
+        return back()->withNotify($notify);
     }
 }

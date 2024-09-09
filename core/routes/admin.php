@@ -81,6 +81,8 @@ Route::middleware('admin')->group(function () {
         Route::get('project/check-slug/{id?}', 'checkSlug')->name('check.slug');
         Route::post('status/{id}', 'status')->name('status');
         Route::get('invest/history/{id}', 'investHistory')->name('investHistory');
+        Route::get('seo/{id}', 'frontendSEO')->name('seo');
+        Route::post('update/seo/{id}', 'updateSEO')->name('update.seo');
     });
 
     Route::controller('ManageFaqController')->name('project.faq.')->prefix('project/faq')->group(function () {

@@ -95,7 +95,7 @@
                                 <div class="offcanvas-sidebar-block">
                                     <button class="offcanvas-sidebar-block__btn" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#offcanvas-sidebar-collapse-2" aria-expanded="true">
-                                        <span class="offcanvas-sidebar-block__title">@lang('Time Duration')</span>
+                                        <span class="offcanvas-sidebar-block__title">@lang('Return Type')</span>
                                     </button>
 
                                     <div class="collapse show" id="offcanvas-sidebar-collapse-2">
@@ -105,28 +105,19 @@
                                                     <div class="form-check form--check">
                                                         <input class="form-check-input" type="checkbox"
                                                                name="return_type[]"
-                                                               value="high_return"
+                                                               value="-1"
                                                                id="high_return">
                                                         <label class="form-check-label"
-                                                               for="high_return">@lang('High Return')</label>
+                                                               for="high_return">@lang('Life Time')</label>
                                                     </div>
                                                 </li>
                                                 <li class="offcanvas-sidebar-list__item">
                                                     <div class="form-check form--check">
                                                         <input class="form-check-input" type="checkbox"
                                                                name="return_type[]"
-                                                               value="long_duration" id="long_duration">
+                                                               value="2" id="long_duration">
                                                         <label class="form-check-label"
-                                                               for="long_duration">@lang('Long Duration')</label>
-                                                    </div>
-                                                </li>
-                                                <li class="offcanvas-sidebar-list__item">
-                                                    <div class="form-check form--check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               name="return_type[]"
-                                                               value="short_duration" id="short_duration">
-                                                        <label class="form-check-label"
-                                                               for="short_duration">@lang('Short Duration')</label>
+                                                               for="long_duration">@lang('Repeated')</label>
                                                     </div>
                                                 </li>
                                             </ul>

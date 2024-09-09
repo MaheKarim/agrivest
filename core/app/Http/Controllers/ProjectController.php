@@ -12,7 +12,7 @@ class ProjectController extends Controller
     {
         $pageTitle = 'Projects';
         $categories = Category::active()->get();
-        $projects = Project::active()->latest()->paginate(getPaginate(3));
+        $projects = Project::active()->beforeEndDate()->latest()->paginate(getPaginate(3));
 
         return view('Template::projects.all_projects', compact('pageTitle', 'projects', 'categories'));
     }
@@ -25,8 +25,11 @@ class ProjectController extends Controller
         session()->put('project', [
             'id' => $project->id,
         ]);
+        $seoContents = $project->seo_content;
+        $path = 'assets/images/frontend/project/seo';
+        $seoImage = @$seoContents->image ? getImage($path . '/' . @$seoContents->image, getFileSize('seo')) : null;
 
-        return view('Template::projects.project_details', compact('pageTitle', 'project'));
+        return view('Template::projects.project_details', compact('pageTitle', 'project', 'seoContents', 'seoImage'));
     }
 
     public function checkQuantity(Request $request)
@@ -66,6 +69,15 @@ class ProjectController extends Controller
                 $projects->whereIn('category_id', $request->category);
             } else {
                 $projects->where('category_id', $request->category);
+            }
+        }
+
+        // Return Type
+        if ($request->has('return_type') && !empty($request->return_type)) {
+            if (is_array($request->return_type)) {
+                $projects->whereIn('return_type', $request->return_type);
+            } else {
+                $projects->where('return_type', $request->return_type);
             }
         }
 

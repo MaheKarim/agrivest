@@ -10,7 +10,8 @@ class Project extends Model
     use GlobalStatus;
 
     protected $casts = [
-        'gallery'  => 'array'
+        'gallery' => 'array',
+        'seo_content' => 'object',
     ];
 
     public function time()
@@ -26,5 +27,10 @@ class Project extends Model
     public function faqs()
     {
         return $this->hasMany(Faq::class, 'project_id', 'id')->active();
+    }
+
+    public function scopeBeforeEndDate($query)
+    {
+        return $query->where('end_date', '>=', now());
     }
 }

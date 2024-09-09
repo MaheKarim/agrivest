@@ -75,7 +75,6 @@ class PaymentController extends Controller
     public static function confirmOrder($invest, $deposit = null, $user = null)
     {
         $user = $invest->user;
-        $projectName = $invest->project->title;
         if (!$deposit || $deposit->invest_id == 0 || $invest->payment_type == Status::PAYMENT_WALLET) {
             $user->balance -= $invest->total_price;
             $user->save();
@@ -118,7 +117,7 @@ class PaymentController extends Controller
         ]);
 
         $invest->payment_status = Status::PAYMENT_SUCCESS;
-        $invest->status = Status::VERIFIED;
+        $invest->status = Status::INVEST_RUNNING;
         $invest->save();
     }
 

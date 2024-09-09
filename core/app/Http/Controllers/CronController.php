@@ -73,12 +73,10 @@ class CronController extends Controller
     {
         try {
             $now = Carbon::now();
-            $general = gs();
-
             // Fetch investments with projects that have not ended yet
             $invests = Invest::with(['user', 'project.time'])
                 ->whereHas('project', function ($query) use ($now) {
-                    $query->where('end_date', '>', $now);
+                    $query->where('maturity_date', '<', $now);
                 })
                 ->running()
                 ->orderBy('last_time')
@@ -88,16 +86,8 @@ class CronController extends Controller
             foreach ($invests as $invest) {
                 $project = $invest->project;
                 $user = $invest->user;
-                $endDate = Carbon::parse($project->end_date);
-
-                // Skip if the project has ended
-                if ($endDate->lessThanOrEqualTo($now)) {
-                    continue;
-                }
-
-                // Calculate maturity period only once
-                $maturityDays = (int)$project->maturity_time * 30;
-                $next = $endDate->copy()->addDays($maturityDays);
+                $hours = (int)$invest->project?->time->hours;
+                $next = $now->addHours($hours)->toDateTimeString();
 
                 // Process investment
                 $invest->period += 1;
@@ -124,7 +114,7 @@ class CronController extends Controller
                 $transaction->save();
 
                 // Check if the investment should be closed
-                if ($invest->repeat_times >= $invest->return_type && $invest->return_type != -1) {
+                if ($invest->repeat_times == $invest->period && $invest->return_type != -1) {
                     $invest->status = Status::INVEST_CLOSED;
                     if ($invest->capital_status == Status::CAPITAL_BACK) {
                         Capital::capitalReturn($invest);

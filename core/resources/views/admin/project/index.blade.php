@@ -76,12 +76,18 @@
                                                         <i class="la la-eye"></i> @lang('Enable')
                                                     </button>
                                                 @endif
-                                                <a class="dropdown-item"
+                                                <a class="dropdown-item text--info"
                                                    href="{{ route('admin.project.faq.add', $project->id) }}"
-                                                ><i class="la la-question-circle"></i> @lang('FAQ')</a>
-                                                <a class="dropdown-item"
+                                                ><i class="la la-question-circle"></i> @lang('FAQ')
+                                                </a>
+                                                <a class="dropdown-item text--primary"
                                                    href="{{ route('admin.project.investHistory', $project->id) }}">
-                                                    <i class="la la-users"></i> @lang('Investors')</a>
+                                                    <i class="la la-users"></i> @lang('Investors')
+                                                </a>
+                                                <a class="dropdown-item text--info"
+                                                   href="{{ route('admin.project.seo', $project->id) }}">
+                                                    <i class="la la-cog"></i> @lang('SEO Setting')
+                                                </a>
                                             </div>
                                         </div>
                                     </td>
