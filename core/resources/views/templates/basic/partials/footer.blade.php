@@ -1,8 +1,9 @@
 @php
-$policyPages = getContent('policy_pages.element', false, orderById:true);
-$contactInfo = getContent('contact_us.content', true);
-$appStores = getContent('contact_us.element', orderById: true);
-$socialIcons = getContent('social_icon.element', orderById: true);
+    $policyPages = getContent('policy_pages.element', false, orderById:true);
+    $contactInfo = getContent('contact_us.content', true);
+    $appStores = getContent('contact_us.element', orderById: true);
+    $socialIcons = getContent('social_icon.element', orderById: true);
+    $latestProjects = \App\Models\Project::active()->beforeEndDate()->limit(4)->get();
 @endphp
 <footer class="footer">
     <div class="footer-top py-120">
@@ -34,17 +35,15 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                 </div>
                 <div class="col-7 col-sm-4 col-md-3 col-lg-2 order-4 order-lg-3">
                     <div class="footer-item">
-                        <h6 class="footer-item__title">@lang('Learn More')</h6>
+                        <h6 class="footer-item__title">@lang('Latest Projects')</h6>
                         <ul class="footer-menu">
-                            <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">@lang('How to work')</a>
-                            </li>
-                            <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">@lang('Coverage area')</a>
-                            </li>
-                            <li class="footer-menu__item">
-                                <a class="footer-menu__link" href="#">@lang('Common')</a>
-                            </li>
+                            @foreach($latestProjects as $project)
+                                <li class="footer-menu__item">
+                                    <a class="footer-menu__link" href="{{ route('project.details', $project->slug) }}">
+                                        {{ __(Str::limit($project->title, 20)) }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -54,7 +53,8 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                         <ul class="footer-menu">
                             @foreach($policyPages as $page)
                                 <li class="footer-menu__item">
-                                    <a class="footer-menu__link" href="{{ route('policy.pages', $page->slug) }}" target="_blank">
+                                    <a class="footer-menu__link" href="{{ route('policy.pages', $page->slug) }}"
+                                       target="_blank">
                                         {{ __(@$page->data_values->title) }}
                                     </a>
                                 </li>
@@ -75,13 +75,15 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                             </li>
                             <li class="contact-list__item">
                                 <i class="fas fa-phone-volume"></i>
-                                <a class="contact-list__link" href="tel:{{ __(@$contactInfo->data_values->contact_number) }}">
+                                <a class="contact-list__link"
+                                   href="tel:{{ __(@$contactInfo->data_values->contact_number) }}">
                                     {{ __(@$contactInfo->data_values->contact_number) }}
                                 </a>
                             </li>
                             <li class="contact-list__item">
                                 <i class="fas fa-envelope"></i>
-                                <a class="contact-list__link" href="mailto:{{ __(@$contactInfo->data_values->email_address) }}">
+                                <a class="contact-list__link"
+                                   href="mailto:{{ __(@$contactInfo->data_values->email_address) }}">
                                     {{ __(@$contactInfo->data_values->email_address) }}
                                 </a>
                             </li>
@@ -91,13 +93,14 @@ $socialIcons = getContent('social_icon.element', orderById: true);
                             <span class="title">@lang('Follow Us')</span>
                             <ul class="social-list style-two">
                                 @foreach($socialIcons as $link)
-                                <li class="social-list__item">
-                                    <a href="{{ @$link->data_values->url }}" class="social-list__link flex-center" target="_blank">
-                                       @php
-                                           echo @$link->data_values->social_icon
-                                       @endphp
-                                    </a>
-                                </li>
+                                    <li class="social-list__item">
+                                        <a href="{{ @$link->data_values->url }}" class="social-list__link flex-center"
+                                           target="_blank">
+                                            @php
+                                                echo @$link->data_values->social_icon
+                                            @endphp
+                                        </a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
