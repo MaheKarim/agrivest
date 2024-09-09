@@ -191,6 +191,8 @@ Route::middleware('admin')->group(function () {
         Route::get('login/ipHistory/{ip}', 'loginIpHistory')->name('login.ipHistory');
         Route::get('notification/history', 'notificationHistory')->name('notification.history');
         Route::get('email/detail/{id}', 'emailDetails')->name('email.details');
+        Route::get('invest/history', 'investHistory')->name('invest.history');
+        Route::get('invest/details/{id}', 'investDetails')->name('invest.details');
     });
 
     // Admin Support

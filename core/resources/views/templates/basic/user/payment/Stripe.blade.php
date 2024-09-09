@@ -1,6 +1,6 @@
 @extends($activeTemplate.'layouts.master')
 @section('content')
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="dashboard-card">
             <div class="dashboard-card__header">
                 <h5>@lang('Stripe Hosted')</h5>

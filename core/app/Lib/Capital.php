@@ -18,6 +18,7 @@ class Capital
 
         $transaction = new Transaction();
         $transaction->user_id = $user->id;
+        $transaction->invest_id = $invest->id;
         $transaction->amount = $invest->total_price;
         $transaction->charge = 0;
         $transaction->post_balance = $user->balance;

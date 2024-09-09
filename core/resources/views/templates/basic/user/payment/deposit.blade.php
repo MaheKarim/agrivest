@@ -67,6 +67,7 @@
                                                 >
                                             </div>
                                         </div>
+                                        <input type="hidden" name="invest_id" value="{{ $investId ?? 0}}">
                                     </div>
                                     <hr>
                                     <div class="deposit-info">

@@ -448,6 +448,21 @@
             },
             {
                 "keyword": [
+                    "Invest History",
+                    "Report",
+                    "Invest report",
+                    "Project purchase",
+                    "Purchase history"
+                ],
+                "title": "Invest History",
+                "route_name": "admin.report.invest.history",
+                "menu_active": [
+                    "admin.report.invest.history",
+                    "admin.report.invest.details"
+                ]
+            },
+            {
+                "keyword": [
                     "Login History",
                     "Report",
                     "Login report",

@@ -32,6 +32,7 @@ class PaymentController extends Controller
 
             $transaction = new Transaction();
             $transaction->user_id = $deposit->user_id;
+            $transaction->invest_id = $deposit->invest_id ?? 0;
             $transaction->amount = $deposit->amount;
             $transaction->post_balance = $user->balance;
             $transaction->charge = $deposit->charge;
@@ -88,6 +89,7 @@ class PaymentController extends Controller
 
         $transaction = new Transaction();
         $transaction->user_id = $invest->user_id;
+        $transaction->invest_id = $invest->id ?? 0;
         $transaction->amount = $invest->total_price;
         $transaction->post_balance = $user->balance;
         $transaction->charge = 0;

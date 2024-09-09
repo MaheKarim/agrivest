@@ -33,6 +33,11 @@ class Invest extends Model
         return $query->where('status', Status::INVEST_COMPLETED);
     }
 
+    public function scopeClosed($query)
+    {
+        return $query->where('status', Status::INVEST_CLOSED);
+    }
+
     public function scopeTotalInvest($query)
     {
         return $query->sum('total_price');

@@ -122,102 +122,106 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <aside id="offer-details-offcanvas-sidebar"
-                           class="offcanvas-sidebar offcanvas-sidebar--offer-details">
-                        <div class="offcanvas-sidebar__header">
-                            <button type="button" class="btn--close">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
+                @if($project->end_date > now())
+                    <div class="col-lg-4">
+                        <aside id="offer-details-offcanvas-sidebar"
+                               class="offcanvas-sidebar offcanvas-sidebar--offer-details">
+                            <div class="offcanvas-sidebar__header">
+                                <button type="button" class="btn--close">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
 
-                        <div class="offcanvas-sidebar__body">
-                            <div class="payment-form">
-                                <div class="payment-form__block">
-                                    <ul class="amount-detail">
-                                        <li class="amount-detail-item">
-                                            <span class="amount-detail-item__label">@lang('Total Payable')</span>
-                                            <span
-                                                class="amount-detail-item__value"
-                                                id="total-payable">{{ gs('cur_sym') }}{{ getAmount($project->share_amount) }}</span>
-                                        </li>
-                                        <li class="amount-detail-item">
-                                            <span class="amount-detail-item__label">@lang('Total Earning')</span>
-                                            <span
-                                                class="amount-detail-item__value"
-                                                id="total-earning">{{ gs('cur_sym') }}{{ getAmount($project->share_amount + $project->roi_amount) }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="offcanvas-sidebar__body">
+                                <div class="payment-form">
+                                    <div class="payment-form__block">
+                                        <ul class="amount-detail">
+                                            <li class="amount-detail-item">
+                                                <span class="amount-detail-item__label">@lang('Total Payable')</span>
+                                                <span
+                                                    class="amount-detail-item__value"
+                                                    id="total-payable">{{ gs('cur_sym') }}{{ getAmount($project->share_amount) }}</span>
+                                            </li>
+                                            <li class="amount-detail-item">
+                                                <span class="amount-detail-item__label">@lang('Total Earning')</span>
+                                                <span
+                                                    class="amount-detail-item__value"
+                                                    id="total-earning">{{ gs('cur_sym') }}{{ getAmount($project->share_amount + $project->roi_amount) }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <div class="payment-form__block">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span class="payment-form__label">@lang('Quantity')</span>
+                                    <div class="payment-form__block">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <span class="payment-form__label">@lang('Quantity')</span>
 
-                                        <div class="product-qty">
-                                            <button class="product-qty__decrement" type="button"><i
-                                                    class="fas fa-minus"></i></button>
-                                            <input class="product-qty__value" type="number" min="1" value="1">
-                                            <button class="product-qty__increment" type="button"><i
-                                                    class="fas fa-plus"></i></button>
+                                            <div class="product-qty">
+                                                <button class="product-qty__decrement" type="button"><i
+                                                        class="fas fa-minus"></i></button>
+                                                <input class="product-qty__value" type="number" min="1" value="1">
+                                                <button class="product-qty__increment" type="button"><i
+                                                        class="fas fa-plus"></i></button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="payment-form__block">
-                                    <button type="button" class="btn btn--lg btn--base w-100 bookNow"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#bitModal">
-                                        @lang('Book Now')
-                                    </button>
-                                </div>
-
-                                <div class="payment-form__block">
-                                    <div class="detail-collpase">
-                                        <button class="collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#detail-collapse" aria-expanded="false">
-                                            <span class="text text-collapsed">@lang('See Details')</span>
-                                            <span class="text text-open">@lang('Hide Details')</span>
+                                    <div class="payment-form__block">
+                                        <button type="button" class="btn btn--lg btn--base w-100 bookNow"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#bitModal">
+                                            @lang('Book Now')
                                         </button>
+                                    </div>
 
-                                        <div id="detail-collapse" class="collapse">
-                                            <ul class="detail-list">
-                                                <li class="detail-list-item">
-                                                    <span class="detail-list-item__label">@lang('Unit Price')</span>
-                                                    <span
-                                                        class="detail-list-item__value"
-                                                        id="total-price">{{ __(showAmount($project->share_amount)) }}</span>
-                                                </li>
-                                                <li class="detail-list-item">
-                                                    <span class="detail-list-item__label">@lang('Total Price')</span>
-                                                    <span
-                                                        class="detail-list-item__value quantity-total-price">{{ gs('cur_sym') }}{{ __(getAmount($project->share_amount)) }} {{ gs('cur_text') }}</span>
-                                                </li>
-                                                <li class="detail-list-item">
+                                    <div class="payment-form__block">
+                                        <div class="detail-collpase">
+                                            <button class="collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#detail-collapse" aria-expanded="false">
+                                                <span class="text text-collapsed">@lang('See Details')</span>
+                                                <span class="text text-open">@lang('Hide Details')</span>
+                                            </button>
+
+                                            <div id="detail-collapse" class="collapse">
+                                                <ul class="detail-list">
+                                                    <li class="detail-list-item">
+                                                        <span class="detail-list-item__label">@lang('Unit Price')</span>
+                                                        <span
+                                                            class="detail-list-item__value"
+                                                            id="total-price">{{ __(showAmount($project->share_amount)) }}</span>
+                                                    </li>
+                                                    <li class="detail-list-item">
+                                                        <span
+                                                            class="detail-list-item__label">@lang('Total Price')</span>
+                                                        <span
+                                                            class="detail-list-item__value quantity-total-price">{{ gs('cur_sym') }}{{ __(getAmount($project->share_amount)) }} {{ gs('cur_text') }}</span>
+                                                    </li>
+                                                    <li class="detail-list-item">
                                                     <span
                                                         class="detail-list-item__label">@lang('Earning ROI (%)')</span>
-                                                    <span
-                                                        class="detail-list-item__value">{{ __(getAmount($project->roi_percentage)) }}</span>
-                                                </li>
-                                                <li class="detail-list-item">
+                                                        <span
+                                                            class="detail-list-item__value">{{ __(getAmount($project->roi_percentage)) }}</span>
+                                                    </li>
+                                                    <li class="detail-list-item">
                                                     <span
                                                         class="detail-list-item__label">@lang('Return Timespan')</span>
-                                                    <span
-                                                        class="detail-list-item__value">{{ __($project->return_timespan )}} @lang('Times /') {{ __($project->time->name) }}</span>
-                                                </li>
-                                                <li class="detail-list-item">
-                                                    <span class="detail-list-item__label">@lang('Total Earning')</span>
-                                                    <span class="detail-list-item__value"
-                                                          id="total-earning-last">{{ __(showAmount($project->share_amount + $project->roi_amount)) }}</span>
-                                                </li>
-                                            </ul>
+                                                        <span
+                                                            class="detail-list-item__value">{{ __($project->return_timespan )}} @lang('Times /') {{ __($project->time->name) }}</span>
+                                                    </li>
+                                                    <li class="detail-list-item">
+                                                        <span
+                                                            class="detail-list-item__label">@lang('Total Earning')</span>
+                                                        <span class="detail-list-item__value"
+                                                              id="total-earning-last">{{ __(showAmount($project->share_amount + $project->roi_amount)) }}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </aside>
-                </div>
+                        </aside>
+                    </div>
+                @endif
             </div>
         </div>
     </section>

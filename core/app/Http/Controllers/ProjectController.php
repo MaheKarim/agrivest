@@ -56,7 +56,7 @@ class ProjectController extends Controller
     {
         $pageTitle = 'Projects';
         $categories = Category::active()->get();
-        $projects = Project::active();
+        $projects = Project::active()->beforeEndDate();
 
         $search = $request->has('search') ? $request->search : '';
         if (!empty($search)) {

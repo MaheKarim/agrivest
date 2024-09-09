@@ -30,15 +30,15 @@
                         @forelse($deposits as $deposit)
                             <tr>
                                 <td>
-                                                <span class="fw-bold">
-                                                    <span class="text-primary">
-                                                        @if($deposit->method_code < 5000)
-                                                            {{ __(@$deposit->gateway->name) }}
-                                                        @else
-                                                            @lang('Google Pay')
-                                                        @endif
-                                                    </span>
-                                                </span>
+                                    <span class="fw-bold">
+                                        <span class="text--base">
+                                            @if($deposit->method_code < 5000)
+                                                {{ __(@$deposit->gateway->name) }}
+                                            @else
+                                                @lang('Google Pay')
+                                            @endif
+                                        </span>
+                                    </span>
                                     <br>
                                     <small> {{ $deposit->trx }} </small>
                                 </td>
