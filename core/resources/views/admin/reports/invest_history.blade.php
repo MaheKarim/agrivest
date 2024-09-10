@@ -42,22 +42,11 @@
                                 <input class="form-control" name="search" type="text" value="{{ request()->search }}">
                             </div>
                             <div class="flex-grow-1">
-                                <label>@lang('Return Type')</label>
-                                <select class="form-control select2" name="type" data-minimum-results-for-search="-1">
-                                    <option value="">@lang('All')</option>
-                                    <option
-                                        value="repeat" @selected(request()->type == 'repeat')>@lang('Repeat')</option>
-                                    <option
-                                        value="lifetime" @selected(request()->type == 'lifetime')>@lang('Lifetime')</option>
-                                </select>
-                            </div>
-                            <div class="flex-grow-1">
                                 <label>@lang('Status')</label>
                                 <select class="form-control select2" name="status" data-minimum-results-for-search="-1">
                                     <option value="">@lang('All')</option>
-                                    <option value="1" @selected(request()->status == '1')>@lang('Live')</option>
-                                    <option value="2" @selected(request()->status == '2')>@lang('Canceled')</option>
-                                    <option value="0" @selected(request()->status == '0')>@lang('Closed')</option>
+                                    <option value="2" @selected(request()->status == '2')>@lang('Running')</option>
+                                    <option value="3" @selected(request()->status == '3')>@lang('Completed')</option>
                                 </select>
                             </div>
                             <div class="flex-grow-1">
@@ -99,7 +88,7 @@
                                                 href="{{ appendQuery('search', $invest->user->username) }}"><span>@</span>{{ $invest->user->username }}</a> </span>
                                     </td>
                                     <td>{{ __($invest->project->title) }}</td>
-                                    <td>{{ $invest->quantity }} @lang('Pcs')</td>
+                                    <td>{{ __($invest->quantity) }} @lang('Units')</td>
                                     <td>{{ showAmount($invest->total_price) }}</td>
                                     <td>{{ showAmount($invest->total_earning) }}</td>
                                     <td>{{ $invest->should_pay != -1 ? showAmount($invest->recuring_pay) : '**' }}</td>
@@ -112,9 +101,6 @@
                                             <a class="btn btn-outline--primary btn-sm"
                                                href="{{ route('admin.report.invest.details', $invest->id) }}"><i
                                                     class="las la-desktop"></i>@lang('Details')</a>
-                                            <button class="btn btn-outline--danger btn-sm cancelBtn"
-                                                    data-invest_id="{{ $invest->id }}" @disabled($invest->status != Status::INVEST_RUNNING)>
-                                                <i class="las la-times"></i>@lang('Cancel')</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -135,42 +121,6 @@
             </div><!-- card end -->
         </div>
     </div>
-
-    {{--    <div class="modal fade" id="cancelModal">--}}
-    {{--        <div class="modal-dialog">--}}
-    {{--            <div class="modal-content">--}}
-    {{--                <div class="modal-header">--}}
-    {{--                    <h4 class="modal-title">@lang('Cancel Investment')</h4>--}}
-    {{--                    <button class="close" data-bs-dismiss="modal" type="button"><span><i--}}
-    {{--                                class="las la-times"></i></span></button>--}}
-    {{--                </div>--}}
-    {{--                <form method="post" action="{{ route('admin.project.invest.cancel') }}">--}}
-    {{--                    @csrf--}}
-    {{--                    <div class="modal-body">--}}
-    {{--                        <input name="invest_id" type="hidden">--}}
-    {{--                        <div class="form-group">--}}
-    {{--                            <label>@lang('Action')</label>--}}
-    {{--                            <select class="form-control select2" name="action" data-minimum-results-for-search="-1"--}}
-    {{--                                    required>--}}
-    {{--                                <option value="" hidden>@lang('Select One')</option>--}}
-    {{--                                <option value="1">@lang('Capital Back & Interest remains in the user balance')</option>--}}
-    {{--                                <option--}}
-    {{--                                    value="2">@lang('Capital Back & Interest is deducted from the user balance')</option>--}}
-    {{--                                <option--}}
-    {{--                                    value="3">@lang('No Capital Back & Interest remains in the user balance')</option>--}}
-    {{--                                <option--}}
-    {{--                                    value="4">@lang('No Capital Back & Interest is deducted from the user balance')</option>--}}
-    {{--                            </select>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <div class="modal-footer">--}}
-    {{--                        <button class="btn btn--primary w-100 h-45" type="submit"><i--}}
-    {{--                                class="fa fa-send"></i> @lang('Submit')</button>--}}
-    {{--                    </div>--}}
-    {{--                </form>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
 @endsection
 
 @push('script')

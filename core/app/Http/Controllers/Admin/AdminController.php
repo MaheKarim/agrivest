@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Lib\CurlRequest;
 use App\Models\AdminNotification;
 use App\Models\Deposit;
+use App\Models\Invest;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserLogin;
@@ -54,7 +55,12 @@ class AdminController extends Controller
         $withdrawals['total_withdraw_rejected'] = Withdrawal::rejected()->count();
         $withdrawals['total_withdraw_charge'] = Withdrawal::approved()->sum('charge');
 
-        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart', 'deposit', 'withdrawals'));
+        $invest['total_invests'] = Invest::sum('total_price');
+        $invest['total_interests'] = Transaction::where('remark', 'profit')->sum('amount');
+        $invest['running_invests'] = Invest::where('status', Status::INVEST_RUNNING)->sum('total_price');
+        $invest['closed_invests'] = Invest::where('status', Status::INVEST_CLOSED)->sum('total_price');
+
+        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart', 'deposit', 'withdrawals', 'invest'));
     }
 
     public function depositAndWithdrawReport(Request $request)
@@ -277,7 +283,6 @@ class AdminController extends Controller
         $pageTitle = 'Notifications';
         return view('admin.notifications', compact('pageTitle', 'notifications', 'hasUnread', 'hasNotification'));
     }
-
 
     public function notificationRead($id)
     {

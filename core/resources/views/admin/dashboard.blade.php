@@ -196,7 +196,48 @@
             </div>
         </div>
     </div>
-
+    <div class="row gy-4 mt-2">
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.report.invest.history') }}"
+                title="Total Investments"
+                icon="las la-chart-bar"
+                value="{{ showAmount($invest['total_invests']) }}"
+                bg="primary"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.report.transaction') }}?remark=profit"
+                title="Total Interests"
+                icon="las la-chart-pie"
+                value="{{ showAmount($invest['total_interests']) }}"
+                bg="1"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_RUNNING }}"
+                title="Live Investments"
+                icon="las la-chart-area"
+                value="{{ showAmount($invest['running_invests']) }}"
+                bg="12"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_CLOSED }}"
+                title="Closed Investments"
+                icon="las la-chart-line"
+                value="{{ showAmount($invest['closed_invests']) }}"
+                bg="9"
+            />
+        </div><!-- dashboard-w1 end -->
+    </div><!-- row end-->
     <div class="row mb-none-30 mt-30">
         <div class="col-xl-6 mb-30">
             <div class="card">
