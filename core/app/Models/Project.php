@@ -36,6 +36,11 @@ class Project extends Model
         return $query->where('end_date', '>=', now());
     }
 
+    public function scopeAvailable($query)
+    {
+        return $query->where('available_share', '>', 0);
+    }
+
     public function scopeEnd($query)
     {
         return $query->where('status', Status::PROJECT_END);

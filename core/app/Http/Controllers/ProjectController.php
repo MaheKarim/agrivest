@@ -12,7 +12,7 @@ class ProjectController extends Controller
     {
         $pageTitle = 'Projects';
         $categories = Category::active()->get();
-        $projects = Project::active()->beforeEndDate()->latest()->paginate(getPaginate(3));
+        $projects = Project::active()->available()->beforeEndDate()->latest()->paginate(getPaginate(3));
 
         return view('Template::projects.all_projects', compact('pageTitle', 'projects', 'categories'));
     }

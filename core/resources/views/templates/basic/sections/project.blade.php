@@ -1,5 +1,6 @@
 @php
     $projectContent = getContent('project.content', true);
+    $projects = \App\Models\Project::end()->take(10)->get();
 @endphp
 <section class="our-projects pt-120 pb-60 bg--white">
     <div class="container">
@@ -16,166 +17,27 @@
                 </div>
             </div>
             <div class="project-slider">
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue.'images/thumbs/project-thumb-1.png') }}" alt="">
-                        </a>
+                @foreach($projects as $project)
+                    <div class="project-slider__item">
+                        <div class="project-card">
+                            <a href="{{ route('project.details', $project->slug) }}" class="project-card__thumb">
+                                <img
+                                    src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                                    alt="{{ __($project->title) }}">
+                            </a>
 
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Local Poultry Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
+                            <div class="project-card__content">
+                                <h6 class="project-card__title">
+                                    <a href="{{ route('project.details', $project->slug) }}">{{ __($project->title) }}</a>
+                                </h6>
+
+                                <p class="project-card__desc">
+                                    @php echo substr(strip_tags($project->description), 0, 100) @endphp
+                                </p>
                             </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
                         </div>
                     </div>
-                </div>
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue.'images/thumbs/project-thumb-2.png') }}" alt="">
-                        </a>
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Fish Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
-                            </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue.'images/thumbs/project-thumb-3.png') }}" alt="">
-                        </a>
-
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Banna Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
-                            </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue."images/thumbs/project-thumb-4.png") }}" alt="">
-                        </a>
-
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Vegetable  Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
-                            </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue."images/thumbs/project-thumb-1.png") }}" alt="">
-                        </a>
-
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Local Poultry Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
-                            </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue.'images/thumbs/project-thumb-2.png') }}" alt="">
-                        </a>
-
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Fish Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
-                            </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue.'images/thumbs/project-thumb-3.png') }}" alt="">
-                        </a>
-
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Banna Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
-                            </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-slider__item">
-                    <div class="project-card">
-                        <a href="#" class="project-card__thumb">
-                            <img src="{{ asset($activeTemplateTrue.'images/thumbs/project-thumb-4.png') }}" alt="">
-                        </a>
-
-                        <div class="project-card__content">
-                            <h6 class="project-card__title">
-                                <a href="#">Vegetable  Farming</a>
-                            </h6>
-                            <div class="project-card__review">
-                                <span class="rating">4.0 <i class="fas fa-star"></i></span>
-                                <span class="total">(25)</span>
-                            </div>
-                            <p class="project-card__desc">
-                                Contrary to popular belief. Lorem Ipsum is not simply random text.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
