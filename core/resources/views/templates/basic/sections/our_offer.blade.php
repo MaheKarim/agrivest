@@ -25,7 +25,6 @@
                     <div class="col-sm-6 col-lg-4 col-xl-3">
                         <article class="card card--offer ">
                             <div class="card-header">
-                                <span class="card-badge">Regular</span>
                                 <a class="card-thumb" href="offer-details.html">
                                     <img src="{{ asset($activeTemplateTrue.'images/thumbs/offer-card-thumb-1.jpg') }}"
                                          alt="">

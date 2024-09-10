@@ -1212,6 +1212,7 @@ button:focus {
 
 .border--danger {
     border-color: hsl(var(--danger)) !important;
+    color: hsl(var(--white)) !important;
 }
 
 .border--warning {
@@ -3468,56 +3469,77 @@ textarea.form--control {
 
 .custom--alert--base {
     border-color: hsl(var(--base)/0.6);
+    background-color: hsl(var(--base)/.12);
 }
-
+.custom--alert--base .alert-heading {
+    color: hsl(var(--base));
+}
 .custom--alert--base .alert__icon {
     color: hsl(var(--base));
 }
 
 .custom--alert--primary {
     border-color: hsl(var(--primary)/0.6);
+    background-color: hsl(var(--primary)/.12);
 }
-
+.custom--alert--primary .alert-heading {
+    color: hsl(var(--primary));
+}
 .custom--alert--primary .alert__icon {
     color: hsl(var(--primary));
 }
 
 .custom--alert--success {
     border-color: hsl(var(--success)/0.6);
+    background-color: hsl(var(--success)/.12);
 }
-
+.custom--alert--success .alert-heading {
+    color: hsl(var(--success));
+}
 .custom--alert--success .alert__icon {
     color: hsl(var(--success));
 }
 
 .custom--alert--info {
     border-color: hsl(var(--info)/0.6);
+    background-color: hsl(var(--info)/.12);
 }
-
+.custom--alert--info .alert-heading {
+    color: hsl(var(--info));
+}
 .custom--alert--info .alert__icon {
     color: hsl(var(--info));
 }
 
 .custom--alert--danger {
     border-color: hsl(var(--danger)/0.6);
+    background-color: hsl(var(--danger)/.12);
 }
-
+.custom--alert--danger .alert-heading {
+    color: hsl(var(--danger));
+}
 .custom--alert--danger .alert__icon {
     color: hsl(var(--danger));
 }
 
 .custom--alert--warning {
     border-color: hsl(var(--warning)/0.6);
+    background-color: hsl(var(--warning)/.12);
 }
-
+.custom--alert--warning .alert-heading {
+    color: hsl(var(--warning));
+}
 .custom--alert--warning .alert__icon {
     color: hsl(var(--warning));
 }
 
 .custom--alert--secondary {
     border-color: hsl(var(--secondary)/0.6);
+    background-color: hsl(var(--secondary)/.12);
 }
-
+.custom--alert--secondary .alert-heading {
+    color: hsl(var(--secondary));
+}
 .custom--alert--secondary .alert__icon {
     color: hsl(var(--secondary));
 }

@@ -10,146 +10,142 @@
 @endphp
 @section('content')
     <div class="dashboard-inner__block">
-        <div class="row">
-            <div class="col-lg-9">
-                <form action="{{ route('user.deposit.insert', $investId) }}" method="post" class="deposit-form">
-                    @csrf
-                    <input type="hidden" name="currency">
-                    <div class="gateway-card">
-                        <div class="row justify-content-center gy-sm-4 gy-3">
-                            <div class="col-lg-6">
-                                <div class="payment-system-list is-scrollable gateway-option-list">
-                                    @foreach ($gatewayCurrency as $data)
-                                        <label for="{{ titleToKey($data->name) }}"
-                                               class="payment-item @if ($loop->index > 4) d-none @endif gateway-option">
-                                            <div class="payment-item__info">
-                                                <span class="payment-item__check"></span>
-                                                <span class="payment-item__name">{{ __($data->name) }}</span>
-                                            </div>
-                                            <div class="payment-item__thumb">
-                                                <img class="payment-item__thumb-img"
-                                                     src="{{ getImage(getFilePath('gateway') . '/' . $data->method->image) }}"
-                                                     alt="@lang('payment-thumb')">
-                                            </div>
-                                            <input class="payment-item__radio gateway-input"
-                                                   id="{{ titleToKey($data->name) }}" hidden
-                                                   data-gateway='@json($data)' type="radio" name="gateway"
-                                                   value="{{ $data->method_code }}"
-                                                   @checked(old('gateway',$loop->first) == $data->method_code)
-                                                   data-min-amount="{{ showAmount($data->min_amount) }}"
-                                                   data-max-amount="{{ showAmount($data->max_amount) }}">
-                                        </label>
-                                    @endforeach
-                                    @if ($gatewayCurrency->count() > 4)
-                                        <button type="button" class="payment-item__btn more-gateway-option">
-                                            <p class="payment-item__btn-text">@lang('Show All Payment Options')</p>
-                                            <span class="payment-item__btn__icon"><i
-                                                    class="fas fa-chevron-down"></i></span>
-                                        </button>
-                                    @endif
+        <form action="{{ route('user.deposit.insert', $investId) }}" method="post" class="deposit-form">
+            @csrf
+            <input type="hidden" name="currency">
+            <div class="gateway-card">
+                <div class="row justify-content-center gy-sm-4 gy-3">
+                    <div class="col-lg-6">
+                        <div class="payment-system-list is-scrollable gateway-option-list">
+                            @foreach ($gatewayCurrency as $data)
+                                <label for="{{ titleToKey($data->name) }}"
+                                       class="payment-item @if ($loop->index > 4) d-none @endif gateway-option">
+                                    <div class="payment-item__info">
+                                        <span class="payment-item__check"></span>
+                                        <span class="payment-item__name">{{ __($data->name) }}</span>
+                                    </div>
+                                    <div class="payment-item__thumb">
+                                        <img class="payment-item__thumb-img"
+                                             src="{{ getImage(getFilePath('gateway') . '/' . $data->method->image) }}"
+                                             alt="@lang('payment-thumb')">
+                                    </div>
+                                    <input class="payment-item__radio gateway-input"
+                                           id="{{ titleToKey($data->name) }}" hidden
+                                           data-gateway='@json($data)' type="radio" name="gateway"
+                                           value="{{ $data->method_code }}"
+                                           @checked(old('gateway',$loop->first) == $data->method_code)
+                                           data-min-amount="{{ showAmount($data->min_amount) }}"
+                                           data-max-amount="{{ showAmount($data->max_amount) }}">
+                                </label>
+                            @endforeach
+                            @if ($gatewayCurrency->count() > 4)
+                                <button type="button" class="payment-item__btn more-gateway-option">
+                                    <p class="payment-item__btn-text">@lang('Show All Payment Options')</p>
+                                    <span class="payment-item__btn__icon"><i
+                                            class="fas fa-chevron-down"></i></span>
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="payment-system-list p-3">
+                            <div class="deposit-info">
+                                <div class="deposit-info__title">
+                                    <p class="text mb-0">@lang('Amount')</p>
+                                </div>
+                                <div class="deposit-info__input">
+                                    <div class="deposit-info__input-group input-group">
+                                        <span class="deposit-info__input-group-text px-2">{{ gs('cur_sym') }}</span>
+                                        <input type="text" class="form-control form--control amount"
+                                               name="amount"
+                                               placeholder="@lang('00.00')"
+                                               autocomplete="off"
+                                               value="{{ getAmount($amount) }}"
+                                               @if($invest) readonly @endif
+                                        >
+                                    </div>
+                                </div>
+                                <input type="hidden" name="invest_id" value="{{ $investId ?? 0}}">
+                            </div>
+                            <hr>
+                            <div class="deposit-info">
+                                <div class="deposit-info__title">
+                                    <p class="text has-icon"> @lang('Limit')
+                                        <span></span>
+                                    </p>
+                                </div>
+                                <div class="deposit-info__input">
+                                    <p class="text"><span class="gateway-limit">@lang('0.00')</span>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="payment-system-list p-3">
-                                    <div class="deposit-info">
-                                        <div class="deposit-info__title">
-                                            <p class="text mb-0">@lang('Amount')</p>
-                                        </div>
-                                        <div class="deposit-info__input">
-                                            <div class="deposit-info__input-group input-group">
-                                                <span class="deposit-info__input-group-text">{{ gs('cur_sym') }}</span>
-                                                <input type="text" class="form-control form--control amount"
-                                                       name="amount"
-                                                       placeholder="@lang('00.00')"
-                                                       autocomplete="off"
-                                                       value="{{ getAmount($amount) }}"
-                                                       @if($invest) readonly @endif
-                                                >
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="invest_id" value="{{ $investId ?? 0}}">
-                                    </div>
-                                    <hr>
-                                    <div class="deposit-info">
-                                        <div class="deposit-info__title">
-                                            <p class="text has-icon"> @lang('Limit')
-                                                <span></span>
-                                            </p>
-                                        </div>
-                                        <div class="deposit-info__input">
-                                            <p class="text"><span class="gateway-limit">@lang('0.00')</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="deposit-info">
-                                        <div class="deposit-info__title">
-                                            <p class="text has-icon">@lang('Processing Charge')
-                                                <span data-bs-toggle="tooltip"
-                                                      title="@lang('Processing charge for payment gateways')"
-                                                      class="proccessing-fee-info"><i
-                                                        class="las la-info-circle"></i> </span>
-                                            </p>
-                                        </div>
-                                        <div class="deposit-info__input">
-                                            <p class="text"><span class="processing-fee">@lang('0.00')</span>
-                                                {{ __(gs('cur_text')) }}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="deposit-info total-amount pt-3">
-                                        <div class="deposit-info__title">
-                                            <p class="text">@lang('Total')</p>
-                                        </div>
-                                        <div class="deposit-info__input">
-                                            <p class="text"><span class="final-amount">@lang('0.00')</span>
-                                                {{ __(gs('cur_text')) }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="deposit-info gateway-conversion d-none total-amount pt-2">
-                                        <div class="deposit-info__title">
-                                            <p class="text">@lang('Conversion')
-                                            </p>
-                                        </div>
-                                        <div class="deposit-info__input">
-                                            <p class="text"></p>
-                                        </div>
-                                    </div>
-                                    <div class="deposit-info conversion-currency d-none total-amount pt-2">
-                                        <div class="deposit-info__title">
-                                            <p class="text">
-                                                @lang('In') <span class="gateway-currency"></span>
-                                            </p>
-                                        </div>
-                                        <div class="deposit-info__input">
-                                            <p class="text">
-                                                <span class="in-currency"></span>
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                    <div class="d-none crypto-message mb-3">
-                                        @lang('Conversion with') <span
-                                            class="gateway-currency"></span> @lang('and final value will Show on next step')
-                                    </div>
-                                    <button type="submit" class="btn btn--base w-100" disabled>
-                                        @if($investId)
-                                            @lang('Confirm Payment')
-                                        @else
-                                            @lang('Confirm Deposit')
-                                        @endif
-                                    </button>
-                                    <div class="info-text pt-3">
-                                        <p class="text">@lang('Ensuring your funds grow safely through our secure deposit process with world-class payment options.')</p>
-                                    </div>
+                            <div class="deposit-info">
+                                <div class="deposit-info__title">
+                                    <p class="text has-icon">@lang('Processing Charge')
+                                        <span data-bs-toggle="tooltip"
+                                              title="@lang('Processing charge for payment gateways')"
+                                              class="proccessing-fee-info"><i
+                                                class="las la-info-circle"></i> </span>
+                                    </p>
                                 </div>
+                                <div class="deposit-info__input">
+                                    <p class="text"><span class="processing-fee">@lang('0.00')</span>
+                                        {{ __(gs('cur_text')) }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="deposit-info total-amount pt-3">
+                                <div class="deposit-info__title">
+                                    <p class="text">@lang('Total')</p>
+                                </div>
+                                <div class="deposit-info__input">
+                                    <p class="text"><span class="final-amount">@lang('0.00')</span>
+                                        {{ __(gs('cur_text')) }}</p>
+                                </div>
+                            </div>
+
+                            <div class="deposit-info gateway-conversion d-none total-amount pt-2">
+                                <div class="deposit-info__title">
+                                    <p class="text">@lang('Conversion')
+                                    </p>
+                                </div>
+                                <div class="deposit-info__input">
+                                    <p class="text"></p>
+                                </div>
+                            </div>
+                            <div class="deposit-info conversion-currency d-none total-amount pt-2">
+                                <div class="deposit-info__title">
+                                    <p class="text">
+                                        @lang('In') <span class="gateway-currency"></span>
+                                    </p>
+                                </div>
+                                <div class="deposit-info__input">
+                                    <p class="text">
+                                        <span class="in-currency"></span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="d-none crypto-message mb-3">
+                                @lang('Conversion with') <span
+                                    class="gateway-currency"></span> @lang('and final value will Show on next step')
+                            </div>
+                            <button type="submit" class="btn btn--base w-100" disabled>
+                                @if($investId)
+                                    @lang('Confirm Payment')
+                                @else
+                                    @lang('Confirm Deposit')
+                                @endif
+                            </button>
+                            <div class="info-text pt-3">
+                                <p class="text">@lang('Ensuring your funds grow safely through our secure deposit process with world-class payment options.')</p>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 

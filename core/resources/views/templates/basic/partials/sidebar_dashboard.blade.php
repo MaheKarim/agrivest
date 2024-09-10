@@ -101,7 +101,7 @@
                                 @lang('Create New')
                             </a>
                         </li>
-                        <li class="offcanvas-sidebar-submenu__item ">
+                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('ticket.index')}}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('ticket.index') }}">
                                 @lang('My Tickets')
                             </a>

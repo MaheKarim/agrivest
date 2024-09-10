@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/support/support_view.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Constants/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Constants/Status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Models/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Models/Project.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/components/confirmation-modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/components/confirmation-modal.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/sidebar_dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/sidebar_dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/our_offer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/our_offer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/payment/deposit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/payment/deposit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/support/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/support/view.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,7 +280,8 @@
       <workItem from="1725778943420" duration="10000" />
       <workItem from="1725800801641" duration="3804000" />
       <workItem from="1725857299493" duration="31540000" />
-      <workItem from="1725941916170" duration="2350000" />
+      <workItem from="1725941916170" duration="3628000" />
+      <workItem from="1725966896898" duration="646000" />
     </task>
     <servers />
   </component>
