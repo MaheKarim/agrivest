@@ -161,16 +161,7 @@ class ManageProjectController extends Controller
 
     public function status(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required|integer',
-        ]);
-
-        $project = Project::where('id', $id)->firstOrFail();
-        $project->status = $request->status;
-        $project->save();
-
-        $notify[] = ['success', 'Project status updated successfully'];
-        return back()->withNotify($notify);
+        return Project::changeStatus($id);
     }
 
     public function investHistory($id)
@@ -215,6 +206,32 @@ class ManageProjectController extends Controller
         $data->save();
 
         $notify[] = ['success', 'SEO content updated successfully'];
+        return back()->withNotify($notify);
+    }
+
+    public function closed()
+    {
+        $pageTitle = 'Closed Projects';
+        $projects = $this->projectData('end');
+        return view('admin.project.index', compact('pageTitle', 'projects'));
+    }
+
+    protected function projectData($scope = null)
+    {
+        if ($scope) {
+            $users = Project::$scope();
+        } else {
+            $users = Project::query();
+        }
+        return $users->searchable(['title'])->orderBy('id', 'desc')->paginate(getPaginate());
+    }
+
+    public function end(Request $request, $id)
+    {
+        $project = Project::findOrFail($id);
+        $project->status = Status::PROJECT_END;
+        $project->save();
+        $notify[] = ['success', 'Project closed successfully'];
         return back()->withNotify($notify);
     }
 }

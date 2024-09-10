@@ -30,7 +30,34 @@
         "title": "Manage Investments",
         "icon": "las la-hand-holding-usd",
         "menu_active": "admin.invest*",
-        "route_name": "admin.invest.index"
+        "submenu": [
+            {
+                "keyword": [
+                    "all investments",
+                    "Manage Investments",
+                    "Investment management",
+                    "Investment control",
+                    "Investment status",
+                    "Investment activity"
+                ],
+                "title": "All Investments",
+                "route_name": "admin.invest.index",
+                "menu_active": "admin.invest.index"
+            },
+            {
+                "keyword": [
+                    "running investments",
+                    "Manage Investments",
+                    "Running Investment management",
+                    "Investment control",
+                    "Running Investment",
+                    "Investment activity"
+                ],
+                "title": "Running Investments",
+                "route_name": "admin.invest.running",
+                "menu_active": "admin.invest.running"
+            }
+        ]
     },
     "time_settings": {
         "title": "Time Settings",
@@ -61,6 +88,19 @@
                 "title": "All Projects",
                 "route_name": "admin.project.index",
                 "menu_active": "admin.project.index*"
+            },
+            {
+                "keyword": [
+                    "Closed projects",
+                    "Manage Closed Projects",
+                    "Closed Project management",
+                    "Project control",
+                    "Closed Project",
+                    "Project activity"
+                ],
+                "title": "Closed Projects",
+                "route_name": "admin.project.closed",
+                "menu_active": "admin.project.closed"
             }
         ]
     },

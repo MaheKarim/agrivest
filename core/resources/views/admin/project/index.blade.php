@@ -60,13 +60,25 @@
                                             <button class="btn btn-sm btn-outline--primary" data-bs-toggle="dropdown">
                                                 <i class="las la-ellipsis-v"></i> @lang('Action')
                                             </button>
-                                            @if ($project->status == Status::PROJECT_CONFIRMED)
-                                                <button class="btn btn-sm btn-outline--danger cancelOrderModal"
-                                                        data-url="{{ route('admin.project.status', $project->id) }}">
-                                                    <i class="lar la-times-circle"></i>
-                                                    @lang('Project End')
-                                                </button>
+                                            @if($project->status != Status::PROJECT_END)
+                                                @if ($project->status == Status::ENABLE)
+                                                    <button
+                                                        class="btn btn-sm btn-outline--danger ms-1 confirmationBtn"
+                                                        data-question="@lang('Are you sure to disable this project?')"
+                                                        data-action="{{ route('admin.project.status',$project->id) }}">
+                                                        <i class="la la-eye-slash"></i> @lang('Disable')
+                                                    </button>
+                                                @else
+                                                    <button
+                                                        class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
+                                                        data-question="@lang('Are you sure to enable this project?')"
+                                                        data-action="{{ route('admin.project.status',$project->id) }}">
+                                                        <i class="la la-eye"></i> @lang('Enable')
+                                                    </button>
+                                                @endif
                                             @endif
+
+
                                             <div class="dropdown-menu p-0">
                                                 <a class="dropdown-item text--info"
                                                    href="{{ route('admin.project.faq.add', $project->id) }}"
@@ -80,6 +92,14 @@
                                                    href="{{ route('admin.project.seo', $project->id) }}">
                                                     <i class="la la-cog"></i> @lang('SEO Setting')
                                                 </a>
+
+                                                @if($project->status != Status::PROJECT_END)
+                                                    <a class="dropdown-item text--danger cancelOrderModal"
+                                                       data-url="{{ route('admin.project.end', $project->id) }}">
+                                                        <i class="lar la-times-circle"></i>
+                                                        @lang('End Project')
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
@@ -124,6 +144,7 @@
             </div>
         </div>
     </div>
+    <x-confirmation-modal/>
 @endsection
 
 @push('breadcrumb-plugins')
@@ -139,7 +160,7 @@
             $('.cancelOrderModal').on('click', function () {
                 var modal = $('#orderStatusModal');
                 var url = $(this).data('url');
-                var status = 3;
+                var status = 2;
                 modal.find('form').attr('action', url);
                 modal.find('[name=status]').val(status);
                 modal.find('.modal-detail').text(`@lang('Are you sure to end this project?')`);

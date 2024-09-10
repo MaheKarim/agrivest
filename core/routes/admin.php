@@ -64,6 +64,7 @@ Route::middleware('admin')->group(function () {
         Route::get('details/{id}', 'details')->name('details');
         Route::post('store/{id?}', 'store')->name('store');
         Route::post('invest/status/{id?}', 'investStatus')->name('status');
+        Route::get('invest/running', 'runningInvest')->name('running');
     });
 
     Route::controller('CategoryController')->name('category.')->prefix('category')->group(function () {
@@ -80,9 +81,11 @@ Route::middleware('admin')->group(function () {
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::get('project/check-slug/{id?}', 'checkSlug')->name('check.slug');
         Route::post('status/{id}', 'status')->name('status');
+        Route::post('end/{id}', 'end')->name('end');
         Route::get('invest/history/{id}', 'investHistory')->name('investHistory');
         Route::get('seo/{id}', 'frontendSEO')->name('seo');
         Route::post('update/seo/{id}', 'updateSEO')->name('update.seo');
+        Route::get('closed', 'closed')->name('closed');
     });
 
     Route::controller('ManageFaqController')->name('project.faq.')->prefix('project/faq')->group(function () {

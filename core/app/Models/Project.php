@@ -43,7 +43,7 @@ class Project extends Model
 
     public function scopeFeatured($query)
     {
-        return $query->where('featured', Status::PROJECT_END);
+        return $query->where('featured', Status::PROJECT_FEATURED);
     }
 
     public function statusBadge()
@@ -53,9 +53,9 @@ class Project extends Model
             $html = '';
 
             if ($this->status == Status::PROJECT_CONFIRMED) {
-                $html = '<span class="badge badge--success">' . trans('Confirmed') . '</span>';
+                $html = '<span class="badge badge--success">' . trans('Enabled') . '</span>';
             } elseif ($this->status == Status::PROJECT_END) {
-                $html = '<span class="badge badge--primary">' . trans('End') . '</span>';
+                $html = '<span class="badge badge--primary">' . trans('Closed') . '</span>';
             } else {
                 $html = '<span class="badge badge--danger">' . trans('Disabled') . '</span>';
             }

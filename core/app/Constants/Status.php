@@ -19,6 +19,10 @@ class Status
     const PAYMENT_PENDING = 2;
     const PAYMENT_REJECT = 3;
 
+    const INVEST_PAYMENT_PENDING = 0;
+    const INVEST_PAYMENT_SUCCESS = 1;
+    const INVEST_PAYMENT_REJECT = 3;
+
     const TICKET_OPEN = 0;
     const TICKET_ANSWER = 1;
     const TICKET_REPLY = 2;
@@ -53,16 +57,12 @@ class Status
     const INVEST_CANCELED = 9;
     const CAPITAL_BACK = 1;
 
-    const ORDER_PENDING = 0;
-    const ORDER_ACCEPT = 1;
-    const ORDER_RUNNING = 2;
-    const ORDER_COMPLETED = 3;
-    const ORDER_CANCELLED = 9;
-
     const LIFETIME = 1;
     const REPEAT = 2;
 
     const PROJECT_DISABLED = 0;
     const PROJECT_CONFIRMED = 1;
     const PROJECT_END = 2;
+
+    const PROJECT_FEATURED = 1;
 }

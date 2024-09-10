@@ -12,7 +12,7 @@
                                 <th>@lang('ID')</th>
                                 <th>@lang('Project Name')</th>
                                 <th>@lang('Payment Status')</th>
-                                <th>@lang('Order Status')</th>
+                                <th>@lang('Invest Status')</th>
                                 <th>@lang('Created At')</th>
                                 <th>@lang('Action')</th>
                             </tr>
@@ -32,7 +32,7 @@
                                                 <i class="las la-desktop"></i>@lang('Details')
                                             </a>
 
-                                            @if ($invest->status == Status::ORDER_PENDING)
+                                            @if ($invest->status == Status::INVEST_PENDING)
                                                 <button class="btn btn-sm btn-outline--danger cancelOrderModal"
                                                         data-url="{{ route('admin.invest.status', $invest->id) }}">
                                                     <i class="lar la-times-circle"></i>
