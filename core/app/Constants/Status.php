@@ -61,4 +61,8 @@ class Status
 
     const LIFETIME = 1;
     const REPEAT = 2;
+
+    const PROJECT_DISABLED = 0;
+    const PROJECT_CONFIRMED = 1;
+    const PROJECT_END = 2;
 }

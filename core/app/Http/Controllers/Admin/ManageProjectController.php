@@ -159,9 +159,18 @@ class ManageProjectController extends Controller
         ]);
     }
 
-    public function status($id)
+    public function status(Request $request, $id)
     {
-        return Project::changeStatus($id);
+        $request->validate([
+            'status' => 'required|integer',
+        ]);
+
+        $project = Project::where('id', $id)->firstOrFail();
+        $project->status = $request->status;
+        $project->save();
+
+        $notify[] = ['success', 'Project status updated successfully'];
+        return back()->withNotify($notify);
     }
 
     public function investHistory($id)
