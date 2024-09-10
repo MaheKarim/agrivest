@@ -87,7 +87,15 @@ Route::middleware('admin')->group(function () {
         Route::post('update/seo/{id}', 'updateSEO')->name('update.seo');
         Route::get('closed', 'closed')->name('closed');
     });
-
+    // Invest Report
+    Route::controller('InvestReportController')->name('invest.report.')->prefix('invest/report')->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('invest-statistics', 'investStatistics')->name('statistics');
+        Route::get('invest-statistics-by-project', 'investStatisticsByProject')->name('statistics.project');
+        Route::get('invest-interest-statistics', 'investInterestStatistics')->name('interest');
+        Route::get('invest-interest-chart', 'investInterestChart')->name('interest.chart');
+    });
+    // Manage FAQ
     Route::controller('ManageFaqController')->name('project.faq.')->prefix('project/faq')->group(function () {
         Route::get('add/{id}', 'addFaq')->name('add');
         Route::post('store/{id?}', 'storeFaq')->name('store');

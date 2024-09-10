@@ -26,6 +26,21 @@
         "route_name": "admin.dashboard",
         "menu_active": "admin.dashboard"
     },
+    "investment_report": {
+        "keyword": [
+            "Investment Report",
+            "Report",
+            "Investment Dashboard",
+            "Investment Analysis",
+            "Financial Report",
+            "Investment Overview",
+            "Investment Summary"
+        ],
+        "title": "Investment Report",
+        "icon": "las la-signal",
+        "route_name": "admin.invest.report.index",
+        "menu_active": "admin.invest.report.index"
+    },
     "manage_invest": {
         "title": "Manage Investments",
         "icon": "las la-hand-holding-usd",

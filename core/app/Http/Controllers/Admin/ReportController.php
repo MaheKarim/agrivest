@@ -57,7 +57,7 @@ class ReportController extends Controller
     public function investHistory(Request $request)
     {
         $pageTitle = 'Invest History';
-        $invests = Invest::with('project', 'user')->searchable(['project:name', 'user:username,firstname,lastname']);
+        $invests = Invest::with('project', 'user')->searchable(['project:title', 'user:username,firstname,lastname']);
 
         if ($request->type == 'lifetime') {
             $invests = $invests->where('period', -1);

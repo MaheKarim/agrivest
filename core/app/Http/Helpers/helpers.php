@@ -33,8 +33,8 @@ function verificationCode($length)
 {
     if ($length == 0) return 0;
     $min = pow(10, $length - 1);
-    $max = (int) ($min - 1).'9';
-    return random_int($min,$max);
+    $max = (int)($min - 1) . '9';
+    return random_int($min, $max);
 }
 
 function getNumber($length = 8)
@@ -49,23 +49,28 @@ function getNumber($length = 8)
 }
 
 
-function activeTemplate($asset = false) {
+function activeTemplate($asset = false)
+{
     $template = session('template') ?? gs('active_template');
     if ($asset) return 'assets/templates/' . $template . '/';
     return 'templates.' . $template . '.';
 }
 
-function activeTemplateName() {
+function activeTemplateName()
+{
     $template = session('template') ?? gs('active_template');
     return $template;
 }
 
-function siteLogo($type = null) {
+function siteLogo($type = null)
+{
     $name = $type ? "/logo_$type.png" : '/logo.png';
     return getImage(getFilePath('logoIcon') . $name);
 }
-function siteFavicon() {
-    return getImage(getFilePath('logoIcon'). '/favicon.png');
+
+function siteFavicon()
+{
+    return getImage(getFilePath('logoIcon') . '/favicon.png');
 }
 
 function loadReCaptcha()
@@ -123,11 +128,11 @@ function showAmount($amount, $decimal = 2, $separate = true, $exceptZeros = fals
     }
     if ($currencyFormat) {
         if (gs('currency_format') == Status::CUR_BOTH) {
-            return gs('cur_sym').$printAmount.' '.__(gs('cur_text'));
-        }elseif(gs('currency_format') == Status::CUR_TEXT){
-            return $printAmount.' '.__(gs('cur_text'));
-        }else{
-            return gs('cur_sym').$printAmount;
+            return gs('cur_sym') . $printAmount . ' ' . __(gs('cur_text'));
+        } elseif (gs('currency_format') == Status::CUR_TEXT) {
+            return $printAmount . ' ' . __(gs('cur_text'));
+        } else {
+            return gs('cur_sym') . $printAmount;
         }
     }
     return $printAmount;
@@ -215,7 +220,7 @@ function getImage($image, $size = null)
 }
 
 
-function notify($user, $templateName, $shortCodes = null, $sendVia = null, $createLog = true,$pushImage = null)
+function notify($user, $templateName, $shortCodes = null, $sendVia = null, $createLog = true, $pushImage = null)
 {
     $globalShortCodes = [
         'site_name' => gs('site_name'),
@@ -224,7 +229,7 @@ function notify($user, $templateName, $shortCodes = null, $sendVia = null, $crea
     ];
 
     if (gettype($user) == 'array') {
-        $user = (object) $user;
+        $user = (object)$user;
     }
 
     $shortCodes = array_merge($shortCodes ?? [], $globalShortCodes);
@@ -247,7 +252,7 @@ function getPaginate($paginate = null)
     return $paginate;
 }
 
-function paginateLinks($data,$view = null)
+function paginateLinks($data, $view = null)
 {
     return $data->appends(request()->all())->links($view);
 }
@@ -274,7 +279,7 @@ function menuActive($routeName, $type = null, $param = null)
 }
 
 
-function fileUploader($file, $location, $size = null, $old = null, $thumb = null,$filename = null)
+function fileUploader($file, $location, $size = null, $old = null, $thumb = null, $filename = null)
 {
     $fileManager = new FileManager($file);
     $fileManager->path = $location;
@@ -309,7 +314,7 @@ function getFileExt($key)
 function diffForHumans($date)
 {
     $lang = session()->get('lang');
-    if(!$lang){
+    if (!$lang) {
         $lang = getDefaultLang();
     }
 
@@ -324,7 +329,7 @@ function showDateTime($date, $format = 'Y-m-d h:i A')
         return '-';
     }
     $lang = session()->get('lang');
-    if(!$lang){
+    if (!$lang) {
         $lang = getDefaultLang();
     }
 
@@ -332,12 +337,14 @@ function showDateTime($date, $format = 'Y-m-d h:i A')
     return Carbon::parse($date)->translatedFormat($format);
 }
 
-function getDefaultLang(){
+function getDefaultLang()
+{
     return Language::where('is_default', Status::YES)->first()->code ?? 'en';
 }
 
 
-function getContent($dataKeys, $singleQuery = false, $limit = null, $orderById = false) {
+function getContent($dataKeys, $singleQuery = false, $limit = null, $orderById = false)
+{
 
     $templateName = activeTemplateName();
     if ($singleQuery) {
@@ -456,7 +463,9 @@ function gs($key = null)
     if ($key) return @$general->$key;
     return $general;
 }
-function isImage($string){
+
+function isImage($string)
+{
     $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
     $fileExtension = pathinfo($string, PATHINFO_EXTENSION);
     if (in_array($fileExtension, $allowedExtensions)) {
@@ -476,31 +485,42 @@ function isHtml($string)
 }
 
 
-function convertToReadableSize($size) {
+function convertToReadableSize($size)
+{
     preg_match('/^(\d+)([KMG])$/', $size, $matches);
     $size = (int)$matches[1];
     $unit = $matches[2];
 
     if ($unit == 'G') {
-        return $size.'GB';
+        return $size . 'GB';
     }
 
     if ($unit == 'M') {
-        return $size.'MB';
+        return $size . 'MB';
     }
 
     if ($unit == 'K') {
-        return $size.'KB';
+        return $size . 'KB';
     }
 
-    return $size.$unit;
+    return $size . $unit;
 }
 
 
-function frontendImage($sectionName, $image, $size = null,$seo = false)
+function frontendImage($sectionName, $image, $size = null, $seo = false)
 {
     if ($seo) {
         return getImage('assets/images/frontend/' . $sectionName . '/seo/' . $image, $size);
     }
     return getImage('assets/images/frontend/' . $sectionName . '/' . $image, $size);
+}
+
+function convertMatureTime($value)
+{
+    if ($value < 12) {
+        return $value . ' month' . ($value > 1 ? 's' : '');
+    } else {
+        $years = intdiv($value, 12);
+        return $years . ' year' . ($years > 1 ? 's' : '');
+    }
 }
