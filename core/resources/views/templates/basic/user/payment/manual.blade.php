@@ -1,7 +1,7 @@
 @extends($activeTemplate.'layouts.master')
 
 @section('content')
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="card custom--card">
             <div class="card-header card-header-bg">
                 <h5 class="card-title">{{__($pageTitle)}}</h5>
@@ -12,7 +12,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="alert alert-primary">
+                            <div class="alert custom--alert--base">
                                 <p class="mb-0"><i class="las la-info-circle"></i> @lang('You are requesting')
                                     <b>{{ showAmount($data['amount'])  }}</b> @lang('to deposit.') @lang('Please pay')
                                     <b>{{showAmount($data['final_amount'],currencyFormat:false) .' '.$data['method_currency'] }} </b> @lang('for successful payment.')

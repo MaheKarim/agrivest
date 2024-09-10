@@ -1,6 +1,6 @@
 @extends($activeTemplate . 'layouts.master')
 @section('content')
-    <div class="col-lg-9">
+    <div class="col-lg-10">
         <form action="{{ route('user.withdraw.money') }}" method="post" class="withdraw-form">
             @csrf
             <div class="gateway-card">

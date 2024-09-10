@@ -6,7 +6,7 @@
                 <h5 class="card-title">@lang('Withdraw Via') {{ $withdraw->method->name }}</h5>
             </div>
             <div class="card-body">
-                <div class="alert alert-primary">
+                <div class="alert custom--alert--base">
                     <p class="mb-0"><i class="las la-info-circle"></i> @lang('You are requesting')
                         <b>{{ showAmount($withdraw->amount)  }}</b> @lang('for withdraw.') @lang('The admin will send you')
                         <b class="text--success">{{showAmount($withdraw->final_amount,currencyFormat:false) .' '.$withdraw->currency }} </b> @lang('to your account.')

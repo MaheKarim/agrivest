@@ -79,7 +79,7 @@
 
                                 <td>
                                     @if($deposit->method_code >= 1000 && $deposit->method_code <= 5000)
-                                        <a href="javascript:void(0)" class="btn btn--base btn-sm detailBtn"
+                                        <a href="javascript:void(0)" class="btn btn--base btn--xsm detailBtn"
                                            data-info="{{ json_encode($details) }}"
                                            @if ($deposit->status == Status::PAYMENT_REJECT)
                                                data-admin_feedback="{{ $deposit->admin_feedback }}"
@@ -98,7 +98,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="100%" class="text-center">{{ __($emptyMessage) }}</td>
+                                <td colspan="100%" class="text-center text--base">{{ __($emptyMessage) }}</td>
                             </tr>
                         @endforelse
                         </tbody>

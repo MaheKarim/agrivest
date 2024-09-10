@@ -42,7 +42,7 @@
                 @empty
                     <tr>
                         <td colspan="100%">
-                            <div class="text-center">@lang('No data found!')</div>
+                            <div class="text-center text--base">@lang('No data found!')</div>
                         </td>
                     </tr>
                 @endforelse

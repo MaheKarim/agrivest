@@ -43,7 +43,7 @@
                                     <tr>
                                         <td>
                                             <span class="fw-bold"><span
-                                                    class="text-primary"> {{ __(@$withdraw->method->name) }}</span></span>
+                                                    class="text--base"> {{ __(@$withdraw->method->name) }}</span></span>
                                             <br>
                                             <small>{{ $withdraw->trx }}</small>
                                         </td>
@@ -83,7 +83,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
+                                        <td class="text--base text-center" colspan="100%">{{ __($emptyMessage) }}</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
