@@ -181,6 +181,9 @@
                 $('#filterForm input[name="category[]"]').on('change', function () {
                     fetchProjects();
                 });
+                $('#filterForm input[name="return_type[]"]').on('change', function () {
+                    fetchProjects();
+                });
 
                 $(".list-grid-btn").on('click', function () {
                     const listGridClass = $(this).data("list-grid-class");

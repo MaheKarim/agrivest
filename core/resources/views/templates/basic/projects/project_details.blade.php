@@ -7,16 +7,18 @@
         <div class="container">
             <div class="offer-details-top">
                 <div class="offer-details-thumb">
+                    <img
+                        src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                        alt="Project Image">
+
                     @if(!empty($project->gallery) && count($project->gallery) > 0)
                         @foreach($project->gallery as $index => $gallery)
-                            <img
-                                src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
-                                alt="Project Image">
+                            @if($index < 5)
+                                <img
+                                    src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
+                                    alt="Project Gallery Image">
+                            @endif
                         @endforeach
-                    @else
-                        <img
-                            src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
-                            alt="Project Image">
                     @endif
                 </div>
 
@@ -24,22 +26,26 @@
                     <div class="offer-details-slider d-lg-none">
                         <div class="offer-details-thumb-slider">
                             @foreach($project->gallery as $index => $gallery)
-                                <div class="offer-details-thumb-slider__item">
-                                    <img class="offer-details-thumb-slider__img"
-                                         src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
-                                         alt="@lang('Project Image')"
-                                         data-index="{{ $index }}">
-                                </div>
+                                @if($index < 5)
+                                    <div class="offer-details-thumb-slider__item">
+                                        <img class="offer-details-thumb-slider__img"
+                                             src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
+                                             alt="@lang('Project Image')"
+                                             data-index="{{ $index }}">
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
 
                         <div class="offer-details-preview-slider">
-                            @foreach($project->gallery as $gallery)
-                                <div class="offer-details-preview-slider__item">
-                                    <img class="offer-details-preview-slider__img"
-                                         src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
-                                         alt="@lang('Project Image')">
-                                </div>
+                            @foreach($project->gallery as $index => $gallery)
+                                @if($index < 5)
+                                    <div class="offer-details-preview-slider__item">
+                                        <img class="offer-details-preview-slider__img"
+                                             src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
+                                             alt="@lang('Project Image')">
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>

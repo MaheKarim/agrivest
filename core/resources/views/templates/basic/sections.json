@@ -1,12 +1,12 @@
 {
     "banner": {
         "builder": true,
-        "no_selection":true,
+        "no_selection": true,
         "name": "Banner Section",
         "content": {
-            "images":{
-                "image":{
-                    "size":"1920x950"
+            "images": {
+                "image": {
+                    "size": "1920x950"
                 }
             },
             "heading": "text",
@@ -16,17 +16,18 @@
             "left_button_url_": "text",
             "right_button_name": "text",
             "right_button_url": "text"
-        }, "element": {
+        },
+        "element": {
             "modal": true,
             "number": "text",
             "text": "text"
         }
     },
     "why_we": {
-      "builder": true,
+        "builder": true,
         "name": "Why We Are Section",
         "content": {
-            "images":{
+            "images": {
                 "image": {
                     "size": "666x556"
                 },
@@ -50,7 +51,7 @@
         "builder": true,
         "name": "Our Offer Section",
         "content": {
-           "small_heading": "text",
+            "small_heading": "text",
             "heading": "text",
             "subheading": "text",
             "button_name": "text",
@@ -64,7 +65,8 @@
             "small_heading": "text",
             "heading": "text",
             "subheading": "text"
-        }, "element": {
+        },
+        "element": {
             "images": {
                 "image": {
                     "size": "40x40"
@@ -86,7 +88,8 @@
             "small_heading": "text",
             "heading": "text",
             "subheading": "text"
-        }, "element": {
+        },
+        "element": {
             "title": "text",
             "description": "textarea",
             "images": {
@@ -104,7 +107,8 @@
             "small_heading": "text",
             "heading": "text",
             "subheading": "text"
-        }, "element": {
+        },
+        "element": {
             "images": {
                 "image": {
                     "size": "80x80"
@@ -138,25 +142,17 @@
             "modal": true
         }
     },
-    "upcoming_offer": {
-        "builder": true,
-        "name": "UpComing Offer Section",
-        "content": {
-            "small_heading": "text",
-            "heading": "text",
-            "subheading": "text"
-        }
-    },
     "award": {
         "builder": true,
         "name": "Award Section",
         "content": {
-           "small_heading": "text",
-           "heading": "text",
-           "subheading": "text",
+            "small_heading": "text",
+            "heading": "text",
+            "subheading": "text",
             "button_name": "text",
             "button_url": "text"
-        }, "element": {
+        },
+        "element": {
             "images": {
                 "image": {
                     "size": "96x96"
@@ -197,46 +193,46 @@
             "subheading": "text"
         },
         "element": {
-            "images":{
-                "image":{
-                    "size":"966x450",
-                    "thumb":"416x268"
+            "images": {
+                "image": {
+                    "size": "966x450",
+                    "thumb": "416x268"
                 }
             },
             "title": "text",
-            "slug":"title",
+            "slug": "title",
             "description": "textarea-nic",
             "modal": false,
-            "seo":true
+            "seo": true
         }
     },
     "policy_pages": {
         "builder": true,
-        "no_selection":true,
+        "no_selection": true,
         "name": "Policy Pages",
-        "hide_builder":true,
+        "hide_builder": true,
         "element": {
             "title": "text",
-            "slug":"title",
+            "slug": "title",
             "details": "textarea-nic",
             "modal": false,
-            "seo":true
+            "seo": true
         }
     },
     "register_disable": {
         "builder": true,
-        "no_selection":true,
+        "no_selection": true,
         "name": "Registration Disable",
         "content": {
-            "images":{
-                "image":{
-                    "size":"280x280"
+            "images": {
+                "image": {
+                    "size": "280x280"
                 }
             },
             "heading": "text",
-            "subheading":"text",
-            "button_name":"text",
-            "button_url":"text"
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
         }
     },
     "social_icon": {
