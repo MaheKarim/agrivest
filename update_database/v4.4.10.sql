@@ -1,1 +1,0 @@
-ALTER TABLE `deposits` CHANGE `final_amo` `final_amount` DECIMAL(28,8) NOT NULL DEFAULT '0.00000000';

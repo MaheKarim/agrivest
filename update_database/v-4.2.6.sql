@@ -1,1 +1,0 @@
-ALTER TABLE `admin_password_resets` DROP `updated_at`;

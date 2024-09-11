@@ -1,1 +1,0 @@
-ALTER TABLE `general_settings` ADD `system_customized` TINYINT(1) NOT NULL DEFAULT '0' AFTER `system_info`;

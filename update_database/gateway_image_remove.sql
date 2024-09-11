@@ -1,1 +1,0 @@
-ALTER TABLE `gateways` DROP COLUMN `image`
