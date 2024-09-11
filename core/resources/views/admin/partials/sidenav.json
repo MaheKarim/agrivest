@@ -39,12 +39,15 @@
         "title": "Investment Report",
         "icon": "las la-signal",
         "route_name": "admin.invest.report.index",
-        "menu_active": "admin.invest.report.index*"
+        "menu_active": "admin.invest.report.index"
     },
     "manage_invest": {
         "title": "Manage Investments",
         "icon": "las la-hand-holding-usd",
-        "menu_active": "admin.invest*",
+        "menu_active": [
+            "admin.invest.index",
+            "admin.invest.running"
+        ],
         "submenu": [
             {
                 "keyword": [

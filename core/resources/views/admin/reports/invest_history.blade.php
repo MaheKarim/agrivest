@@ -47,6 +47,7 @@
                                     <option value="">@lang('All')</option>
                                     <option value="2" @selected(request()->status == '2')>@lang('Running')</option>
                                     <option value="3" @selected(request()->status == '3')>@lang('Completed')</option>
+                                    <option value="4" @selected(request()->status == '4')>@lang('Closed')</option>
                                 </select>
                             </div>
                             <div class="flex-grow-1">
