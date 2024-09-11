@@ -19,7 +19,7 @@ class InvestReportController extends Controller
         $widget['profit_paid'] = Invest::where('status', Status::INVEST_RUNNING)->where('period', '>', 0)->sum('paid');
 
         $interestByProjects = Invest::where('period', '>', 0)->selectRaw("SUM(paid) as total_price, project_id")->with('project')->groupBy('project_id')->orderBy('paid', 'desc')->get();
-        $totalInterest = $interestByProjects->sum('paid');
+        $totalInterest = $interestByProjects->sum('total_price');
 
         $interestByProjects = $interestByProjects->mapWithKeys(function ($invest) {
             return [
@@ -112,7 +112,7 @@ class InvestReportController extends Controller
 
         $runningInvests = Invest::where('status', Status::INVEST_RUNNING)->where('created_at', '>=', $time)->sum('total_price');
         $expiredInvests = Invest::where('status', Status::INVEST_CLOSED)->where('created_at', '>=', $time)->sum('total_price');
-        $interests = Transaction::where('remark', 'profit')->where('created_at', '>=', $time)->sum('total_price');
+        $interests = Transaction::where('remark', 'profit')->where('created_at', '>=', $time)->sum('amount');
 
         return [
             'running_invests' => showAmount($runningInvests),
@@ -129,7 +129,7 @@ class InvestReportController extends Controller
             return $invest->date;
         })->toArray();
 
-        $interests = Transaction::whereYear('created_at', $request->year)->whereMonth('created_at', $request->month)->where('remark', 'profit')->selectRaw("SUM(total_price) as total_price, DATE_FORMAT(created_at, '%d') as date")->groupBy('date')->get();
+        $interests = Transaction::whereYear('created_at', $request->year)->whereMonth('created_at', $request->month)->where('remark', 'profit')->selectRaw("SUM(amount) as amount, DATE_FORMAT(created_at, '%d') as date")->groupBy('date')->get();
 
         $interestsDate = $interests->map(function ($interest) {
             return $interest->date;

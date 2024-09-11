@@ -143,7 +143,7 @@
                                                 <li class="chart-info-list-item">
                                                     <i
                                                         class="fas fa-plane projectPointInterest me-2"></i>{{ __($key) }}
-                                                    {{ $totalInterest > 0 ? showAmount(($invest / $totalInterest) * 100, currencyFormat: false) : 0 }}
+                                                    {{ showAmount(($invest/$totalInterest) * 100, currencyFormat: false) }}
                                                     %
                                                 </li>
                                             @endforeach
@@ -198,7 +198,7 @@
                                     <h5 class="mb-1 text-warning counter expiredInvests"></h5>
                                     <p class="mb-0">
                                         <a
-                                            href="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_CLOSED }}">
+                                            href="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_COMPLETED }}">
                                             <button
                                                 class="btn btn-sm btn-outline-warning font-12 px-2"
                                                 type="button">@lang('History')</button>
@@ -326,8 +326,8 @@
                                             <div class="plan-name fw-bold">{{ $invest->project->title }} -
                                                 @lang('Every')
                                                 {{ __($invest->time_name) }}
-                                                {{ $invest->project->interest_type != 1 ? gs('cur_sym') : '' }}{{ showAmount($invest->project->share_amount, currencyFormat: false) }}{{ $invest->project->interest_type == 1 ? '%' : '' }}
-                                                @lang('for') @if ($invest->project->lifetime == 0)
+                                                {{ $invest->project->return_type != 1 ? gs('cur_sym') : '' }}{{ showAmount($invest->project->share_amount, currencyFormat: false) }}
+                                                @lang('for') @if ($invest->project->return_type == 2)
                                                     {{ __($invest->project->repeat_time) }}
                                                     {{ __(@$invest->project->time->name) }}
                                                 @else
@@ -350,15 +350,11 @@
                                         <div class="plan-amount plan-inner-div text-end">
                                             <p class="plan-label">@lang('Net Profit')</p>
                                             <p class="plan-value amount">
-                                                {{--                                                @if ($invest->period != -1)--}}
-                                                {{--                                                    @if ($invest->project->is_dispatch == Status::INTEREST_DISPATCH)--}}
-                                                {{--                                                        {{ showAmount($invest->period * $invest->interest) }}--}}
-                                                {{--                                                    @else--}}
-                                                {{--                                                        @lang('On Production')--}}
-                                                {{--                                                    @endif--}}
-                                                {{--                                                @else--}}
-                                                {{--                                                    ----}}
-                                                {{--                                                @endif--}}
+                                                @if ($invest->return_type != -1)
+                                                    {{ showAmount($invest->repeat_times * $invest->recuring_pay) }}
+                                                @else
+                                                    --
+                                                @endif
                                             </p>
                                         </div>
                                     </div>

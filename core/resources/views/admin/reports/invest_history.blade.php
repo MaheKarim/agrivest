@@ -91,7 +91,7 @@
                                     <td>{{ __($invest->quantity) }} @lang('Units')</td>
                                     <td>{{ showAmount($invest->total_price) }}</td>
                                     <td>{{ showAmount($invest->total_earning) }}</td>
-                                    <td>{{ $invest->should_pay != -1 ? showAmount($invest->recuring_pay) : '**' }}</td>
+                                    <td>{{ $invest->return_type != -1 ? showAmount($invest->recuring_pay) : '**' }}</td>
                                     <td>{{ showAmount($invest->paid) }}</td>
                                     <td>
                                         @php echo $invest->statusBadge @endphp
