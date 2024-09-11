@@ -596,8 +596,7 @@
             "admin.frontend.index",
             "admin.frontend.sections*",
             "admin.gateway*",
-            "admin.withdraw.method*",
-            "admin.setting.app.purchase"
+            "admin.withdraw.method*"
         ]
     },
     "extra": {

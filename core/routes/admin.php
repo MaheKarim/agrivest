@@ -271,12 +271,6 @@ Route::middleware('admin')->group(function () {
         //maintenance_mode
         Route::get('maintenance-mode', 'maintenanceMode')->name('maintenance.mode');
         Route::post('maintenance-mode', 'maintenanceModeSubmit');
-
-        //In app purchase
-        Route::get('in-app-purchase', 'inAppPurchase')->name('setting.app.purchase');
-        Route::post('in-app-purchase', 'inAppPurchaseConfigure');
-        Route::get('in-app-purchase/file/download', 'inAppPurchaseFileDownload')->name('setting.app.purchase.file.download');
-
     });
 
 

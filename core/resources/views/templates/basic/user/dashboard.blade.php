@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="dashboard-inner__block">
+        <div class="notice"></div>
         <div class="row gy-3">
             <div class="col-xsm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 @php
