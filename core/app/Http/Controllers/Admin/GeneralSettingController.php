@@ -32,7 +32,6 @@ class GeneralSettingController extends Controller
             'cur_text' => 'required|string|max:40',
             'cur_sym' => 'required|string|max:40',
             'base_color' => 'nullable|regex:/^[a-f0-9]{6}$/i',
-            'secondary_color' => 'nullable|regex:/^[a-f0-9]{6}$/i',
             'timezone' => 'required|integer',
             'currency_format' => 'required|in:1,2,3',
             'paginate_number' => 'required|integer'
@@ -47,7 +46,6 @@ class GeneralSettingController extends Controller
         $general->cur_sym = $request->cur_sym;
         $general->paginate_number = $request->paginate_number;
         $general->base_color = str_replace('#', '', $request->base_color);
-        $general->secondary_color = str_replace('#', '', $request->secondary_color);
         $general->currency_format = $request->currency_format;
         $general->save();
 

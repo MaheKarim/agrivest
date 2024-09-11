@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/partials/sidenav.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/partials/sidenav.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/setting/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/setting/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/routes/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/routes/admin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +217,7 @@
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/agrivest&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/goldtrade&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
@@ -286,7 +282,7 @@
       <workItem from="1725941916170" duration="3628000" />
       <workItem from="1725966896898" duration="16035000" />
       <workItem from="1726032836856" duration="7821000" />
-      <workItem from="1726047135480" duration="1234000" />
+      <workItem from="1726047135480" duration="2846000" />
     </task>
     <servers />
   </component>
