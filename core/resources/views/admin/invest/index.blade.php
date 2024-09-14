@@ -13,6 +13,8 @@
                                 <th>@lang('Project Name')</th>
                                 <th>@lang('Payment Status')</th>
                                 <th>@lang('Invest Status')</th>
+                                <th>@lang('Capital Back') | @lang('is Backed?')</th>
+                                <th>@lang('Profit Paid - Remaining')</th>
                                 <th>@lang('Created At')</th>
                                 <th>@lang('Action')</th>
                             </tr>
@@ -24,6 +26,18 @@
                                     <td>{{ __($invest->project->title) }}</td>
                                     <td>@php echo $invest->paymentStatusBadge @endphp</td>
                                     <td>@php echo $invest->statusBadge @endphp</td>
+                                    <td>@php echo $invest->capitalBackBadge @endphp
+                                        @if($invest->capital_back == Status::YES)
+                                            @php echo $invest->isBackedBadge @endphp
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                            $remaining = $invest->period - $invest->repeated_times;
+                                        @endphp
+                                        {{ __($invest->period) }} | {{ __($remaining) }}
+                                    </td>
+
                                     <td>{{ showDateTime($invest->created_at) }}</td>
                                     <td>
                                         <div class="button-group">

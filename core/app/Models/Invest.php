@@ -107,4 +107,35 @@ class Invest extends Model
             return $html;
         });
     }
+
+    public function capitalBackBadge()
+    : Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+            if ($this->capital_back == Status::YES) {
+                $html = '<span class="badge badge--success">' . trans('Yes') . '</span>';
+            } else {
+                $html = '<span class="badge badge--warning">' . trans('No') . '</span>';
+            }
+
+            return $html;
+        });
+    }
+
+    public function isBackedBadge()
+    : Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+            if ($this->capital_status == Status::YES) {
+                $html = '<span class="badge badge--primary">' . trans('Yes') . '</span>';
+            } else {
+                $html = '<span class="badge badge--dark">' . trans('No') . '</span>';
+            }
+
+            return $html;
+        });
+    }
+
 }
