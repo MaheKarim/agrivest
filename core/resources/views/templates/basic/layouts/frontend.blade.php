@@ -1,5 +1,5 @@
 @extends($activeTemplate . 'layouts.app')
-@section('main-content')
+@section('panel')
     @stack('fbComment')
     @include($activeTemplate . 'partials.header')
     <main class="page-wrapper">

@@ -1,5 +1,5 @@
 @extends($activeTemplate . 'layouts.app')
-@section('main-content')
+@section('panel')
     <section class="account">
         <div class="account-left bg-img"
             data-background-image="{{ asset($activeTemplateTrue . 'images/thumbs/account-thumb.jpg') }}">
@@ -11,7 +11,7 @@
             <form class="account-form verify-gcaptcha" action="{{ route('user.login') }}" method="POST">
                 @csrf
                 <div class="account-form__header">
-                    <a class="account-logo d-lg-none" href="{{route('home')}}">
+                    <a class="account-logo d-lg-none" href="{{ route('home') }}">
                         <img src="{{ siteLogo('dark') }}" alt="Logo">
                     </a>
                     <div class="account-form-headings">

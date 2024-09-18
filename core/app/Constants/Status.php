@@ -57,7 +57,7 @@ class Status
     const INVEST_CANCELED = 9;
     const CAPITAL_BACK = 1;
 
-    const LIFETIME = 1;
+    const LIFETIME = -1;
     const REPEAT = 2;
 
     const PROJECT_DISABLED = 0;

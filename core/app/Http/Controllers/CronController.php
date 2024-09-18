@@ -73,48 +73,50 @@ class CronController extends Controller
     {
         try {
             $now = Carbon::now();
-            // Fetch investments with projects that have not ended yet
             $invests = Invest::with(['user', 'project.time'])
                 ->whereHas('project', function ($query) use ($now) {
                     $query->where('maturity_date', '<', $now);
                 })
                 ->running()
+                ->where('next_time', '<=', $now)
                 ->orderBy('last_time')
                 ->take(100)
                 ->get();
 
+            // dd($invests);
+
             foreach ($invests as $invest) {
                 $project = $invest->project;
-                $user = $invest->user;
-                $hours = (int)$invest->project?->time->hours;
-                $next = $now->addHours($hours)->toDateTimeString();
+                $user    = $invest->user;
+                $hours   = (int)$invest->project?->time->hours;
+                $next    = now()->addHours($hours)->toDateTimeString();
 
                 // Process investment
                 $invest->period += 1;
                 $invest->paid += $invest->recuring_pay;
                 $invest->next_time = $next;
-                $invest->last_time = $now;
+                $invest->last_time = now();
 
                 // Update user's balance
                 $user->balance += $invest->recuring_pay;
                 $user->save();
 
                 // Log the transaction
-                $trx = getTrx();
-                $transaction = new Transaction([
-                    'user_id' => $user->id,
-                    'amount' => $invest->recuring_pay,
-                    'charge' => 0,
-                    'post_balance' => $user->balance,
-                    'trx_type' => '+',
-                    'trx' => $trx,
-                    'remark' => 'profit',
-                    'details' => showAmount($invest->recuring_pay) . ' profit from ' . @$invest->project->title
-                ]);
+                $trx                       = getTrx();
+                $transaction               = new Transaction();
+                $transaction->user_id      = $user->id;
+                $transaction->amount       = $invest->recuring_pay;
+                $transaction->charge       = 0;
+                $transaction->post_balance = $user->balance;
+                $transaction->trx_type     = '+';
+                $transaction->trx          = $trx;
+                $transaction->remark       = 'profit';
+                $transaction->details      = showAmount($invest->recuring_pay) . ' profit from ' . @$invest->project->title;
                 $transaction->save();
 
+
                 // Check if the investment should be closed
-                if ($invest->repeat_times == $invest->period && $invest->return_type != -1) {
+                if ($invest->repeat_times == $invest->period && $invest->return_type != Status::LIFETIME) {
                     $invest->status = Status::INVEST_CLOSED;
                     if ($invest->capital_status == Status::CAPITAL_BACK) {
                         Capital::capitalReturn($invest);
@@ -126,8 +128,8 @@ class CronController extends Controller
 
                 // Notify the user about the profit
                 notify($user, 'INTEREST', [
-                    'trx' => $trx,
-                    'amount' => showAmount($invest->recuring_pay),
+                    'trx'          => $trx,
+                    'amount'       => showAmount($invest->recuring_pay),
                     'project_name' => @$invest->project->title,
                     'post_balance' => showAmount($user->balance),
                 ]);
@@ -136,4 +138,6 @@ class CronController extends Controller
             throw new \Exception($th->getMessage());
         }
     }
+
+    //crop missing
 }

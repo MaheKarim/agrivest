@@ -51,8 +51,7 @@ class Project extends Model
         return $query->where('featured', Status::PROJECT_FEATURED);
     }
 
-    public function statusBadge()
-    : Attribute
+    public function statusBadge(): Attribute
     {
         return new Attribute(function () {
             $html = '';
@@ -68,5 +67,4 @@ class Project extends Model
             return $html;
         });
     }
-
 }

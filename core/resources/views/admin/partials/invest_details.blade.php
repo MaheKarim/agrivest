@@ -1,10 +1,6 @@
-<div class="card">
-    <div class="card-header d-flex justify-content-between">
-        <h5 class="card-title ">@lang('Invest detail of') {{ $invest->invest_no }}</h5>
-        {{--        <a href="{{ route('admin.order.invoice', $invest->id) }}" class="btn btn-outline--primary " target="_blank">--}}
-        {{--            <i class="las la-print"></i>--}}
-        {{--            @lang('Print Invoice')--}}
-        {{--        </a>--}}
+<div class="card mb-3">
+    <div class="card-header bg-info">
+        <h5 class="mb-0 text-white">@lang('Investment Information')</h5>
     </div>
     <div class="card-body">
         <div class="row mb-3">
@@ -27,8 +23,8 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Payment')
                         @if ($invest->payment_type == Status::PAYMENT_ONLINE)
-                            <span
-                                class="fw-bold">{{ __(@$invest->deposit->gateway->name) }} @lang('payment gateway')</span>
+                            <span class="fw-bold">{{ __(@$invest->deposit->gateway->name) }}
+                                @lang('payment gateway')</span>
                         @else
                             <span class="fw-bold">@lang('Wallet')</span>
                         @endif
@@ -49,17 +45,16 @@
             </div>
             <div class="col-md-6">
                 <ul class="list-group list-group-flush">
-
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Investor Address')
                         <span class="fw-bold">
-                            {{ __(@$invest->user->address)}},{{ @$invest->user->city}},{{@$invest->user->state}}, {{@$invest->user->country_name}}
+                            {{ __(@$invest->user->address) }},{{ @$invest->user->city }},{{ @$invest->user->state }},
+                            {{ @$invest->user->country_name }}
                         </span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Share Available')
-                        <span
-                            class="fw-bold"> {{ getAmount($invest->project->available_share) }}</span>
+                        <span class="fw-bold"> {{ getAmount($invest->project->available_share) }}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Order Date')
@@ -74,58 +69,62 @@
                 </ul>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="table-responsive--md  table-responsive">
-            <table class="table table--light style--two">
-                <thead>
-                <tr>
-                    <th>@lang('Project Name')</th>
-                    <th>@lang('Quantity')</th>
-                    <th>@lang('Price')</th>
-                    <th>@lang('Subtotal')</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <a href="{{ route('admin.project.edit', $invest->id) }}">
-                            {{ __(strLimit($invest->project->title, 25)) }}
-                        </a>
-                    </td>
-
-                    <td>
-                        <strong>{{ $invest->quantity }}</strong>
-                    </td>
-
-                    <td>
-                        <strong>{{ showAmount($invest->unit_price) }} </strong>
-                    </td>
-
-                    <td>
-                        <strong>{{ showAmount($invest->total_price) }} </strong>
-                    </td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="3"></td>
-                    <td>
-                        <span>@lang('ROI Percentage :')</span><strong> {{ getAmount($invest->roi_percentage) }} @lang('%')</strong>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td>
-                        <span>@lang('ROI Amount:')</span><strong> {{ showAmount($invest->roi_amount * $invest->quantity) }} </strong>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td><span>@lang('Total Earning:')</span><strong> {{ showAmount($invest->total_earning) }}</strong>
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
+<div class="project-details">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header bg-primary">
+                    <h5 class="mb-0 text-white">@lang('Project Details')</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@lang('Project Name'):</span>
+                            <a href="{{ route('admin.project.edit', $invest->project->id) }}" class="fw-bold">
+                                {{ __(strLimit($invest->project->title, 25)) }}
+                            </a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@lang('Quantity'):</span>
+                            <span class="fw-bold">{{ $invest->quantity }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@lang('Price'):</span>
+                            <span class="fw-bold">{{ showAmount($invest->unit_price) }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@lang('Subtotal'):</span>
+                            <span class="fw-bold">{{ showAmount($invest->total_price) }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success">
+                    <h5 class="mb-0 text-white">@lang('Investment Details')</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@lang('ROI Percentage'):</span>
+                            <span class="fw-bold">{{ getAmount($invest->roi_percentage) }}@lang('%')</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@lang('ROI Amount'):</span>
+                            <span class="fw-bold">{{ showAmount($invest->roi_amount * $invest->quantity) }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@lang('Total Earning'):</span>
+                            <span class="fw-bold">{{ showAmount($invest->total_earning) }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

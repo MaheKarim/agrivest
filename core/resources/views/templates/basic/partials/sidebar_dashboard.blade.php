@@ -138,7 +138,7 @@
                 </div>
             </li>
             <li class="offcanvas-sidebar-menu__item">
-                <a class="offcanvas-sidebar-menu__link logout" href="{{ route('user.logout') }}">
+                <a class="offcanvas-sidebar-menu__link" href="{{ route('user.logout') }}">
                     <i class="fas fa-sign-out"></i>
                     <span>@lang('Logout')</span>
                 </a>

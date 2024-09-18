@@ -42,12 +42,9 @@
         "menu_active": "admin.invest.report.index"
     },
     "manage_invest": {
-        "title": "Manage Investments",
+        "title": "Investments",
         "icon": "las la-hand-holding-usd",
-        "menu_active": [
-            "admin.invest.index",
-            "admin.invest.running"
-        ],
+        "menu_active": ["admin.invest.index", "admin.invest.running"],
         "submenu": [
             {
                 "keyword": [
@@ -78,19 +75,41 @@
         ]
     },
     "time_settings": {
+        "keyword": [
+            "Time Settings",
+            "Time Configuration",
+            "Time Management",
+            "Clock Settings",
+            "Schedule Settings",
+            "Timing Preferences",
+            "System Time",
+            "Time Zone Settings",
+            "Timing Control"
+        ],
         "title": "Time Settings",
         "icon": "las la-clock",
         "menu_active": "admin.time*",
         "route_name": "admin.time.index"
     },
     "manage_category": {
-        "title": "Manage Category",
+        "keyword": [
+            "Manage Category",
+            "Category Management",
+            "Product Categories",
+            "Service Categories",
+            "Item Categories",
+            "Category Settings",
+            "Category Control",
+            "Category Overview",
+            "Category List"
+        ],
+        "title": "Categories",
         "icon": "las la-list",
         "menu_active": "admin.category*",
         "route_name": "admin.category.index"
     },
     "manage_projects": {
-        "title": "Manage Projects",
+        "title": "Projects",
         "icon": "las la-project-diagram",
         "menu_active": "admin.project*",
         "submenu": [
@@ -122,6 +141,7 @@
             }
         ]
     },
+
     "manage_users": {
         "title": "Manage Users",
         "icon": "las la-users",
@@ -252,12 +272,11 @@
             }
         ]
     },
+
     "deposits": {
         "title": "Deposits",
         "icon": "las la-file-invoice-dollar",
-        "counters": [
-            "pendingDepositsCount"
-        ],
+        "counters": ["pendingDepositsCount"],
         "menu_active": "admin.deposit*",
         "submenu": [
             {
@@ -353,9 +372,7 @@
     "withdrawals": {
         "title": "Withdrawals",
         "icon": "la la-bank",
-        "counters": [
-            "pendingWithdrawCount"
-        ],
+        "counters": ["pendingWithdrawCount"],
         "menu_active": "admin.withdraw.data*",
         "submenu": [
             {
@@ -423,9 +440,7 @@
     "support_ticket": {
         "title": "Support Ticket",
         "icon": "la la-ticket",
-        "counters": [
-            "pendingTicketCount"
-        ],
+        "counters": ["pendingTicketCount"],
         "menu_active": "admin.ticket*",
         "submenu": [
             {
@@ -554,6 +569,7 @@
             }
         ]
     },
+
     "system_setting": {
         "keyword": [
             "System Setting",
@@ -603,9 +619,7 @@
         "title": "Extra",
         "icon": "la la-server",
         "menu_active": "admin.system*",
-        "counters": [
-            "updateAvailable"
-        ],
+        "counters": ["updateAvailable"],
         "submenu": [
             {
                 "keyword": [

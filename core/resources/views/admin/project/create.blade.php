@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.project.store', $project->id ?? null) }}" method="POST"
-                          enctype="multipart/form-data">
+                        enctype="multipart/form-data">
                         @csrf
                         @include('admin.project.form')
                         <button type="submit" class="btn btn--primary w-100 h-45">
@@ -19,7 +19,7 @@
 @endsection
 
 @push('breadcrumb-plugins')
-    <x-back route="{{ route('admin.project.index') }}"/>
+    <x-back route="{{ route('admin.project.index') }}" />
 @endpush
 @push('style-lib')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/daterangepicker.css') }}">
@@ -34,15 +34,16 @@
 
 @push('script')
     <script>
-        (function ($) {
+        (function($) {
             "use strict";
-            $(document).ready(function () {
+            $(document).ready(function() {
                 // Date ranger Start here
                 $('input[name="start_date"],input[name="end_date"]').daterangepicker({
                     singleDatePicker: true,
                     showDropdowns: true,
                     minYear: 1950,
                     maxYear: parseInt(moment().format('YYYY'), 10),
+                    applyButtonClasses: 'btn btn--primary',
                     locale: {
                         format: 'YYYY-MM-DD'
                     }
@@ -59,7 +60,7 @@
                     preloadedInputName: 'old',
                     maxFiles: 5
                 });
-                $(document).on('input', 'input[name="gallery[]"]', function () {
+                $(document).on('input', 'input[name="gallery[]"]', function() {
                     var fileUpload = $("input[type='file']");
                     if (parseInt(fileUpload.get(0).files.length) > 4) {
                         notify('error', 'You can only upload 4 images');
@@ -71,7 +72,7 @@
 
                 function toggleFields() {
                     var returnType = $('select[name="return_type"]').val();
-                    if (returnType == '1') {
+                    if (returnType == '-1') {
                         $('#return_interval').closest('.form-group').hide();
                         $('#repeat_times').closest('.form-group').hide();
                         $('#return_interval').removeAttr('required');
@@ -95,7 +96,7 @@
                 toggleFields();
 
                 // Call the function every time the return type changes
-                $('select[name="return_type"]').change(function () {
+                $('select[name="return_type"]').change(function() {
                     toggleFields();
                 });
 
@@ -139,7 +140,7 @@
                     }
                 }
 
-                $('.share_count, .goal').on('input', function (e) {
+                $('.share_count, .goal').on('input', function(e) {
                     calculateShareAmount();
                 });
 
@@ -173,7 +174,7 @@
                     }
                 }
 
-                $('.goal, .share_amount').on('input', function (e) {
+                $('.goal, .share_amount').on('input', function(e) {
                     calculateShareCount();
                 });
 
@@ -207,7 +208,7 @@
 
                 }
 
-                $('.roi_percentage, .goal').on('input', function (e) {
+                $('.roi_percentage, .goal').on('input', function(e) {
                     calculateRoiAmount();
                 });
 
@@ -240,19 +241,20 @@
                     }
                 }
 
-                $('.roi_amount, .goal').on('input', function (e) {
+                $('.roi_amount, .goal').on('input', function(e) {
                     calculateRoiPercentage();
                 });
 
                 // Slug Code
-                $('.buildSlug').on('click', function () {
+                $('.buildSlug').on('click', function() {
                     let closestForm = $(this).closest('form');
                     let title = closestForm.find('[name=title]').val();
                     closestForm.find('[name=slug]').val(title);
                     closestForm.find('[name=slug]').trigger('input');
                 });
 
-                $('[name=slug]').on('input', function () {
+                $('[name=slug]').on('input', function() {
+                    let projectId = '{{ @$project->id ?? 0 }}';
                     let closestForm = $(this).closest('form');
                     closestForm.find('[type=submit]').addClass('disabled')
                     let slug = $(this).val();
@@ -264,8 +266,9 @@
                         <small class="text--info"><i class="las la-spinner la-spin"></i> @lang('Checking')</small>
                     `);
                         $.get("{{ route('admin.project.check.slug') }}", {
-                            slug: slug
-                        }, function (response) {
+                            slug: slug,
+                            id: projectId,
+                        }, function(response) {
                             if (!response.exists) {
                                 $('.slug-verification').html(`
                                 <small class="text--success"><i class="las la-check"></i> @lang('Available')</small>
@@ -286,4 +289,3 @@
         })(jQuery);
     </script>
 @endpush
-

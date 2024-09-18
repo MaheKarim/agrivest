@@ -130,8 +130,8 @@
 .hover-input-popup .input-popup {
     display: block;
     position: absolute;
-    bottom: 100%;
-    left: 30%;
+    bottom: calc(100% + 12px);
+    left: 50%;
     width: 280px;
     background-color: #1a1a1a;
     color: #fff;
@@ -241,21 +241,21 @@
     padding: 12px 14px !important;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar {
     width: 8px;
     border-radius: 5px;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-track {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 5px;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-thumb {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb {
     background: #ddd;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-thumb:hover {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb:hover {
     background: #ddd;
 }
 
@@ -328,7 +328,8 @@
     margin-bottom: 0px !important;
 }
 
-.select2-container--open .select2-selection.select2-selection--single, .select2-container--open .select2-selection.select2-selection--multiple {
+.select2-container--open .select2-selection.select2-selection--single,
+.select2-container--open .select2-selection.select2-selection--multiple {
     border-color: hsl(var(--base)) !important;
     border-radius: .375rem !important;
 }
@@ -510,7 +511,7 @@
 }
 
 .total-amount {
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid #e0e0e0;
 }
 
 .total-amount .deposit-info__title {
@@ -531,7 +532,7 @@
     background-color: hsl(var(--base));
 }
 
-.payment-item:hover + .payment-item__btn {
+.payment-item:hover+.payment-item__btn {
     border-top-color: #fff;
 }
 
@@ -539,12 +540,15 @@ button .spinner-border {
     --bs-spinner-width: 1.5rem;
     --bs-spinner-height: 1.5rem;
 }
+
 .payment-item__btn-text {
     color: hsl(var(--white));
 }
+
 .payment-item__btn__icon {
     color: hsl(var(--white));
 }
+
 /* ////////////////// select 2 css //////////////// */
 .select2-dropdown {
     border: 0 !important;
@@ -570,21 +574,21 @@ button .spinner-border {
     padding: 12px 14px !important;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar {
     width: 8px;
     border-radius: 5px;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-track {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 5px;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-thumb {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb {
     background: #ddd;
 }
 
-.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-thumb:hover {
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb:hover {
     background: #ddd;
 }
 
@@ -769,5 +773,5 @@ label.required:after {
 
 /* select2 css start here  */
 .select2-container:has(.select2-selection--single) {
- width: 100% !important;
+    width: 100% !important;
 }

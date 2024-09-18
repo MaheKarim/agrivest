@@ -121,7 +121,7 @@
             "modal": true
         }
     },
-    "faq": {
+    "": {
         "builder": true,
         "name": "FAQ Section",
         "content": {
@@ -277,7 +277,7 @@
             "modal": true
         }
     },
-    "breadcrumb_image": {
+    "breadcrumb": {
         "builder": true,
         "no_selection": true,
         "name": "Breadcrumb Image",
@@ -285,6 +285,18 @@
             "images": {
                 "image": {
                     "size": "1920x174"
+                }
+            }
+        }
+    },
+    "banned": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Banned Image",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "500x500"
                 }
             }
         }

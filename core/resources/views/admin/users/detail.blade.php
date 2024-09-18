@@ -5,125 +5,97 @@
         <div class="col-12">
             <div class="row gy-4">
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        style="6"
-                        link="{{ route('admin.report.transaction',$user->id) }}"
-                        title="Balance"
-                        icon="las la-money-bill-wave-alt"
-                        value="{{ showAmount($user->balance) }}"
-                        bg="indigo"
-                        type="2"
-                    />
+                    <x-widget style="6" link="{{ route('admin.report.transaction', $user->id) }}" title="Balance"
+                        icon="las la-money-bill-wave-alt" value="{{ showAmount($user->balance) }}" bg="indigo"
+                        type="2" />
                 </div>
 
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        style="6"
-                        link="{{ route('admin.deposit.list',$user->id) }}"
-                        title="Deposits"
-                        icon="las la-wallet"
-                        value="{{ showAmount($totalDeposit) }}"
-                        bg="8"
-                        type="2"
-                    />
+                    <x-widget style="6" link="{{ route('admin.deposit.list', $user->id) }}" title="Deposits"
+                        icon="las la-wallet" value="{{ showAmount($totalDeposit) }}" bg="8" type="2" />
                 </div>
 
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        style="6"
-                        link="{{ route('admin.withdraw.data.all',$user->id) }}"
-                        title="Withdrawals"
-                        icon="la la-bank"
-                        value="{{ showAmount($totalWithdrawals) }}"
-                        bg="6"
-                        type="2"
-                    />
+                    <x-widget style="6" link="{{ route('admin.withdraw.data.all', $user->id) }}" title="Withdrawals"
+                        icon="la la-bank" value="{{ showAmount($totalWithdrawals) }}" bg="6" type="2" />
                 </div>
 
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        style="6"
-                        link="{{ route('admin.report.transaction',$user->id) }}"
-                        title="Transactions"
-                        icon="las la-exchange-alt"
-                        value="{{ $totalTransaction }}"
-                        bg="17"
-                        type="2"
-                    />
+                    <x-widget style="6" link="{{ route('admin.report.transaction', $user->id) }}" title="Transactions"
+                        icon="las la-exchange-alt" value="{{ $totalTransaction }}" bg="17" type="2" />
                 </div>
             </div>
             <div class="row gy-4 mt-2">
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        value="{{ showAmount(@$invest['total_invests']) }}" title="Total Investments" style="6"
-                        link="{{ route('admin.report.invest.history') }}" icon="las la-chart-bar" bg="primary"/>
+                    <x-widget value="{{ showAmount(@$invest['total_invests']) }}" title="Total Investments" style="6"
+                        link="{{ route('admin.report.invest.history') }}" icon="las la-chart-bar" bg="primary" />
                 </div><!-- dashboard-w1 end -->
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        value="{{ showAmount(@$invest['total_interests']) }}" title="Total Interests" style="6"
-                        link="{{ route('admin.report.transaction') }}?remark=profit" icon="las la-chart-pie" bg="1"/>
+                    <x-widget value="{{ showAmount(@$invest['total_interests']) }}" title="Total Interests" style="6"
+                        link="{{ route('admin.report.transaction') }}?remark=profit" icon="las la-chart-pie"
+                        bg="1" />
                 </div><!-- dashboard-w1 end -->
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        value="{{ showAmount(@$invest['running_invests']) }}" title="Running Investments" style="6"
+                    <x-widget value="{{ showAmount(@$invest['running_invests']) }}" title="Running Investments"
+                        style="6"
                         link="{{ route('admin.report.invest.history') }}?search={{ $user->username }}&status={{ Status::INVEST_RUNNING }}"
-                        icon="las la-chart-area" bg="12"/>
+                        icon="las la-chart-area" bg="12" />
                 </div><!-- dashboard-w1 end -->
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                        value="{{ showAmount(@$invest['closed_invests']) }}" title="Closed Investments" style="6"
+                    <x-widget value="{{ showAmount(@$invest['closed_invests']) }}" title="Closed Investments"
+                        style="6"
                         link="{{ route('admin.report.invest.history') }}?search={{ $user->username }}&status={{ Status::INVEST_CLOSED }}"
-                        icon="las la-chart-line" bg="9"/>
+                        icon="las la-chart-line" bg="9" />
                 </div><!-- dashboard-w1 end -->
             </div><!-- row end-->
 
             <div class="d-flex flex-wrap gap-3 mt-4">
                 <div class="flex-fill">
                     <button data-bs-toggle="modal" data-bs-target="#addSubModal"
-                            class="btn btn--success btn--shadow w-100 btn-lg bal-btn" data-act="add">
+                        class="btn btn--success btn--shadow w-100 btn-lg bal-btn" data-act="add">
                         <i class="las la-plus-circle"></i> @lang('Balance')
                     </button>
                 </div>
 
                 <div class="flex-fill">
                     <button data-bs-toggle="modal" data-bs-target="#addSubModal"
-                            class="btn btn--danger btn--shadow w-100 btn-lg bal-btn" data-act="sub">
+                        class="btn btn--danger btn--shadow w-100 btn-lg bal-btn" data-act="sub">
                         <i class="las la-minus-circle"></i> @lang('Balance')
                     </button>
                 </div>
 
                 <div class="flex-fill">
-                    <a href="{{route('admin.report.login.history')}}?search={{ $user->username }}"
-                       class="btn btn--primary btn--shadow w-100 btn-lg">
+                    <a href="{{ route('admin.report.login.history') }}?search={{ $user->username }}"
+                        class="btn btn--primary btn--shadow w-100 btn-lg">
                         <i class="las la-list-alt"></i>@lang('Logins')
                     </a>
                 </div>
 
                 <div class="flex-fill">
-                    <a href="{{ route('admin.users.notification.log',$user->id) }}"
-                       class="btn btn--secondary btn--shadow w-100 btn-lg">
+                    <a href="{{ route('admin.users.notification.log', $user->id) }}"
+                        class="btn btn--secondary btn--shadow w-100 btn-lg">
                         <i class="las la-bell"></i>@lang('Notifications')
                     </a>
                 </div>
 
-                @if($user->kyc_data)
+                @if ($user->kyc_data)
                     <div class="flex-fill">
                         <a href="{{ route('admin.users.kyc.details', $user->id) }}" target="_blank"
-                           class="btn btn--dark btn--shadow w-100 btn-lg">
+                            class="btn btn--dark btn--shadow w-100 btn-lg">
                             <i class="las la-user-check"></i>@lang('KYC Data')
                         </a>
                     </div>
                 @endif
 
                 <div class="flex-fill">
-                    @if($user->status == Status::USER_ACTIVE)
+                    @if ($user->status == Status::USER_ACTIVE)
                         <button type="button" class="btn btn--warning btn--shadow w-100 btn-lg userStatus"
-                                data-bs-toggle="modal" data-bs-target="#userStatusModal">
+                            data-bs-toggle="modal" data-bs-target="#userStatusModal">
                             <i class="las la-ban"></i>@lang('Ban User')
                         </button>
                     @else
                         <button type="button" class="btn btn--success btn--shadow w-100 btn-lg userStatus"
-                                data-bs-toggle="modal" data-bs-target="#userStatusModal">
+                            data-bs-toggle="modal" data-bs-target="#userStatusModal">
                             <i class="las la-undo"></i>@lang('Unban User')
                         </button>
                     @endif
@@ -133,11 +105,11 @@
 
             <div class="card mt-30">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">@lang('Information of') {{$user->fullname}}</h5>
+                    <h5 class="card-title mb-0">@lang('Information of') {{ $user->fullname }}</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.users.update',[$user->id])}}" method="POST"
-                          enctype="multipart/form-data">
+                    <form action="{{ route('admin.users.update', [$user->id]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
@@ -145,7 +117,7 @@
                                 <div class="form-group">
                                     <label>@lang('First Name')</label>
                                     <input class="form-control" type="text" name="firstname" required
-                                           value="{{$user->firstname}}">
+                                        value="{{ $user->firstname }}">
                                 </div>
                             </div>
 
@@ -153,15 +125,15 @@
                                 <div class="form-group">
                                     <label class="form-control-label">@lang('Last Name')</label>
                                     <input class="form-control" type="text" name="lastname" required
-                                           value="{{$user->lastname}}">
+                                        value="{{ $user->lastname }}">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>@lang('Email')</label>
-                                    <input class="form-control" type="email" name="email" value="{{$user->email}}"
-                                           required>
+                                    <input class="form-control" type="email" name="email"
+                                        value="{{ $user->email }}" required>
                                 </div>
                             </div>
 
@@ -171,7 +143,7 @@
                                     <div class="input-group ">
                                         <span class="input-group-text mobile-code">+{{ $user->dial_code }}</span>
                                         <input type="number" name="mobile" value="{{ $user->mobile }}" id="mobile"
-                                               class="form-control checkUser" required>
+                                            class="form-control checkUser" required>
                                     </div>
                                 </div>
                             </div>
@@ -179,28 +151,32 @@
                             <div class="col-md-12">
                                 <div class="form-group ">
                                     <label>@lang('Address')</label>
-                                    <input class="form-control" type="text" name="address" value="{{@$user->address}}">
+                                    <input class="form-control" type="text" name="address"
+                                        value="{{ @$user->address }}">
                                 </div>
                             </div>
 
                             <div class="col-xl-3 col-md-6">
                                 <div class="form-group">
                                     <label>@lang('City')</label>
-                                    <input class="form-control" type="text" name="city" value="{{@$user->city}}">
+                                    <input class="form-control" type="text" name="city"
+                                        value="{{ @$user->city }}">
                                 </div>
                             </div>
 
                             <div class="col-xl-3 col-md-6">
                                 <div class="form-group ">
                                     <label>@lang('State')</label>
-                                    <input class="form-control" type="text" name="state" value="{{@$user->state}}">
+                                    <input class="form-control" type="text" name="state"
+                                        value="{{ @$user->state }}">
                                 </div>
                             </div>
 
                             <div class="col-xl-3 col-md-6">
                                 <div class="form-group ">
                                     <label>@lang('Zip/Postal')</label>
-                                    <input class="form-control" type="text" name="zip" value="{{@$user->zip}}">
+                                    <input class="form-control" type="text" name="zip"
+                                        value="{{ @$user->zip }}">
                                 </div>
                             </div>
 
@@ -208,9 +184,10 @@
                                 <div class="form-group ">
                                     <label>@lang('Country') <span class="text--danger">*</span></label>
                                     <select name="country" class="form-control select2">
-                                        @foreach($countries as $key => $country)
+                                        @foreach ($countries as $key => $country)
                                             <option data-mobile_code="{{ $country->dial_code }}"
-                                                    value="{{ $key }}" @selected($user->country_code == $key)>{{ __($country->country) }}</option>
+                                                value="{{ $key }}" @selected($user->country_code == $key)>
+                                                {{ __($country->country) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -221,10 +198,9 @@
                                 <div class="form-group">
                                     <label>@lang('Email Verification')</label>
                                     <input type="checkbox" data-width="100%" data-onstyle="-success"
-                                           data-offstyle="-danger"
-                                           data-bs-toggle="toggle" data-on="@lang('Verified')"
-                                           data-off="@lang('Unverified')" name="ev"
-                                           @if($user->ev) checked @endif>
+                                        data-offstyle="-danger" data-bs-toggle="toggle" data-on="@lang('Verified')"
+                                        data-off="@lang('Unverified')" name="ev"
+                                        @if ($user->ev) checked @endif>
                                 </div>
                             </div>
 
@@ -232,27 +208,27 @@
                                 <div class="form-group">
                                     <label>@lang('Mobile Verification')</label>
                                     <input type="checkbox" data-width="100%" data-onstyle="-success"
-                                           data-offstyle="-danger"
-                                           data-bs-toggle="toggle" data-on="@lang('Verified')"
-                                           data-off="@lang('Unverified')" name="sv"
-                                           @if($user->sv) checked @endif>
+                                        data-offstyle="-danger" data-bs-toggle="toggle" data-on="@lang('Verified')"
+                                        data-off="@lang('Unverified')" name="sv"
+                                        @if ($user->sv) checked @endif>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-12">
                                 <div class="form-group">
                                     <label>@lang('2FA Verification') </label>
                                     <input type="checkbox" data-width="100%" data-height="50" data-onstyle="-success"
-                                           data-offstyle="-danger" data-bs-toggle="toggle" data-on="@lang('Enable')"
-                                           data-off="@lang('Disable')" name="ts" @if($user->ts) checked @endif>
+                                        data-offstyle="-danger" data-bs-toggle="toggle" data-on="@lang('Enable')"
+                                        data-off="@lang('Disable')" name="ts"
+                                        @if ($user->ts) checked @endif>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-12">
                                 <div class="form-group">
                                     <label>@lang('KYC') </label>
                                     <input type="checkbox" data-width="100%" data-height="50" data-onstyle="-success"
-                                           data-offstyle="-danger" data-bs-toggle="toggle" data-on="@lang('Verified')"
-                                           data-off="@lang('Unverified')" name="kv"
-                                           @if($user->kv == Status::KYC_VERIFIED) checked @endif>
+                                        data-offstyle="-danger" data-bs-toggle="toggle" data-on="@lang('Verified')"
+                                        data-off="@lang('Unverified')" name="kv"
+                                        @if ($user->kv == Status::KYC_VERIFIED) checked @endif>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -278,8 +254,8 @@
                         <i class="las la-times"></i>
                     </button>
                 </div>
-                <form action="{{route('admin.users.add.sub.balance',$user->id)}}"
-                      class="balanceAddSub disableSubmission" method="POST">
+                <form action="{{ route('admin.users.add.sub.balance', $user->id) }}"
+                    class="balanceAddSub disableSubmission" method="POST">
                     @csrf
                     <input type="hidden" name="act">
                     <div class="modal-body">
@@ -287,14 +263,13 @@
                             <label>@lang('Amount')</label>
                             <div class="input-group">
                                 <input type="number" step="any" name="amount" class="form-control"
-                                       placeholder="@lang('Please provide positive amount')" required>
+                                    placeholder="@lang('Please provide positive amount')" required>
                                 <div class="input-group-text">{{ __(gs('cur_text')) }}</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>@lang('Remark')</label>
-                            <textarea class="form-control" placeholder="@lang('Remark')" name="remark" rows="4"
-                                      required></textarea>
+                            <textarea class="form-control" placeholder="@lang('Remark')" name="remark" rows="4" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -311,37 +286,54 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        @if($user->status == Status::USER_ACTIVE)
-                            @lang('Ban User')
+                        @if ($user->status == Status::USER_ACTIVE)
+                            <i class="las la-user-slash text-danger"></i> @lang('Ban User')
                         @else
-                            @lang('Unban User')
+                            <i class="las la-user-check text-success"></i> @lang('Unban User')
                         @endif
                     </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="las la-times"></i>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{route('admin.users.status',$user->id)}}" method="POST">
+                <form action="{{ route('admin.users.status', $user->id) }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        @if($user->status == Status::USER_ACTIVE)
-                            <h6 class="mb-2">@lang('If you ban this user he/she won\'t able to access his/her dashboard.')</h6>
+                        @if ($user->status == Status::USER_ACTIVE)
+                            <div class="alert alert-warning p-3" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="las la-exclamation-triangle me-2 fs-4"></i>
+                                    <small>@lang('If you ban this user, they will not be able to access their dashboard.')</small>
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <label>@lang('Reason')</label>
-                                <textarea class="form-control" name="reason" rows="4" required></textarea>
+                                <label for="ban-reason" class="form-label">@lang('Reason for Ban')</label>
+                                <textarea class="form-control" id="ban-reason" name="reason" rows="4" required></textarea>
                             </div>
                         @else
-                            <p><span>@lang('Ban reason was'):</span></p>
-                            <p>{{ $user->ban_reason }}</p>
-                            <h4 class="text-center mt-3">@lang('Are you sure to unban this user?')</h4>
+                            <div class="alert alert-warning p-3" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="las la-exclamation-triangle me-2 fs-4"></i>
+                                    <small>@lang('Are you sure you want to unban this user? They will regain access to their dashboard.')</small>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h6 class="text-danger mb-3">@lang('Previous Ban Reason')</h6>
+                                <div class="bg-light p-3 rounded">
+                                    <p class="text-muted mb-0">{{ $user->ban_reason ?: __('No reason provided') }}</p>
+                                </div>
+                            </div>
                         @endif
                     </div>
                     <div class="modal-footer">
-                        @if($user->status == Status::USER_ACTIVE)
-                            <button type="submit" class="btn btn--primary h-45 w-100">@lang('Submit')</button>
+                        @if ($user->status == Status::USER_ACTIVE)
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="las la-ban"></i> @lang('Confirm Ban')
+                            </button>
                         @else
-                            <button type="button" class="btn btn--dark" data-bs-dismiss="modal">@lang('No')</button>
-                            <button type="submit" class="btn btn--primary">@lang('Yes')</button>
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">@lang('Cancel')</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="las la-user-check"></i> @lang('Confirm Unban')
+                            </button>
                         @endif
                     </div>
                 </form>
@@ -351,17 +343,17 @@
 @endsection
 
 @push('breadcrumb-plugins')
-    <a href="{{route('admin.users.login',$user->id)}}" target="_blank" class="btn btn-sm btn-outline--primary"><i
+    <a href="{{ route('admin.users.login', $user->id) }}" target="_blank" class="btn btn-sm btn-outline--primary"><i
             class="las la-sign-in-alt"></i>@lang('Login as User')</a>
 @endpush
 
 @push('script')
     <script>
-        (function ($) {
+        (function($) {
             "use strict"
 
 
-            $('.bal-btn').on('click', function () {
+            $('.bal-btn').on('click', function() {
 
                 $('.balanceAddSub')[0].reset();
 
@@ -375,7 +367,7 @@
             });
 
             let mobileElement = $('.mobile-code');
-            $('select[name=country]').on('change', function () {
+            $('select[name=country]').on('change', function() {
                 mobileElement.text(`+${$('select[name=country] :selected').data('mobile_code')}`);
             });
 

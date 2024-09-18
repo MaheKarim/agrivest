@@ -18,8 +18,7 @@ class ManageProjectController extends Controller
     public function index()
     {
         $pageTitle = 'All Projects';
-        $projects = Project::orderByDesc('id')->searchable('title')->paginate(getPaginate());
-
+        $projects = Project::orderByDesc('id')->searchable(['title'])->paginate(getPaginate());
         return view('admin.project.index', compact('pageTitle', 'projects'));
     }
 
@@ -28,7 +27,6 @@ class ManageProjectController extends Controller
         $pageTitle = 'New Project';
         $times = Time::active()->get();
         $categories = Category::active()->get();
-
         return view('admin.project.create', compact('pageTitle', 'times', 'categories'));
     }
 
@@ -53,27 +51,26 @@ class ManageProjectController extends Controller
     public function store(Request $request, $id = 0)
     {
         $isRequired = $id ? 'nullable' : 'required';
-
         $request->validate([
-            'title' => 'required|string|max:191',
-            'goal' => 'required|numeric|min:1',
-            'description' => 'required|string',
-            'share_amount' => 'required|numeric|min:1',
-            'share_count' => 'required|numeric|min:1',
-            'roi_amount' => 'required|numeric|min:1',
-            'roi_percentage' => 'required|numeric|min:1',
-            'map_url' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'maturity_time' => 'required|numeric|min:1',
-            'image' => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'gallery' => "$isRequired|array|min:0|max:4",
-            'gallery.*' => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'category_id' => "$isRequired|exists:categories,id",
-            'time_id' => "$isRequired|exists:times,id",
-            'return_type' => 'required|in:1,2',
+            'title'           => 'required|string|max:191',
+            'goal'            => 'required|numeric|min:1',
+            'description'     => 'required|string',
+            'share_amount'    => 'required|numeric|min:1',
+            'share_count'     => 'required|numeric|min:1',
+            'roi_amount'      => 'required|numeric|min:1',
+            'roi_percentage'  => 'required|numeric|min:1',
+            'map_url'         => 'required|string',
+            'start_date'      => 'required|date',
+            'end_date'        => 'required|date',
+            'maturity_time'   => 'required|numeric|min:1',
+            'image'           => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'gallery'         => "$isRequired|array|min:0|max:4",
+            'gallery.*'       => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'category_id'     => "$isRequired|exists:categories,id",
+            'time_id'         => "$isRequired|exists:times,id",
+            'return_type'     => 'required|in:' . Status::REPEAT . ',' . Status::LIFETIME,
             'return_interval' => 'required_if:return_type,2|numeric|min:1',
-            'repeat_times' => 'required_if:return_type,2|numeric|min:1',
+            'repeat_times'    => 'required_if:return_type,2|numeric|min:1',
         ]);
 
         if ($id) {
@@ -88,10 +85,12 @@ class ManageProjectController extends Controller
 
                 $project->gallery = removeElement($project->gallery, $imageToRemove);
             }
+            $redirect = back();
         } else {
             $project = new Project();
             $project->available_share = $request->share_count;
             $notify[] = ['success', 'Project created successfully'];
+            $redirect = redirect()->route('admin.project.index');
         }
 
         if ($request->hasFile('image')) {
@@ -117,43 +116,47 @@ class ManageProjectController extends Controller
             }
         }
 
-        $investEndDate = Carbon::parse($request->end_date);
+        $investEndDate  = Carbon::parse($request->end_date);
         $maturityMonths = (int)$request->maturity_time;
-        $matureDate = $investEndDate->addMonths($maturityMonths);
+        $matureDate     = $investEndDate->addMonths($maturityMonths);
 
-        $project->title = $request->title;
-        $project->slug = $request->slug;
-        $project->goal = $request->goal;
-        $project->share_count = $request->share_count;
-        $project->share_amount = $request->share_amount;
-        $project->roi_percentage = $request->roi_percentage;
-        $project->roi_amount = $request->roi_amount;
-        $project->start_date = $request->start_date;
-        $project->end_date = $request->end_date;
-        $project->maturity_time = $request->maturity_time;
-        $project->maturity_date = $matureDate;
-        $project->time_id = $request->time_id;
+        $project->title           = $request->title;
+        $project->slug            = $request->slug;
+        $project->goal            = $request->goal;
+        $project->share_count     = $request->share_count;
+        $project->share_amount    = $request->share_amount;
+        $project->roi_percentage  = $request->roi_percentage;
+        $project->roi_amount      = $request->roi_amount;
+        $project->start_date      = $request->start_date;
+        $project->end_date        = $request->end_date;
+        $project->maturity_time   = $request->maturity_time;
+        $project->maturity_date   = $matureDate;
+        $project->time_id         = $request->time_id;
         $project->return_interval = $request->return_interval;
-        $project->repeat_times = $request->repeat_times;
-        $project->capital_back = $request->capital_back ?? Status::NO;
-        $project->return_type = $request->return_type == Status::REPEAT ? Status::REPEAT : Status::LIFETIME;
-        $project->category_id = $request->category_id;
-        $project->map_url = $request->map_url;
-        $project->description = $request->description;
-        $project->gallery = $gallery;
-        $project->featured = $request->featured;
+        $project->repeat_times    = $request->repeat_times;
+        $project->capital_back    = @$request->capital_back ? Status::YES : Status::NO;
+        $project->return_type     = @$request->return_type == Status::REPEAT ? Status::REPEAT : Status::LIFETIME;
+        $project->category_id     = $request->category_id;
+        $project->map_url         = $request->map_url;
+        $project->description     = $request->description;
+        $project->gallery         = $gallery;
+        $project->featured        = $request->featured ? Status::YES : Status::NO;
         $project->save();
 
-        return redirect()->route('admin.project.index')->withNotify($notify);
+        return $redirect->withNotify($notify);
     }
 
-    public function checkSlug($id = null)
+    public function checkSlug()
     {
+        $id   = request()->id ?? 0;
         $page = Project::where('slug', request()->slug);
+
         if ($id) {
             $page = $page->where('id', '!=', $id);
         }
+
         $exist = $page->exists();
+
         return response()->json([
             'exists' => $exist
         ]);

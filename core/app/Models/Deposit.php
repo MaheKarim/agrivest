@@ -48,25 +48,25 @@ class Deposit extends Model
 
     // scope
 
-    public function statusBadge()
-    : Attribute
+    public function statusBadge(): Attribute
     {
         return new Attribute(function () {
             $html = '';
             if ($this->status == Status::PAYMENT_PENDING) {
-                $html = '<span class="badge badge--warning">' . trans('Pending') . '</span>';
+                $html = '<span class="badge badge--status badge--warning">' . trans('Pending') . '</span>';
             } elseif ($this->status == Status::PAYMENT_SUCCESS && $this->method_code >= 1000 && $this->method_code <= 5000) {
-                $html = '<span><span class="badge badge--success">' . trans('Approved') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
+                $html = '<span><span class="badge badge--status badge--success">' . trans('Approved') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
             } elseif ($this->status == Status::PAYMENT_SUCCESS && ($this->method_code < 1000 || $this->method_code >= 5000)) {
-                $html = '<span class="badge badge--success">' . trans('Succeed') . '</span>';
+                $html = '<span class="badge badge--status badge--success">' . trans('Succeed') . '</span>';
             } elseif ($this->status == Status::PAYMENT_REJECT) {
-                $html = '<span><span class="badge badge--danger">' . trans('Rejected') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
+                $html = '<span><span class="badge badge--status badge--danger">' . trans('Rejected') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
             } else {
-                $html = '<span class="badge badge--dark">' . trans('Initiated') . '</span>';
+                $html = '<span class="badge badge--status badge--dark">' . trans('Initiated') . '</span>';
             }
             return $html;
         });
     }
+
 
     public function baseCurrency()
     {

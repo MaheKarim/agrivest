@@ -1,5 +1,6 @@
 <div class="input-group w-auto flex-fill">
-    <input name="date" type="search" class="datepicker-here form-control bg--white pe-2 date-range" placeholder="@lang('Start Date - End Date')" autocomplete="off" value="{{ request()->date }}">
+    <input name="date" type="search" class="datepicker-here form-control bg--white pe-2 date-range"
+        placeholder="@lang('Start Date - End Date')" autocomplete="off" value="{{ request()->date }}">
     <button class="btn btn--primary input-group-text"><i class="la la-search"></i></button>
 </div>
 
@@ -13,11 +14,12 @@
 @endpush
 @push('script')
     <script>
-        (function($){
+        (function($) {
             "use strict"
 
             const datePicker = $('.date-range').daterangepicker({
                 autoUpdateInput: false,
+                applyButtonClasses: 'btn btn--primary',
                 locale: {
                     cancelLabel: 'Clear'
                 },
@@ -29,7 +31,9 @@
                     'Last 15 Days': [moment().subtract(14, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(30, 'days'), moment()],
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month')
+                        .endOf('month')
+                    ],
                     'Last 6 Months': [moment().subtract(6, 'months').startOf('month'), moment().endOf('month')],
                     'This Year': [moment().startOf('year'), moment().endOf('year')],
                 },
@@ -40,7 +44,8 @@
             }
 
 
-            $('.date-range').on('apply.daterangepicker', (event, picker) => changeDatePickerText(event, picker.startDate, picker.endDate));
+            $('.date-range').on('apply.daterangepicker', (event, picker) => changeDatePickerText(event, picker
+                .startDate, picker.endDate));
 
 
             if ($('.date-range').val()) {

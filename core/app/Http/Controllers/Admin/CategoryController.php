@@ -12,7 +12,6 @@ class CategoryController extends Controller
     {
         $pageTitle = 'Manage Category';
         $categories = Category::searchable(['name'])->orderBy('name')->paginate(getPaginate());
-
         return view('admin.category.index', compact('pageTitle', 'categories'));
     }
 

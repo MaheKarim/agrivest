@@ -28,18 +28,19 @@ class Withdrawal extends Model
 
     public function statusBadge(): Attribute
     {
-        return new Attribute(function(){
+        return new Attribute(function () {
             $html = '';
-            if($this->status == Status::PAYMENT_PENDING){
-                $html = '<span class="badge badge--warning">'.trans('Pending').'</span>';
-            }elseif($this->status == Status::PAYMENT_SUCCESS){
-                $html = '<span><span class="badge badge--success">'.trans('Approved').'</span><br>'.diffForHumans($this->updated_at).'</span>';
-            }elseif($this->status == Status::PAYMENT_REJECT){
-                $html = '<span><span class="badge badge--danger">'.trans('Rejected').'</span><br>'.diffForHumans($this->updated_at).'</span>';
+            if ($this->status == Status::PAYMENT_PENDING) {
+                $html = '<span class="badge badge--status badge--warning">' . trans('Pending') . '</span>';
+            } elseif ($this->status == Status::PAYMENT_SUCCESS) {
+                $html = '<span><span class="badge badge--status badge--success">' . trans('Approved') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
+            } elseif ($this->status == Status::PAYMENT_REJECT) {
+                $html = '<span><span class="badge badge--status badge--danger">' . trans('Rejected') . '</span><br>' . diffForHumans($this->updated_at) . '</span>';
             }
             return $html;
         });
     }
+
 
     public function scopePending($query)
     {

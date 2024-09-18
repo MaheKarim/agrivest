@@ -202,6 +202,7 @@
             "social icons",
             "testimonial section",
             "up coming feature section",
+            "banned image",
             "why we are section"
         ],
         "title": "Manage Frontend",
@@ -379,24 +380,14 @@
         "route_name": "admin.setting.custom.css"
     },
     "sitemap": {
-        "keyword": [
-            "Site map",
-            "sitemap",
-            "xml",
-            "sitemap.xml"
-        ],
+        "keyword": ["Site map", "sitemap", "xml", "sitemap.xml"],
         "title": "Sitemap XML",
         "subtitle": "Insert the sitemap XML here to enhance SEO performance.",
         "icon": "las la-sitemap",
         "route_name": "admin.setting.sitemap"
     },
     "robots": {
-        "keyword": [
-            "Robots",
-            "txt",
-            "robots.txt",
-            "robot.txt"
-        ],
+        "keyword": ["Robots", "txt", "robots.txt", "robot.txt"],
         "title": "Robots txt",
         "subtitle": "Insert the robots.txt content here to enhance bot web crawlers and instruct them on how to interact with certain areas of the website.",
         "icon": "las la-robot",

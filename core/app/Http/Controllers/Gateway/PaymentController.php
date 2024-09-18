@@ -23,50 +23,57 @@ class PaymentController extends Controller
             $deposit->save();
 
             $user = User::find($deposit->user_id);
-            if ($deposit->invest_id == 0) {
-                $user->balance += $deposit->amount;
-                $user->save();
-            }
 
+            $isDeposit  = $deposit->invest_id == 0;
+            $isInvest   = $deposit->invest_id != 0;
             $methodName = $deposit->methodName();
 
-            $transaction = new Transaction();
-            $transaction->user_id = $deposit->user_id;
-            $transaction->invest_id = $deposit->invest_id ?? 0;
-            $transaction->amount = $deposit->amount;
-            $transaction->post_balance = $user->balance;
-            $transaction->charge = $deposit->charge;
-            $transaction->trx_type = '+';
-            if ($deposit->invest_id == 0) {
-                $transaction->details = 'Deposit Via ' . $methodName;
-                $transaction->remark = 'deposit';
-            } else {
-                $transaction->details = 'Payment Via ' . $methodName;
-                $transaction->remark = 'payment';
+            //if its a deposit
+            if ($isDeposit) {
+                $user->balance += $deposit->amount;
+                $user->save();
+
+
+                $transaction               = new Transaction();
+                $transaction->user_id      = $deposit->user_id;
+                $transaction->invest_id    = $deposit->invest_id ?? 0;
+                $transaction->amount       = $deposit->amount;
+                $transaction->post_balance = $user->balance;
+                $transaction->charge       = $deposit->charge;
+                $transaction->trx_type     = '+';
+                if ($deposit->invest_id == 0) {
+                    $transaction->details = 'Deposit Via ' . $methodName;
+                    $transaction->remark  = 'deposit';
+                } else {
+                    $transaction->details = 'Payment Via ' . $methodName;
+                    $transaction->remark  = 'payment';
+                }
+                $transaction->trx = $deposit->trx;
+                $transaction->save();
+
+                if (!$isManual) {
+                    $adminNotification = new AdminNotification();
+                    $adminNotification->user_id = $user->id;
+                    $adminNotification->title = 'Deposit successful via ' . $methodName;
+                    $adminNotification->click_url = urlPath('admin.deposit.successful');
+                    $adminNotification->save();
+                }
+
+                notify($user, $isManual ? 'DEPOSIT_APPROVE' : 'DEPOSIT_COMPLETE', [
+                    'method_name' => $methodName,
+                    'method_currency' => $deposit->method_currency,
+                    'method_amount' => showAmount($deposit->final_amount, currencyFormat: false),
+                    'amount' => showAmount($deposit->amount, currencyFormat: false),
+                    'charge' => showAmount($deposit->charge, currencyFormat: false),
+                    'rate' => showAmount($deposit->rate, currencyFormat: false),
+                    'trx' => $deposit->trx,
+                    'post_balance' => showAmount($user->balance)
+                ]);
             }
-            $transaction->trx = $deposit->trx;
-            $transaction->save();
 
-            if (!$isManual) {
-                $adminNotification = new AdminNotification();
-                $adminNotification->user_id = $user->id;
-                $adminNotification->title = 'Deposit successful via ' . $methodName;
-                $adminNotification->click_url = urlPath('admin.deposit.successful');
-                $adminNotification->save();
-            }
 
-            notify($user, $isManual ? 'DEPOSIT_APPROVE' : 'DEPOSIT_COMPLETE', [
-                'method_name' => $methodName,
-                'method_currency' => $deposit->method_currency,
-                'method_amount' => showAmount($deposit->final_amount, currencyFormat: false),
-                'amount' => showAmount($deposit->amount, currencyFormat: false),
-                'charge' => showAmount($deposit->charge, currencyFormat: false),
-                'rate' => showAmount($deposit->rate, currencyFormat: false),
-                'trx' => $deposit->trx,
-                'post_balance' => showAmount($user->balance)
-            ]);
-
-            if ($deposit->invest_id != 0) {
+            //if its a investment
+            if ($isInvest) {
                 $invest = $deposit->invest;
                 self::confirmOrder($invest, $deposit, $user);
             }
@@ -84,6 +91,8 @@ class PaymentController extends Controller
         $project = $invest->project;
         $project->available_share -= $invest->quantity;
         $project->save();
+
+        //add next time
 
         $methodName = $deposit ? $deposit->methodName() : 'Wallet';
 
@@ -161,6 +170,8 @@ class PaymentController extends Controller
             $gate = GatewayCurrency::whereHas('method', function ($gate) {
                 $gate->where('status', Status::ENABLE);
             })->where('method_code', $request->gateway)->where('currency', $request->currency)->first();
+
+
             if ($gate->min_amount > $invest->total_price || $gate->max_amount < $invest->total_price) {
                 $notify[] = ['error', 'Please follow deposit limit'];
                 return back()->withNotify($notify);
@@ -300,5 +311,4 @@ class PaymentController extends Controller
         $notify[] = ['success', 'You have deposit request has been taken'];
         return to_route('user.deposit.history')->withNotify($notify);
     }
-
 }

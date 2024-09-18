@@ -25,6 +25,7 @@ class ProjectController extends Controller
         session()->put('project', [
             'id' => $project->id,
         ]);
+
         $seoContents = $project->seo_content;
         $path = 'assets/images/frontend/project/seo';
         $seoImage = @$seoContents->image ? getImage($path . '/' . @$seoContents->image, getFileSize('seo')) : null;
@@ -54,40 +55,36 @@ class ProjectController extends Controller
 
     public function filter(Request $request)
     {
-        $pageTitle = 'Projects';
+        $pageTitle  = 'Projects';
         $categories = Category::active()->get();
-        $projects = Project::active()->beforeEndDate()->available();
+        $projects   = Project::active()->searchable('title')->beforeEndDate()->available();
 
-        $search = $request->has('search') ? $request->search : '';
-        if (!empty($search)) {
-            $projects->where('title', 'like', '%' . $search . '%');
-        }
-
-        // Category filter
         if ($request->has('category') && !empty($request->category)) {
-            if (is_array($request->category)) {
-                $projects->whereIn('category_id', $request->category);
-            } else {
-                $projects->where('category_id', $request->category);
-            }
+            $projects = $this->filterItem($request, $projects, 'category');
         }
 
-        // Return Type
         if ($request->has('return_type') && !empty($request->return_type)) {
-            if (is_array($request->return_type)) {
-                $projects->whereIn('return_type', $request->return_type);
-            } else {
-                $projects->where('return_type', $request->return_type);
-            }
+            $projects = $this->filterItem($request, $projects, 'return_type');
         }
-
 
         $projects = $projects->latest()->paginate(getPaginate());
 
         return response()->json([
-            'view' => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
+            'view'          => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
             'totalProjects' => $projects->total(),
         ]);
+    }
 
+    protected function filterItem($request, $projects, $type)
+    {
+        $col = $type == 'category' ? ($type . '_id') : $type;
+
+        if (is_array($request->$type)) {
+            $projects->whereIn($col, $request->$type);
+        } else {
+            $projects->where($col, $request->$type);
+        }
+
+        return $projects;
     }
 }
