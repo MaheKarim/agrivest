@@ -67,9 +67,11 @@
             </div>
         </div>
 
-        <div class="mt-70 text-center">
-            <a href="{{ @$ourOfferContent->data_values->button_url }}"
-               class="btn btn--lg btn--outline">{{ __(@$ourOfferContent->data_values->button_name) }}</a>
-        </div>
+        @if (\App\Models\Project::active()->featured()->available()->beforeEndDate()->count() >4)
+            <div class="mt-70 text-center">
+                <a href="{{ @$ourOfferContent->data_values->button_url }}"
+                   class="btn btn--lg btn--outline">{{ __(@$ourOfferContent->data_values->button_name) }}</a>
+            </div>
+        @endif
     </div>
 </section>

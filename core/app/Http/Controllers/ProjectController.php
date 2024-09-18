@@ -14,17 +14,13 @@ class ProjectController extends Controller
         $categories = Category::active()->get();
         $projects = Project::active()->available()->beforeEndDate()->latest()->paginate(getPaginate(18));
 
-        return view('Template::projects.all_projects', compact('pageTitle', 'projects', 'categories'));
+        return view('Template::projects.index', compact('pageTitle', 'projects', 'categories'));
     }
 
     public function projectDetails($slug)
     {
         $pageTitle = 'Project Details';
         $project = Project::where('slug', $slug)->firstOrFail();
-
-        session()->put('project', [
-            'id' => $project->id,
-        ]);
 
         $seoContents = $project->seo_content;
         $path = 'assets/images/frontend/project/seo';
@@ -35,8 +31,12 @@ class ProjectController extends Controller
 
     public function checkQuantity(Request $request)
     {
-        $projectId = $request->input('project_id');
-        $requestedQuantity = (int)$request->input('quantity');
+        $validatedData = $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+        $projectId = $validatedData['project_id'];
+        $requestedQuantity = (int)$validatedData['quantity'];
 
         $project = Project::findOrFail($projectId);
 
@@ -55,9 +55,9 @@ class ProjectController extends Controller
 
     public function filter(Request $request)
     {
-        $pageTitle  = 'Projects';
+        $pageTitle = 'Projects';
         $categories = Category::active()->get();
-        $projects   = Project::active()->searchable('title')->beforeEndDate()->available();
+        $projects = Project::active()->searchable(['title'])->beforeEndDate()->available();
 
         if ($request->has('category') && !empty($request->category)) {
             $projects = $this->filterItem($request, $projects, 'category');
@@ -70,7 +70,7 @@ class ProjectController extends Controller
         $projects = $projects->latest()->paginate(getPaginate());
 
         return response()->json([
-            'view'          => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
+            'view' => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
             'totalProjects' => $projects->total(),
         ]);
     }

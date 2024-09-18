@@ -160,6 +160,7 @@
             },
             "name": "text",
             "date": "text",
+            "url": "text",
             "modal": true
         }
     },

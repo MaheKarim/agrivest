@@ -12,7 +12,7 @@
                     <img src="{{ siteLogo() }}" alt="@lang('logo')">
                 </a>
                 <button class="navbar-toggler header-button order-3 order-lg-2" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-expanded="false">
+                        data-bs-target="#navbarSupportedContent" aria-expanded="false">
                     <span id="hiddenNav">
                         <i class="las la-bars"></i>
                     </span>
@@ -29,10 +29,10 @@
                                     @endphp
                                     <div class="dropdown dropdown--lang style-two d-lg-none">
                                         <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
+                                                aria-expanded="false">
                                             <img class="dropdown-flag"
-                                                src="{{ getImage(getFilePath('language') . '/' . $selectedLang->image, getFileSize('language')) }}"
-                                                alt="@lang('Language Flag')">
+                                                 src="{{ getImage(getFilePath('language') . '/' . $selectedLang->image, getFileSize('language')) }}"
+                                                 alt="@lang('Language Flag')">
                                             <span>{{ __($selectedLang->name) }}</span>
                                         </button>
 
@@ -40,8 +40,8 @@
                                             @foreach ($languages as $lang)
                                                 <a class="dropdown-item" href="{{ route('lang', $lang->code) }}">
                                                     <img class="dropdown-flag"
-                                                        src="{{ getImage(getFilePath('language') . '/' . $lang->image, getFileSize('language')) }}"
-                                                        alt="@lang('Language Flag')">
+                                                         src="{{ getImage(getFilePath('language') . '/' . $lang->image, getFileSize('language')) }}"
+                                                         alt="@lang('Language Flag')">
                                                     <span>
                                                         {{ __($lang->name) }}
                                                     </span>
@@ -56,33 +56,33 @@
                                         @lang('Dashboard')
                                     </a>
                                 @else
-                                    <a class="btn btn--white d-sm-none" href="{{ route('user.register') }}">
-                                        @lang('Register')
+                                    <a class="btn btn--white d-sm-none" href="{{ route('user.login') }}">
+                                        @lang('Login')
                                     </a>
                                 @endif
                             </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ menuActive('home') }}"
-                                href="{{ route('home') }}">@lang('Home')</a>
+                               href="{{ route('home') }}">@lang('Home')</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ menuActive('projects') }}"
-                                href="{{ route('projects') }}">@lang('Projects')</a>
+                               href="{{ route('projects') }}">@lang('Projects')</a>
                         </li>
                         @foreach ($pages as $page)
                             <li class="nav-item">
                                 <a class="nav-link {{ menuActive($page->slug) }}"
-                                    href="{{ $page->slug }}">{{ __($page->name) }}</a>
+                                   href="{{ $page->slug }}">{{ __($page->name) }}</a>
                             </li>
                         @endforeach
                         <li class="nav-item">
                             <a class="nav-link {{ menuActive('blogs') }}"
-                                href="{{ route('blogs') }}">@lang('Blogs')</a>
+                               href="{{ route('blogs') }}">@lang('Blogs')</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ menuActive('contact') }}"
-                                href="{{ route('contact') }}">@lang('Contact')</a>
+                               href="{{ route('contact') }}">@lang('Contact')</a>
                         </li>
                     </ul>
                 </div>
@@ -94,14 +94,16 @@
                         @endphp
                         <div class="dropdown dropdown--user">
                             <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                                <img
+                                    src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
                                     alt="@lang('User Image')">
                             </div>
 
                             <div class="dropdown-menu dropdown-menu-end ">
                                 <div class="user-info">
                                     <div class="user-info__thumb">
-                                        <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                                        <img
+                                            src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
                                             alt="@lang('User Image')">
                                     </div>
 
@@ -133,8 +135,8 @@
                             </div>
                         </div>
                     @else
-                        <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.register') }}">
-                            @lang('Register')
+                        <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.login') }}">
+                            @lang('Login')
                         </a>
                     @endif
                 </div>

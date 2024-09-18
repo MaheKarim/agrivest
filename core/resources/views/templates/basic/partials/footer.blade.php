@@ -113,7 +113,8 @@
     <div class="footer-bottom">
         <div class="container">
             <p class="footer-bottom__text text-center">
-                @lang('Copyright') &copy; @php echo date('Y') @endphp @lang('All rights reserved.')
+                @lang('Copyright') <a href="{{ route('home') }}" class="text--base"> {{ config('app.name')}}</a>
+                &copy; @php echo date('Y') @endphp @lang('All rights reserved.')
             </p>
         </div>
     </div>

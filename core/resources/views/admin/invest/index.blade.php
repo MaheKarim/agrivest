@@ -101,9 +101,6 @@
 @endsection
 @push('breadcrumb-plugins')
     <x-search-form placeholder="Search here..."/>
-    <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn"
-            data-modal_title="@lang('Create New Time')" type="button">
-        <i class="las la-plus"></i>@lang('Add New')</button>
 @endpush
 
 @push('script')
