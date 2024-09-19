@@ -5,23 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/images/frontend/breadcrumb/66ebd313565dc1726731027.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/frontend/login_registration/66ebd78a10ff71726732170.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/templates/basic/images/svg/box.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/ProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/SiteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/invest/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/invest/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/blog_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/blog_details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/cookie_card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/cookie_card.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/frontend/breadcrumb/66e7f9dca89d81726478812.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/templates/basic/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Gateway/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Gateway/PaymentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/User/InvestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/User/InvestController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/partials/sidenav.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/partials/sidenav.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/setting/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/setting/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/blog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/blog.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/contact.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/frontend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/frontend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/header_responsive.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/header_responsive.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/svg_template.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/all_projects.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/invest_data.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/invest_data.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/sidebar_dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/sidebar_dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project_details.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/award.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/award.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/our_offer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/our_offer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/email.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/sms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/sms.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/twofactor.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/twofactor.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/user_data.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/user_data.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -378,35 +389,38 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyAccountsIdsRefresh&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyMigrateChatHistory-v2&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ToggleCodyToolWindowAfterMigration&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/agrivest&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.CodyAccountHistoryMigration": "true",
+    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
+    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
+    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
+    "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
+    "RunOnceActivity.CodyProjectSettingsMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/laragon/www/agrivest/assets/templates/basic/images/svg",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\agrivest\assets\templates\basic\images\svg" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\agrivest\core\resources\views\templates\basic\partials" />
     </key>
@@ -466,7 +480,8 @@
       <workItem from="1726323351820" duration="1762000" />
       <workItem from="1726641861592" duration="313000" />
       <workItem from="1726661206877" duration="303000" />
-      <workItem from="1726667039711" duration="3234000" />
+      <workItem from="1726667039711" duration="3428000" />
+      <workItem from="1726724839722" duration="12804000" />
     </task>
     <servers />
   </component>

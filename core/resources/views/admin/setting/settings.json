@@ -57,8 +57,7 @@
             "push notification control",
             "language control",
             "mobile verification",
-            "email verification",
-            "in app payment"
+            "email verification"
         ],
         "title": "System Configuration",
         "subtitle": "Control all of the basic modules of the system.",
@@ -203,7 +202,10 @@
             "testimonial section",
             "up coming feature section",
             "banned image",
-            "why we are section"
+            "why we are section",
+            "breadcrumb image",
+            "Login Registration Image",
+            "Login/Registration Background Image"
         ],
         "title": "Manage Frontend",
         "subtitle": "Control all of the frontend contents of the system.",
@@ -380,14 +382,24 @@
         "route_name": "admin.setting.custom.css"
     },
     "sitemap": {
-        "keyword": ["Site map", "sitemap", "xml", "sitemap.xml"],
+        "keyword": [
+            "Site map",
+            "sitemap",
+            "xml",
+            "sitemap.xml"
+        ],
         "title": "Sitemap XML",
         "subtitle": "Insert the sitemap XML here to enhance SEO performance.",
         "icon": "las la-sitemap",
         "route_name": "admin.setting.sitemap"
     },
     "robots": {
-        "keyword": ["Robots", "txt", "robots.txt", "robot.txt"],
+        "keyword": [
+            "Robots",
+            "txt",
+            "robots.txt",
+            "robot.txt"
+        ],
         "title": "Robots txt",
         "subtitle": "Insert the robots.txt content here to enhance bot web crawlers and instruct them on how to interact with certain areas of the website.",
         "icon": "las la-robot",

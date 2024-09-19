@@ -1,8 +1,6 @@
 @extends($activeTemplate . 'layouts.frontend')
 
 @section('content')
-    @include($activeTemplate . 'partials.breadcrumb')
-
     <section class="offer-details py-120  bg--white">
         <div class="container">
             <div class="offer-details-top">
@@ -151,7 +149,7 @@
                                                 </li>
                                                 <li class="amount-detail-item">
                                                     <span
-                                                        class="amount-detail-item__label">@lang('Total Earning')</span>
+                                                        class="amount-detail-item__label">@lang('Invest + Profit')</span>
                                                     <span class="amount-detail-item__value"
                                                           id="total-earning">{{ gs('cur_sym') }}{{ getAmount($project->share_amount + $project->roi_amount) }}</span>
                                                 </li>
@@ -213,7 +211,7 @@
                                                             <span
                                                                 class="detail-list-item__label">@lang('Return Timespan')</span>
                                                             <span
-                                                                class="detail-list-item__value">{{ __($project->return_timespan) }}
+                                                                class="detail-list-item__value">{{ __($project->repeat_times) }}
                                                                 @lang('Times /') {{ __($project->time->name) }}</span>
                                                         </li>
                                                         <li class="detail-list-item">
@@ -246,14 +244,21 @@
                 const $decrementBtn = $('.product-qty__decrement');
                 const $incrementBtn = $('.product-qty__increment');
                 const $quantityInput = $('.product-qty__value');
-                const $totalPrice = $('.quantity-total-price, #total-payable');
+                const $totalPrice = $('.quantity-total-price');
+                const $totalPayable = $('#total-payable');
                 const $totalEarning = $('#total-earning, #total-earning-last');
 
                 const projectId = "{{ $project->id }}";
                 const shareAmount = parseFloat("{{ $project->share_amount }}");
                 const roiAmount = parseFloat("{{ $project->roi_amount }}");
+                const availableShare = parseInt("{{ $project->available_share }}");
+                const currencySymbol = "{{ gs('cur_sym') }}";
 
                 function updateQuantity(newValue) {
+                    if (newValue > availableShare) {
+                        notify('error', '@lang("Cannot select more than available shares.")');
+                        newValue = availableShare;
+                    }
                     $quantityInput.val(newValue);
                     updateTotalPrice(newValue);
                     checkQuantity(newValue);
@@ -263,12 +268,13 @@
 
                 function updateTotalPrice(quantity) {
                     let totalPrice = shareAmount * quantity;
-                    $totalPrice.text(totalPrice.toFixed(2));
+                    $totalPrice.text(currencySymbol + totalPrice.toFixed(2));
+                    $totalPayable.text(currencySymbol + totalPrice.toFixed(2));
                 }
 
                 function updateTotalEarning(quantity) {
                     let totalEarning = (shareAmount + roiAmount) * quantity;
-                    $totalEarning.text(totalEarning.toFixed(2));
+                    $totalEarning.text(currencySymbol + totalEarning.toFixed(2));
                 }
 
                 function updateModalFields(quantity) {

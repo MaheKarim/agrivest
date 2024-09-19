@@ -127,7 +127,7 @@
                                         <i class="fas fa-user-circle"></i>
                                         <span>@lang('My Profile')</span>
                                     </a>
-                                    <a class="dropdown-item logout" href="{{ route('user.logout') }}">
+                                    <a class="dropdown-item" href="{{ route('user.logout') }}">
                                         <i class="fas fa-sign-out"></i>
                                         <span>@lang('Logout')</span>
                                     </a>

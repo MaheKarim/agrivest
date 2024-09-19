@@ -44,7 +44,11 @@
     "manage_invest": {
         "title": "Investments",
         "icon": "las la-hand-holding-usd",
-        "menu_active": ["admin.invest.index", "admin.invest.running"],
+        "menu_active": [
+            "admin.invest.index",
+            "admin.invest.running",
+            "admin.invest.details"
+        ],
         "submenu": [
             {
                 "keyword": [
@@ -141,7 +145,6 @@
             }
         ]
     },
-
     "manage_users": {
         "title": "Manage Users",
         "icon": "las la-users",
@@ -272,11 +275,12 @@
             }
         ]
     },
-
     "deposits": {
         "title": "Deposits",
         "icon": "las la-file-invoice-dollar",
-        "counters": ["pendingDepositsCount"],
+        "counters": [
+            "pendingDepositsCount"
+        ],
         "menu_active": "admin.deposit*",
         "submenu": [
             {
@@ -372,7 +376,9 @@
     "withdrawals": {
         "title": "Withdrawals",
         "icon": "la la-bank",
-        "counters": ["pendingWithdrawCount"],
+        "counters": [
+            "pendingWithdrawCount"
+        ],
         "menu_active": "admin.withdraw.data*",
         "submenu": [
             {
@@ -440,7 +446,9 @@
     "support_ticket": {
         "title": "Support Ticket",
         "icon": "la la-ticket",
-        "counters": ["pendingTicketCount"],
+        "counters": [
+            "pendingTicketCount"
+        ],
         "menu_active": "admin.ticket*",
         "submenu": [
             {
@@ -569,7 +577,6 @@
             }
         ]
     },
-
     "system_setting": {
         "keyword": [
             "System Setting",
@@ -619,7 +626,9 @@
         "title": "Extra",
         "icon": "la la-server",
         "menu_active": "admin.system*",
-        "counters": ["updateAvailable"],
+        "counters": [
+            "updateAvailable"
+        ],
         "submenu": [
             {
                 "keyword": [

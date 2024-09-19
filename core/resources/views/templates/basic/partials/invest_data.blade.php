@@ -8,7 +8,7 @@
                 <form class="d-flex align-items-center">
                     <div class="position-relative">
                         <input class="form-control form--control with-search-icon" type="search" name="search"
-                            value="{{ request()->search }}" placeholder="@lang('Search by title')">
+                               value="{{ request()->search }}" placeholder="@lang('Search by title')">
                         <button type="submit" class="search-icon-button">
                             <i class="las la-search"></i>
                         </button>
@@ -21,51 +21,51 @@
         <div class="dashboard-card__body">
             <table class="table table--responsive--sm">
                 <thead>
-                    <tr>
-                        <th>@lang('Project')</th>
-                        <th>@lang('Duration')</th>
-                        <th>@lang('Amount')</th>
-                        <th>@lang('Status')</th>
-                        <th>@lang('Action')</th>
-                    </tr>
+                <tr>
+                    <th>@lang('Project')</th>
+                    <th>@lang('Duration')</th>
+                    <th>@lang('Amount')</th>
+                    <th>@lang('Status')</th>
+                    <th>@lang('Action')</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @forelse($invests as $invest)
-                        <tr>
-                            <td>
-                                <div class="td-wrapper">
-                                    <div>{{ __($invest->project->title) }}</div>
-                                    <span>@lang('Units:') {{ __($invest->quantity) }} x
+                @forelse($invests as $invest)
+                    <tr>
+                        <td>
+                            <div class="td-wrapper">
+                                <div>{{ __($invest->project->title) }}</div>
+                                <span>@lang('Units:') {{ __($invest->quantity) }} x
                                         {{ __(showAmount($invest->unit_price)) }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                {{ __($invest->project->maturity_time) }} @lang('Months')
-                            </td>
-                            <td>{{ __(showAmount($invest->total_price)) }}</td>
-                            <td>
-                                @php echo $invest->statusBadge @endphp
-                            </td>
+                            </div>
+                        </td>
+                        <td>
+                            {{ __($invest->project->maturity_time) }} @lang('Months')
+                        </td>
+                        <td>{{ __(showAmount($invest->total_price)) }}</td>
+                        <td>
+                            @php echo $invest->statusBadge @endphp
+                        </td>
 
-                            <td>
-                                <div class="action-buttons">
-                                    <button type="button" class="btn btn--xsm btn--outline action-btn"
+                        <td>
+                            <div class="action-buttons">
+                                <button type="button" class="btn btn--xsm btn--outline action-btn"
                                         data-value="{{ json_encode($invest) }}" data-bs-toggle="modal"
                                         data-bs-target="#projects-modal">
-                                        <i class="las la-desktop"></i>
-                                    </button>
-                                </div>
-                            </td>
+                                    <i class="las la-desktop"></i>
+                                </button>
+                            </div>
+                        </td>
 
 
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="100%">
-                                <div class="text-center text--base">@lang('No data found!')</div>
-                            </td>
-                        </tr>
-                    @endforelse
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="100%">
+                            <div class="text-center text--base">@lang('No data found!')</div>
+                        </td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
             @if (!request()->routeIs('user.dashboard') && $invests instanceof \Illuminate\Contracts\Pagination\Paginator)
@@ -93,7 +93,7 @@
                     <li class="amount-detail-item">
                         <span class="amount-detail-item__label">@lang('Total Earning')</span>
                         <span class="amount-detail-item__value" id="totalEarning"
-                            data-total-earning="{{ @$invest->total_earning }}"></span>
+                              data-total-earning="{{ @$invest->total_earning }}"></span>
                     </li>
                 </ul>
 
@@ -124,7 +124,7 @@
 @push('script')
     <script>
         "use strict";
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             function getAmount(amount) {
                 amount = amount || 0;
@@ -133,8 +133,7 @@
             }
 
 
-
-            $('.action-btn').on('click', function() {
+            $('.action-btn').on('click', function () {
                 var invest = $(this).data('value');
                 var row = $(this).closest('tr');
 

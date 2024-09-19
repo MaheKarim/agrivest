@@ -43,14 +43,17 @@
                     <span>@lang('Deposit')</span>
                 </button>
 
+                @php
+                    $isPayment = isset($invest);
+                @endphp
                 <div class="collapse" id="offcanvas-sidebar-deposit-collapse">
-                    <ul class="offcanvas-sidebar-submenu" {{ menuActive('user.deposit*') }}>
-                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.deposit.index') }}">
+                    <ul class="offcanvas-sidebar-submenu {{ !$isPayment && menuActive('user.deposit*') ? 'active' : '' }}">
+                        <li class="offcanvas-sidebar-submenu__item {{ !$isPayment && menuActive('user.deposit.index') ? 'active' : '' }}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.deposit.index') }}">
                                 @lang('Deposit Now')
                             </a>
                         </li>
-                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('user.deposit.history') }}">
+                        <li class="offcanvas-sidebar-submenu__item {{ !$isPayment && menuActive('user.deposit.history') ? 'active' : '' }}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('user.deposit.history') }}">
                                 @lang('Deposit History')
                             </a>
@@ -87,7 +90,7 @@
                     <span>@lang('Transactions')</span>
                 </a>
             </li>
-            <li class="offcanvas-sidebar-menu__item">
+            <li class="offcanvas-sidebar-menu__item {{ menuActive('ticket*') }}">
                 <button class="offcanvas-sidebar-menu__btn collapsed" data-bs-toggle="collapse"
                         data-bs-target="#offcanvas-sidebar-support-collapse" aria-expanded="false" type="button">
                     <i class="fas fa-headset"></i>
@@ -101,7 +104,7 @@
                                 @lang('Create New')
                             </a>
                         </li>
-                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('ticket.index')}}">
+                        <li class="offcanvas-sidebar-submenu__item {{ menuActive('ticket.index') }}">
                             <a class="offcanvas-sidebar-submenu__link" href="{{ route('ticket.index') }}">
                                 @lang('My Tickets')
                             </a>

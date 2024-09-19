@@ -24,29 +24,28 @@ class PaymentController extends Controller
 
             $user = User::find($deposit->user_id);
 
-            $isDeposit  = $deposit->invest_id == 0;
-            $isInvest   = $deposit->invest_id != 0;
+            $isDeposit = $deposit->invest_id == 0;
+            $isInvest = $deposit->invest_id != 0;
             $methodName = $deposit->methodName();
 
-            //if its a deposit
             if ($isDeposit) {
                 $user->balance += $deposit->amount;
                 $user->save();
 
 
-                $transaction               = new Transaction();
-                $transaction->user_id      = $deposit->user_id;
-                $transaction->invest_id    = $deposit->invest_id ?? 0;
-                $transaction->amount       = $deposit->amount;
+                $transaction = new Transaction();
+                $transaction->user_id = $deposit->user_id;
+                $transaction->invest_id = $deposit->invest_id ?? 0;
+                $transaction->amount = $deposit->amount;
                 $transaction->post_balance = $user->balance;
-                $transaction->charge       = $deposit->charge;
-                $transaction->trx_type     = '+';
+                $transaction->charge = $deposit->charge;
+                $transaction->trx_type = '+';
                 if ($deposit->invest_id == 0) {
                     $transaction->details = 'Deposit Via ' . $methodName;
-                    $transaction->remark  = 'deposit';
+                    $transaction->remark = 'deposit';
                 } else {
                     $transaction->details = 'Payment Via ' . $methodName;
-                    $transaction->remark  = 'payment';
+                    $transaction->remark = 'payment';
                 }
                 $transaction->trx = $deposit->trx;
                 $transaction->save();
@@ -71,8 +70,6 @@ class PaymentController extends Controller
                 ]);
             }
 
-
-            //if its a investment
             if ($isInvest) {
                 $invest = $deposit->invest;
                 self::confirmOrder($invest, $deposit, $user);
@@ -92,7 +89,6 @@ class PaymentController extends Controller
         $project->available_share -= $invest->quantity;
         $project->save();
 
-        //add next time
 
         $methodName = $deposit ? $deposit->methodName() : 'Wallet';
 
@@ -128,12 +124,14 @@ class PaymentController extends Controller
         ]);
 
         $invest->payment_status = Status::PAYMENT_SUCCESS;
+        $invest->next_time = $project->maturity_time;
         $invest->status = Status::INVEST_RUNNING;
         $invest->save();
     }
 
     public function deposit(Request $request, $investId = 0)
     {
+
         $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
             $gate->where('status', Status::ENABLE);
         })->with('method')->orderby('name')->get();

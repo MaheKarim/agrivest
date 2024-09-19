@@ -1,9 +1,12 @@
 @extends($activeTemplate . 'layouts.app')
+@php
+    $authContent = getContent('login_registration.content', true);
+@endphp
 @section('panel')
     @if (gs('registration'))
         <section class="account">
             <div class="account-left bg-img"
-                 data-background-image="{{ asset($activeTemplateTrue . 'images/thumbs/account-thumb.jpg') }}">
+                 data-background-image="{{ frontendImage('login_registration', @$authContent->data_values->image, '1168x1080') }}">
                 <a class="account-logo" href="{{ route('home') }}">
                     <img src="{{ siteLogo() }}" alt="Logo">
                 </a>

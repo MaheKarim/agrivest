@@ -121,7 +121,7 @@
             "modal": true
         }
     },
-    "": {
+    "faq": {
         "builder": true,
         "name": "FAQ Section",
         "content": {
@@ -298,6 +298,18 @@
             "images": {
                 "image": {
                     "size": "500x500"
+                }
+            }
+        }
+    },
+    "login_registration": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Login/Registration Image",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "1168x1080"
                 }
             }
         }
