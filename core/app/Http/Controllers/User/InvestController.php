@@ -31,9 +31,6 @@ class InvestController extends Controller
             return back()->withNotify($notify);
         }
 
-//        dd($request->all(), $request->quantity, $project->available_share, $project->roi_amount);
-        //next time missing
-
         $unitPrice = $project->share_amount;
         $totalPrice = $unitPrice * $request->quantity;
         $totalEarning = ($request->quantity * $project->roi_amount);
@@ -55,8 +52,8 @@ class InvestController extends Controller
         $invest->capital_back = $project->capital_back;
         $invest->capital_status = Status::NO;
         $invest->return_type = $project->return_type;
+        $invest->project_duration = $project->project_duration;
         $invest->repeat_times = $project->repeat_times;
-        $invest->return_interval = $project->return_interval;
         $invest->time_name = $project->time->name;
         $invest->hours = $project->time->hours;
         $invest->recuring_pay = $recurringAmount;

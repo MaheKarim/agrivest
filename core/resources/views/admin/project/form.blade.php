@@ -160,7 +160,7 @@
 
 </div>
 <div class="row">
-    <div class="col-md-6 return-type-wrapper">
+    <div class="col-md-4 return-type-wrapper">
         <label>
             @lang('Return Type')
             <i class="las la-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -174,7 +174,7 @@
                 value="2" @selected(old('return_type', @$project->return_type) == 2 ? 'selected' : '')>@lang('Repeat')</option>
         </select>
     </div>
-    <div class="col-md-6 time-settings-wrapper">
+    <div class="col-md-4 time-settings-wrapper">
         <div class="form-group">
             <label>
                 @lang('Time')
@@ -190,20 +190,22 @@
             </select>
         </div>
     </div>
-    <div class="col-md-3 return_interval">
+    <div class="col-md-4 project_duration">
         <div class="form-group">
             <label>
-                @lang('Return Interval')
+                @lang('Project Duration')
                 <i class="las la-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
-                   title="The frequency at which returns are distributed."></i>
+                   title="For Lifetime Return How Many Month Will Share Profit"></i>
             </label>
             <div class="input-group">
-                <input type="number" class="form-control return_interval" name="return_interval"
-                       value="{{ old('return_interval', @$project->return_interval) }}" step="0">
+                <input type="number" class="form-control project_duration" name="project_duration"
+                       value="{{ old('project_duration', @$project->project_duration) }}" step="0" required>
+                <span class="input-group-text">@lang('Months')</span>
+
             </div>
         </div>
     </div>
-    <div class="col-md-3 return_timespan">
+    <div class="col-md-4 return_timespan">
         <div class="form-group">
             <label>
                 @lang('Return Repeat Times')

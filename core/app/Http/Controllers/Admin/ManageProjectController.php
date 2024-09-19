@@ -132,10 +132,10 @@ class ManageProjectController extends Controller
         $project->maturity_time = $request->maturity_time;
         $project->maturity_date = $matureDate;
         $project->time_id = $request->time_id;
-        $project->return_interval = $request->return_interval;
         $project->repeat_times = $request->repeat_times;
         $project->capital_back = @$request->capital_back ? Status::YES : Status::NO;
         $project->return_type = @$request->return_type == Status::REPEAT ? Status::REPEAT : Status::LIFETIME;
+        $project->project_duration = $request->project_duration;
         $project->category_id = $request->category_id;
         $project->map_url = $request->map_url;
         $project->description = $request->description;

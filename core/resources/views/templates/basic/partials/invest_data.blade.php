@@ -24,7 +24,7 @@
                 <tr>
                     <th>@lang('Project')</th>
                     <th>@lang('Duration')</th>
-                    <th>@lang('Amount')</th>
+                    <th>@lang('Invested Amount')</th>
                     <th>@lang('Status')</th>
                     <th>@lang('Action')</th>
                 </tr>
