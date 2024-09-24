@@ -5,9 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/balance-overlay-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/balance-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/deposit-overlay-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/deposit-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/invest-overlay-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/invest-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/profit-overlay-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/profit-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/project-overlay-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/project-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/withdraw-overlay-svg.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/resources/views/components/withdraw-svg.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/User/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/User/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -365,38 +375,39 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyAccountsIdsRefresh&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyMigrateChatHistory-v2&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ToggleCodyToolWindowAfterMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.laravel-idea.search-composer-json&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.laravel-idea.update-module-directories&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/agrivest/assets/templates/basic/images/svg&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.CodyAccountHistoryMigration": "true",
+    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
+    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
+    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
+    "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
+    "RunOnceActivity.CodyProjectSettingsMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
+    "RunOnceActivity.laravel-idea.search-composer-json": "true",
+    "RunOnceActivity.laravel-idea.update-module-directories": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/laragon/www/agrivest/core/resources/views/components",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\agrivest\core\resources\views\components" />
       <recent name="C:\laragon\www\agrivest\assets\templates\basic\images\svg" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -463,7 +474,7 @@
       <workItem from="1727156272961" duration="606000" />
       <workItem from="1727157173165" duration="8995000" />
       <workItem from="1727172244689" duration="91000" />
-      <workItem from="1727172347459" duration="10411000" />
+      <workItem from="1727172347459" duration="13314000" />
     </task>
     <servers />
   </component>
