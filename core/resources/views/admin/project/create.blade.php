@@ -72,25 +72,21 @@
 
                 function toggleFields() {
                     var returnType = $('select[name="return_type"]').val();
-                    if (returnType === '-1') {
-                        $('.project_duration').closest('.form-group').show();
-                        $('#repeat_times').closest('.form-group').hide();
-                        // $('#return_interval').removeAttr('required');
-                        $('#repeat_times').removeAttr('required');
 
-                        $('.return-type-wrapper').removeClass('col-md-4').addClass('col-md-4');
-                        $('.time-settings-wrapper').removeClass('col-md-4').addClass('col-md-4');
-                        $('.project_duration').removeClass('col-md-4').addClass('col-md-4');
-                    } else if (returnType === '2') {
-                        // $('#return_interval').closest('.form-group').show();
-                        $('#repeat_times').closest('.form-group').show();
-                        $('#project_duration').removeAttr('required');
-                        $('#repeat_times').attr('required', 'required');
-                        $('.project_duration').hide();
-                        $('.return_timespan').show();
+                    if (returnType === '-1') {
+                        $('.project_duration').show().addClass('col-md-4');
+                        $('#repeat_times').closest('.form-group').hide().removeAttr('required');
+
+                        $('.return_timespan').hide();
                         $('.return-type-wrapper').removeClass('col-md-6').addClass('col-md-4');
                         $('.time-settings-wrapper').removeClass('col-md-6').addClass('col-md-4');
-                        // $('.project_duration').removeClass('col-md-6').addClass('col-md-4');
+                    } else if (returnType === '2') {
+                        $('#repeat_times').closest('.form-group').show().attr('required', true);
+                        $('.project_duration').hide();
+                        $('.return_timespan').show();
+
+                        $('.return-type-wrapper').removeClass('col-md-6').addClass('col-md-4');
+                        $('.time-settings-wrapper').removeClass('col-md-6').addClass('col-md-4');
                     }
                 }
 

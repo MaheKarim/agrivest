@@ -69,7 +69,6 @@ class ManageProjectController extends Controller
             'category_id' => "$isRequired|exists:categories,id",
             'time_id' => "$isRequired|exists:times,id",
             'return_type' => 'required|in:' . Status::REPEAT . ',' . Status::LIFETIME,
-            'return_interval' => 'required_if:return_type,2|numeric|min:1',
             'repeat_times' => 'required_if:return_type,2|numeric|min:1',
         ]);
 
