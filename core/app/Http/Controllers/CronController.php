@@ -83,65 +83,66 @@ class CronController extends Controller
                 ->take(100)
                 ->get();
 
-            // dd($invests);
-
             foreach ($invests as $invest) {
-                $project = $invest->project;
-                $user = $invest->user;
-                $hours = (int)$invest->project?->time->hours;
-                $next = now()->addHours($hours)->toDateTimeString();
-
-                // Process investment
-                $invest->period += 1;
-                $invest->paid += $invest->recuring_pay;
-                $invest->next_time = $next;
-                $invest->last_time = now();
-
-                // Update user's balance
-                $user->balance += $invest->recuring_pay;
-                $user->save();
-
-                // Log the transaction
-                $trx = getTrx();
-                $transaction = new Transaction();
-                $transaction->user_id = $user->id;
-                $transaction->amount = $invest->recuring_pay;
-                $transaction->charge = 0;
-                $transaction->post_balance = $user->balance;
-                $transaction->trx_type = '+';
-                $transaction->trx = $trx;
-                $transaction->remark = 'profit';
-                $transaction->details = showAmount($invest->recuring_pay) . ' profit from ' . @$invest->project->title;
-                $transaction->save();
-
-
-                // Check if the investment should be closed
-                $this->checkInvestmentClosure($invest);
-
-                // Save the updated investment
-                $invest->save();
-
-                // Notify the user about the profit
-                notify($user, 'INTEREST', [
-                    'trx' => $trx,
-                    'amount' => showAmount($invest->recuring_pay),
-                    'project_name' => @$invest->project->title,
-                    'post_balance' => showAmount($user->balance),
-                ]);
+                $this->processInvestment($invest, $now);
             }
         } catch (\Throwable $th) {
             throw new \Exception($th->getMessage());
         }
     }
 
-    private function checkInvestmentClosure($invest)
+    private function processInvestment($invest, $now)
+    {
+        $project = $invest->project;
+        $user = $invest->user;
+        $hours = (int)$invest->project?->time->hours;
+        $next = $now->addHours($hours)->toDateTimeString();
+
+        // Process investment
+        $invest->period += 1;
+        $invest->paid += $invest->recuring_pay;
+        $invest->next_time = $next;
+        $invest->last_time = $now;
+
+        // Update user's balance
+        $user->balance += $invest->recuring_pay;
+        $user->save();
+
+        // Log the transaction
+        $trx = getTrx();
+        $transaction = new Transaction();
+        $transaction->user_id = $user->id;
+        $transaction->invest_id = $invest->id;
+        $transaction->amount = $invest->recuring_pay;
+        $transaction->charge = 0;
+        $transaction->post_balance = $user->balance;
+        $transaction->trx_type = '+';
+        $transaction->trx = $trx;
+        $transaction->remark = 'profit';
+        $transaction->details = showAmount($invest->recuring_pay) . ' profit from ' . @$invest->project->title;
+        $transaction->save();
+
+        // Check if the investment should be closed
+        $this->checkInvestmentClosure($invest, $now);
+
+        // Save the updated investment
+        $invest->save();
+
+        // Notify the user about the profit
+        notify($user, 'INTEREST', [
+            'trx' => $trx,
+            'amount' => showAmount($invest->recuring_pay),
+            'project_name' => @$invest->project->title,
+            'post_balance' => showAmount($user->balance),
+        ]);
+    }
+
+    private function checkInvestmentClosure($invest, $now)
     {
         if ($invest->return_type == Status::LIFETIME) {
             $projectDurationMonths = $invest->project->project_duration;
-            $investEndDate = Carbon::parse($invest->project->end_date);
-            $matureDate = $investEndDate->addMonths($projectDurationMonths);
-
-            if ($matureDate->lte(now())) {
+            $matureDate = Carbon::parse($invest->project->maturity_date)->addMonths($projectDurationMonths);
+            if ($matureDate->lte($now)) {
                 $invest->status = Status::INVEST_CLOSED;
                 if ($invest->capital_status == Status::CAPITAL_BACK) {
                     Capital::capitalReturn($invest);

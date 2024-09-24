@@ -8,9 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Gateway/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Gateway/PaymentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/User/InvestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/User/InvestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project_details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/deposit_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/deposit_history.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -465,7 +463,7 @@
       <workItem from="1727156272961" duration="606000" />
       <workItem from="1727157173165" duration="8995000" />
       <workItem from="1727172244689" duration="91000" />
-      <workItem from="1727172347459" duration="4918000" />
+      <workItem from="1727172347459" duration="8510000" />
     </task>
     <servers />
   </component>

@@ -113,7 +113,7 @@ class PaymentController extends Controller
         ]);
 
         $invest->payment_status = Status::PAYMENT_SUCCESS;
-        $invest->next_time = $project->maturity_time;
+        $invest->next_time = $project->maturity_date;
         $invest->status = Status::INVEST_RUNNING;
         $invest->save();
     }

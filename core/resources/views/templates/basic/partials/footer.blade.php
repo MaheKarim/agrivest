@@ -3,7 +3,7 @@
     $contactInfo = getContent('contact_us.content', true);
     $appStores = getContent('contact_us.element', orderById: true);
     $socialIcons = getContent('social_icon.element', orderById: true);
-    $latestProjects = \App\Models\Project::active()->beforeEndDate()->limit(4)->get();
+    $latestProjects = \App\Models\Project::active()->available()->beforeEndDate()->limit(4)->get();
 @endphp
 <footer class="footer">
     <div class="footer-top py-120">
