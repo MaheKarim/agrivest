@@ -209,10 +209,22 @@
                                                         </li>
                                                         <li class="detail-list-item">
                                                             <span
-                                                                class="detail-list-item__label">@lang('Return Timespan')</span>
+                                                                class="detail-list-item__label">@lang('Earning ROI Amount')</span>
                                                             <span
-                                                                class="detail-list-item__value">{{ __($project->repeat_times) }}
-                                                                @lang('Times /') {{ __($project->time->name) }}</span>
+                                                                class="detail-list-item__value roi_amount">{{ __(getAmount($project->roi_amount)) }}</span>
+                                                        </li>
+                                                        <li class="detail-list-item">
+                                                            @if($project->return_type != Status::LIFETIME)
+                                                                <span
+                                                                    class="detail-list-item__label">@lang('Return Timespan')</span>
+                                                                <span
+                                                                    class="detail-list-item__value">{{ __($project->repeat_times) }}@lang('Times /') {{ __($project->time->name) }}</span>
+                                                            @else
+                                                                <span
+                                                                    class="detail-list-item__label">@lang('Project Duration')</span>
+                                                                <span
+                                                                    class="detail-list-item__value">@lang('Lifetime') {{ __($project->project_duration) }}  </span>
+                                                            @endif
                                                         </li>
                                                         <li class="detail-list-item">
                                                             <span
@@ -273,13 +285,16 @@
                 }
 
                 function updateTotalEarning(quantity) {
-                    let totalEarning = (shareAmount + roiAmount) * quantity;
+                    let totalEarning = (shareAmount + (roiAmount)) * quantity;
+                    let roiEarning = roiAmount * quantity;
                     $totalEarning.text(currencySymbol + totalEarning.toFixed(2));
+                    $('.roi_amount').text(currencySymbol + roiEarning.toFixed(2));
                 }
+
 
                 function updateModalFields(quantity) {
                     let totalPrice = shareAmount * quantity;
-                    let totalEarning = (shareAmount + roiAmount) * quantity;
+                    let totalEarning = (shareAmount + (roiAmount * quantity)) * quantity; // Adjusted to include roiAmount based on quantity
 
                     $('#modal_quantity').val(quantity);
                     $('#modal_total_price').val(totalPrice.toFixed(2));

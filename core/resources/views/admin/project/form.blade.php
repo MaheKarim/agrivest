@@ -66,7 +66,8 @@
                    title="The total number of shares available for investment in this project. This represents how many shares are needed to reach the project goal."></i>
             </label>
             <input type="number" class="form-control share_count" name="share_count"
-                   value="{{ old('share_count', getAmount(@$project->share_count)) }}"
+                   value="{{ isset($project) ? getAmount($project->share_count) : old('share_count') }}"
+                   {{ isset($project) ? 'disabled' : '' }}
                    placeholder="@lang('Share Count')"
                    step="0" required>
         </div>
