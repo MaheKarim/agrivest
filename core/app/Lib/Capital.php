@@ -13,7 +13,7 @@ class Capital
         $user->balance += $invest->total_price;
         $user->save();
 
-        $invest->capital_back = Status::CAPITAL_BACK;
+        $invest->capital_status = Status::CAPITAL_BACK;
         $invest->save();
 
         $transaction = new Transaction();

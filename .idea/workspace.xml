@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/reports/invest_statistics.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/reports/invest_statistics.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/cookie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/cookie.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/app/Lib/Capital.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Lib/Capital.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -466,7 +464,7 @@
       <workItem from="1727157173165" duration="8995000" />
       <workItem from="1727172244689" duration="91000" />
       <workItem from="1727172347459" duration="13771000" />
-      <workItem from="1727186793528" duration="598000" />
+      <workItem from="1727186793528" duration="1353000" />
     </task>
     <servers />
   </component>
