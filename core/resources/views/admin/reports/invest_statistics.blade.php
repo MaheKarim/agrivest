@@ -326,8 +326,8 @@
                                             <div class="plan-name fw-bold">{{ $invest->project->title }} -
                                                 @lang('Every')
                                                 {{ __($invest->time_name) }}
-                                                {{ $invest->project->return_type != 1 ? gs('cur_sym') : '' }}{{ showAmount($invest->project->share_amount, currencyFormat: false) }}
-                                                @lang('for') @if ($invest->project->return_type == 2)
+                                                {{ $invest->project->return_type != Status::LIFETIME ? gs('cur_sym') : '' }}{{ showAmount($invest->project->share_amount, currencyFormat: false) }}
+                                                @lang('for') @if ($invest->project->return_type == Status::REPEAT)
                                                     {{ __($invest->project->repeat_time) }}
                                                     {{ __(@$invest->project->time->name) }}
                                                 @else
@@ -350,7 +350,7 @@
                                         <div class="plan-amount plan-inner-div text-end">
                                             <p class="plan-label">@lang('Net Profit')</p>
                                             <p class="plan-value amount">
-                                                @if ($invest->return_type != -1)
+                                                @if ($invest->return_type != Status::LIFETIME)
                                                     {{ showAmount($invest->repeat_times * $invest->recuring_pay) }}
                                                 @else
                                                     --

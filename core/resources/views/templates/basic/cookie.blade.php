@@ -1,6 +1,5 @@
 @extends($activeTemplate.'layouts.frontend')
 @section('content')
-    @include($activeTemplate.'partials.breadcrumb')
     <section class="blogs py-60 bg--white">
         <div class="container">
             <div class="row justify-content-center">
