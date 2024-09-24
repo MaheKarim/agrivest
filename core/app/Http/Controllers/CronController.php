@@ -87,9 +87,9 @@ class CronController extends Controller
 
             foreach ($invests as $invest) {
                 $project = $invest->project;
-                $user    = $invest->user;
-                $hours   = (int)$invest->project?->time->hours;
-                $next    = now()->addHours($hours)->toDateTimeString();
+                $user = $invest->user;
+                $hours = (int)$invest->project?->time->hours;
+                $next = now()->addHours($hours)->toDateTimeString();
 
                 // Process investment
                 $invest->period += 1;
@@ -102,34 +102,29 @@ class CronController extends Controller
                 $user->save();
 
                 // Log the transaction
-                $trx                       = getTrx();
-                $transaction               = new Transaction();
-                $transaction->user_id      = $user->id;
-                $transaction->amount       = $invest->recuring_pay;
-                $transaction->charge       = 0;
+                $trx = getTrx();
+                $transaction = new Transaction();
+                $transaction->user_id = $user->id;
+                $transaction->amount = $invest->recuring_pay;
+                $transaction->charge = 0;
                 $transaction->post_balance = $user->balance;
-                $transaction->trx_type     = '+';
-                $transaction->trx          = $trx;
-                $transaction->remark       = 'profit';
-                $transaction->details      = showAmount($invest->recuring_pay) . ' profit from ' . @$invest->project->title;
+                $transaction->trx_type = '+';
+                $transaction->trx = $trx;
+                $transaction->remark = 'profit';
+                $transaction->details = showAmount($invest->recuring_pay) . ' profit from ' . @$invest->project->title;
                 $transaction->save();
 
 
                 // Check if the investment should be closed
-                if ($invest->repeat_times == $invest->period && $invest->return_type != Status::LIFETIME) {
-                    $invest->status = Status::INVEST_CLOSED;
-                    if ($invest->capital_status == Status::CAPITAL_BACK) {
-                        Capital::capitalReturn($invest);
-                    }
-                }
+                $this->checkInvestmentClosure($invest);
 
                 // Save the updated investment
                 $invest->save();
 
                 // Notify the user about the profit
                 notify($user, 'INTEREST', [
-                    'trx'          => $trx,
-                    'amount'       => showAmount($invest->recuring_pay),
+                    'trx' => $trx,
+                    'amount' => showAmount($invest->recuring_pay),
                     'project_name' => @$invest->project->title,
                     'post_balance' => showAmount($user->balance),
                 ]);
@@ -139,5 +134,24 @@ class CronController extends Controller
         }
     }
 
-    //crop missing
+    private function checkInvestmentClosure($invest)
+    {
+        if ($invest->return_type == Status::LIFETIME) {
+            $projectDurationMonths = $invest->project->project_duration;
+            $investEndDate = Carbon::parse($invest->project->end_date);
+            $matureDate = $investEndDate->addMonths($projectDurationMonths);
+
+            if ($matureDate->lte(now())) {
+                $invest->status = Status::INVEST_CLOSED;
+                if ($invest->capital_status == Status::CAPITAL_BACK) {
+                    Capital::capitalReturn($invest);
+                }
+            }
+        } elseif ($invest->repeat_times == $invest->period) {
+            $invest->status = Status::INVEST_CLOSED;
+            if ($invest->capital_status == Status::CAPITAL_BACK) {
+                Capital::capitalReturn($invest);
+            }
+        }
+    }
 }

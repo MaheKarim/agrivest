@@ -35,7 +35,12 @@ class InvestController extends Controller
         $totalPrice = $unitPrice * $request->quantity;
         $totalEarning = ($request->quantity * $project->roi_amount);
         $totalShare = $project->share_count;
-        $recurringAmount = $totalEarning / $project->repeat_times;
+        
+        if ($project->return_type == Status::LIFETIME) {
+            $recurringAmount = $totalEarning / $project->project_duration;
+        } elseif ($project->return_type == Status::REPEAT) {
+            $recurringAmount = $totalEarning / $project->repeat_times;
+        }
 
         $invest = new Invest();
         $invest->invest_no = getTrx();
@@ -53,7 +58,7 @@ class InvestController extends Controller
         $invest->capital_status = Status::NO;
         $invest->return_type = $project->return_type;
         $invest->project_duration = $project->project_duration;
-        $invest->repeat_times = $project->repeat_times;
+        $invest->repeat_times = $project->repeat_times ?? 0;
         $invest->time_name = $project->time->name;
         $invest->hours = $project->time->hours;
         $invest->recuring_pay = $recurringAmount;

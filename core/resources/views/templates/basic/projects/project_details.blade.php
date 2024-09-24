@@ -223,7 +223,7 @@
                                                                 <span
                                                                     class="detail-list-item__label">@lang('Project Duration')</span>
                                                                 <span
-                                                                    class="detail-list-item__value">@lang('Lifetime') {{ __($project->project_duration) }}  </span>
+                                                                    class="detail-list-item__value">@lang('Lifetime') {{ __($project->project_duration) }} @lang('Months') </span>
                                                             @endif
                                                         </li>
                                                         <li class="detail-list-item">
