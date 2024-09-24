@@ -69,7 +69,7 @@ class ManageProjectController extends Controller
             'category_id' => "$isRequired|exists:categories,id",
             'time_id' => "$isRequired|exists:times,id",
             'return_type' => 'required|in:' . Status::REPEAT . ',' . Status::LIFETIME,
-            'repeat_times' => 'required_if:return_type,2|numeric|min:1',
+            'repeat_times' => 'nullable|required_if:return_type,' . Status::REPEAT . '|numeric|min:1',
         ]);
 
         if ($id) {
@@ -118,6 +118,8 @@ class ManageProjectController extends Controller
         $investEndDate = Carbon::parse($request->end_date);
         $maturityMonths = (int)$request->maturity_time;
         $matureDate = $investEndDate->addMonths($maturityMonths);
+        // ROI Amount
+        $roiAmount = $request->roi_percentage / 100 * $request->share_amount;
 
         $project->title = $request->title;
         $project->slug = $request->slug;
@@ -125,7 +127,7 @@ class ManageProjectController extends Controller
         $project->share_count = $request->share_count;
         $project->share_amount = $request->share_amount;
         $project->roi_percentage = $request->roi_percentage;
-        $project->roi_amount = $request->roi_amount;
+        $project->roi_amount = $roiAmount;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
         $project->maturity_time = $request->maturity_time;

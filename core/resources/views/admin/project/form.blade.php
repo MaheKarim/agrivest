@@ -213,7 +213,7 @@
                    title="The number of times returns will be repeated."></i>
             </label>
             <div class="input-group">
-                <input type="number" class="form-control return_timespan" name="repeat_times"
+                <input type="number" class="form-control return_timespan" id="repeat_times" name="repeat_times"
                        value="{{ old('repeat_times', @$project->repeat_times) }}" step="0">
             </div>
         </div>

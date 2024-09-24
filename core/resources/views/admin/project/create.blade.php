@@ -75,15 +75,13 @@
 
                     if (returnType === '-1') {
                         $('.project_duration').show().addClass('col-md-4');
-                        $('#repeat_times').closest('.form-group').hide().removeAttr('required');
+                        $('.return_timespan').hide().closest('.form-group').find('input').attr('required', false);
 
-                        $('.return_timespan').hide();
                         $('.return-type-wrapper').removeClass('col-md-6').addClass('col-md-4');
                         $('.time-settings-wrapper').removeClass('col-md-6').addClass('col-md-4');
                     } else if (returnType === '2') {
-                        $('#repeat_times').closest('.form-group').show().attr('required', true);
+                        $('.return_timespan').show().closest('.form-group').attr('required', true);
                         $('.project_duration').hide();
-                        $('.return_timespan').show();
 
                         $('.return-type-wrapper').removeClass('col-md-6').addClass('col-md-4');
                         $('.time-settings-wrapper').removeClass('col-md-6').addClass('col-md-4');
@@ -100,11 +98,11 @@
 
 
                 function clearIfGoalEmpty(goal) {
-                    if (goal === '') {
-                        $('.share_count, .share_amount').val('');
-                        notify('error', 'Please enter project goal value first');
-                        return true;
-                    }
+                    // if (goal === '') {
+                    //     $('.share_count, .share_amount').val('');
+                    //     notify('error', 'Please enter project goal value first');
+                    //     return true;
+                    // }
                     return false;
                 }
 
@@ -177,7 +175,7 @@
                 });
 
                 function calculateRoiAmount() {
-                    let goal = $('.goal').val().trim();
+                    let goal = $('.share_amount').val().trim();
                     let roi = $('.roi_percentage').val().trim();
                     let invalidInputPattern = /^-|\b0[0-9]/;
 
@@ -206,12 +204,12 @@
 
                 }
 
-                $('.roi_percentage, .goal').on('input', function (e) {
+                $('.roi_percentage, .share_amount').on('input', function (e) {
                     calculateRoiAmount();
                 });
 
                 function calculateRoiPercentage() {
-                    let goal = $('.goal').val().trim();
+                    let goal = $('.share_amount').val().trim();
                     let roiAmount = $('.roi_amount').val().trim();
                     let invalidInputPattern = /^-|\b0[0-9]/;
 
@@ -239,7 +237,7 @@
                     }
                 }
 
-                $('.roi_amount, .goal').on('input', function (e) {
+                $('.roi_amount, .share_amount').on('input', function (e) {
                     calculateRoiPercentage();
                 });
 
