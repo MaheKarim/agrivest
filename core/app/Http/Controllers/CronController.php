@@ -142,13 +142,13 @@ class CronController extends Controller
         if ($invest->return_type == Status::LIFETIME) {
             $matureDate = Carbon::now($invest->project->project_closed);
             if ($matureDate->lte($now)) {
-                $invest->status = Status::INVEST_CLOSED;
+                $invest->status = Status::INVEST_COMPLETED;
                 if ($invest->capital_status == Status::CAPITAL_BACK) {
                     Capital::capitalReturn($invest);
                 }
             }
         } elseif ($invest->repeat_times == $invest->period) {
-            $invest->status = Status::INVEST_CLOSED;
+            $invest->status = Status::INVEST_COMPLETED;
             if ($invest->capital_status == Status::CAPITAL_BACK) {
                 Capital::capitalReturn($invest);
             }
