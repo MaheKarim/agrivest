@@ -176,7 +176,13 @@
 
                 $(".list-grid-btn").on('click', function () {
                     const listGridClass = $(this).data("list-grid-class");
-                    $(".single-project").removeClass().addClass(listGridClass);
+                    if (listGridClass === "col-sm-6 col-xl-4") {
+                        $(".single-project").removeClass("col-sm-12").addClass(listGridClass);
+                    } else {
+                        $(".single-project").removeClass("col-sm-6 col-xl-4").addClass(listGridClass);
+                    }
+                    $(".list-grid-btn").removeClass("active");
+                    $(this).addClass("active");
                 });
             });
         })(jQuery);

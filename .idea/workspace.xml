@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core/resources/views/components/bar-icon.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/resources/views/components/grid-icon.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/index.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -463,7 +458,7 @@
       <workItem from="1727156272961" duration="606000" />
       <workItem from="1727157173165" duration="8995000" />
       <workItem from="1727172244689" duration="91000" />
-      <workItem from="1727172347459" duration="590000" />
+      <workItem from="1727172347459" duration="1082000" />
     </task>
     <servers />
   </component>
