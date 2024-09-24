@@ -140,8 +140,7 @@ class CronController extends Controller
     private function checkInvestmentClosure($invest, $now)
     {
         if ($invest->return_type == Status::LIFETIME) {
-            $projectDurationMonths = $invest->project->project_duration;
-            $matureDate = Carbon::parse($invest->project->maturity_date)->addMonths($projectDurationMonths);
+            $matureDate = Carbon::now($invest->project->project_closed);
             if ($matureDate->lte($now)) {
                 $invest->status = Status::INVEST_CLOSED;
                 if ($invest->capital_status == Status::CAPITAL_BACK) {

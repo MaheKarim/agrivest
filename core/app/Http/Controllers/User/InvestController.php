@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Gateway\PaymentController;
 use App\Models\Invest;
 use App\Models\Project;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InvestController extends Controller
@@ -30,14 +31,14 @@ class InvestController extends Controller
             $notify[] = ['error', 'Not enough shares available.'];
             return back()->withNotify($notify);
         }
-
         $unitPrice = $project->share_amount;
         $totalPrice = $unitPrice * $request->quantity;
         $totalEarning = ($request->quantity * $project->roi_amount);
         $totalShare = $project->share_count;
-        
+
         if ($project->return_type == Status::LIFETIME) {
             $recurringAmount = $totalEarning / $project->project_duration;
+            $investClosed = Carbon::parse($project->maturity_date)->addMonths($project->project_duration);
         } elseif ($project->return_type == Status::REPEAT) {
             $recurringAmount = $totalEarning / $project->repeat_times;
         }
@@ -58,6 +59,7 @@ class InvestController extends Controller
         $invest->capital_status = Status::NO;
         $invest->return_type = $project->return_type;
         $invest->project_duration = $project->project_duration;
+        $invest->project_closed = $investClosed;
         $invest->repeat_times = $project->repeat_times ?? 0;
         $invest->time_name = $project->time->name;
         $invest->hours = $project->time->hours;
