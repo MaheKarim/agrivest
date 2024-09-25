@@ -113,12 +113,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="offcanvas-sidebar-block">
-                                    <button class="btn btn--lg btn-outline--base w-100" type="submit">
-                                        @lang('Filter Now')
-                                    </button>
-                                </div>
+                                
                             </form>
                         </div>
                     </aside>

@@ -42,7 +42,7 @@ class UserController extends Controller
         return view('Template::user.dashboard', [
             'pageTitle' => 'Dashboard',
             'user' => $user,
-            'invests' => $user->invests()->latest()->take(5)->get(),
+            'invests' => $user->invests()->latest()->paginate(getPaginate(5)),
             'investData' => $investData
         ]);
     }

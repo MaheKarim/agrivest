@@ -1,9 +1,7 @@
 <div class="dashboard-inner__block">
     <div class="dashboard-card">
-
         <div class="dashboard-card__header">
             <h6 class="dashboard-card__title">@lang('My Projects')</h6>
-
             @if (!request()->routeIs('user.home'))
                 <form class="d-flex align-items-center">
                     <div class="position-relative">
@@ -15,7 +13,6 @@
                     </div>
                 </form>
             @endif
-
         </div>
 
         <div class="dashboard-card__body">
@@ -46,7 +43,6 @@
                         <td>
                             @php echo $invest->statusBadge @endphp
                         </td>
-
                         <td>
                             <div class="action-buttons">
                                 <button type="button" class="btn btn--xsm btn--outline action-btn"
@@ -56,8 +52,6 @@
                                 </button>
                             </div>
                         </td>
-
-
                     </tr>
                 @empty
                     <tr>
@@ -68,7 +62,7 @@
                 @endforelse
                 </tbody>
             </table>
-            @if (!request()->routeIs('user.dashboard') && $invests instanceof \Illuminate\Contracts\Pagination\Paginator)
+            @if (!request()->routeIs('user.dashboard') && $invests->hasPages())
                 {{ paginateLinks($invests) }}
             @endif
         </div>
@@ -125,13 +119,11 @@
     <script>
         "use strict";
         $(document).ready(function () {
-
             function getAmount(amount) {
                 amount = amount || 0;
                 amount = parseFloat(amount).toFixed(2);
                 return amount;
             }
-
 
             $('.action-btn').on('click', function () {
                 var invest = $(this).data('value');
