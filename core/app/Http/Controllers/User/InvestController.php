@@ -59,7 +59,7 @@ class InvestController extends Controller
         $invest->capital_status = Status::NO;
         $invest->return_type = $project->return_type;
         $invest->project_duration = $project->project_duration;
-        $invest->project_closed = $investClosed;
+        $invest->project_closed = $investClosed ?? null;
         $invest->repeat_times = $project->repeat_times ?? 0;
         $invest->time_name = $project->time->name;
         $invest->hours = $project->time->hours;

@@ -85,15 +85,14 @@
                         <span class="amount-detail-item__value"></span>
                     </li>
                     <li class="amount-detail-item">
-                        <span class="amount-detail-item__label">@lang('Total Earning')</span>
-                        <span class="amount-detail-item__value" id="totalEarning"
-                              data-total-earning="{{ @$invest->total_earning }}"></span>
+                        <span class="amount-detail-item__label">@lang('Profit Earning')</span>
+                        <span class="amount-detail-item__value" id="totalEarning"></span>
                     </li>
                 </ul>
 
                 <ul class="detail-list mt-4">
                     <li class="detail-list-item">
-                        <span class="detail-list-item__label">@lang('Unite Price')</span>
+                        <span class="detail-list-item__label">@lang('Unit Price')</span>
                         <span class="detail-list-item__value"></span>
                     </li>
                     <li class="detail-list-item">
@@ -104,6 +103,14 @@
                     <li class="detail-list-item">
                         <span class="detail-list-item__label">@lang('Earning(%)')</span>
                         <span class="detail-list-item__value"></span>
+                    </li>
+                    <li class="detail-list-item">
+                        <span class="detail-list-item__label">@lang('is Cashback Capital ?')</span>
+                        <span class="detail-list-item__value cashback"></span>
+                    </li>
+                    <li class="detail-list-item">
+                        <span class="detail-list-item__label">@lang('ROI Amount')</span>
+                        <span class="detail-list-item__value roi_amount"></span>
                     </li>
                     <li class="detail-list-item">
                         <span class="detail-list-item__label">@lang('Total Earning')</span>
@@ -133,19 +140,33 @@
                 var unitPrice = "{{ gs('cur_sym') }}" + getAmount(invest.unit_price);
                 var totalPrice = "{{ gs('cur_sym') }}" + getAmount(invest.total_price);
                 var totalEarning = "{{ gs('cur_sym') }}" + getAmount(invest.total_earning);
+                var roiAmount = "{{ gs('cur_sym') }}" + getAmount(invest.roi_amount);
                 var roiPercentage = getAmount(invest.roi_percentage) + '%';
+                var cashBack = invest.capital_back ? "@lang('Yes')" : "@lang('No')";
+
+                // Calculate Profit Earning and Total Earning based on capital_back
+                var profitEarning = parseFloat(invest.total_earning);
+                var totalEarningValue = parseFloat(invest.total_earning);
+                if (invest.capital_back) {
+                    profitEarning += parseFloat(invest.total_price);
+                    totalEarningValue += parseFloat(invest.total_price);
+                }
+                profitEarning = "{{ gs('cur_sym') }}" + getAmount(profitEarning);
+                totalEarningValue = "{{ gs('cur_sym') }}" + getAmount(totalEarningValue);
 
                 // Update the modal content with extracted data
                 $('#projects-modal .modal-title').text(projectTitle);
                 $('#projects-modal .amount-detail-item__value').eq(0).text(totalPrice);
-                $('#projects-modal #totalEarning').text(totalEarning);
+                $('#projects-modal #totalEarning').text(profitEarning);
 
                 // Update the details list
                 var $detailListItems = $('#projects-modal .detail-list-item');
                 $detailListItems.eq(0).find('.detail-list-item__value').text(unitPrice);
                 $detailListItems.eq(1).find('.detail-list-item__value').text(totalPrice);
                 $detailListItems.eq(2).find('.detail-list-item__value').text(roiPercentage);
-                $detailListItems.eq(3).find('.detail-list-item__value').text(totalEarning);
+                $detailListItems.eq(3).find('.cashback').text(cashBack);
+                $detailListItems.eq(4).find('.roi_amount').text(roiAmount);
+                $detailListItems.eq(5).find('.detail-list-item__value').text(totalEarningValue);
 
                 // Show the modal
                 $('#projects-modal').modal('show');
