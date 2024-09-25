@@ -148,10 +148,20 @@
                                                           id="total-payable">{{ gs('cur_sym') }}{{ getAmount($project->share_amount) }}</span>
                                                 </li>
                                                 <li class="amount-detail-item">
-                                                    <span
-                                                        class="amount-detail-item__label">@lang('Invest + Profit')</span>
-                                                    <span class="amount-detail-item__value"
-                                                          id="total-earning">{{ gs('cur_sym') }}{{ getAmount($project->share_amount + $project->roi_amount) }}</span>
+                                                    @if($project->capital_back == Status::YES)
+                                                        <span
+                                                            class="amount-detail-item__label">@lang('Invest + Profit')</span>
+                                                        <span class="amount-detail-item__value"
+                                                              id="total-earning">
+                                                        {{ gs('cur_sym') }}{{ getAmount($project->share_amount + $project->roi_amount)}}
+                                                    </span>
+                                                    @else
+                                                        <span class="amount-detail-item__label">@lang('Profit')</span>
+                                                        <span class="amount-detail-item__value"
+                                                              id="total-earning">
+                                                        {{ gs('cur_sym') }}{{ getAmount( $project->roi_amount)}}
+                                                    </span>
+                                                    @endif
                                                 </li>
                                             </ul>
                                         </div>
@@ -228,9 +238,28 @@
                                                         </li>
                                                         <li class="detail-list-item">
                                                             <span
+                                                                class="detail-list-item__label">@lang('is Capital Back ?')</span>
+                                                            <span class="detail-list-item__value">
+                                                                @if ($project->capital_back)
+                                                                    @lang('Yes')
+                                                                @else
+                                                                    @lang('No')
+                                                                @endif</span>
+                                                        </li>
+                                                        <li class="detail-list-item">
+                                                            <span
                                                                 class="detail-list-item__label">@lang('Total Earning')</span>
-                                                            <span class="detail-list-item__value"
-                                                                  id="total-earning-last">{{ __(showAmount($project->share_amount + $project->roi_amount)) }}</span>
+                                                            @if($project->capital_back == Status::YES)
+                                                                <span class="detail-list-item__value total_earning"
+                                                                      id="total-earning-last">
+                                                                {{ __(showAmount($project->share_amount + $project->roi_amount)) }}
+                                                                </span>
+                                                            @else
+                                                                <span class="detail-list-item__value total_earning"
+                                                                      id="total-earning-last">
+                                                                {{ __(showAmount($project->roi_amount)) }}
+                                                                </span>
+                                                            @endif
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -265,6 +294,7 @@
                 const roiAmount = parseFloat("{{ $project->roi_amount }}");
                 const availableShare = parseInt("{{ $project->available_share }}");
                 const currencySymbol = "{{ gs('cur_sym') }}";
+                const capitalBack = "{{ $project->capital_back }}"; // Get the capital_back value
 
                 function updateQuantity(newValue) {
                     if (newValue > availableShare) {
@@ -285,16 +315,24 @@
                 }
 
                 function updateTotalEarning(quantity) {
-                    let totalEarning = (shareAmount + (roiAmount)) * quantity;
-                    let roiEarning = roiAmount * quantity;
+                    let totalEarning;
+                    if (capitalBack == 1) {
+                        totalEarning = (shareAmount + roiAmount) * quantity;
+                    } else {
+                        totalEarning = roiAmount * quantity;
+                    }
                     $totalEarning.text(currencySymbol + totalEarning.toFixed(2));
-                    $('.roi_amount').text(currencySymbol + roiEarning.toFixed(2));
+                    $('.roi_amount').text(currencySymbol + (roiAmount * quantity).toFixed(2));
                 }
-
 
                 function updateModalFields(quantity) {
                     let totalPrice = shareAmount * quantity;
-                    let totalEarning = (shareAmount + (roiAmount * quantity)) * quantity; // Adjusted to include roiAmount based on quantity
+                    let totalEarning;
+                    if (capitalBack == 1) {
+                        totalEarning = (shareAmount + roiAmount) * quantity;
+                    } else {
+                        totalEarning = roiAmount * quantity;
+                    }
 
                     $('#modal_quantity').val(quantity);
                     $('#modal_total_price').val(totalPrice.toFixed(2));

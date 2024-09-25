@@ -148,12 +148,11 @@
     <script>
         (function ($) {
             $(document).ready(function () {
-                // Function to fetch projects with AJAX
-                function fetchProjects() {
+                function fetchProjects(viewType) {
                     $.ajax({
                         url: "{{ route('project.filter') }}",
                         type: 'GET',
-                        data: $('#searchForm').serialize() + '&' + $('#filterForm').serialize(),
+                        data: $('#searchForm').serialize() + '&' + $('#filterForm').serialize() + '&viewType=' + viewType,
                         success: function (response) {
                             $("#singleProject").html(response.view);
                         },
@@ -165,24 +164,23 @@
 
                 $('#searchForm').on('submit', function (e) {
                     e.preventDefault();
-                    fetchProjects();
+                    fetchProjects('grid');
                 });
                 $('#filterForm input[name="category[]"]').on('change', function () {
-                    fetchProjects();
+                    fetchProjects('grid');
                 });
                 $('#filterForm input[name="return_type[]"]').on('change', function () {
-                    fetchProjects();
+                    fetchProjects('grid');
                 });
 
                 $(".list-grid-btn").on('click', function () {
                     const listGridClass = $(this).data("list-grid-class");
-                    if (listGridClass === "col-sm-6 col-xl-4") {
-                        $(".single-project").removeClass("col-sm-12").addClass(listGridClass);
-                    } else {
-                        $(".single-project").removeClass("col-sm-6 col-xl-4").addClass(listGridClass);
-                    }
+                    const viewType = listGridClass === "col-sm-6 col-xl-4" ? 'grid' : 'list';
+
                     $(".list-grid-btn").removeClass("active");
                     $(this).addClass("active");
+
+                    fetchProjects(viewType);
                 });
             });
         })(jQuery);

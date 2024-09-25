@@ -69,8 +69,17 @@ class ProjectController extends Controller
 
         $projects = $projects->latest()->paginate(getPaginate());
 
+        $viewType = $request->input('viewType', 'grid');
+
+        // Return the appropriate view based on viewType
+        if ($viewType === 'list') {
+            $view = view('Template::projects.list-project', compact('projects', 'categories', 'pageTitle'))->render();
+        } else {
+            $view = view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render();
+        }
+
         return response()->json([
-            'view' => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
+            'view' => $view,
             'totalProjects' => $projects->total(),
         ]);
     }

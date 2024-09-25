@@ -56,7 +56,7 @@ class ManageProjectController extends Controller
             'goal' => 'required|numeric|min:1',
             'description' => 'required|string',
             'share_amount' => 'required|numeric|min:1',
-            'share_count' => 'required|numeric|min:1',
+            'share_count' => "$isRequired|numeric|min:1",
             'roi_amount' => 'required|numeric|min:1',
             'roi_percentage' => 'required|numeric|min:1',
             'map_url' => 'required|string|url',
@@ -88,6 +88,7 @@ class ManageProjectController extends Controller
         } else {
             $project = new Project();
             $project->available_share = $request->share_count;
+            $project->share_count = $request->share_count;
             $notify[] = ['success', 'Project created successfully'];
             $redirect = redirect()->route('admin.project.index');
         }
@@ -124,7 +125,6 @@ class ManageProjectController extends Controller
         $project->title = $request->title;
         $project->slug = $request->slug;
         $project->goal = $request->goal;
-        $project->share_count = $request->share_count;
         $project->share_amount = $request->share_amount;
         $project->roi_percentage = $request->roi_percentage;
         $project->roi_amount = $roiAmount;

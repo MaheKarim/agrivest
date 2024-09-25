@@ -6,7 +6,7 @@
                     <a class="card-thumb" href="{{ route('project.details', $project->slug) }}">
                         <img
                             src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
-                            alt="">
+                            alt="@lang('Project Image')">
                     </a>
 
                     <div class="card-offer">
@@ -32,8 +32,8 @@
                            class="btn btn--xsm btn--outline">@lang('Book Now')</a>
                     </div>
                     <div class="card-bottom">
-                                            <span
-                                                class="card-bottom__unit">@lang('Remaining:') {{ __($project->available_share) }} @lang('Units')</span>
+                        <span
+                            class="card-bottom__unit">@lang('Remaining:') {{ __($project->available_share) }} @lang('Units')</span>
                         <span
                             class="card-bottom__duration">{{ __(diffForHumans($project->end_date)) }}</span>
                     </div>
