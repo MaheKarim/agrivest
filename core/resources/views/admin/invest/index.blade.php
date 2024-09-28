@@ -33,7 +33,7 @@
                                     </td>
                                     <td>
                                         @php
-                                            $remaining = $invest->period - $invest->repeated_times;
+                                            $remaining = $invest->repeated_times - $invest->period;
                                         @endphp
                                         {{ __($invest->period) }} | {{ __($remaining) }}
                                     </td>
