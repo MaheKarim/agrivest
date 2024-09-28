@@ -19,10 +19,11 @@ class UserController extends Controller
     {
         $pageTitle = 'My Projects';
         $invests = auth()->user()->invests()
-            ->with('project:id,title')
+            ->with(['project', 'project.time'])
             ->searchable(['project:title'])
             ->latest()
             ->paginate(getPaginate());
+
 
         return view('Template::user.projects', compact('pageTitle', 'invests'));
     }

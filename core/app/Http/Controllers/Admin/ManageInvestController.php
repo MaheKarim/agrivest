@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Invest;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class ManageInvestController extends Controller
@@ -20,9 +21,10 @@ class ManageInvestController extends Controller
     public function details($id)
     {
         $pageTitle = 'Invest Details';
-        $invest = Invest::findOrFail($id);
+        $invest = Invest::with('user', 'project')->findOrFail($id);
+        $transactions = Transaction::where('invest_id', $invest->id)->orderBy('id', 'desc')->paginate(getPaginate());
 
-        return view('admin.invest.details', compact('pageTitle', 'invest'));
+        return view('admin.invest.details', compact('pageTitle', 'invest', 'transactions'));
     }
 
     public function investStatus(Request $request, $id)

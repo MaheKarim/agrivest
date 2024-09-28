@@ -10,11 +10,15 @@ class ProjectController extends Controller
 {
     public function projects()
     {
-        $pageTitle = 'Projects';
+        $pageTitle  = 'Projects';
         $categories = Category::active()->get();
-        $projects = Project::active()->available()->beforeEndDate()->latest()->paginate(getPaginate(18));
+        $projects   = Project::active()->available()->beforeEndDate();
+        $count      = $projects->count();
+        $projects   = $projects->latest()->paginate(getPaginate(18));
+        $minProjectPrice = $projects->min('share_amount');
+        $maxProjectPrice = $projects->max('share_amount');
 
-        return view('Template::projects.index', compact('pageTitle', 'projects', 'categories'));
+        return view('Template::projects.index', compact('pageTitle', 'projects', 'categories', 'count', 'minProjectPrice', 'maxProjectPrice'));
     }
 
     public function projectDetails($slug)
@@ -55,10 +59,12 @@ class ProjectController extends Controller
 
     public function filter(Request $request)
     {
-        $pageTitle = 'Projects';
-        $categories = Category::active()->get();
+        $pageTitle  = 'Projects'; // Define $pageTitle
+        $categories = Category::active()->get(); // Define $categories
+
         $projects = Project::active()->searchable(['title'])->beforeEndDate()->available();
 
+        // Apply filters
         if ($request->has('category') && !empty($request->category)) {
             $projects = $this->filterItem($request, $projects, 'category');
         }
@@ -67,9 +73,23 @@ class ProjectController extends Controller
             $projects = $this->filterItem($request, $projects, 'return_type');
         }
 
+        // Price filtering
+        if ($request->filled('min_price') || $request->filled('max_price')) {
+            $minPrice = $request->input('min_price', 0);
+            $maxPrice = $request->input('max_price', PHP_INT_MAX);
+
+            $projects = $projects->whereBetween('share_amount', [$minPrice, $maxPrice]);
+        }
+
+        // Get the min and max prices of the filtered projects
+        $minProjectPrice = $projects->min('share_amount');
+        $maxProjectPrice = $projects->max('share_amount');
+
         $projects = $projects->latest()->paginate(getPaginate());
 
         $viewType = $request->input('viewType', 'grid');
+
+        session()->put('viewType', $viewType);
 
         // Return the appropriate view based on viewType
         if ($viewType === 'list') {
@@ -79,10 +99,13 @@ class ProjectController extends Controller
         }
 
         return response()->json([
-            'view' => $view,
+            'view'          => $view,
             'totalProjects' => $projects->total(),
+            'minPrice'      => $minProjectPrice,
+            'maxPrice'      => $maxProjectPrice,
         ]);
     }
+
 
     protected function filterItem($request, $projects, $type)
     {

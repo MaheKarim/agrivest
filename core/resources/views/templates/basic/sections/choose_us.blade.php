@@ -1,13 +1,14 @@
 @php
-    $whyWeContent = getContent('why_we.content', true);
-    $whyWeElement = getContent('why_we.element', orderById: true);
+    $whyWeContent = getContent('choose_us.content', true);
+    $whyWeElement = getContent('choose_us.element', orderById: true);
 @endphp
 <section class="why-invest bg--white py-120">
     <div class="container">
         <div class="row gy-5 gy-lg-0 justify-content-center">
             <div class="col-md-10 col-lg-6 col-xxl-7">
                 <div class="why-invest__thumb">
-                    <img src="{{ frontendImage('why_we',@$whyWeContent->data_values->image,'666x556') }}" alt="@lang('Image')">
+                    <img src="{{ frontendImage('choose_us', @$whyWeContent->data_values->image, '666x556') }}"
+                        alt="@lang('Image')">
 
                     <div class="why-invest__thumb-overlay">
                         <a class="play-btn" href="{{ @$whyWeContent->data_values->video_link }}">
@@ -20,7 +21,9 @@
                 <div class="why-invest__content">
                     <div class="section-heading style-left">
                         <div class="section-heading__sec-name">
-                            <img class="me-2" src="{{ frontendImage('why_we',@$whyWeContent->data_values->icon_image) }}" alt="@lang('Icon')">
+                            <img class="me-2"
+                                src="{{ frontendImage('choose_us', @$whyWeContent->data_values->icon_image) }}"
+                                alt="@lang('Icon')">
                             <span>{{ __(@$whyWeContent->data_values->small_heading) }}</span>
                         </div>
                         <h3 class="section-heading__title">{{ __(@$whyWeContent->data_values->heading) }}</h3>
@@ -29,11 +32,12 @@
 
                     <ul class="why-invest-points">
                         @foreach ($whyWeElement as $element)
-                        <li class="why-invest-points__item">{{ __(@$element->data_values->text) }}</li>
+                            <li class="why-invest-points__item">{{ __(@$element->data_values->text) }}</li>
                         @endforeach
                     </ul>
 
-                    <a href="{{ @$whyWeContent->data_values->button_url }}" class="btn btn--lg btn--outline">{{__(@$whyWeContent->data_values->button_name)}}</a>
+                    <a href="{{ @$whyWeContent->data_values->button_url }}"
+                        class="btn btn--lg btn--outline">{{ __(@$whyWeContent->data_values->button_name) }}</a>
                 </div>
             </div>
         </div>
@@ -42,7 +46,7 @@
 
 @push('script')
     <script>
-        (function ($) {
+        (function($) {
             "use strict";
             $('.play-btn').magnificPopup({
                 type: 'iframe',

@@ -41,7 +41,7 @@ class ManageProjectController extends Controller
 
         foreach ($project->gallery ?? [] as $key => $gallery) {
             $img['id'] = $gallery;
-            $img['src'] = getImage(getFilePath('projectGallery') . '/' . $gallery);
+            $img['src'] = getImage(getFilePath('project') . '/' . $gallery);
             $galleries[] = $img;
         }
 
@@ -52,24 +52,24 @@ class ManageProjectController extends Controller
     {
         $isRequired = $id ? 'nullable' : 'required';
         $request->validate([
-            'title' => 'required|string|max:191',
-            'goal' => 'required|numeric|min:1',
-            'description' => 'required|string',
-            'share_amount' => 'required|numeric|min:1',
-            'share_count' => "$isRequired|numeric|min:1",
-            'roi_amount' => 'required|numeric|min:1',
-            'roi_percentage' => 'required|numeric|min:1',
-            'map_url' => 'required|string|url',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'maturity_time' => 'required|numeric|min:1',
-            'image' => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'gallery' => "$isRequired|array|min:0|max:4",
-            'gallery.*' => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'category_id' => "$isRequired|exists:categories,id",
-            'time_id' => "$isRequired|exists:times,id",
-            'return_type' => 'required|in:' . Status::REPEAT . ',' . Status::LIFETIME,
-            'repeat_times' => 'nullable|required_if:return_type,' . Status::REPEAT . '|numeric|min:1',
+            'title'          => 'required|string|max:40',
+            'goal'           => 'required|numeric|gt:0',
+            'description'    => 'required|string',
+            'share_amount'   => 'required|numeric|gt:0',
+            'share_count'    => "$isRequired|numeric|gt:0",
+            'roi_amount'     => 'required|numeric|gt:0',
+            'roi_percentage' => 'required|numeric|gt:0',
+            'map_url'        => 'required|string|url',
+            'start_date'     => 'required|date',
+            'end_date'       => 'required|date',
+            'maturity_time'  => 'required|numeric|gt:0',
+            'image'          => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'gallery'        => "$isRequired|array|min:0|max:4",
+            'gallery.*'      => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'category_id'    => "$isRequired|exists:categories,id",
+            'time_id'        => "$isRequired|exists:times,id",
+            'return_type'    => 'required|in:' . Status::REPEAT . ',' . Status::LIFETIME,
+            'repeat_times'   => 'nullable|required_if:return_type,' . Status::REPEAT . '|numeric|gt:0',
         ]);
 
         if ($id) {
@@ -79,7 +79,7 @@ class ManageProjectController extends Controller
 
             if ($imageToRemove != null && count($imageToRemove)) {
                 foreach ($imageToRemove as $singleImage) {
-                    fileManager()->removeFile(getFilePath('projectGallery') . '/' . $singleImage);
+                    fileManager()->removeFile(getFilePath('project') . '/' . $singleImage);
                 }
 
                 $project->gallery = removeElement($project->gallery, $imageToRemove);
@@ -108,7 +108,7 @@ class ManageProjectController extends Controller
         if ($request->hasFile('gallery')) {
             foreach ($request->gallery as $singleImage) {
                 try {
-                    $gallery[] = fileUploader($singleImage, getFilePath('projectGallery'), getFileSize('projectGallery'));
+                    $gallery[] = fileUploader($singleImage, getFilePath('project'), getFileSize('project'));
                 } catch (\Exception $exp) {
                     $notify[] = ['error', 'Couldn\'t upload your product gallery image'];
                     return back()->withNotify($notify);

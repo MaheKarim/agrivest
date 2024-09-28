@@ -23,9 +23,9 @@
             "text": "text"
         }
     },
-    "why_we": {
+    "choose_us": {
         "builder": true,
-        "name": "Why We Are Section",
+        "name": "Why Choose Us",
         "content": {
             "images": {
                 "image": {
@@ -197,7 +197,7 @@
             "images": {
                 "image": {
                     "size": "966x450",
-                    "thumb": "416x268"
+                    "thumb": "416x193"
                 }
             },
             "title": "text",

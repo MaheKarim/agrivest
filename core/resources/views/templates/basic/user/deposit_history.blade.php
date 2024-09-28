@@ -7,7 +7,7 @@
                 <form class="d-flex align-items-center">
                     <div class="position-relative">
                         <input class="form-control form--control with-search-icon" type="search" name="search"
-                               value="{{ request()->search }}" placeholder="@lang('Search by transactions')">
+                            value="{{ request()->search }}" placeholder="@lang('Search by transactions')">
                         <button type="submit" class="search-icon-button">
                             <i class="las la-search search-icon"></i>
                         </button>
@@ -16,22 +16,22 @@
             </div>
             <div class="dashboard-card__body">
                 <div class="table-responsive">
-                    <table class="table table--responsive--sm">
+                    <table class="table table--responsive--md">
                         <thead>
-                        <tr>
-                            <th>@lang('Gateway | Transaction')</th>
-                            <th class="text-center">@lang('Initiated')</th>
-                            <th class="text-center">@lang('Amount')</th>
-                            <th class="text-center text-nowrap">@lang('Conversion')</th>
-                            <th class="text-center">@lang('Status')</th>
-                            <th>@lang('Details')</th>
-                        </tr>
+                            <tr>
+                                <th>@lang('Gateway | Transaction')</th>
+                                <th class="text-center">@lang('Initiated')</th>
+                                <th class="text-center">@lang('Amount')</th>
+                                <th class="text-center text-nowrap">@lang('Conversion')</th>
+                                <th class="text-center">@lang('Status')</th>
+                                <th>@lang('Details')</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @forelse($deposits as $deposit)
-                            <tr>
-                                <td>
-                                    <div class="td-wrapper text-nowrap">
+                            @forelse($deposits as $deposit)
+                                <tr>
+                                    <td>
+                                        <div class="td-wrapper text-nowrap">
                                             <span class="fw-bold">
                                                 <span class="text--base">
                                                     @if ($deposit->method_code < 5000)
@@ -41,84 +41,82 @@
                                                     @endif
                                                 </span>
                                             </span>
-                                        <br>
-                                        <small>{{ $deposit->trx }}</small>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="td-wrapper">
-                                        <span class="text-nowrap">{{ showDateTime($deposit->created_at) }}</span>
-                                        <br>{{ diffForHumans($deposit->created_at) }}
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="td-wrapper">
-                                        <span class="text-nowrap">{{ showAmount($deposit->amount) }}</span> +
-                                        <span class="text--danger" data-bs-toggle="tooltip"
-                                              title="@lang('Processing Charge')">
-                                                                                {{ showAmount($deposit->charge) }}
-                                                                            </span>
-                                        <br>
-                                        <strong data-bs-toggle="tooltip" title="@lang('Amount with charge')">
-                                            {{ showAmount($deposit->amount + $deposit->charge) }}
-                                        </strong>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="td-wrapper">
-                                        {{ showAmount(1) }} = {{ showAmount($deposit->rate, currencyFormat: false) }}
-                                        {{ __($deposit->method_currency) }}
-                                        <br>
-                                        <strong
-                                            class="fs-12">{{ showAmount($deposit->final_amount, currencyFormat: false) }}
-                                            {{ __($deposit->method_currency) }}</strong>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="td-wrapper">
-                                        @php echo $deposit->statusBadge @endphp
-                                    </div>
-                                </td>
-                                @php
-                                    $details = [];
-                                    if ($deposit->method_code >= 1000 && $deposit->method_code <= 5000) {
-                                        foreach (@$deposit->detail ?? [] as $key => $info) {
-                                            $details[] = $info;
-                                            if ($info->type == 'file') {
-                                                $details[$key]->value = route(
-                                                    'user.download.attachment',
-                                                    encrypt(getFilePath('verify') . '/' . $info->value),
-                                                );
+                                            <br>
+                                            <small>{{ $deposit->trx }}</small>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="td-wrapper">
+                                            <span class="text-nowrap">{{ showDateTime($deposit->created_at) }}</span>
+                                            <br>{{ diffForHumans($deposit->created_at) }}
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="td-wrapper">
+                                            <span class="text-nowrap">{{ showAmount($deposit->amount) }}</span> +
+                                            <span class="text--danger" data-bs-toggle="tooltip" title="@lang('Processing Charge')">
+                                                {{ showAmount($deposit->charge) }}
+                                            </span>
+                                            <br>
+                                            <strong data-bs-toggle="tooltip" title="@lang('Amount with charge')">
+                                                {{ showAmount($deposit->amount + $deposit->charge) }}
+                                            </strong>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="td-wrapper">
+                                            {{ showAmount(1) }} = {{ showAmount($deposit->rate, currencyFormat: false) }}
+                                            {{ __($deposit->method_currency) }}
+                                            <br>
+                                            <strong
+                                                class="fs-12">{{ showAmount($deposit->final_amount, currencyFormat: false) }}
+                                                {{ __($deposit->method_currency) }}</strong>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="td-wrapper">
+                                            @php echo $deposit->statusBadge @endphp
+                                        </div>
+                                    </td>
+                                    @php
+                                        $details = [];
+                                        if ($deposit->method_code >= 1000 && $deposit->method_code <= 5000) {
+                                            foreach (@$deposit->detail ?? [] as $key => $info) {
+                                                $details[] = $info;
+                                                if ($info->type == 'file') {
+                                                    $details[$key]->value = route(
+                                                        'user.download.attachment',
+                                                        encrypt(getFilePath('verify') . '/' . $info->value),
+                                                    );
+                                                }
                                             }
                                         }
-                                    }
-                                @endphp
-                                <td>
-                                    <div class="td-wrapper">
-                                        @if ($deposit->method_code >= 1000 && $deposit->method_code <= 5000)
-                                            <button type="button"
+                                    @endphp
+                                    <td>
+                                        <div class="td-wrapper">
+                                            @if ($deposit->method_code >= 1000 && $deposit->method_code <= 5000)
+                                                <button type="button"
                                                     class="btn btn--xsm btn--outline action-btn detailBtn"
                                                     data-info="{{ json_encode($details) }}"
-                                                    @if ($deposit->status == Status::PAYMENT_REJECT) data-admin_feedback="{{ $deposit->admin_feedback }}"
-                                                    @endif
+                                                    @if ($deposit->status == Status::PAYMENT_REJECT) data-admin_feedback="{{ $deposit->admin_feedback }}" @endif
                                                     data-bs-toggle="modal" data-bs-target="#projects-modal">
-                                                <i class="las la-desktop"></i>
-                                            </button>
-                                        @else
-                                            <button type="button" class="btn btn--xsm btn--outline action-btn"
+                                                    <i class="las la-desktop"></i>
+                                                </button>
+                                            @else
+                                                <button type="button" class="btn btn--xsm btn--outline action-btn"
                                                     data-bs-toggle="tooltip" title="@lang('Automatically processed')">
-                                                <i class="las la-check"></i>
-                                            </button>
-                                        @endif
-                                    </div>
-                                </td>
-                            </tr>
+                                                    <i class="las la-check"></i>
+                                                </button>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
 
-                        @empty
-                            <tr>
-                                <td colspan="100%" class="text-center text--base">{{ __($emptyMessage) }}</td>
-                            </tr>
-                        @endforelse
+                            @empty
+                                <tr>
+                                    <td colspan="100%" class="text-center text--base">{{ __($emptyMessage) }}</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -153,9 +151,9 @@
 
 @push('script')
     <script>
-        (function ($) {
+        (function($) {
             "use strict";
-            $('.detailBtn').on('click', function () {
+            $('.detailBtn').on('click', function() {
                 var modal = $('#detailModal');
                 var userData = $(this).data('info');
                 var html = '';
@@ -195,7 +193,7 @@
             });
 
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[title], [data-title], [data-bs-title]'));
-            tooltipTriggerList.map(function (tooltipTriggerEl) {
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
             });
         })(jQuery);
