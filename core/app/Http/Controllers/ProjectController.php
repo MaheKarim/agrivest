@@ -10,15 +10,15 @@ class ProjectController extends Controller
 {
     public function projects()
     {
-        $pageTitle  = 'Projects';
+        $pageTitle = 'Projects';
         $categories = Category::active()->get();
-        $projects   = Project::active()->available()->beforeEndDate();
-        $count      = $projects->count();
-        $projects   = $projects->latest()->paginate(getPaginate(18));
+        $projects = Project::active()->available()->beforeEndDate();
+        $count = $projects->count();
+        $maxShareAmount = $projects->max('share_amount');
+        $projects = $projects->latest()->paginate(getPaginate(18));
         $minProjectPrice = $projects->min('share_amount');
-        $maxProjectPrice = $projects->max('share_amount');
 
-        return view('Template::projects.index', compact('pageTitle', 'projects', 'categories', 'count', 'minProjectPrice', 'maxProjectPrice'));
+        return view('Template::projects.index', compact('pageTitle', 'projects', 'categories', 'count', 'minProjectPrice', 'maxShareAmount'));
     }
 
     public function projectDetails($slug)
@@ -59,7 +59,7 @@ class ProjectController extends Controller
 
     public function filter(Request $request)
     {
-        $pageTitle  = 'Projects'; // Define $pageTitle
+        $pageTitle = 'Projects'; // Define $pageTitle
         $categories = Category::active()->get(); // Define $categories
 
         $projects = Project::active()->searchable(['title'])->beforeEndDate()->available();
@@ -99,10 +99,10 @@ class ProjectController extends Controller
         }
 
         return response()->json([
-            'view'          => $view,
+            'view' => $view,
             'totalProjects' => $projects->total(),
-            'minPrice'      => $minProjectPrice,
-            'maxPrice'      => $maxProjectPrice,
+            'minPrice' => $minProjectPrice,
+            'maxPrice' => $maxProjectPrice,
         ]);
     }
 

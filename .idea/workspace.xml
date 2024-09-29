@@ -5,64 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59105471-d50f-4b70-a20a-419d7ab5ca67" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/agrivest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/agrivest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agrivest_v1.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/frontend/why_we/66cea5ae3fc451724818862.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/frontend/why_we/66cea5ae6acb31724818862.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/images/svg/search.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/images/svg/search.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/basic/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/templates/basic/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Constants/FileInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Constants/FileInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/FrontendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/FrontendController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/InvestReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/InvestReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageInvestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageInvestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageTimeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ManageTimeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Admin/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/CronController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/Gateway/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/Gateway/PaymentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/ProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/User/InvestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/User/InvestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Controllers/User/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Controllers/User/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Http/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/app/Http/Helpers/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/app/Lib/Capital.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/invest/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/invest/details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/invest/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/invest/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/partials/invest_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/partials/invest_details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/project/invest_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/project/invest_history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/reports/invest_details.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/reports/invest_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/reports/invest_history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/reports/invest_statistics.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/reports/invest_statistics.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/admin/setting/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/admin/setting/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/blog_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/blog_details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/contact.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/blog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/blog.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/header_responsive.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/header_responsive.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/invest_data.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/invest_data.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/sidebar_dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/partials/sidebar_dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/policy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/policy.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/buy-modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/buy-modal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/list-project.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/list-project.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/projects/project_details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/award.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/award.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/banner.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/banner.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/our_offer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/our_offer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/sections/why_we.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/2fa.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/2fa.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/ban.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/authorization/ban.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/passwords/code_verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/passwords/code_verify.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/auth/passwords/reset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/resources/views/templates/basic/user/deposit_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/resources/views/templates/basic/user/deposit_history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/routes/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/routes/admin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -411,6 +357,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2lF9s1gfdmHGDCtSnt8XzasYXmr" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -419,36 +368,37 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.CodyAccountHistoryMigration": "true",
-    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
-    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
-    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
-    "RunOnceActivity.CodyHistoryLlmMigration": "true",
-    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
-    "RunOnceActivity.CodyProjectSettingsMigration": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
-    "RunOnceActivity.laravel-idea.search-composer-json": "true",
-    "RunOnceActivity.laravel-idea.update-module-directories": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/laragon/www/agrivest",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAccountsIdsRefresh&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyMigrateChatHistory-v2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ToggleCodyToolWindowAfterMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.laravel-idea.search-composer-json&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.laravel-idea.update-module-directories&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/agrivest&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\laragon\www\agrivest\core\resources\views\components" />
@@ -522,12 +472,16 @@
       <workItem from="1727186793528" duration="1550000" />
       <workItem from="1727246668617" duration="9882000" />
       <workItem from="1727520142598" duration="884000" />
-      <workItem from="1727539375450" duration="49000" />
+      <workItem from="1727539375450" duration="334000" />
+      <workItem from="1727590681266" duration="3221000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
