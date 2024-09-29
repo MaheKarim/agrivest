@@ -21,6 +21,69 @@ class ProjectController extends Controller
         return view('Template::projects.index', compact('pageTitle', 'projects', 'categories', 'count', 'minProjectPrice', 'maxShareAmount'));
     }
 
+    public function filter(Request $request)
+    {
+        $pageTitle = 'Projects';
+        $categories = Category::active()->get();
+
+        $projects = Project::active()->searchable(['title'])->beforeEndDate()->available();
+
+        // Apply filters
+        if ($request->has('category') && !empty($request->category)) {
+            $projects = $this->filterItem($request, $projects, 'category');
+        }
+
+        if ($request->has('return_type') && !empty($request->return_type)) {
+            $projects = $this->filterItem($request, $projects, 'return_type');
+        }
+
+        // Price filtering
+        if ($request->filled('min_price') || $request->filled('max_price')) {
+            $minPrice = $request->input('min_price', 0);
+            $maxPrice = $request->input('max_price', PHP_INT_MAX);
+
+            $projects = $projects->whereBetween('share_amount', [$minPrice, $maxPrice]);
+        }
+
+        // Get the min and max prices of the filtered projects
+        $minProjectPrice = $projects->min('share_amount');
+        $maxProjectPrice = $projects->max('share_amount');
+
+        $projects = $projects->latest()->paginate(getPaginate(18));
+
+        $viewType = $request->input('viewType', 'grid');
+
+        session()->put('viewType', $viewType);
+
+        // Return the appropriate view based on viewType
+        if ($viewType === 'list') {
+            $view = view('Template::projects.list-project', compact('projects', 'categories', 'pageTitle'))->render();
+        } else {
+            $view = view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render();
+        }
+
+        return response()->json([
+            'view' => $view,
+            'totalProjects' => $projects->total(),
+            'minPrice' => $minProjectPrice,
+            'maxPrice' => $maxProjectPrice,
+        ]);
+    }
+
+
+    protected function filterItem($request, $projects, $type)
+    {
+        $col = $type == 'category' ? ($type . '_id') : $type;
+
+        if (is_array($request->$type)) {
+            $projects->whereIn($col, $request->$type);
+        } else {
+            $projects->where($col, $request->$type);
+        }
+
+        return $projects;
+    }
+
     public function projectDetails($slug)
     {
         $pageTitle = 'Project Details';
@@ -57,66 +120,5 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function filter(Request $request)
-    {
-        $pageTitle = 'Projects'; // Define $pageTitle
-        $categories = Category::active()->get(); // Define $categories
 
-        $projects = Project::active()->searchable(['title'])->beforeEndDate()->available();
-
-        // Apply filters
-        if ($request->has('category') && !empty($request->category)) {
-            $projects = $this->filterItem($request, $projects, 'category');
-        }
-
-        if ($request->has('return_type') && !empty($request->return_type)) {
-            $projects = $this->filterItem($request, $projects, 'return_type');
-        }
-
-        // Price filtering
-        if ($request->filled('min_price') || $request->filled('max_price')) {
-            $minPrice = $request->input('min_price', 0);
-            $maxPrice = $request->input('max_price', PHP_INT_MAX);
-
-            $projects = $projects->whereBetween('share_amount', [$minPrice, $maxPrice]);
-        }
-
-        // Get the min and max prices of the filtered projects
-        $minProjectPrice = $projects->min('share_amount');
-        $maxProjectPrice = $projects->max('share_amount');
-
-        $projects = $projects->latest()->paginate(getPaginate());
-
-        $viewType = $request->input('viewType', 'grid');
-
-        session()->put('viewType', $viewType);
-
-        // Return the appropriate view based on viewType
-        if ($viewType === 'list') {
-            $view = view('Template::projects.list-project', compact('projects', 'categories', 'pageTitle'))->render();
-        } else {
-            $view = view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render();
-        }
-
-        return response()->json([
-            'view' => $view,
-            'totalProjects' => $projects->total(),
-            'minPrice' => $minProjectPrice,
-            'maxPrice' => $maxProjectPrice,
-        ]);
-    }
-
-
-    protected function filterItem($request, $projects, $type)
-    {
-        $col = $type == 'category' ? ($type . '_id') : $type;
-
-        if (is_array($request->$type)) {
-            $projects->whereIn($col, $request->$type);
-        } else {
-            $projects->where($col, $request->$type);
-        }
-
-        return $projects;
-    }
 }

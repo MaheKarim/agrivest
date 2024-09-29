@@ -4,7 +4,8 @@
             <article class="card card--offer card--list-view style-two">
                 <div class="card-left">
                     <a class="card-thumb" href="{{ route('project.details', $project->slug) }}">
-                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                        <img
+                            src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
                             alt="@lang('Project Image')">
                     </a>
 
@@ -18,8 +19,8 @@
                 <div class="card-right">
                     <div class="card-top">
                         <img class="card-thumb-sm"
-                            src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
-                            alt="">
+                             src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                             alt="">
                         <h6 class="card-title">
                             <a href="{{ route('project.details', $project->slug) }}">{{ __($project->title) }}
                             </a>
@@ -47,7 +48,7 @@
 
                         <div class="card-buttons">
                             <a class="btn btn--xsm btn--outline book-now"
-                                href="{{ route('project.details', $project->slug) }}">
+                               href="{{ route('project.details', $project->slug) }}">
                                 @lang('Book Now')
                             </a>
                         </div>
@@ -72,9 +73,3 @@
         </div>
     @endforelse
 </div>
-
-@if ($projects->hasPages())
-    <ul class="pagination">
-        {{ paginateLinks($projects) }}
-    </ul>
-@endif

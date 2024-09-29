@@ -302,7 +302,7 @@
                         }
                     });
                 }
-                
+
                 $('#searchForm').on('submit', function (e) {
                     e.preventDefault();
                     fetchProjects(viewType);
