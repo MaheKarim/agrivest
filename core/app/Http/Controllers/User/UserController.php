@@ -8,6 +8,7 @@ use App\Lib\FormProcessor;
 use App\Lib\GoogleAuthenticator;
 use App\Models\DeviceToken;
 use App\Models\Form;
+use App\Models\Project;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -268,5 +269,12 @@ class UserController extends Controller
         header('Content-Disposition: attachment; filename="' . $title);
         header("Content-Type: " . $mimetype);
         return readfile($filePath);
+    }
+
+    public function projectsTransactions($id)
+    {
+        $pageTitle = 'Project Transactions';
+        $transactions = Transaction::where('invest_id', $id)->with(['invest'])->orderBy('id', 'desc')->paginate(getPaginate());
+        return view('Template::user.projects_transaction', compact('pageTitle', 'transactions'));
     }
 }
