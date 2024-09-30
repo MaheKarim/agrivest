@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants\Status;
+use App\Lib\Capital;
 use App\Lib\CurlRequest;
 use App\Models\CronJob;
 use App\Models\CronJobLog;
@@ -14,7 +15,7 @@ class CronController extends Controller
 {
     public function cron()
     {
-        $general            = gs();
+        $general = gs();
         $general->last_cron = now();
         $general->save();
 
@@ -27,9 +28,9 @@ class CronController extends Controller
         }
         $crons = $crons->get();
         foreach ($crons as $cron) {
-            $cronLog              = new CronJobLog();
+            $cronLog = new CronJobLog();
             $cronLog->cron_job_id = $cron->id;
-            $cronLog->start_at    = now();
+            $cronLog->start_at = now();
             if ($cron->is_default) {
                 $controller = new $cron->action[0];
                 try {
@@ -51,9 +52,9 @@ class CronController extends Controller
 
             $cronLog->end_at = $cron->last_run;
 
-            $startTime         = Carbon::parse($cronLog->start_at);
-            $endTime           = Carbon::parse($cronLog->end_at);
-            $diffInSeconds     = $startTime->diffInSeconds($endTime);
+            $startTime = Carbon::parse($cronLog->start_at);
+            $endTime = Carbon::parse($cronLog->end_at);
+            $diffInSeconds = $startTime->diffInSeconds($endTime);
             $cronLog->duration = $diffInSeconds;
             $cronLog->save();
         }
@@ -73,112 +74,70 @@ class CronController extends Controller
         try {
             $now = Carbon::now();
             $invests = Invest::with(['user', 'project.time'])
-                ->whereHas('project')
-                ->running() //status running
+                ->whereHas('project', function ($query) use ($now) {
+                    $query->where('maturity_date', '<', $now);
+                })
+                ->running()
                 ->where('next_time', '<=', $now)
                 ->orderBy('last_time')
                 ->take(100)
                 ->get();
 
-            dump($invests);
+            // dd($invests);
+
             foreach ($invests as $invest) {
-                // dd(getTotalReturns($invest) <= $invest->period);
+                $project = $invest->project;
+                $user    = $invest->user;
+                $hours   = (int)$invest->project?->time->hours;
+                $next    = now()->addHours($hours)->toDateTimeString();
 
-                // 4 <= 3
-                // 4 = 4
-                // 4 <= 5
-                // 4 <= 6
+                // Process investment
+                $invest->period += 1;
+                $invest->paid += $invest->recuring_pay;
+                $invest->next_time = $next;
+                $invest->last_time = now();
 
-                $this->processInvestment($invest, $now);
+                // Update user's balance
+                $user->balance += $invest->recuring_pay;
+                $user->save();
+
+                // Log the transaction
+                $trx                       = getTrx();
+                $transaction               = new Transaction();
+                $transaction->user_id      = $user->id;
+                $transaction->amount       = $invest->recuring_pay;
+                $transaction->charge       = 0;
+                $transaction->post_balance = $user->balance;
+                $transaction->trx_type     = '+';
+                $transaction->trx          = $trx;
+                $transaction->remark       = 'profit';
+                $transaction->details      = showAmount($invest->recuring_pay) . ' profit from ' . @$invest->project->title;
+                $transaction->save();
+
+
+                // Check if the investment should be closed
+                if ($invest->repeat_times == $invest->period && $invest->return_type != Status::LIFETIME) {
+                    $invest->status = Status::INVEST_CLOSED;
+                    if ($invest->capital_status == Status::CAPITAL_BACK) {
+                        Capital::capitalReturn($invest);
+                    }
+                }
+
+                // Save the updated investment
+                $invest->save();
+
+                // Notify the user about the profit
+                notify($user, 'INTEREST', [
+                    'trx'          => $trx,
+                    'amount'       => showAmount($invest->recuring_pay),
+                    'project_name' => @$invest->project->title,
+                    'post_balance' => showAmount($user->balance),
+                ]);
             }
         } catch (\Throwable $th) {
             throw new \Exception($th->getMessage());
         }
     }
 
-    private function processInvestment($invest, $now)
-    {
-        $user    = $invest->user;
-        $hours   = (int)$invest->project?->time->hours;
-        $next    = $now->addHours($hours)->toDateTimeString();
-
-        // Process investment
-        $invest->period   += 1;
-        $invest->paid     += $invest->recurring_pay;
-        $invest->next_time = $next;
-        $invest->last_time = $now;
-
-        // dd(getTotalReturns($invest) <= $invest->period);
-
-        // Update user's balance
-        $user->balance += $invest->recurring_pay;
-        $user->save();
-
-        // Log the transaction
-        $trx                       = getTrx();
-        $transaction               = new Transaction();
-        $transaction->user_id      = $user->id;
-        $transaction->invest_id    = $invest->id;
-        $transaction->amount       = $invest->recurring_pay;
-        $transaction->charge       = 0;
-        $transaction->post_balance = $user->balance;
-        $transaction->trx_type     = '+';
-        $transaction->trx          = $trx;
-        $transaction->remark       = 'profit';
-        $transaction->details      = showAmount($invest->recurring_pay) . ' profit from ' . @$invest->project->title;
-        $transaction->save();
-
-        // Check if the investment should be closed
-        $this->checkInvestmentClosure($invest, $now);
-
-        // Save the updated investment
-        $invest->save();
-
-        // Notify the user about the profit
-        notify($user, 'INTEREST', [
-            'trx'          => $trx,
-            'amount'       => showAmount($invest->recurring_pay),
-            'project_name' => @$invest->project->title,
-            'post_balance' => showAmount($user->balance),
-        ]);
-    }
-
-    private function checkInvestmentClosure($invest, $now)
-    {
-        if ($invest->return_type == Status::LIFETIME) {
-            if (getTotalReturns($invest) <= $invest->period) {
-                $invest->status = Status::INVEST_COMPLETED;
-                $invest->save();
-
-                $this->capitalReturn($invest);
-            }
-        } elseif ($invest->repeat_times == $invest->period) {
-            $invest->status = Status::INVEST_COMPLETED;
-            $this->capitalReturn($invest);
-        }
-    }
-
-    private function capitalReturn($invest)
-    {
-        if ($invest->capital_back == Status::CAPITAL_BACK && $invest->capital_status == Status::NO) {
-            $user           = $invest->user;
-            $user->balance += $invest->total_price;
-            $user->save();
-
-            $invest->capital_status = Status::YES;
-            $invest->save();
-
-            $transaction               = new Transaction();
-            $transaction->user_id      = $user->id;
-            $transaction->invest_id    = $invest->id;
-            $transaction->amount       = $invest->total_price;
-            $transaction->charge       = 0;
-            $transaction->post_balance = $user->balance;
-            $transaction->trx_type     = '+';
-            $transaction->trx          = getTrx();
-            $transaction->remark       = 'capital_return';
-            $transaction->details      = showAmount($invest->total_price) . ' capital back from ' . @$invest->project->title;
-            $transaction->save();
-        }
-    }
+    //crop missing
 }

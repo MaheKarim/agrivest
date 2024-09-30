@@ -84,6 +84,11 @@ class FileInfo
             'path' => 'assets/images/project',
             'size' => '690x420',
         ];
+        $data['projectGallery'] = [
+            'path' => 'assets/images/project',
+            'size' => '325x230',
+        ];
         return $data;
     }
+
 }

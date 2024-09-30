@@ -130,8 +130,8 @@
 .hover-input-popup .input-popup {
     display: block;
     position: absolute;
-    bottom: calc(100% + 12px);
-    left: 50%;
+    bottom: 100%;
+    left: 30%;
     width: 280px;
     background-color: #1a1a1a;
     color: #fff;

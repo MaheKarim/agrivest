@@ -167,6 +167,7 @@ Route::middleware('admin')->group(function () {
         Route::get('details/{id}', 'details')->name('details');
         Route::post('reject', 'reject')->name('reject');
         Route::post('approve/{id}', 'approve')->name('approve');
+
     });
 
     // WITHDRAW SYSTEM
@@ -202,6 +203,7 @@ Route::middleware('admin')->group(function () {
         Route::get('notification/history', 'notificationHistory')->name('notification.history');
         Route::get('email/detail/{id}', 'emailDetails')->name('email.details');
         Route::get('invest/history', 'investHistory')->name('invest.history');
+        Route::get('invest/details/{id}', 'investDetails')->name('invest.details');
     });
 
     // Admin Support
@@ -374,5 +376,7 @@ Route::middleware('admin')->group(function () {
             Route::get('manage-seo/{id}', 'manageSeo')->name('manage.pages.seo');
             Route::post('manage-seo/{id}', 'manageSeoStore');
         });
+
     });
 });
+

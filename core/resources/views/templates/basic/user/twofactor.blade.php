@@ -7,7 +7,7 @@
                     <div class="col-md-6">
                         <div class="card custom--card">
                             <div class="card-header">
-                                <h5 class="card-title fontSize">@lang('Add Your Account')</h5>
+                                <h5 class="card-title">@lang('Add Your Account')</h5>
                             </div>
 
                             <div class="card-body">
@@ -45,7 +45,7 @@
                     @if(auth()->user()->ts)
                         <div class="card custom--card">
                             <div class="card-header">
-                                <h5 class="card-title fontSize">@lang('Disable 2FA Security')</h5>
+                                <h5 class="card-title">@lang('Disable 2FA Security')</h5>
                             </div>
                             <form action="{{route('user.twofactor.disable')}}" method="POST">
                                 <div class="card-body">
@@ -62,7 +62,7 @@
                     @else
                         <div class="card custom--card">
                             <div class="card-header">
-                                <h5 class="card-title fontSize">@lang('Enable 2FA Security')</h5>
+                                <h5 class="card-title">@lang('Enable 2FA Security')</h5>
                             </div>
                             <form action="{{ route('user.twofactor.enable') }}" method="POST">
                                 <div class="card-body">
@@ -87,11 +87,6 @@
     <style>
         .copied::after {
             background-color: #{{ gs('base_color') }};
-        }
-
-        .fontSize {
-            font-size: 1.3rem !important;
-            line-height: 1.5;
         }
     </style>
 @endpush

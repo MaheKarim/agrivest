@@ -72,7 +72,6 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::post('add-device-token', 'addDeviceToken')->name('add.device.token');
 
                 Route::get('projects', 'projects')->name('projects');
-                Route::get('projects/transactions/{id}', 'projectsTransactions')->name('projectsTransactions');;
             });
 
             //Profile setting

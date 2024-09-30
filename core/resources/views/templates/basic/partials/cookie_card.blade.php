@@ -8,7 +8,7 @@
             <i class="las la-cookie-bite"></i>
         </div>
         <p class="mt-4 cookies-card__content">{{ __($cookie->data_values->short_desc) }} <a
-                href="{{ route('cookie.policy') }}" target="_blank" class="text--base">@lang('learn more')</a></p>
+                href="{{ route('cookie.policy') }}" target="_blank">@lang('learn more')</a></p>
         <div class="cookies-card__btn mt-4">
             <a href="javascript:void(0)" class="btn btn--base w-100 policy">@lang('Allow')</a>
         </div>

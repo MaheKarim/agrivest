@@ -1,6 +1,8 @@
 @extends($activeTemplate.'layouts.frontend')
 
 @section('content')
+    @include($activeTemplate . 'partials.breadcrumb')
+
     <section class="blogs py-120 bg--white">
         <div class="container">
             <div class="row gy-4">

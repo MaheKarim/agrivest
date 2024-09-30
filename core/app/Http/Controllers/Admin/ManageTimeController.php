@@ -17,18 +17,19 @@ class ManageTimeController extends Controller
 
     public function store(Request $request, $id = 0)
     {
-        $time = $id ? Time::findOrFail($id) : new Time();
-
         $request->validate([
-            'name' => 'required|string|max:255|unique:times,name,' . $time->id,
+            'name' => 'required|unique:times|string|max:255',
             'hours' => 'required|numeric',
         ]);
 
         if ($id) {
+            $time = Time::findOrFail($id);
             $notify[] = ['success', 'Time updated successfully'];
         } else {
+            $time = new Time();
             $notify[] = ['success', 'Time added successfully'];
         }
+
 
         $time->name = $request->name;
         $time->hours = $request->hours;
@@ -37,9 +38,9 @@ class ManageTimeController extends Controller
         return redirect()->route('admin.time.index')->withNotify($notify);
     }
 
-
     public function status($id)
     {
         return Time::changeStatus($id);
     }
+
 }

@@ -58,7 +58,7 @@ class AdminController extends Controller
         $invest['total_invests'] = Invest::sum('total_price');
         $invest['total_interests'] = Transaction::where('remark', 'profit')->sum('amount');
         $invest['running_invests'] = Invest::where('status', Status::INVEST_RUNNING)->sum('total_price');
-        $invest['completed_invests'] = Invest::where('status', Status::INVEST_COMPLETED)->sum('total_price');
+        $invest['closed_invests'] = Invest::where('status', Status::INVEST_CLOSED)->sum('total_price');
 
         return view('admin.dashboard', compact('pageTitle', 'widget', 'chart', 'deposit', 'withdrawals', 'invest'));
     }

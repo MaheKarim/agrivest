@@ -3,10 +3,8 @@
         <div class="card custom--card">
             <div class="card-header card-header-bg d-flex flex-wrap justify-content-between align-items-center">
                 <h6 class="text-black mb-0">
-                    <div class="d-flex align-items-center gap-2">
-                        @php echo $myTicket->statusBadge; @endphp
-                        [@lang('Ticket')#{{ $myTicket->ticket }}] {{ $myTicket->subject }}
-                    </div>
+                    @php echo $myTicket->statusBadge; @endphp
+                    [@lang('Ticket')#{{ $myTicket->ticket }}] {{ $myTicket->subject }}
                 </h6>
                 @if ($myTicket->status != Status::TICKET_CLOSE && $myTicket->user)
                     <button class="confirmationBtn border-0" type="button" data-question="@lang('Are you sure to close this ticket?')"

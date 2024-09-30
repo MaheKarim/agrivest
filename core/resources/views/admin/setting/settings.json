@@ -57,7 +57,8 @@
             "push notification control",
             "language control",
             "mobile verification",
-            "email verification"
+            "email verification",
+            "in app payment"
         ],
         "title": "System Configuration",
         "subtitle": "Control all of the basic modules of the system.",
@@ -202,10 +203,7 @@
             "testimonial section",
             "up coming feature section",
             "banned image",
-            "why choose us section",
-            "breadcrumb image",
-            "Login Registration Image",
-            "Login/Registration Background Image"
+            "why we are section"
         ],
         "title": "Manage Frontend",
         "subtitle": "Control all of the frontend contents of the system.",

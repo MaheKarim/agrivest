@@ -76,4 +76,13 @@ class ReportController extends Controller
 
         return view('admin.reports.invest_history', compact('pageTitle', 'invests', 'totalInvestCount', 'totalInvestAmount', 'totalPaid'));
     }
+
+    public function investDetails($id)
+    {
+        $pageTitle = 'Investment Details';
+        $invest = Invest::with('user', 'project')->findOrFail($id);
+        $transactions = Transaction::where('invest_id', $invest->id)->orderBy('id', 'desc')->paginate(getPaginate());
+
+        return view('admin.reports.invest_details', compact('pageTitle', 'invest', 'transactions'));
+    }
 }

@@ -1,6 +1,6 @@
 @extends($activeTemplate . 'layouts.master')
 @section('content')
-    <div class="dashboard-inner__block">
+    <div class="col-md-12">
         <div class="dashboard-card">
             <div class="dashboard-card__header d-flex justify-content-between align-items-center">
                 <h6 class="dashboard-card__title mb-0">@lang('Deposits')</h6>
@@ -16,13 +16,13 @@
             </div>
             <div class="dashboard-card__body">
                 <div class="table-responsive">
-                    <table class="table table--responsive--md">
+                    <table class="table table--responsive--sm">
                         <thead>
                             <tr>
                                 <th>@lang('Gateway | Transaction')</th>
                                 <th class="text-center">@lang('Initiated')</th>
                                 <th class="text-center">@lang('Amount')</th>
-                                <th class="text-center text-nowrap">@lang('Conversion')</th>
+                                <th class="text-center">@lang('Conversion')</th>
                                 <th class="text-center">@lang('Status')</th>
                                 <th>@lang('Details')</th>
                             </tr>
@@ -31,7 +31,7 @@
                             @forelse($deposits as $deposit)
                                 <tr>
                                     <td>
-                                        <div class="td-wrapper text-nowrap">
+                                        <div>
                                             <span class="fw-bold">
                                                 <span class="text--base">
                                                     @if ($deposit->method_code < 5000)
@@ -46,14 +46,14 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <div class="td-wrapper">
-                                            <span class="text-nowrap">{{ showDateTime($deposit->created_at) }}</span>
+                                        <div>
+                                            {{ showDateTime($deposit->created_at) }}
                                             <br>{{ diffForHumans($deposit->created_at) }}
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <div class="td-wrapper">
-                                            <span class="text-nowrap">{{ showAmount($deposit->amount) }}</span> +
+                                        <div>
+                                            {{ showAmount($deposit->amount) }} +
                                             <span class="text--danger" data-bs-toggle="tooltip" title="@lang('Processing Charge')">
                                                 {{ showAmount($deposit->charge) }}
                                             </span>
@@ -64,17 +64,16 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <div class="td-wrapper">
+                                        <div>
                                             {{ showAmount(1) }} = {{ showAmount($deposit->rate, currencyFormat: false) }}
                                             {{ __($deposit->method_currency) }}
                                             <br>
-                                            <strong
-                                                class="fs-12">{{ showAmount($deposit->final_amount, currencyFormat: false) }}
+                                            <strong>{{ showAmount($deposit->final_amount, currencyFormat: false) }}
                                                 {{ __($deposit->method_currency) }}</strong>
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <div class="td-wrapper">
+                                        <div>
                                             @php echo $deposit->statusBadge @endphp
                                         </div>
                                     </td>
@@ -93,7 +92,7 @@
                                         }
                                     @endphp
                                     <td>
-                                        <div class="td-wrapper">
+                                        <div>
                                             @if ($deposit->method_code >= 1000 && $deposit->method_code <= 5000)
                                                 <button type="button"
                                                     class="btn btn--xsm btn--outline action-btn detailBtn"

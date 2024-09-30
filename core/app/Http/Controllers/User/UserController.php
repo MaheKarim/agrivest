@@ -8,7 +8,6 @@ use App\Lib\FormProcessor;
 use App\Lib\GoogleAuthenticator;
 use App\Models\DeviceToken;
 use App\Models\Form;
-use App\Models\Project;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,11 +19,10 @@ class UserController extends Controller
     {
         $pageTitle = 'My Projects';
         $invests = auth()->user()->invests()
-            ->with(['project', 'project.time'])
+            ->with('project:id,title')
             ->searchable(['project:title'])
             ->latest()
             ->paginate(getPaginate());
-
 
         return view('Template::user.projects', compact('pageTitle', 'invests'));
     }
@@ -33,18 +31,17 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $investData = [
-            'completed' => $user->invests()->completed()->count(),
-            'total_invest' => $user->invests()->totalInvest(),
-            'total_earning' => $user->invests()->totalEarn(),
-            'invest_count' => $user->invests()->count(),
-            'total_deposit' => $user->deposits()->directDeposit()->sum('amount'),
+            'completed'      => $user->invests()->completed()->count(),
+            'total_invest'   => $user->invests()->totalInvest(),
+            'total_earning'  => $user->invests()->totalEarn(),
+            'total_deposit'  => $user->deposits()->directDeposit()->sum('amount'),
             'total_withdraw' => $user->withdrawals()->approved()->sum('amount')
         ];
 
         return view('Template::user.dashboard', [
-            'pageTitle' => 'Dashboard',
-            'user' => $user,
-            'invests' => $user->invests()->latest()->paginate(getPaginate(5)),
+            'pageTitle'  => 'Dashboard',
+            'user'       => $user,
+            'invests'    => $user->invests()->latest()->take(5)->get(),
             'investData' => $investData
         ]);
     }
@@ -87,7 +84,7 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $request->validate([
-            'key' => 'required',
+            'key'  => 'required',
             'code' => 'required',
         ]);
 
@@ -95,7 +92,7 @@ class UserController extends Controller
 
         if ($response) {
             $user->tsc = $request->key;
-            $user->ts = Status::ENABLE;
+            $user->ts  = Status::ENABLE;
             $user->save();
 
             $notify[] = ['success', 'Two factor authenticator activated successfully'];
@@ -142,17 +139,17 @@ class UserController extends Controller
 
     public function kycData()
     {
-        $user = auth()->user();
-        $pageTitle = 'KYC Data';
+        $user              = auth()->user();
+        $pageTitle         = 'KYC Data';
         abort_if($user->kv == Status::VERIFIED, 403);
         return view('Template::user.kyc.info', compact('pageTitle', 'user'));
     }
 
     public function kycSubmit(Request $request)
     {
-        $form = Form::where('act', 'kyc')->firstOrFail();
-        $formData = $form->form_data;
-        $formProcessor = new FormProcessor();
+        $form           = Form::where('act', 'kyc')->firstOrFail();
+        $formData       = $form->form_data;
+        $formProcessor  = new FormProcessor();
         $validationRule = $formProcessor->valueValidation($formData);
         $request->validate($validationRule);
         $user = auth()->user();
@@ -161,10 +158,10 @@ class UserController extends Controller
                 fileManager()->removeFile(getFilePath('verify') . '/' . $kycData->value);
             }
         }
-        $userData = $formProcessor->processFormData($request, $formData);
-        $user->kyc_data = $userData;
+        $userData                   = $formProcessor->processFormData($request, $formData);
+        $user->kyc_data             = $userData;
         $user->kyc_rejection_reason = null;
-        $user->kv = Status::KYC_PENDING;
+        $user->kv                   = Status::KYC_PENDING;
         $user->save();
 
         $notify[] = ['success', 'KYC data submitted successfully'];
@@ -179,10 +176,10 @@ class UserController extends Controller
             return to_route('user.home');
         }
 
-        $pageTitle = 'User Data';
-        $info = json_decode(json_encode(getIpInfo()), true);
+        $pageTitle  = 'User Data';
+        $info       = json_decode(json_encode(getIpInfo()), true);
         $mobileCode = @implode(',', $info['code']);
-        $countries = json_decode(file_get_contents(resource_path('views/partials/country.json')));
+        $countries  = json_decode(file_get_contents(resource_path('views/partials/country.json')));
 
         return view('Template::user.user_data', compact('pageTitle', 'user', 'countries', 'mobileCode'));
     }
@@ -202,10 +199,10 @@ class UserController extends Controller
 
         $request->validate([
             'country_code' => 'required|in:' . $countryCodes,
-            'country' => 'required|in:' . $countries,
-            'mobile_code' => 'required|in:' . $mobileCodes,
-            'username' => 'required|unique:users|min:6',
-            'mobile' => ['required', 'regex:/^([0-9]*)$/', Rule::unique('users')->where('dial_code', $request->mobile_code)],
+            'country'      => 'required|in:' . $countries,
+            'mobile_code'  => 'required|in:' . $mobileCodes,
+            'username'     => 'required|unique:users|min:6',
+            'mobile'       => ['required', 'regex:/^([0-9]*)$/', Rule::unique('users')->where('dial_code', $request->mobile_code)],
         ]);
 
         if (preg_match("/[^a-z0-9_]/", trim($request->username))) {
@@ -215,14 +212,14 @@ class UserController extends Controller
         }
 
         $user->country_code = $request->country_code;
-        $user->mobile = $request->mobile;
-        $user->username = $request->username;
-        $user->address = $request->address;
-        $user->city = $request->city;
-        $user->state = $request->state;
-        $user->zip = $request->zip;
+        $user->mobile       = $request->mobile;
+        $user->username     = $request->username;
+        $user->address      = $request->address;
+        $user->city         = $request->city;
+        $user->state        = $request->state;
+        $user->zip          = $request->zip;
         $user->country_name = @$request->country;
-        $user->dial_code = $request->mobile_code;
+        $user->dial_code    = $request->mobile_code;
 
         $user->profile_complete = Status::YES;
         $user->save();
@@ -257,9 +254,9 @@ class UserController extends Controller
 
     public function downloadAttachment($fileHash)
     {
-        $filePath = decrypt($fileHash);
+        $filePath  = decrypt($fileHash);
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
-        $title = slug(gs('site_name')) . '- attachments.' . $extension;
+        $title     = slug(gs('site_name')) . '- attachments.' . $extension;
         try {
             $mimetype = mime_content_type($filePath);
         } catch (\Exception $e) {
@@ -269,12 +266,5 @@ class UserController extends Controller
         header('Content-Disposition: attachment; filename="' . $title);
         header("Content-Type: " . $mimetype);
         return readfile($filePath);
-    }
-
-    public function projectsTransactions($id)
-    {
-        $pageTitle = 'Project Transactions';
-        $transactions = Transaction::where('invest_id', $id)->with(['invest'])->orderBy('id', 'desc')->paginate(getPaginate());
-        return view('Template::user.projects_transaction', compact('pageTitle', 'transactions'));
     }
 }
