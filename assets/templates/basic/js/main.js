@@ -55,6 +55,7 @@
         selector.find("li").eq(0).addClass("active");
       }
     }
+
     if ($(".header ul.nav-menu").length) {
       dynamicActiveMenuClass($(".header ul.nav-menu"));
     }
@@ -80,78 +81,6 @@
       });
     });
     /* ==================== Password Toggle JS End ========================= */
-
-    /* ==================== Slick Slider JS Start ========================== */
-
-    $(".testimonial-slider").slick({
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      autoplay: false,
-      autoplaySpeed: 2000,
-      speed: 1500,
-      dots: true,
-      pauseOnHover: true,
-      arrows: false,
-      prevArrow:
-        '<button type="button" class="slick-prev"><i class="fas fa-long-arrow-alt-left"></i></button>',
-      nextArrow:
-        '<button type="button" class="slick-next"><i class="fas fa-long-arrow-alt-right"></i></button>',
-      responsive: [
-        {
-          breakpoint: 1199,
-          settings: {
-            arrows: false,
-            slidesToShow: 2,
-            dots: true,
-          },
-        },
-        {
-          breakpoint: 991,
-          settings: {
-            arrows: false,
-            slidesToShow: 2,
-          },
-        },
-        {
-          breakpoint: 464,
-          settings: {
-            arrows: false,
-            slidesToShow: 1,
-          },
-        },
-      ],
-    });
-
-    $(".offer-details-thumb-slider").slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 1500,
-      dots: false,
-      arrows: false,
-      pauseOnHover: true,
-      asNavFor: ".offer-details-preview-slider",
-    });
-
-    $(".offer-details-preview-slider").slick({
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 1500,
-      dots: false,
-      arrows: false,
-      pauseOnHover: true,
-      asNavFor: ".offer-details-thumb-slider",
-      responsive: [
-        {
-          breakpoint: 576,
-          settings: {
-            slidesToShow: 3,
-          },
-        },
-      ],
-    });
-    /* ==================== Slick Slider JS End ============================ */
 
     /* ==================== Add Active Class in Custom Accordion Item JS Start ====================== */
     $(".custom--accordion .accordion-item").each(function (
@@ -193,91 +122,6 @@
     });
     /* ==================== Offcanvas Sidebar JS End ========================== */
 
-    // ==================== Navbar Horizontal Scrolling JS Start ==================
-    $(".nav-horizontal").each(function (index, nav) {
-      var navPrev = $(nav).find(".nav-horizontal__btn.prev");
-      var navNext = $(nav).find(".nav-horizontal__btn.next");
-      var navMenu = $(nav).find(".nav-horizontal-menu");
-      var navMenuItems = $(nav).find(
-        ".nav-horizontal-menu .nav-horizontal-menu__item"
-      );
-      var navMenuItemFirst = $(nav).find(
-        ".nav-horizontal-menu .nav-horizontal-menu__item:first-child"
-      );
-      var navMenuItemLast = $(nav).find(
-        ".nav-horizontal-menu .nav-horizontal-menu__item:last-child"
-      );
-      var navMenuItemTotalWidth = 0;
-      var navMenuScrollLeft = 0;
-      var observerOptions = {
-        root: navMenu[0],
-        rootMargin: "1px",
-        threshold: 1,
-      };
-
-      var setIntersectionObserver = function (element, btn) {
-        let observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.intersectionRatio >= 1) {
-              $(btn).removeClass("show");
-            } else {
-              $(btn).addClass("show");
-            }
-          });
-        }, observerOptions);
-
-        return observer.observe(element);
-      };
-
-      navMenu[0].scrollLeft = 0;
-
-      setIntersectionObserver(navMenuItemFirst[0], navPrev[0]);
-      setIntersectionObserver(navMenuItemLast[0], navNext[0]);
-
-      navMenuItems.each(
-        (index, element) => (navMenuItemTotalWidth += element.scrollWidth)
-      );
-      navMenuScrollLeft = Math.floor(
-        navMenuItemTotalWidth / navMenuItems.length
-      );
-
-      navNext.on("click", function () {
-        navMenu[0].scrollLeft += navMenuScrollLeft;
-      });
-
-      navPrev.on("click", function () {
-        if (navMenu[0].scrollLeft === 0) {
-          return;
-        }
-
-        navMenu[0].scrollLeft -= navMenuScrollLeft;
-      });
-    });
-    // ==================== Navbar Horizontal Scrolling JS End ====================
-
-    // ==================== Product QTY JS Start ==================================
-    $(".product-qty").each(function () {
-      var qtyIncrement = $(this).find(".product-qty__increment");
-      var qtyDecrement = $(this).find(".product-qty__decrement");
-      var qtyValue = $(this).find(".product-qty__value");
-      qtyIncrement.on("click", function () {
-        var oldValue = parseFloat(qtyValue.val());
-        var newVal = oldValue + 1;
-        qtyValue.val(newVal).trigger("change");
-      });
-
-      qtyDecrement.on("click", function () {
-        var oldValue = parseFloat(qtyValue.val());
-        if (oldValue <= 0) {
-          var newVal = oldValue;
-        } else {
-          var newVal = oldValue - 1;
-        }
-        qtyValue.val(newVal).trigger("change");
-      });
-    });
-    // ==================== Product QTY JS End ====================================
-
     // ==================== Add A Class In Select Input JS Start ====================================
     $(".form-select.form--select").each(function (index, select) {
       $(select).on("change", function () {
@@ -289,7 +133,28 @@
       });
     });
     // ==================== Add A Class In Select Input JS End ====================================
+
+    // ========================== Overflow Content Js Start ======================
+    $('[data-toggle="overflow-content"]').each((index, element) => {
+      let content = $(element);
+      let button = $(content.data("target"));
+      if (content[0].scrollHeight > content[0].clientHeight) {
+        button.addClass("show");
+      }
+      button.on("click", function () {
+        content.toggleClass("show");
+        if (content.hasClass("show")) {
+          button.find("span").text("See less");
+          button.find("i").removeClass("la-angle-up").addClass("la-angle-down");
+        } else {
+          button.find("span").text("See more");
+          button.find("i").removeClass("la-angle-down").addClass("la-angle-up");
+        }
+      });
+    });
+    // ========================== Overflow Content Js End ========================
   });
+
   /* ==================== Ready Function End ===================== */
 
   /* ==================== Scroll Top JS Start ==================== */

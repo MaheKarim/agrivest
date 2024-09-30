@@ -8,59 +8,79 @@
                     <div class="table-responsive--sm table-responsive">
                         <table class="table table--light style--two">
                             <thead>
-                            <tr>
-                                <th>@lang('ID')</th>
-                                <th>@lang('Project Name')</th>
-                                <th>@lang('Payment Status')</th>
-                                <th>@lang('Invest Status')</th>
-                                <th>@lang('Capital Back') | @lang('is Backed?')</th>
-                                <th>@lang('Profit Paid - Remaining')</th>
-                                <th>@lang('Created At')</th>
-                                <th>@lang('Action')</th>
-                            </tr>
+                                <tr>
+                                    <th>@lang('ID')</th>
+                                    <th>@lang('Project Name')</th>
+                                    <th>@lang('Payment Status')</th>
+                                    <th>@lang('Invest Status')</th>
+                                    <th>@lang('Capital Back') | @lang('is Backed?')</th>
+                                    <th>@lang('Paid | Remaining')</th>
+                                    <th>@lang('Created At')</th>
+                                    <th>@lang('Action')</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @forelse($invests as $invest)
-                                <tr>
-                                    <td>{{ __($invest->invest_no) }}</td>
-                                    <td>{{ __($invest->project->title) }}</td>
-                                    <td>@php echo $invest->paymentStatusBadge @endphp</td>
-                                    <td>@php echo $invest->statusBadge @endphp</td>
-                                    <td>@php echo $invest->capitalBackBadge @endphp
-                                        @if($invest->capital_back == Status::YES)
-                                            @php echo $invest->isBackedBadge @endphp
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @php
-                                            $remaining = $invest->period - $invest->repeated_times;
-                                        @endphp
-                                        {{ __($invest->period) }} | {{ __($remaining) }}
-                                    </td>
-
-                                    <td>{{ showDateTime($invest->created_at) }}</td>
-                                    <td>
-                                        <div class="button-group">
-                                            <a class="btn btn-outline--primary btn-sm editBtn"
-                                               href="{{ route('admin.invest.details',$invest->id) }}">
-                                                <i class="las la-desktop"></i>@lang('Details')
+                                @forelse($invests as $invest)
+                                    <tr>
+                                        <td>{{ __($invest->invest_no) }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.project.edit', $invest->project->id) }}">
+                                                {{ __($invest->project->title) }}
                                             </a>
-
-                                            @if ($invest->status == Status::INVEST_PENDING)
-                                                <button class="btn btn-sm btn-outline--danger cancelOrderModal"
-                                                        data-url="{{ route('admin.invest.status', $invest->id) }}">
-                                                    <i class="lar la-times-circle"></i>
-                                                    @lang('Cancel')
-                                                </button>
+                                        </td>
+                                        <td>@php echo $invest->paymentStatusBadge @endphp</td>
+                                        <td>@php echo $invest->statusBadge @endphp</td>
+                                        <td>@php echo $invest->capitalBackBadge @endphp
+                                            @if ($invest->project->capital_back == Status::YES)
+                                                @php echo $invest->isBackedBadge @endphp
                                             @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
-                                </tr>
-                            @endforelse
+                                        </td>
+
+                                        <td>
+                                            @php
+                                                $remaining = getInvestmentRemaining($invest);
+                                            @endphp
+
+                                            <span data-toggle="tooltip" data-placement="top"
+                                                title="@lang('Paid: ') {{ __($invest->period) }} @lang('returns')">
+                                                {{ __($invest->period) }}
+                                            </span>
+
+                                            @if ($invest->project->return_type != Status::LIFETIME)
+                                                |
+                                                <span data-toggle="tooltip" data-placement="top"
+                                                    title="@lang('Remaining: ') {{ __($remaining) }} @lang('returns')">
+                                                    {{ __($remaining) }}
+                                                </span>
+                                            @endif
+                                        </td>
+
+
+                                        <td>{{ showDateTime($invest->created_at) }}</td>
+                                        <td>
+                                            <div class="button-group">
+                                                <a class="btn btn-outline--primary btn-sm editBtn"
+                                                    href="{{ route('admin.invest.details', $invest->id) }}">
+                                                    <i class="las la-desktop"></i>@lang('Details')
+                                                </a>
+
+                                                @if ($invest->status == Status::INVEST_PENDING && $invest->payment_status == Status::INVEST_PAYMENT_PENDING)
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline--danger confirmationBtn"
+                                                        data-question="@lang('Are you sure to cancel this investment?')"
+                                                        data-action="{{ route('admin.invest.status', $invest->id) }}">
+                                                        <i class="lar la-times-circle"></i>
+                                                        @lang('Cancel')
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
+                                    </tr>
+                                @endforelse
 
                             </tbody>
                         </table>
@@ -98,27 +118,10 @@
             </div>
         </div>
     </div>
-@endsection
-@push('breadcrumb-plugins')
-    <x-search-form placeholder="Search here..."/>
-    <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn"
-            data-modal_title="@lang('Create New Time')" type="button">
-        <i class="las la-plus"></i>@lang('Add New')</button>
-@endpush
 
-@push('script')
-    <script>
-        (function ($) {
-            "use strict";
-            $('.cancelOrderModal').on('click', function () {
-                var modal = $('#orderStatusModal');
-                var url = $(this).data('url');
-                var orderStatus = 9;
-                modal.find('form').attr('action', url);
-                modal.find('[name=status]').val(orderStatus);
-                modal.find('.modal-detail').text(`@lang('Are you sure to cancel this order?')`);
-                modal.modal('show');
-            });
-        })(jQuery);
-    </script>
+    <x-confirmation-modal />
+@endsection
+
+@push('breadcrumb-plugins')
+    <x-search-form placeholder="Search here..." />
 @endpush

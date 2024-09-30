@@ -111,7 +111,7 @@ class ManageUsersController extends Controller
         $invest['total_invests'] = Invest::where('user_id', $user->id)->sum('total_price');
         $invest['total_interests'] = Transaction::where('user_id', $user->id)->where('remark', 'profit')->sum('amount');
         $invest['running_invests'] = Invest::where('user_id', $user->id)->running()->sum('paid');
-        $invest['closed_invests'] = Invest::where('user_id', $user->id)->closed()->sum('paid');
+        $invest['completed_invests'] = Invest::where('user_id', $user->id)->completed()->sum('paid');
 
         return view('admin.users.detail', compact('pageTitle', 'user', 'totalDeposit', 'totalWithdrawals', 'totalTransaction', 'countries', 'invest'));
     }
@@ -236,7 +236,6 @@ class ManageUsersController extends Controller
             $notifyTemplate = 'BAL_ADD';
 
             $notify[] = ['success', 'Balance added successfully'];
-
         } else {
             if ($amount > $user->balance) {
                 $notify[] = ['error', $user->username . ' doesn\'t have sufficient balance.'];
@@ -295,7 +294,6 @@ class ManageUsersController extends Controller
         }
         $user->save();
         return back()->withNotify($notify);
-
     }
 
     public function showNotificationSingleForm($id)
@@ -496,5 +494,4 @@ class ManageUsersController extends Controller
         $logs = NotificationLog::where('user_id', $id)->with('user')->orderBy('id', 'desc')->paginate(getPaginate());
         return view('admin.reports.notification_history', compact('pageTitle', 'logs', 'user'));
     }
-
 }

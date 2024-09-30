@@ -41,7 +41,7 @@ class ManageProjectController extends Controller
 
         foreach ($project->gallery ?? [] as $key => $gallery) {
             $img['id'] = $gallery;
-            $img['src'] = getImage(getFilePath('projectGallery') . '/' . $gallery);
+            $img['src'] = getImage(getFilePath('project') . '/' . $gallery);
             $galleries[] = $img;
         }
 
@@ -50,27 +50,78 @@ class ManageProjectController extends Controller
 
     public function store(Request $request, $id = 0)
     {
+
+
+        //         $project = new Project();
+        //         $project->title = "Sustainable Rice Farm Investment";
+        //         $project->slug = "sustainable-rice-farm-investment";
+        //         $project->goal = 300000;
+        //         $project->description = "
+        // <h5>About This Project</h5>
+        // <p>This project focuses on sustainable rice farming, aimed at increasing productivity while using eco-friendly practices. Investors in this project will help support environmentally conscious rice production, contributing to global food security while ensuring consistent returns.</p>
+        // <h5>How You Get Benefit</h5>
+        // <p>Investors will receive periodic returns based on their investment. The project provides stability and attractive yields, making it an ideal opportunity for those looking to diversify their investment portfolio with an agricultural focus.</p>
+        // <ul>
+        //   <li>Periodic Returns</li>
+        //   <li>Stable Yields</li>
+        //   <li>Safe Haven Investment</li>
+        //   <li>Inflation Hedge</li>
+        //   <li>Sustainable Agriculture</li>
+        // </ul>
+        // <h5>Our Goal & Challenge</h5>
+        // <p>The goal is to scale up sustainable rice farming operations. The challenge lies in balancing growth while adhering to eco-friendly farming practices, ensuring both environmental benefits and profitable returns for investors.</p>
+        // ";
+        //         $project->share_amount = 150;
+        //         $project->share_count = 4000;
+        //         $project->available_share = 4000; // Available shares equal to share count
+        //         $project->roi_percentage = 6;
+        //         $project->roi_amount = $project->roi_percentage / 100 * $project->share_amount;
+        //         $project->map_url = "https://www.google.com/maps/embed/v1/place?q=Sustainable+Rice+Farm&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8";
+        //         $project->start_date = "2024-11-01";
+        //         $project->end_date = "2025-11-01";
+        //         $project->maturity_time = 12;
+
+        //         // Calculate maturity date
+        //         $investEndDate = Carbon::parse($project->end_date);
+        //         $maturityMonths = (int) $project->maturity_time;
+        //         $project->maturity_date = $investEndDate->addMonths($maturityMonths);
+
+        //         $project->time_id = 3; // Example time ID
+        //         $project->category_id = 6; // Example category ID for Rice Farming
+        //         $project->return_type = 2; // REPEAT
+        //         $project->repeat_times = 4; // This project will have returns every quarter (4 times)
+        //         $project->project_duration = 12;
+        //         $project->capital_back = 1; // YES
+        //         $project->featured = 1; // YES
+
+        //         // Save the project
+        //         $project->save();
+
+
+
+
+        //         return 200;
+
         $isRequired = $id ? 'nullable' : 'required';
         $request->validate([
-            'title'           => 'required|string|max:191',
-            'goal'            => 'required|numeric|min:1',
-            'description'     => 'required|string',
-            'share_amount'    => 'required|numeric|min:1',
-            'share_count'     => 'required|numeric|min:1',
-            'roi_amount'      => 'required|numeric|min:1',
-            'roi_percentage'  => 'required|numeric|min:1',
-            'map_url'         => 'required|string',
-            'start_date'      => 'required|date',
-            'end_date'        => 'required|date',
-            'maturity_time'   => 'required|numeric|min:1',
-            'image'           => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'gallery'         => "$isRequired|array|min:0|max:4",
-            'gallery.*'       => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'category_id'     => "$isRequired|exists:categories,id",
-            'time_id'         => "$isRequired|exists:times,id",
-            'return_type'     => 'required|in:' . Status::REPEAT . ',' . Status::LIFETIME,
-            'return_interval' => 'required_if:return_type,2|numeric|min:1',
-            'repeat_times'    => 'required_if:return_type,2|numeric|min:1',
+            'title'          => 'required|string|max:40',
+            'goal'           => 'required|numeric|gt:0',
+            'description'    => 'required|string',
+            'share_amount'   => 'required|numeric|gt:0',
+            'share_count'    => "$isRequired|numeric|gt:0",
+            'roi_amount'     => 'required|numeric|gt:0',
+            'roi_percentage' => 'required|numeric|gt:0',
+            'map_url'        => 'required|string|url',
+            'start_date'     => 'required|date',
+            'end_date'       => 'required|date',
+            'maturity_time'  => 'required|numeric|gt:0',
+            'image'          => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'gallery'        => "$isRequired|array|min:0|max:4",
+            'gallery.*'      => [$isRequired, 'image', new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+            'category_id'    => "$isRequired|exists:categories,id",
+            'time_id'        => "$isRequired|exists:times,id",
+            'return_type'    => 'required|in:' . Status::REPEAT . ',' . Status::LIFETIME,
+            'repeat_times'   => 'nullable|required_if:return_type,' . Status::REPEAT . '|numeric|gt:0',
         ]);
 
         if ($id) {
@@ -80,7 +131,7 @@ class ManageProjectController extends Controller
 
             if ($imageToRemove != null && count($imageToRemove)) {
                 foreach ($imageToRemove as $singleImage) {
-                    fileManager()->removeFile(getFilePath('projectGallery') . '/' . $singleImage);
+                    fileManager()->removeFile(getFilePath('project') . '/' . $singleImage);
                 }
 
                 $project->gallery = removeElement($project->gallery, $imageToRemove);
@@ -89,6 +140,7 @@ class ManageProjectController extends Controller
         } else {
             $project = new Project();
             $project->available_share = $request->share_count;
+            $project->share_count = $request->share_count;
             $notify[] = ['success', 'Project created successfully'];
             $redirect = redirect()->route('admin.project.index');
         }
@@ -108,7 +160,7 @@ class ManageProjectController extends Controller
         if ($request->hasFile('gallery')) {
             foreach ($request->gallery as $singleImage) {
                 try {
-                    $gallery[] = fileUploader($singleImage, getFilePath('projectGallery'), getFileSize('projectGallery'));
+                    $gallery[] = fileUploader($singleImage, getFilePath('project'), getFileSize('project'));
                 } catch (\Exception $exp) {
                     $notify[] = ['error', 'Couldn\'t upload your product gallery image'];
                     return back()->withNotify($notify);
@@ -116,31 +168,37 @@ class ManageProjectController extends Controller
             }
         }
 
-        $investEndDate  = Carbon::parse($request->end_date);
+        $investEndDate = Carbon::parse($request->end_date);
         $maturityMonths = (int)$request->maturity_time;
-        $matureDate     = $investEndDate->addMonths($maturityMonths);
+        $matureDate = $investEndDate->addMonths($maturityMonths);
+        // ROI Amount
+        $roiAmount = $request->roi_percentage / 100 * $request->share_amount;
 
-        $project->title           = $request->title;
-        $project->slug            = $request->slug;
-        $project->goal            = $request->goal;
-        $project->share_count     = $request->share_count;
-        $project->share_amount    = $request->share_amount;
-        $project->roi_percentage  = $request->roi_percentage;
-        $project->roi_amount      = $request->roi_amount;
-        $project->start_date      = $request->start_date;
-        $project->end_date        = $request->end_date;
-        $project->maturity_time   = $request->maturity_time;
-        $project->maturity_date   = $matureDate;
-        $project->time_id         = $request->time_id;
-        $project->return_interval = $request->return_interval;
-        $project->repeat_times    = $request->repeat_times;
-        $project->capital_back    = @$request->capital_back ? Status::YES : Status::NO;
-        $project->return_type     = @$request->return_type == Status::REPEAT ? Status::REPEAT : Status::LIFETIME;
-        $project->category_id     = $request->category_id;
-        $project->map_url         = $request->map_url;
-        $project->description     = $request->description;
-        $project->gallery         = $gallery;
-        $project->featured        = $request->featured ? Status::YES : Status::NO;
+        $project->title = $request->title;
+        $project->slug = $request->slug;
+        $project->goal = $request->goal;
+        $project->share_amount = $request->share_amount;
+        $project->roi_percentage = $request->roi_percentage;
+        $project->roi_amount = $roiAmount;
+        $project->start_date = $request->start_date;
+        $project->end_date = $request->end_date;
+        $project->maturity_time = $request->maturity_time;
+        $project->maturity_date = $matureDate;
+        $project->time_id = $request->time_id;
+        $project->repeat_times = $request->repeat_times;
+        $project->return_type = @$request->return_type == Status::REPEAT ? Status::REPEAT : Status::LIFETIME;
+
+        if ($project->return_type == Status::REPEAT) {
+            $project->capital_back = @$request->capital_back ? Status::YES : Status::NO;
+        } else {
+            $project->capital_back = Status::NO;
+        }
+
+        $project->category_id = $request->category_id;
+        $project->map_url = $request->map_url;
+        $project->description = $request->description;
+        $project->gallery = $gallery;
+        $project->featured = $request->featured ? Status::YES : Status::NO;
         $project->save();
 
         return $redirect->withNotify($notify);
@@ -148,7 +206,7 @@ class ManageProjectController extends Controller
 
     public function checkSlug()
     {
-        $id   = request()->id ?? 0;
+        $id = request()->id ?? 0;
         $page = Project::where('slug', request()->slug);
 
         if ($id) {

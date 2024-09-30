@@ -42,9 +42,9 @@
                         icon="las la-chart-area" bg="12" />
                 </div><!-- dashboard-w1 end -->
                 <div class="col-xxl-3 col-sm-6">
-                    <x-widget value="{{ showAmount(@$invest['closed_invests']) }}" title="Closed Investments"
+                    <x-widget value="{{ showAmount(@$invest['completed_invests']) }}" title="Completed Investments"
                         style="6"
-                        link="{{ route('admin.report.invest.history') }}?search={{ $user->username }}&status={{ Status::INVEST_CLOSED }}"
+                        link="{{ route('admin.report.invest.history') }}?search={{ $user->username }}&status={{ Status::INVEST_COMPLETED }}"
                         icon="las la-chart-line" bg="9" />
                 </div><!-- dashboard-w1 end -->
             </div><!-- row end-->

@@ -2,7 +2,7 @@
     $testimonialContent = getContent('testimonial.content', true);
     $testimonialElement = getContent('testimonial.element', orderById: true);
 @endphp
-<section class="investor-feedback py-120">
+<section class="investor-feedback pt-120 pb-120">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-10 col-md-8 col-lg-6 col-xxl-5">
@@ -18,38 +18,41 @@
             </div>
         </div>
         <div class="feedback-slider">
-            @foreach($testimonialElement as $content)
-            <div class="feedback-slider__item">
-                <div class="feedback-card">
-                    <div class="feedback-card__header">
-                        <div class="feedback-card__thumb">
-                            <img src="{{ frontendImage('testimonial', @$content->data_values->image, '80x80') }}" alt="@lang('Client Image')">
-                        </div>
+            @foreach ($testimonialElement as $content)
+                <div class="feedback-slider__item">
+                    <div class="feedback-card">
+                        <div class="feedback-card__header">
+                            <div class="feedback-card__thumb">
+                                <img src="{{ frontendImage('testimonial', @$content->data_values->image, '80x80') }}"
+                                    alt="@lang('Client Image')">
+                            </div>
 
-                        <div class="feedback-card__info">
-                            <h6 class="feedback-card__name">{{__(@$content->data_values->name)}}</h6>
-                            <p class="feedback-card__designation">{{__(@$content->data_values->designation)}} @lang('from') <span>{{__(@$content->data_values->country)}}</span></p>
+                            <div class="feedback-card__info">
+                                <h6 class="feedback-card__name">{{ __(@$content->data_values->name) }}</h6>
+                                <p class="feedback-card__designation">{{ __(@$content->data_values->designation) }}
+                                    @lang('from') <span>{{ __(@$content->data_values->country) }}</span></p>
 
-                            <div class="feedback-card__icon">
-                                <img src="{{ asset($activeTemplateTrue.'images/icons/quote.png') }}" alt="@lang('Quote Image')">
+                                <div class="feedback-card__icon">
+                                    <img src="{{ asset($activeTemplateTrue . 'images/icons/quote.png') }}"
+                                        alt="@lang('Quote Image')">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="feedback-card__body">
-                        <p class="feedback-card__text">
-                          {{__(@$content->data_values->description)}}
-                        </p>
+                        <div class="feedback-card__body">
+                            <p class="feedback-card__text">
+                                {{ __(@$content->data_values->description) }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>
 </section>
 @push('script')
     <script>
-        (function ($) {
+        (function($) {
             "use strict";
             $('.feedback-slider').slick({
                 slidesToShow: 2,
@@ -60,19 +63,17 @@
                 dots: true,
                 pauseOnHover: true,
                 arrows: false,
-                responsive: [
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1,
-                        }
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
                     }
-                ],
+                }],
             })
         })(jQuery);
     </script>
 @endpush
-@if(!app()->offsetExists('slick_load'))
+@if (!app()->offsetExists('slick_load'))
     @push('style-lib')
         <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
     @endpush

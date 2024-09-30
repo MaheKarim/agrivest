@@ -65,6 +65,8 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id?}', 'store')->name('store');
         Route::post('invest/status/{id?}', 'investStatus')->name('status');
         Route::get('invest/running', 'runningInvest')->name('running');
+        Route::post('stop/returns/{id}', 'stopReturns')->name('stop.returns');
+        Route::post('start/returns/{id}', 'startReturns')->name('start.returns');
     });
 
     Route::controller('CategoryController')->name('category.')->prefix('category')->group(function () {
@@ -167,7 +169,6 @@ Route::middleware('admin')->group(function () {
         Route::get('details/{id}', 'details')->name('details');
         Route::post('reject', 'reject')->name('reject');
         Route::post('approve/{id}', 'approve')->name('approve');
-
     });
 
     // WITHDRAW SYSTEM
@@ -203,7 +204,6 @@ Route::middleware('admin')->group(function () {
         Route::get('notification/history', 'notificationHistory')->name('notification.history');
         Route::get('email/detail/{id}', 'emailDetails')->name('email.details');
         Route::get('invest/history', 'investHistory')->name('invest.history');
-        Route::get('invest/details/{id}', 'investDetails')->name('invest.details');
     });
 
     // Admin Support
@@ -376,7 +376,5 @@ Route::middleware('admin')->group(function () {
             Route::get('manage-seo/{id}', 'manageSeo')->name('manage.pages.seo');
             Route::post('manage-seo/{id}', 'manageSeoStore');
         });
-
     });
 });
-

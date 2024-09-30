@@ -8,13 +8,12 @@
 
     @include('partials.seo')
 
-    <!-- Bootstrap CSS -->
     <link href="{{ asset('assets/global/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/global/css/all.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/global/css/line-awesome.min.css') }}">
 
     @stack('style-lib')
-
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/main.css') }}">
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/custom.css') }}">
 
@@ -35,16 +34,18 @@
 
     @yield('panel')
 
+    @include($activeTemplate . 'partials.footer')
+
     @include($activeTemplate . 'partials.cookie_card')
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/global/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ asset($activeTemplateTrue . 'js/viewport.jquery.js') }}"></script>
 
     @stack('script-lib')
 
+    <script src="{{ asset($activeTemplateTrue . 'js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset($activeTemplateTrue . 'js/main.js') }}"></script>
 
     @php echo loadExtension('tawk-chat') @endphp
@@ -60,6 +61,7 @@
     <script>
         (function($) {
             "use strict";
+
             $(".langSel").on("change", function() {
                 window.location.href = "{{ route('home') }}/change/" + $(this).val();
             });
@@ -98,6 +100,19 @@
                 } else {
                     disableSubmission = true;
                 }
+            });
+
+            Array.from(document.querySelectorAll('table')).forEach(table => {
+                let heading = table.querySelectorAll('thead tr th');
+                Array.from(table.querySelectorAll('tbody tr')).forEach(row => {
+                    Array.from(row.querySelectorAll('td')).forEach((column, i) => {
+                        column.setAttribute('data-label', heading[i].innerText);
+                    });
+                });
+            });
+
+            $(function() {
+                $('[data-toggle="tooltip"]').tooltip();
             });
 
         })(jQuery);

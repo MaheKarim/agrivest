@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Invest;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class ManageInvestController extends Controller
@@ -20,26 +21,33 @@ class ManageInvestController extends Controller
     public function details($id)
     {
         $pageTitle = 'Invest Details';
-        $invest = Invest::findOrFail($id);
+        $invest = Invest::with('user', 'project')->findOrFail($id);
+        $transactions = Transaction::where('invest_id', $invest->id)->orderBy('id', 'desc')->paginate(getPaginate());
 
-        return view('admin.invest.details', compact('pageTitle', 'invest'));
+        return view('admin.invest.details', compact('pageTitle', 'invest', 'transactions'));
     }
 
-    public function investStatus(Request $request, $id)
+    public function investStatus($id)
     {
-        $invest = Invest::find($id);
-        if ($invest->status == Status::INVEST_PENDING && $invest->payment_status == Status::INVEST_PAYMENT_PENDING) {
-            $invest->status = Status::INVEST_CANCELED;
-            $invest->payment_status = Status::PAYMENT_REJECT;
-            $invest->save();
-        } else {
-            $invest->status = Status::INVEST_CANCELED;
-            $invest->payment_status = Status::PAYMENT_REJECT;
-            $invest->save();
-        }
-        $notify[] = ['success', 'Invest status change successfully.'];
+        $invest = Invest::where('status', Status::INVEST_PENDING)
+            ->where('payment_status', Status::INVEST_PAYMENT_PENDING)
+            ->findOrFail($id);
+
+        $invest->status = Status::INVEST_CANCELED;
+        $invest->payment_status = Status::PAYMENT_REJECT;
+        $invest->save();
+
+        notify($invest->user, 'INVEST_REJECTED', [
+            'invest_id' => $invest->invest_no,
+            'project_title' => $invest->project->title,
+            'invest_amount' => showAmount($invest->total_price, currencyFormat: false),
+            'quantity' => $invest->quantity,
+        ]);
+
+        $notify[] = ['success', 'Invest cancelled successfully.'];
         return back()->withNotify($notify);
     }
+
 
     public function runningInvest()
     {
@@ -57,5 +65,37 @@ class ManageInvestController extends Controller
             $users = Invest::query();
         }
         return $users->searchable(['invest_id'])->orderBy('id', 'desc')->paginate(getPaginate());
+    }
+
+    public function stopReturns($id)
+    {
+        $invest = Invest::where('id', $id)
+            ->where('status', Status::INVEST_RUNNING)
+            ->whereHas('project', function ($query) {
+                $query->where('return_type', Status::LIFETIME);
+            })
+            ->firstOrFail();
+
+        $invest->status = Status::INVEST_CLOSED;
+        $invest->save();
+
+        $notify[] = ['success', 'Returns have been stopped successfully.'];
+        return back()->withNotify($notify);
+    }
+
+    public function startReturns($id)
+    {
+        $invest = Invest::where('id', $id)
+            ->where('status', Status::INVEST_CLOSED)
+            ->whereHas('project', function ($query) {
+                $query->where('return_type', Status::LIFETIME);
+            })
+            ->firstOrFail();
+
+        $invest->status = Status::INVEST_RUNNING;
+        $invest->save();
+
+        $notify[] = ['success', 'Returns have been started successfully.'];
+        return back()->withNotify($notify);
     }
 }

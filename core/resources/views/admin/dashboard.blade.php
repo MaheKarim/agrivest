@@ -230,10 +230,10 @@
         <div class="col-xxl-3 col-sm-6">
             <x-widget
                 style="6"
-                link="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_CLOSED }}"
-                title="Closed Investments"
+                link="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_COMPLETED }}"
+                title="Completed Investments"
                 icon="las la-chart-line"
-                value="{{ showAmount($invest['closed_invests']) }}"
+                value="{{ showAmount($invest['completed_invests']) }}"
                 bg="9"
             />
         </div><!-- dashboard-w1 end -->

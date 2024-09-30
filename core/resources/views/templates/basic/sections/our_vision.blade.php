@@ -1,6 +1,6 @@
 @php
     $ourVisionContent = getContent('our_vision.content', true);
-    $ourVisionElement = getContent('our_vision.element',  orderById: true);
+    $ourVisionElement = getContent('our_vision.element', orderById: true);
 @endphp
 <section class="our-vision bg--white pt-120 pb-70">
     <div class="container">
@@ -12,23 +12,24 @@
                         <span>{{ __(@$ourVisionContent->data_values->small_heading) }}</span>
                         <img class="ms-2" src="{{ siteFavicon() }}" alt="@lang('Favicon')">
                     </div>
-                    <h3 class="section-heading__title">{{__(@$ourVisionContent->data_values->heading)}}</h3>
-                    <p class="section-heading__desc">{{__(@$ourVisionContent->data_values->subheading)}}</p>
+                    <h3 class="section-heading__title">{{ __(@$ourVisionContent->data_values->heading) }}</h3>
+                    <p class="section-heading__desc">{{ __(@$ourVisionContent->data_values->subheading) }}</p>
                 </div>
             </div>
         </div>
 
         <div class="row gy-4 justify-content-center justify-content-sm-start">
             @foreach ($ourVisionElement as $element)
-            <div class="col-11 col-xsm-6 col-sm-6 col-lg-3">
-                <div class="our-vision-card">
-                    <div class="our-vision-card__icon">
-                        <img src="{{ frontendImage('our_vision', @$element->data_values->image, '40x40') }}" alt="@lang('Vision Icon Image')">
-                    </div>
+                <div class="col-11 col-xsm-6 col-sm-6 col-lg-3">
+                    <div class="our-vision-card">
+                        <div class="our-vision-card__icon">
+                            <img src="{{ frontendImage('our_vision', @$element->data_values->image, '40x40') }}"
+                                alt="@lang('Vision Icon Image')">
+                        </div>
 
-                    <h6 class="our-vision-card__title">{{__(@$element->data_values->text)}}</h6>
+                        <h6 class="our-vision-card__title">{{ __(@$element->data_values->text) }}</h6>
+                    </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>

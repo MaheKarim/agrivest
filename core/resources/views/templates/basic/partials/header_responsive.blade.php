@@ -56,8 +56,8 @@
                                         @lang('Dashboard')
                                     </a>
                                 @else
-                                    <a class="btn btn--white d-sm-none" href="{{ route('user.register') }}">
-                                        @lang('Register')
+                                    <a class="btn btn--white d-sm-none" href="{{ route('user.login') }}">
+                                        @lang('Login')
                                     </a>
                                 @endif
                             </div>
@@ -67,17 +67,18 @@
                                 href="{{ route('home') }}">@lang('Home')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ menuActive('projects') }}"
+                            <a class="nav-link {{ menuActive(['projects', 'project.details']) }}"
                                 href="{{ route('projects') }}">@lang('Projects')</a>
                         </li>
                         @foreach ($pages as $page)
+                            @php $isActive = route('pages', [$page->slug]) == request()->url(); @endphp
                             <li class="nav-item">
-                                <a class="nav-link {{ menuActive($page->slug) }}"
-                                    href="{{ $page->slug }}">{{ __($page->name) }}</a>
+                                <a class="nav-link @if ($isActive) active @endif"
+                                    href="{{ route('pages', [$page->slug]) }}">{{ __($page->name) }}</a>
                             </li>
                         @endforeach
                         <li class="nav-item">
-                            <a class="nav-link {{ menuActive('blogs') }}"
+                            <a class="nav-link {{ menuActive(['blogs', 'blog.details']) }}"
                                 href="{{ route('blogs') }}">@lang('Blogs')</a>
                         </li>
                         <li class="nav-item">
@@ -125,7 +126,7 @@
                                         <i class="fas fa-user-circle"></i>
                                         <span>@lang('My Profile')</span>
                                     </a>
-                                    <a class="dropdown-item logout" href="{{ route('user.logout') }}">
+                                    <a class="dropdown-item" href="{{ route('user.logout') }}">
                                         <i class="fas fa-sign-out"></i>
                                         <span>@lang('Logout')</span>
                                     </a>
@@ -133,8 +134,8 @@
                             </div>
                         </div>
                     @else
-                        <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.register') }}">
-                            @lang('Register')
+                        <a class="btn btn--white d-none d-sm-inline-block" href="{{ route('user.login') }}">
+                            @lang('Login')
                         </a>
                     @endif
                 </div>

@@ -1,13 +1,13 @@
 @php
     $brandContent = getContent('brand.element', orderById: true);
 @endphp
-<section class="brands py-60 bg--white">
+<section class="brands py-70 bg--white">
     <div class="container">
         <div class="brands-slider">
             @foreach ($brandContent as $element)
                 <div class="brands-slider__item">
                     <img src="{{ frontendImage('brand', $element->data_values->image, '140x40') }}"
-                         alt="@lang('Brand Image')">
+                        alt="@lang('Brand Image')">
                 </div>
             @endforeach
         </div>
@@ -15,7 +15,7 @@
 </section>
 @push('script')
     <script>
-        (function ($) {
+        (function($) {
             "use strict";
             $('.brands-slider').slick({
                 slidesToShow: 6,
@@ -25,8 +25,7 @@
                 arrows: false,
                 autoplay: true,
                 autoplaySpeed: 1000,
-                responsive: [
-                    {
+                responsive: [{
                         breakpoint: 1200,
                         settings: {
                             slidesToShow: 5,
@@ -55,7 +54,7 @@
         })(jQuery);
     </script>
 @endpush
-@if(!app()->offsetExists('slick_load'))
+@if (!app()->offsetExists('slick_load'))
     @push('style-lib')
         <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
     @endpush

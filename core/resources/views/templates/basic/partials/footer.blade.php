@@ -1,9 +1,9 @@
 @php
-    $policyPages = getContent('policy_pages.element', false, orderById:true);
+    $policyPages = getContent('policy_pages.element', false, orderById: true);
     $contactInfo = getContent('contact_us.content', true);
     $appStores = getContent('contact_us.element', orderById: true);
     $socialIcons = getContent('social_icon.element', orderById: true);
-    $latestProjects = \App\Models\Project::active()->beforeEndDate()->limit(4)->get();
+    $latestProjects = \App\Models\Project::active()->available()->beforeEndDate()->limit(4)->get();
 @endphp
 <footer class="footer">
     <div class="footer-top py-120">
@@ -37,7 +37,7 @@
                     <div class="footer-item">
                         <h6 class="footer-item__title">@lang('Latest Projects')</h6>
                         <ul class="footer-menu">
-                            @foreach($latestProjects as $project)
+                            @foreach ($latestProjects as $project)
                                 <li class="footer-menu__item">
                                     <a class="footer-menu__link" href="{{ route('project.details', $project->slug) }}">
                                         {{ __(Str::limit($project->title, 20)) }}
@@ -49,12 +49,11 @@
                 </div>
                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 order-5 order-lg-4">
                     <div class="footer-item">
-                        <h6 class="footer-item__title">@lang('Legal')</h6>
+                        <h6 class="footer-item__title">@lang('Quick Links')</h6>
                         <ul class="footer-menu">
-                            @foreach($policyPages as $page)
+                            @foreach ($policyPages as $page)
                                 <li class="footer-menu__item">
-                                    <a class="footer-menu__link" href="{{ route('policy.pages', $page->slug) }}"
-                                       target="_blank">
+                                    <a class="footer-menu__link" href="{{ route('policy.pages', $page->slug) }}">
                                         {{ __(@$page->data_values->title) }}
                                     </a>
                                 </li>
@@ -68,36 +67,36 @@
 
                         <ul class="contact-list">
                             <li class="contact-list__item">
-                                <i class="fas fa-location-dot"></i>
-                                <span class="contact-list__text">
-                                    {{ __(@$contactInfo->data_values->address) }}
-                                </span>
+                                <i class="fas fa-envelope"></i>
+                                <a class="contact-list__link"
+                                    href="mailto:{{ __(@$contactInfo->data_values->email_address) }}">
+                                    {{ __(@$contactInfo->data_values->email_address) }}
+                                </a>
                             </li>
                             <li class="contact-list__item">
                                 <i class="fas fa-phone-volume"></i>
                                 <a class="contact-list__link"
-                                   href="tel:{{ __(@$contactInfo->data_values->contact_number) }}">
+                                    href="tel:{{ __(@$contactInfo->data_values->contact_number) }}">
                                     {{ __(@$contactInfo->data_values->contact_number) }}
                                 </a>
                             </li>
                             <li class="contact-list__item">
-                                <i class="fas fa-envelope"></i>
-                                <a class="contact-list__link"
-                                   href="mailto:{{ __(@$contactInfo->data_values->email_address) }}">
-                                    {{ __(@$contactInfo->data_values->email_address) }}
-                                </a>
+                                <i class="fas fa-location-dot"></i>
+                                <span class="contact-list__text">
+                                    {{ __(@$contactInfo->data_values->address) }}
+                                </span>
                             </li>
                         </ul>
 
                         <div class="footer-item__social-links">
                             <span class="title">@lang('Follow Us')</span>
                             <ul class="social-list style-two">
-                                @foreach($socialIcons as $link)
+                                @foreach ($socialIcons as $link)
                                     <li class="social-list__item">
                                         <a href="{{ @$link->data_values->url }}" class="social-list__link flex-center"
-                                           target="_blank">
+                                            target="_blank">
                                             @php
-                                                echo @$link->data_values->social_icon
+                                                echo @$link->data_values->social_icon;
                                             @endphp
                                         </a>
                                     </li>
@@ -113,7 +112,8 @@
     <div class="footer-bottom">
         <div class="container">
             <p class="footer-bottom__text text-center">
-                @lang('Copyright') &copy; @php echo date('Y') @endphp @lang('All rights reserved.')
+                @lang('Copyright') <a href="{{ route('home') }}" class="text--base"> {{ gs('site_name') }}</a>
+                &copy; @php echo date('Y') @endphp @lang('All rights reserved.')
             </p>
         </div>
     </div>

@@ -130,8 +130,8 @@
 .hover-input-popup .input-popup {
     display: block;
     position: absolute;
-    bottom: 100%;
-    left: 30%;
+    bottom: calc(100% + 12px);
+    left: 50%;
     width: 280px;
     background-color: #1a1a1a;
     color: #fff;
@@ -769,6 +769,10 @@ label.required:after {
     content: '*';
     color: #DC3545 !important;
     margin-left: 2px;
+}
+
+.la-check:before {
+    color: white !important;
 }
 
 /* select2 css start here  */

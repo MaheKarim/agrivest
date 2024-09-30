@@ -9,7 +9,7 @@
                         @csrf
                         @include('admin.project.form')
                         <button type="submit" class="btn btn--primary w-100 h-45">
-                            {{ isset($project) && $project->id ? __('Update Project') : __('Create Project') }}
+                            @lang('Submit')
                         </button>
                     </form>
                 </div>
@@ -58,7 +58,7 @@
                     preloaded: preloaded,
                     imagesInputName: 'gallery',
                     preloadedInputName: 'old',
-                    maxFiles: 5
+                    maxFiles: 4
                 });
                 $(document).on('input', 'input[name="gallery[]"]', function() {
                     var fileUpload = $("input[type='file']");
@@ -67,28 +67,27 @@
                     }
                 });
 
-                $('.return_interval').hide();
+
                 $('.return_timespan').hide();
 
                 function toggleFields() {
                     var returnType = $('select[name="return_type"]').val();
-                    if (returnType == '-1') {
-                        $('#return_interval').closest('.form-group').hide();
-                        $('#repeat_times').closest('.form-group').hide();
-                        $('#return_interval').removeAttr('required');
-                        $('#repeat_times').removeAttr('required');
 
+                    if (returnType === '-1') {
+                        $('.return_timespan').hide().closest('.form-group').find('input').attr('required',
+                            false);
                         $('.return-type-wrapper').removeClass('col-md-4').addClass('col-md-6');
                         $('.time-settings-wrapper').removeClass('col-md-4').addClass('col-md-6');
-                    } else if (returnType == '2') {
-                        $('#return_interval').closest('.form-group').show();
-                        $('#repeat_times').closest('.form-group').show();
-                        $('#return_interval').attr('required', 'required');
-                        $('#repeat_times').attr('required', 'required');
-                        $('.return_interval').show();
-                        $('.return_timespan').show();
-                        $('.return-type-wrapper').removeClass('col-md-6').addClass('col-md-3');
-                        $('.time-settings-wrapper').removeClass('col-md-6').addClass('col-md-3');
+                        $('.capital_back-wrapper').addClass('d-none');
+                        $('.category-wrapper').removeClass('col-md-4').addClass('col-md-6');
+                        $('.map-wrapper').removeClass('col-md-4').addClass('col-md-6');
+                    } else if (returnType === '2') {
+                        $('.return_timespan').show().closest('.form-group').attr('required', true);
+                        $('.return-type-wrapper').removeClass('col-md-6').addClass('col-md-4');
+                        $('.time-settings-wrapper').removeClass('col-md-6').addClass('col-md-4');
+                        $('.capital_back-wrapper').removeClass('d-none');
+                        $('.category-wrapper').removeClass('col-md-6').addClass('col-md-4');
+                        $('.map-wrapper').removeClass('col-md-6').addClass('col-md-4');
                     }
                 }
 
@@ -102,11 +101,11 @@
 
 
                 function clearIfGoalEmpty(goal) {
-                    if (goal === '') {
-                        $('.share_count, .share_amount').val('');
-                        notify('error', 'Please enter project goal value first');
-                        return true;
-                    }
+                    // if (goal === '') {
+                    //     $('.share_count, .share_amount').val('');
+                    //     notify('error', 'Please enter project goal value first');
+                    //     return true;
+                    // }
                     return false;
                 }
 
@@ -120,8 +119,8 @@
                     }
 
                     if (invalidInputPattern.test(goal) || invalidInputPattern.test(shareCount)) {
-                        notify('error', 'Please enter valid values');
-                        return;
+                        // notify('error', 'Please enter valid values');
+                        // return;
                     }
 
                     goal = parseFloat(goal);
@@ -130,7 +129,7 @@
                     if (!isNaN(goal) && !isNaN(shareCount) && shareCount > 0) {
                         let shareAmount = Math.round(goal / shareCount);
                         if (shareAmount <= 0.00) {
-                            notify('error', 'Share amount must be greater than 0');
+                            // notify('error', 'Share amount must be greater than 0');
                             $('.share_amount').val('');
                         } else {
                             $('.share_amount').val(shareAmount.toFixed(2));
@@ -154,7 +153,7 @@
                     }
 
                     if (invalidInputPattern.test(goal) || invalidInputPattern.test(shareAmount)) {
-                        notify('error', 'Please enter valid values');
+                        // notify('error', 'Please enter valid values');
                         return;
                     }
 
@@ -179,7 +178,7 @@
                 });
 
                 function calculateRoiAmount() {
-                    let goal = $('.goal').val().trim();
+                    let goal = $('.share_amount').val().trim();
                     let roi = $('.roi_percentage').val().trim();
                     let invalidInputPattern = /^-|\b0[0-9]/;
 
@@ -208,12 +207,12 @@
 
                 }
 
-                $('.roi_percentage, .goal').on('input', function(e) {
+                $('.roi_percentage, .share_amount').on('input', function(e) {
                     calculateRoiAmount();
                 });
 
                 function calculateRoiPercentage() {
-                    let goal = $('.goal').val().trim();
+                    let goal = $('.share_amount').val().trim();
                     let roiAmount = $('.roi_amount').val().trim();
                     let invalidInputPattern = /^-|\b0[0-9]/;
 
@@ -241,7 +240,7 @@
                     }
                 }
 
-                $('.roi_amount, .goal').on('input', function(e) {
+                $('.roi_amount, .share_amount').on('input', function(e) {
                     calculateRoiPercentage();
                 });
 

@@ -15,7 +15,7 @@ class InvestReportController extends Controller
         $pageTitle = 'Investment Statistics';
 
         $widget['total_invest'] = Transaction::where('remark', 'payment', 'wallet_payment')->sum('amount');
-        $widget['profit_to_give'] = Invest::where('status', Status::INVEST_RUNNING)->where('period', '>', 0)->sum('recuring_pay');
+        $widget['profit_to_give'] = Invest::where('status', Status::INVEST_RUNNING)->where('period', '>', 0)->sum('recurring_pay');
         $widget['profit_paid'] = Invest::where('status', Status::INVEST_RUNNING)->where('period', '>', 0)->sum('paid');
 
         $interestByProjects = Invest::where('period', '>', 0)->selectRaw("SUM(paid) as total_price, project_id")->with('project')->groupBy('project_id')->orderBy('paid', 'desc')->get();

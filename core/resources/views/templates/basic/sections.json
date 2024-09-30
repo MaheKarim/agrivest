@@ -13,7 +13,7 @@
             "color_text": "text",
             "subheading": "text",
             "left_button_name": "text",
-            "left_button_url_": "text",
+            "left_button_url": "text",
             "right_button_name": "text",
             "right_button_url": "text"
         },
@@ -23,9 +23,9 @@
             "text": "text"
         }
     },
-    "why_we": {
+    "choose_us": {
         "builder": true,
-        "name": "Why We Are Section",
+        "name": "Why Choose Us",
         "content": {
             "images": {
                 "image": {
@@ -121,7 +121,7 @@
             "modal": true
         }
     },
-    "": {
+    "faq": {
         "builder": true,
         "name": "FAQ Section",
         "content": {
@@ -160,6 +160,7 @@
             },
             "name": "text",
             "date": "text",
+            "url": "text",
             "modal": true
         }
     },
@@ -196,7 +197,7 @@
             "images": {
                 "image": {
                     "size": "966x450",
-                    "thumb": "416x268"
+                    "thumb": "416x193"
                 }
             },
             "title": "text",
@@ -297,6 +298,18 @@
             "images": {
                 "image": {
                     "size": "500x500"
+                }
+            }
+        }
+    },
+    "login_registration": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Login/Registration Image",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "1168x1080"
                 }
             }
         }

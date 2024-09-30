@@ -1,105 +1,108 @@
 @extends($activeTemplate . 'layouts.master')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center mt-2">
-            <div class="col-lg-12">
-                <div class="dashboard-card">
-                    <div class="dashboard-card__header d-flex justify-content-between align-items-center">
-                        <h6 class="dashboard-card__title mb-0">@lang('Withdrawals')</h6>
-                        <form class="d-flex align-items-center">
-                            <div class="position-relative">
-                                <input class="form-control form--control with-search-icon" type="search" name="search"
-                                    value="{{ request()->search }}" placeholder="@lang('Search by transactions')">
-                                <button type="submit" class="search-icon-button">
-                                    <i class="las la-search search-icon"></i>
-                                </button>
-                            </div>
-                        </form>
+    <div class="dashboard-inner__block">
+        <div class="dashboard-card">
+            <div class="dashboard-card__header d-flex justify-content-between align-items-center">
+                <h6 class="dashboard-card__title mb-0">@lang('Withdrawals')</h6>
+                <form class="d-flex align-items-center">
+                    <div class="position-relative">
+                        <input class="form-control form--control with-search-icon" type="search" name="search"
+                            value="{{ request()->search }}" placeholder="@lang('Search by transactions')">
+                        <button type="submit" class="search-icon-button">
+                            <i class="las la-search search-icon"></i>
+                        </button>
                     </div>
-                    <div class="dashboard-card__body">
-                        <div class="table-responsive">
-                            <table class="table table--responsive--sm">
-                                <thead>
-                                    <tr>
-                                        <th>@lang('Gateway | Transaction')</th>
-                                        <th class="text-center">@lang('Initiated')</th>
-                                        <th class="text-center">@lang('Amount')</th>
-                                        <th class="text-center">@lang('Conversion')</th>
-                                        <th class="text-center">@lang('Status')</th>
-                                        <th>@lang('Action')</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($withdraws as $withdraw)
-                                        @php
-                                            $details = [];
-                                            foreach ($withdraw->withdraw_information as $key => $info) {
-                                                $details[] = $info;
-                                                if ($info->type == 'file') {
-                                                    $details[$key]->value = route(
-                                                        'user.download.attachment',
-                                                        encrypt(getFilePath('verify') . '/' . $info->value),
-                                                    );
-                                                }
-                                            }
-                                        @endphp
-                                        <tr>
-                                            <td>
-                                                <span class="fw-bold"><span class="text--base">
-                                                        {{ __(@$withdraw->method->name) }}</span></span>
-                                                <br>
-                                                <small>{{ $withdraw->trx }}</small>
-                                            </td>
-                                            <td class="text-center">
-                                                {{ showDateTime($withdraw->created_at) }}
-                                                <br> {{ diffForHumans($withdraw->created_at) }}
-                                            </td>
-                                            <td class="text-center">
-                                                {{ showAmount($withdraw->amount) }} - <span class="text--danger"
-                                                    data-bs-toggle="tooltip"
-                                                    title="@lang('Processing Charge')">{{ showAmount($withdraw->charge) }} </span>
-                                                <br>
-                                                <strong data-bs-toggle="tooltip" title="@lang('Amount after charge')">
-                                                    {{ showAmount($withdraw->amount - $withdraw->charge) }}
-                                                </strong>
-                                            </td>
-                                            <td class="text-center">
-                                                {{ showAmount(1) }}
-                                                = {{ showAmount($withdraw->rate, currencyFormat: false) }}
-                                                {{ __($withdraw->currency) }}
-                                                <br>
-                                                <strong>{{ showAmount($withdraw->final_amount, currencyFormat: false) }}
-                                                    {{ __($withdraw->currency) }}</strong>
-                                            </td>
-                                            <td class="text-center">
-                                                @php echo $withdraw->statusBadge @endphp
-                                            </td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn btn--xsm btn--outline action-btn detailBtn"
-                                                    data-user_data="{{ json_encode($details) }}"
-                                                    @if ($withdraw->status == Status::PAYMENT_REJECT) data-admin_feedback="{{ $withdraw->admin_feedback }}" @endif
-                                                    data-bs-toggle="modal" data-bs-target="#detailModal">
-                                                    <i class="las la-desktop"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td class="text--base text-center" colspan="100%">{{ __($emptyMessage) }}</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    @if ($withdraws->hasPages())
-                        <div class="card-footer">
-                            {{ paginateLinks($withdraws) }}
-                        </div>
-                    @endif
+                </form>
+            </div>
+            <div class="dashboard-card__body">
+                <div class="table-responsive">
+                    <table class="table table--responsive--sm">
+                        <thead>
+                            <tr>
+                                <th>@lang('Gateway | Transaction')</th>
+                                <th class="text-center">@lang('Initiated')</th>
+                                <th class="text-center">@lang('Amount')</th>
+                                <th class="text-center">@lang('Conversion')</th>
+                                <th class="text-center">@lang('Status')</th>
+                                <th>@lang('Action')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($withdraws as $withdraw)
+                                @php
+                                    $details = [];
+                                    foreach ($withdraw->withdraw_information as $key => $info) {
+                                        $details[] = $info;
+                                        if ($info->type == 'file') {
+                                            $details[$key]->value = route(
+                                                'user.download.attachment',
+                                                encrypt(getFilePath('verify') . '/' . $info->value),
+                                            );
+                                        }
+                                    }
+                                @endphp
+                                <tr>
+                                    <td>
+                                        <div class="td-wrapper">
+                                            <span class="fw-bold"><span class="text--base text-nowrap">
+                                                    {{ __(@$withdraw->method->name) }}</span></span>
+                                            <br>
+                                            <small>{{ $withdraw->trx }}</small>
+                                        </div>
+                                    </td>
+                                    <td class="text-end text-md-center">
+                                        <div class="td-wrapper">
+                                            {{ showDateTime($withdraw->created_at) }}
+                                            <br> {{ diffForHumans($withdraw->created_at) }}
+                                        </div>
+                                    </td>
+                                    <td class="text-end text-md-center">
+                                        <div class="td-wrapper">
+                                            {{ showAmount($withdraw->amount) }} - <span class="text--danger"
+                                                data-bs-toggle="tooltip"
+                                                title="@lang('Processing Charge')">{{ showAmount($withdraw->charge) }} </span>
+                                            <br>
+                                            <strong class="fs-12" data-bs-toggle="tooltip" title="@lang('Amount after charge')">
+                                                {{ showAmount($withdraw->amount - $withdraw->charge) }}
+                                            </strong>
+                                        </div>
+                                    </td>
+                                    <td class="text-end text-md-center">
+                                        <div class="td-wrapper">
+                                            {{ showAmount(1) }}
+                                            = {{ showAmount($withdraw->rate, currencyFormat: false) }}
+                                            {{ __($withdraw->currency) }}
+                                            <br>
+                                            <strong class="fs-12">{{ showAmount($withdraw->final_amount, currencyFormat: false) }}
+                                                {{ __($withdraw->currency) }}</strong>
+                                        </div>
+                                    </td>
+                                    <td class="text-end text-md-center">
+                                        @php echo $withdraw->statusBadge @endphp
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn--xsm btn--outline action-btn detailBtn"
+                                            data-user_data="{{ json_encode($details) }}"
+                                            @if ($withdraw->status == Status::PAYMENT_REJECT) data-admin_feedback="{{ $withdraw->admin_feedback }}" @endif
+                                            data-bs-toggle="modal" data-bs-target="#detailModal">
+                                            <i class="las la-desktop"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text--base text-end text-md-center" colspan="100%">{{ __($emptyMessage) }}</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            @if ($withdraws->hasPages())
+                <div class="card-footer">
+                    {{ paginateLinks($withdraws) }}
+                </div>
+            @endif
         </div>
     </div>
 

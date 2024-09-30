@@ -524,3 +524,72 @@ function convertMatureTime($value)
         return $years . ' year' . ($years > 1 ? 's' : '');
     }
 }
+
+
+function investMaturedDate($project, $endDate = false)
+{
+    $date = Carbon::parse($project->end_date)->addMonth($project->maturity_time); // investMaturedDate
+    if ($endDate) {
+        $date = $date->addMonths($project->project_duration); //investmentEndDate
+    }
+    return $date;
+}
+
+function getInvestmentRemaining($invest)
+{
+    //how many times remaining to pay the user
+
+    if ($invest->project->return_type == Status::LIFETIME) {
+        // Investment start and end dates
+        $investmentStartDate = investMaturedDate($invest->project);
+        $investmentEndDate = investMaturedDate($invest->project, true);
+
+        // Total duration in hours
+        $totalDurationHours = $investmentStartDate->diffInHours(
+            $investmentEndDate,
+        );
+
+        // Return interval in hours
+        $returnIntervalHours = $invest->project->time->hours;
+
+        // Total number of returns
+        $totalReturns = floor($totalDurationHours / $returnIntervalHours);
+
+        // Remaining returns
+        $remaining = $totalReturns - $invest->period;
+    } else {
+        // For repeat investments
+        $remaining = $invest->repeat_times - $invest->period;
+        $totalReturns = $invest->repeat_times;
+    }
+
+    return $remaining;
+}
+
+function getTotalReturns($invest)
+{
+    //how many times user will get return
+
+    if ($invest->project->return_type == Status::LIFETIME) {
+        // Investment start and end dates
+        $investmentStartDate = investMaturedDate($invest->project);
+        $investmentEndDate = investMaturedDate($invest->project, true);
+
+        // Total duration in hours
+        $totalDurationHours = $investmentStartDate->diffInHours(
+            $investmentEndDate,
+        );
+
+        // Return interval in hours
+        $returnIntervalHours = $invest->project->time->hours;
+
+        // Total number of returns
+        $totalReturns = floor($totalDurationHours / $returnIntervalHours);
+    } else {
+        // For repeat investments
+        $remaining = $invest->repeat_times - $invest->period;
+        $totalReturns = $invest->repeat_times;
+    }
+
+    return $totalReturns;
+}

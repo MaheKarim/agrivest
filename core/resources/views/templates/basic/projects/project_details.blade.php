@@ -1,20 +1,24 @@
 @extends($activeTemplate . 'layouts.frontend')
 
 @section('content')
-    @include($activeTemplate . 'partials.breadcrumb')
-
     <section class="offer-details py-120  bg--white">
         <div class="container">
             <div class="offer-details-top">
                 <div class="offer-details-thumb">
-                    <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
-                        alt="Project Image">
+                    <a href="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                        data-rel="lightcase:my-slideshow">
+                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                            alt="Project Image">
+                    </a>
+
 
                     @if (!empty($project->gallery) && count($project->gallery) > 0)
                         @foreach ($project->gallery as $index => $gallery)
                             @if ($index < 5)
-                                <img src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
-                                    alt="Project Gallery Image">
+                                <a href="{{ getImage(getFilePath('project') . '/' . $gallery, getFileSize('project')) }}"
+                                    data-rel="lightcase:my-slideshow">
+                                    <img src="{{ getImage(getFilePath('project') . '/' . $gallery, getFileSize('project')) }}"
+                                        alt="Project Gallery Image"></a>
                             @endif
                         @endforeach
                     @endif
@@ -27,7 +31,7 @@
                                 @if ($index < 5)
                                     <div class="offer-details-thumb-slider__item">
                                         <img class="offer-details-thumb-slider__img"
-                                            src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
+                                            src="{{ getImage(getFilePath('project') . '/' . $gallery, getFileSize('project')) }}"
                                             alt="@lang('Project Image')" data-index="{{ $index }}">
                                     </div>
                                 @endif
@@ -39,7 +43,7 @@
                                 @if ($index < 5)
                                     <div class="offer-details-preview-slider__item">
                                         <img class="offer-details-preview-slider__img"
-                                            src="{{ getImage(getFilePath('projectGallery') . '/' . $gallery, getFileSize('projectGallery')) }}"
+                                            src="{{ getImage(getFilePath('project') . '/' . $gallery, getFileSize('project')) }}"
                                             alt="@lang('Project Image')">
                                     </div>
                                 @endif
@@ -48,284 +52,277 @@
                     </div>
                 @endif
             </div>
+            <div class="offer-details-bottom">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="offer-details-content">
+                            <h1 class="offer-details-title">{{ __($project->title) }}</h1>
 
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="offer-details-content">
-                        <h1 class="offer-details-title">{{ __($project->title) }}</h1>
+                            <ul class="offer-details-meta">
+                                <li class="offer-details-meta__item">
+                                    <span class="label">@lang('Per Share')</span>
+                                    <span class="value">{{ __(showAmount($project->share_amount)) }}</span>
+                                </li>
+                                <li class="offer-details-meta__item">
+                                    <span class="label">@lang('ROI')</span>
+                                    <span
+                                        class="value">{{ __(getAmount($project->roi_percentage)) }}@lang('%')</span>
+                                </li>
+                                <li class="offer-details-meta__item">
+                                    <span class="label">@lang('Duration')</span>
+                                    <span class="value">{{ $project->maturity_time }} @lang('Months')</span>
+                                </li>
+                                <li class="offer-details-meta__item">
+                                    <span class="label">@lang('Max')</span>
+                                    <span class="value">{{ __(getAmount($project->share_count)) }}
+                                        @lang('Units')</span>
+                                </li>
+                                <li class="offer-details-meta__item">
+                                    <span class="label">@lang('Remaining')</span>
+                                    <span class="value">{{ __(getAmount($project->available_share)) }}
+                                        @lang('Units')</span>
+                                </li>
+                            </ul>
 
-                        <ul class="offer-details-meta">
-                            <li class="offer-details-meta__item">
-                                <span class="label">@lang('Per Share')</span>
-                                <span class="value">{{ __(showAmount($project->share_amount)) }}</span>
-                            </li>
-                            <li class="offer-details-meta__item">
-                                <span class="label">@lang('ROI')</span>
-                                <span class="value">{{ __(getAmount($project->roi_percentage)) }}@lang('%')</span>
-                            </li>
-                            <li class="offer-details-meta__item">
-                                <span class="label">@lang('Duration')</span>
-                                <span class="value">{{ $project->maturity_time }} @lang('Months')</span>
-                            </li>
-                            <li class="offer-details-meta__item">
-                                <span class="label">@lang('Max')</span>
-                                <span class="value">{{ __(getAmount($project->share_count)) }} @lang('Units')</span>
-                            </li>
-                            <li class="offer-details-meta__item">
-                                <span class="label">@lang('Remaining')</span>
-                                <span class="value">{{ __(getAmount($project->available_share)) }}
-                                    @lang('Units')</span>
-                            </li>
-                        </ul>
+                            <button class="btn btn--lg btn--base w-100 mt-4 d-lg-none" type="button"
+                                data-toggle="offcanvas-sidebar" data-target="#offer-details-offcanvas-sidebar">
+                                @lang('Check Details')
+                            </button>
 
-                        <button class="btn btn--lg btn--base w-100 mt-4 d-lg-none" type="button"
-                            data-toggle="offcanvas-sidebar" data-target="#offer-details-offcanvas-sidebar">
-                            @lang('Check Details')
-                        </button>
-
-                        <div class="offer-details-desc">
-                            <p>
-                                @php echo $project->description; @endphp
-                            </p>
-                        </div>
-
-                        <div class="offer-details-block">
-                            <h5 class="offer-details-block__title">@lang('Where This Project')</h5>
-
-                            <div class="offer-details-block__map">
-                                <iframe src="{{ @$project->map_url }}"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="offer-details-block">
-                            <h5 class="offer-details-block__title">@lang('Frequently Asked Questions')</h5>
-                            <div id="faq-accordion" class="accordion custom--accordion">
-                                @foreach ($project->faqs as $index => $faq)
-                                    <div class="accordion-item {{ $index == 0 ? 'active' : '' }}">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }}"
-                                                type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#faq-accordion-question-{{ $index }}"
-                                                aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
-                                                aria-controls="faq-accordion-question-{{ $index }}">
-                                                {{ __($faq->question) }}
-                                            </button>
-                                        </h2>
-                                        <div id="faq-accordion-question-{{ $index }}"
-                                            class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
-                                            data-bs-parent="#faq-accordion">
-                                            <div class="accordion-body">
-                                                <p class="accordion-text">
-                                                    {{ __($faq->answer) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @if ($project->end_date > now())
-                    <div class="col-lg-4">
-                        <aside id="offer-details-offcanvas-sidebar"
-                            class="offcanvas-sidebar offcanvas-sidebar--offer-details">
-                            <div class="offcanvas-sidebar__header">
-                                <button type="button" class="btn--close">
-                                    <i class="fas fa-times"></i>
-                                </button>
+                            <div class="offer-details-desc">
+                                <p>
+                                    @php echo $project->description; @endphp
+                                </p>
                             </div>
 
-                            <div class="offcanvas-sidebar__body">
-                                <div class="payment-form">
-                                    <div class="payment-form__block">
-                                        <ul class="amount-detail">
-                                            <li class="amount-detail-item">
-                                                <span class="amount-detail-item__label">@lang('Total Payable')</span>
-                                                <span class="amount-detail-item__value"
-                                                    id="total-payable">{{ gs('cur_sym') }}{{ getAmount($project->share_amount) }}</span>
-                                            </li>
-                                            <li class="amount-detail-item">
-                                                <span class="amount-detail-item__label">@lang('Total Earning')</span>
-                                                <span class="amount-detail-item__value"
-                                                    id="total-earning">{{ gs('cur_sym') }}{{ getAmount($project->share_amount + $project->roi_amount) }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div class="offer-details-block">
+                                <h5 class="offer-details-block__title">@lang('Where This Project')</h5>
 
-                                    <div class="payment-form__block">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <span class="payment-form__label">@lang('Quantity')</span>
-
-                                            <div class="product-qty">
-                                                <button class="product-qty__decrement" type="button"><i
-                                                        class="fas fa-minus"></i></button>
-                                                <input class="product-qty__value" type="number" min="1"
-                                                    value="1">
-                                                <button class="product-qty__increment" type="button"><i
-                                                        class="fas fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="payment-form__block">
-                                        <button type="button" class="btn btn--lg btn--base w-100 bookNow"
-                                            data-bs-toggle="modal" data-bs-target="#bitModal">
-                                            @lang('Book Now')
-                                        </button>
-                                    </div>
-
-                                    <div class="payment-form__block">
-                                        <div class="detail-collpase">
-                                            <button class="collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#detail-collapse" aria-expanded="false">
-                                                <span class="text text-collapsed">@lang('See Details')</span>
-                                                <span class="text text-open">@lang('Hide Details')</span>
-                                            </button>
-
-                                            <div id="detail-collapse" class="collapse">
-                                                <ul class="detail-list">
-                                                    <li class="detail-list-item">
-                                                        <span class="detail-list-item__label">@lang('Unit Price')</span>
-                                                        <span class="detail-list-item__value"
-                                                            id="total-price">{{ __(showAmount($project->share_amount)) }}</span>
-                                                    </li>
-                                                    <li class="detail-list-item">
-                                                        <span class="detail-list-item__label">@lang('Total Price')</span>
-                                                        <span
-                                                            class="detail-list-item__value quantity-total-price">{{ gs('cur_sym') }}{{ __(getAmount($project->share_amount)) }}
-                                                            {{ gs('cur_text') }}</span>
-                                                    </li>
-                                                    <li class="detail-list-item">
-                                                        <span class="detail-list-item__label">@lang('Earning ROI (%)')</span>
-                                                        <span
-                                                            class="detail-list-item__value">{{ __(getAmount($project->roi_percentage)) }}</span>
-                                                    </li>
-                                                    <li class="detail-list-item">
-                                                        <span class="detail-list-item__label">@lang('Return Timespan')</span>
-                                                        <span
-                                                            class="detail-list-item__value">{{ __($project->return_timespan) }}
-                                                            @lang('Times /') {{ __($project->time->name) }}</span>
-                                                    </li>
-                                                    <li class="detail-list-item">
-                                                        <span class="detail-list-item__label">@lang('Total Earning')</span>
-                                                        <span class="detail-list-item__value"
-                                                            id="total-earning-last">{{ __(showAmount($project->share_amount + $project->roi_amount)) }}</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="offer-details-block__map">
+                                    <iframe src="{{ @$project->map_url }}"></iframe>
                                 </div>
                             </div>
-                        </aside>
+                            @if ($project->faqs->isNotEmpty())
+                                <div class="offer-details-block">
+                                    <h5 class="offer-details-block__title">@lang('Frequently Asked Questions')</h5>
+                                    <div id="faq-accordion" class="accordion custom--accordion">
+                                        @foreach ($project->faqs as $index => $faq)
+                                            <div class="accordion-item {{ $index == 0 ? 'active' : '' }}">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }}"
+                                                        type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#faq-accordion-question-{{ $index }}"
+                                                        aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                                                        aria-controls="faq-accordion-question-{{ $index }}">
+                                                        {{ __($faq->question) }}
+                                                    </button>
+                                                </h2>
+                                                <div id="faq-accordion-question-{{ $index }}"
+                                                    class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
+                                                    data-bs-parent="#faq-accordion">
+                                                    <div class="accordion-body">
+                                                        <p class="accordion-text">
+                                                            {{ __($faq->answer) }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                @endif
+                    @if ($project->end_date > now())
+                        <div class="col-lg-4" id="sidebar-container">
+                            @include($activeTemplate . 'projects.sidebar')
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </section>
     @include($activeTemplate . 'projects.buy-modal')
 @endsection
 
+@push('style-lib')
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/lightcase.min.css') }}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
+@endpush
+
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/lightcase.min.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+@endpush
+
 @push('script')
     <script>
         (function($) {
             "use strict";
             $(document).ready(function() {
-                const $decrementBtn = $('.product-qty__decrement');
-                const $incrementBtn = $('.product-qty__increment');
-                const $quantityInput = $('.product-qty__value');
-                const $totalPrice = $('.quantity-total-price, #total-payable');
-                const $totalEarning = $('#total-earning, #total-earning-last');
+                $("a[data-rel^=lightcase]").lightcase();
 
-                const projectId = "{{ $project->id }}";
-                const shareAmount = parseFloat("{{ $project->share_amount }}");
-                const roiAmount = parseFloat("{{ $project->roi_amount }}");
+                @if (!empty($project->gallery) && count($project->gallery) > 0)
+                    $(".offer-details-thumb-slider").slick({
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 1500,
+                        dots: false,
+                        arrows: false,
+                        pauseOnHover: true,
+                        asNavFor: ".offer-details-preview-slider",
+                    });
 
-                function updateQuantity(newValue) {
-                    $quantityInput.val(newValue);
-                    updateTotalPrice(newValue);
-                    checkQuantity(newValue);
-                    updateTotalEarning(newValue);
-                    updateModalFields(newValue);
+                    $(".offer-details-preview-slider").slick({
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 1500,
+                        dots: false,
+                        arrows: false,
+                        pauseOnHover: true,
+                        asNavFor: ".offer-details-thumb-slider",
+                        responsive: [{
+                            breakpoint: 576,
+                            settings: {
+                                slidesToShow: 3,
+                            },
+                        }, ],
+                    });
+                @endif
+
+                var STATUS_LIFETIME = {{ Status::LIFETIME }};
+                var STATUS_YES = {{ Status::YES }};
+
+                var project = {
+                    shareAmount: {{ $project->share_amount }},
+                    roiAmount: {{ $project->roi_amount }},
+                    roiPercentage: {{ $project->roi_percentage }},
+                    capitalBack: {{ $project->capital_back }},
+                    returnType: {{ $project->return_type }},
+                    projectDuration: {{ $project->project_duration }},
+                    repeatTimes: {{ @$project->repeat_times ?? 0 }},
+                    timeName: '{{ $project->time->name }}',
+                    timeHours: {{ $project->time->hours }},
+                    availableShare: {{ $project->available_share }},
+                    currencySymbol: '{{ gs('cur_sym') }}',
+                    currencyText: '{{ gs('cur_text') }}'
+                };
+
+                $(document).on('click', '.qty-btn', function() {
+                    changeQuantity(this);
+                });
+
+                // Event listener for manual input in the quantity field
+                $(document).on('change', '.product-qty__value', function() {
+                    var quantity = parseInt($(this).val());
+                    if (isNaN(quantity) || quantity < 1) {
+                        quantity = 1;
+                        $(this).val(quantity);
+                    }
+                    if (quantity > project.availableShare) {
+                        quantity = project.availableShare;
+                        $(this).val(quantity);
+                        notify('error', 'Quantity cannot exceed available shares.');
+                    }
+                    updateValues(quantity);
+                });
+
+                // Function to handle increment/decrement actions
+                function changeQuantity(element) {
+                    var $input = $('.product-qty__value');
+                    var currentValue = parseInt($input.val());
+                    var inputValue = currentValue;
+
+                    var minValue = parseInt($input.attr('min'));
+                    var maxValue = parseInt($input.attr('max'));
+
+                    if ($(element).hasClass('product-qty__increment')) {
+                        if (currentValue < maxValue) {
+                            inputValue = currentValue + 1;
+                        }
+                    } else if ($(element).hasClass('product-qty__decrement')) {
+                        if (currentValue > minValue) {
+                            inputValue = currentValue - 1;
+                        }
+                    }
+
+                    $input.val(inputValue);
+                    updateValues(inputValue);
                 }
 
-                function updateTotalPrice(quantity) {
-                    let totalPrice = shareAmount * quantity;
-                    $totalPrice.text(totalPrice.toFixed(2));
-                }
+                // Function to update values on the page based on the quantity
+                function updateValues(quantity) {
+                    var totalPayable = project.shareAmount * quantity;
+                    var totalEarnings = 0;
 
-                function updateTotalEarning(quantity) {
-                    let totalEarning = (shareAmount + roiAmount) * quantity;
-                    $totalEarning.text(totalEarning.toFixed(2));
-                }
+                    if (project.returnType == STATUS_LIFETIME) {
+                        var totalMonths = project.projectDuration;
+                        var payHours = project.timeHours;
+                        var payAmount = project.roiAmount;
 
-                function updateModalFields(quantity) {
-                    let totalPrice = shareAmount * quantity;
-                    let totalEarning = (shareAmount + roiAmount) * quantity;
+                        var totalHours = totalMonths * 720;
+
+                        var totalPayments = Math.floor(totalHours / payHours);
+
+                        totalEarnings = totalPayments * payAmount * quantity;
+                    } else {
+                        var payAmount = project.roiAmount;
+                        totalEarnings = payAmount * project.repeatTimes * quantity;
+                    }
 
                     $('#modal_quantity').val(quantity);
-                    $('#modal_total_price').val(totalPrice.toFixed(2));
-                    $('#modal_total_earning').val(totalEarning.toFixed(2));
-                }
 
-                function checkQuantity(quantity) {
-                    $.ajax({
-                        url: "{{ route('check.quantity') }}",
-                        method: 'POST',
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            project_id: projectId,
-                            quantity: quantity,
-                        },
-                        success: function(response) {
-                            if (response.status === 'error') {
-                                notify('error', response.message);
-                                $('.bookNow').hide();
-                            } else {
-                                $('.bookNow').show();
-                            }
-                        }
-                    });
-                }
+                    // Update total payable
+                    $('#total-payable').text(project.currencySymbol + totalPayable.toFixed(2));
 
-                $decrementBtn.off('click').on('click', function() {
-                    let currentValue = parseInt($quantityInput.val(), 10);
-                    if (currentValue > 1) {
-                        updateQuantity(currentValue - 1);
+
+                    // Update total earning last
+                    var totalEarningLast = totalEarnings;
+                    if (project.capitalBack == STATUS_YES) {
+                        totalEarningLast += project.shareAmount * quantity;
                     }
-                });
 
-                $incrementBtn.off('click').on('click', function() {
-                    let currentValue = parseInt($quantityInput.val(), 10);
-                    updateQuantity(currentValue + 1);
-                });
+                    $('#total-earning-last').text(project.currencySymbol + totalEarningLast.toFixed(2));
 
-                $quantityInput.off('change').on('change', function() {
-                    let currentValue = parseInt($quantityInput.val(), 10);
-                    if (isNaN(currentValue) || currentValue < 1) {
-                        updateQuantity(1);
+                    // Update total earning
+                    if (project.returnType == STATUS_LIFETIME) {
+                        $('#total-earning').text(project.currencySymbol + (project.roiAmount * quantity)
+                            .toFixed(2) +
+                            ' / ' + project.timeName);
                     } else {
-                        updateQuantity(currentValue);
+                        $('#total-earning').text(project.currencySymbol + totalEarningLast.toFixed(2));
                     }
-                });
+
+                    // Update quantity total price
+                    $('.quantity-total-price').text(project.currencySymbol + totalPayable.toFixed(2));
+
+                    // Update Earning ROI Amount
+                    $('.time-name').text(project.currencySymbol + (project.roiAmount * quantity)
+                        .toFixed(2) +
+                        ' / ' + project.timeName);
+
+                    // Update Earning ROI (%)
+                    $('.roi-percentage').text(project.roiPercentage.toFixed(2) + '%');
+
+                    // Update Capital Back
+                    $('.capital-back').text(project.capitalBack == STATUS_YES ? 'Yes' : 'No');
+                }
+
 
                 document.querySelectorAll('.payment-options').forEach(function(option) {
                     option.addEventListener('click', function() {
-                        document.querySelectorAll('.payment-options').forEach(function(opt) {
+                        document.querySelectorAll('.payment-options').forEach(function(
+                            opt) {
                             opt.classList.remove('active');
                         });
                         option.classList.add('active');
                         $('#payment_type').val(option.getAttribute('data-payment-type'));
                     });
                 });
+
             });
         })(jQuery);
     </script>
-@endpush
-@push('style-lib')
-    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
-@endpush
-@push('script-lib')
-    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
 @endpush

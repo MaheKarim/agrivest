@@ -66,8 +66,8 @@
                     title="The total number of shares available for investment in this project. This represents how many shares are needed to reach the project goal."></i>
             </label>
             <input type="number" class="form-control share_count" name="share_count"
-                value="{{ old('share_count', getAmount(@$project->share_count)) }}" placeholder="@lang('Share Count')"
-                step="0" required>
+                value="{{ isset($project) ? getAmount($project->share_count) : old('share_count') }}"
+                {{ isset($project) ? 'disabled' : '' }} placeholder="@lang('Share Count')" step="0" required>
         </div>
     </div>
     <div class="col-md-6">
@@ -77,9 +77,12 @@
                 <i class="las la-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
                     title="The cost of each share in the project. The total project goal is calculated by multiplying the Share Count by the Share Amount."></i>
             </label>
-            <input type="number" class="form-control share_amount" name="share_amount"
-                value="{{ old('share_amount', getAmount(@$project->share_amount)) }}" step="0"
-                placeholder="@lang('Share Amount')" required>
+            <div class="input-group">
+                <input type="number" class="form-control share_amount" name="share_amount"
+                    value="{{ old('share_amount', getAmount(@$project->share_amount)) }}" step="0"
+                    placeholder="@lang('Share Amount')" required>
+                <span class="input-group-text">{{ gs('cur_text') }}</span>
+            </div>
         </div>
     </div>
 </div>
@@ -156,7 +159,7 @@
 
 </div>
 <div class="row">
-    <div class="col-md-6 return-type-wrapper">
+    <div class="col-md-4 return-type-wrapper">
         <label>
             @lang('Return Type')
             <i class="las la-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -168,7 +171,7 @@
             <option value="2" @selected(old('return_type', @$project->return_type) == 2 ? 'selected' : '')>@lang('Repeat')</option>
         </select>
     </div>
-    <div class="col-md-6 time-settings-wrapper">
+    <div class="col-md-4 time-settings-wrapper">
         <div class="form-group">
             <label>
                 @lang('Time')
@@ -184,20 +187,7 @@
             </select>
         </div>
     </div>
-    <div class="col-md-3 return_interval">
-        <div class="form-group">
-            <label>
-                @lang('Return Interval')
-                <i class="las la-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="The frequency at which returns are distributed."></i>
-            </label>
-            <div class="input-group">
-                <input type="number" class="form-control return_interval" name="return_interval"
-                    value="{{ old('return_interval', @$project->return_interval) }}" step="0">
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 return_timespan">
+    <div class="col-md-4 return_timespan">
         <div class="form-group">
             <label>
                 @lang('Return Repeat Times')
@@ -205,14 +195,14 @@
                     title="The number of times returns will be repeated."></i>
             </label>
             <div class="input-group">
-                <input type="number" class="form-control return_timespan" name="repeat_times"
+                <input type="number" class="form-control return_timespan" id="repeat_times" name="repeat_times"
                     value="{{ old('repeat_times', @$project->repeat_times) }}" step="0">
             </div>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 category-wrapper">
         <div class="form-group">
             <label>@lang('Category')</label>
             <select class="form-control select2" name="category_id" data-search="true" required>
@@ -224,18 +214,18 @@
             </select>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 map-wrapper">
         <div class="form-group">
             <label>
                 @lang('Google Map Embed URL')
                 <i class="las la-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
                     title="URL for embedding the project's location on Google Maps."></i>
             </label>
-            <input type="text" class="form-control" name="map_url"
+            <input type="url" class="form-control" name="map_url"
                 value="{{ old('map_url', @$project->map_url) }}" required>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 capital_back-wrapper">
         <div class="form-group">
             <label>
                 @lang('Capital Back')
@@ -259,7 +249,10 @@
             <div class="input-field">
                 <div class="input-images"></div>
                 <small class="form-text text-muted">
-                    <label><i class="las la-info-circle"></i> @lang('You can only upload maximum of 4 images')</label>
+                    <label><i class="las la-info-circle"></i> @lang('You can upload up to 4 images. For the best design result, it\'s recommended to upload all 4 images').</label>
+                    @lang('Supported Files:')
+                    <b>@lang('.png, .jpg, .jpeg')</b>
+                    @lang('Image will be resized into') <b>{{ getFileSize('project') }}</b>@lang('px')
                 </small>
             </div>
         </div>
@@ -267,7 +260,6 @@
 </div>
 
 <script>
-    // Initialize tooltips
     document.addEventListener("DOMContentLoaded", function() {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {

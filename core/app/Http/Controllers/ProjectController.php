@@ -10,21 +10,23 @@ class ProjectController extends Controller
 {
     public function projects()
     {
-        $pageTitle = 'Projects';
+        $pageTitle  = 'Projects';
         $categories = Category::active()->get();
-        $projects = Project::active()->available()->beforeEndDate()->latest()->paginate(getPaginate(18));
+        $projects   = Project::active()->available()->beforeEndDate();
+        $count      = $projects->count();
+        $minProjectPrice = $projects->min('share_amount');
+        $maxProjectPrice = $projects->max('share_amount');
+        $projects   = $projects->latest()->paginate(getPaginate());
 
-        return view('Template::projects.all_projects', compact('pageTitle', 'projects', 'categories'));
+        // dd($maxProjectPrice);
+
+        return view('Template::projects.index', compact('pageTitle', 'projects', 'categories', 'count', 'minProjectPrice', 'maxProjectPrice'));
     }
 
     public function projectDetails($slug)
     {
         $pageTitle = 'Project Details';
         $project = Project::where('slug', $slug)->firstOrFail();
-
-        session()->put('project', [
-            'id' => $project->id,
-        ]);
 
         $seoContents = $project->seo_content;
         $path = 'assets/images/frontend/project/seo';
@@ -35,8 +37,12 @@ class ProjectController extends Controller
 
     public function checkQuantity(Request $request)
     {
-        $projectId = $request->input('project_id');
-        $requestedQuantity = (int)$request->input('quantity');
+        $validatedData = $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+        $projectId = $validatedData['project_id'];
+        $requestedQuantity = (int)$validatedData['quantity'];
 
         $project = Project::findOrFail($projectId);
 
@@ -55,10 +61,12 @@ class ProjectController extends Controller
 
     public function filter(Request $request)
     {
-        $pageTitle  = 'Projects';
-        $categories = Category::active()->get();
-        $projects   = Project::active()->searchable('title')->beforeEndDate()->available();
+        $pageTitle  = 'Projects'; // Define $pageTitle
+        $categories = Category::active()->get(); // Define $categories
 
+        $projects = Project::active()->searchable(['title'])->beforeEndDate()->available();
+
+        // Apply filters
         if ($request->has('category') && !empty($request->category)) {
             $projects = $this->filterItem($request, $projects, 'category');
         }
@@ -67,13 +75,39 @@ class ProjectController extends Controller
             $projects = $this->filterItem($request, $projects, 'return_type');
         }
 
+        // Price filtering
+        if ($request->filled('min_price') || $request->filled('max_price')) {
+            $minPrice = @$request->input('min_price') ?? 0;
+            $maxPrice = @$request->input('max_price') ?? 0;
+
+            $projects = $projects->whereBetween('share_amount', [$minPrice, $maxPrice]);
+        }
+
+        // Get the min and max prices of the filtered projects
+        $minProjectPrice = $projects->min('share_amount');
+        $maxProjectPrice = $projects->max('share_amount');
+
         $projects = $projects->latest()->paginate(getPaginate());
 
+        $viewType = $request->input('viewType', 'grid');
+
+        session()->put('viewType', $viewType);
+
+        // Return the appropriate view based on viewType
+        if ($viewType === 'list') {
+            $view = view('Template::projects.list-project', compact('projects', 'categories'))->render();
+        } else {
+            $view = view('Template::projects.project', compact('projects', 'categories'))->render();
+        }
+
         return response()->json([
-            'view'          => view('Template::projects.project', compact('projects', 'categories', 'pageTitle'))->render(),
+            'view'          => $view,
             'totalProjects' => $projects->total(),
+            'minPrice'      => $minProjectPrice,
+            'maxPrice'      => $maxProjectPrice,
         ]);
     }
+
 
     protected function filterItem($request, $projects, $type)
     {

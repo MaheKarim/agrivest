@@ -16,7 +16,7 @@
                                         <button class="exit-btn">
                                             <i class="fullscreen-open las la-compress" onclick="openFullscreen();"></i>
                                             <i class="fullscreen-close las la-compress-arrows-alt"
-                                               onclick="closeFullscreen();"></i>
+                                                onclick="closeFullscreen();"></i>
                                         </button>
                                         <select class="widget_select" name="invest_time">
                                             <option value="week">@lang('Current Week')</option>
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="col-6 text-end">
                                             <a class="btn btn--primary"
-                                               href="{{ route('admin.report.invest.history') }}">@lang('History')</a>
+                                                href="{{ route('admin.report.invest.history') }}">@lang('History')</a>
                                         </div>
                                     </div>
                                     <div class="progress-info">
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="progress mb-2 my-progressbar">
                                         <div class="progress-bar" role="progressbar"
-                                             style="width: {{ $widget['profit_paid'] + $widget['profit_to_give'] != 0 ? getAmount(($widget['profit_paid'] / ($widget['profit_paid'] + $widget['profit_to_give'])) * 100) : 0 }}%;">
+                                            style="width: {{ $widget['profit_paid'] + $widget['profit_to_give'] != 0 ? getAmount(($widget['profit_paid'] / ($widget['profit_paid'] + $widget['profit_to_give'])) * 100) : 0 }}%;">
                                         </div>
                                     </div>
                                     <p class="font-12 mb-0">
@@ -135,7 +135,7 @@
                                 <div class="chart-info">
                                     <a class="chart-info-toggle" href="#">
                                         <img class="chart-info-img" src="{{ asset('assets/images/collapse.svg') }}"
-                                             alt="image">
+                                            alt="image">
                                     </a>
                                     <div class="chart-info-content">
                                         <ul class="chart-info-list">
@@ -143,7 +143,7 @@
                                                 <li class="chart-info-list-item">
                                                     <i
                                                         class="fas fa-plane projectPointInterest me-2"></i>{{ __($key) }}
-                                                    {{ showAmount(($invest/$totalInterest) * 100, currencyFormat: false) }}
+                                                    {{ showAmount(($invest / $totalInterest) * 100, currencyFormat: false) }}
                                                     %
                                                 </li>
                                             @endforeach
@@ -172,7 +172,7 @@
                                         </div>
                                         <div class="col-sm-6 text-sm-end">
                                             <select class="widget_select" id="project_statistics_time"
-                                                    name="invest_interest_time">
+                                                name="invest_interest_time">
                                                 <option value="all">@lang('All Time')</option>
                                                 <option value="week">@lang('Current Week')</option>
                                                 <option value="month">@lang('Current Month')</option>
@@ -190,7 +190,7 @@
                                     <h5 class="mb-1 text-success runningInvests"></h5>
                                     <p class="mb-0">
                                         <a class="btn btn-sm btn-outline-success font-12 px-2"
-                                           href="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_RUNNING }}">@lang('History')</a>
+                                            href="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_RUNNING }}">@lang('History')</a>
                                     </p>
                                 </div>
                                 <div class="interest-scheme__content text-sm-center">
@@ -199,8 +199,7 @@
                                     <p class="mb-0">
                                         <a
                                             href="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_COMPLETED }}">
-                                            <button
-                                                class="btn btn-sm btn-outline-warning font-12 px-2"
+                                            <button class="btn btn-sm btn-outline-warning font-12 px-2"
                                                 type="button">@lang('History')</button>
                                         </a>
                                     </p>
@@ -210,7 +209,7 @@
                                     <h5 class="mb-1 text-primary interests"></h5>
                                     <p class="mb-0">
                                         <a class="btn btn-sm btn-outline-primary font-12 px-2 speedUp"
-                                           href="{{ route('admin.report.transaction') }}?remark=profit">@lang('History')</a>
+                                            href="{{ route('admin.report.transaction') }}?remark=profit">@lang('History')</a>
                                     </p>
                                 </div>
                             </div>
@@ -246,7 +245,7 @@
                                 <div class="chart-info">
                                     <a class="chart-info-toggle" href="#">
                                         <img class="chart-info-img" src="{{ asset('assets/images/collapse.svg') }}"
-                                             alt="image">
+                                            alt="image">
                                     </a>
                                     <div class="chart-info-content">
                                         <ul class="chart-info-list project-info-data"></ul>
@@ -272,7 +271,7 @@
                                             <select class="widget_select" name="invest_interest_year">
                                                 @for ($i = $firstInvestYear->date; $i <= date('Y'); $i++)
                                                     <option value="{{ $i }}"
-                                                            @if (date('Y') == $i) selected @endif>
+                                                        @if (date('Y') == $i) selected @endif>
                                                         {{ $i }}
                                                     </option>
                                                 @endfor
@@ -326,8 +325,8 @@
                                             <div class="plan-name fw-bold">{{ $invest->project->title }} -
                                                 @lang('Every')
                                                 {{ __($invest->time_name) }}
-                                                {{ $invest->project->return_type != 1 ? gs('cur_sym') : '' }}{{ showAmount($invest->project->share_amount, currencyFormat: false) }}
-                                                @lang('for') @if ($invest->project->return_type == 2)
+                                                {{ $invest->project->return_type != Status::LIFETIME ? gs('cur_sym') : '' }}{{ showAmount($invest->project->share_amount, currencyFormat: false) }}
+                                                @lang('for') @if ($invest->project->return_type == Status::REPEAT)
                                                     {{ __($invest->project->repeat_time) }}
                                                     {{ __(@$invest->project->time->name) }}
                                                 @else
@@ -350,8 +349,8 @@
                                         <div class="plan-amount plan-inner-div text-end">
                                             <p class="plan-label">@lang('Net Profit')</p>
                                             <p class="plan-value amount">
-                                                @if ($invest->return_type != -1)
-                                                    {{ showAmount($invest->repeat_times * $invest->recuring_pay) }}
+                                                @if ($invest->project->return_type != Status::LIFETIME)
+                                                    {{ showAmount($invest->repeat_times * $invest->recurring_pay) }}
                                                 @else
                                                     --
                                                 @endif
@@ -384,13 +383,13 @@
     <script src="{{ asset('assets/admin/js/vendor/chart.js.2.8.0.js') }}"></script>
     <script>
         'use strict';
-        (function ($) {
-            $('[name=invest_time]').on('change', function () {
+        (function($) {
+            $('[name=invest_time]').on('change', function() {
                 let time = $(this).val();
                 var url = "{{ route('admin.invest.report.statistics') }}";
                 $.get(url, {
                     time: time
-                }, function (response) {
+                }, function(response) {
                     $('.time_type').text(time);
                     $('.total_invest').text(response.total_invest.toFixed(2));
 
@@ -463,14 +462,14 @@
                 });
             }).change();
 
-            $('[name=project_statistics_time]').on('change', function () {
+            $('[name=project_statistics_time]').on('change', function() {
                 let time = $('[name=project_statistics_time]').val();
                 let investType = $('[name=project_statistics_invests]').val();
                 var url = "{{ route('admin.invest.report.statistics.project') }}";
                 $.get(url, {
                     time: time,
                     invest_type: investType
-                }, function (response) {
+                }, function(response) {
                     $('.plan_invest_canvas').html(
                         '<canvas height="250" id="project_invest_statistics"></canvas>');
                     let invests = response.invest_data;
@@ -478,7 +477,7 @@
                     let investAmount = [];
                     let planName = [];
                     let planUrl = "{{ route('admin.report.invest.history') }}";
-                    $.each(invests, function (key, invest) {
+                    $.each(invests, function(key, invest) {
                         let investPercent = (invest.investAmount / response.total_invest) * 100;
                         investAmount.push(parseFloat(invest.investAmount).toFixed(2));
                         planName.push(invest.project.title);
@@ -514,7 +513,7 @@
                     });
 
                     var planPoints = $('.projectPoint');
-                    planPoints.each(function (key, projectPoint) {
+                    planPoints.each(function(key, projectPoint) {
                         var projectPoint = $(projectPoint)
                         projectPoint.css('color', projectColors()[key])
                     })
@@ -522,30 +521,30 @@
                 });
             }).change();
 
-            $('[name=project_statistics_invests]').on('change', function () {
+            $('[name=project_statistics_invests]').on('change', function() {
                 $('[name=project_statistics_time]').trigger('change');
             });
 
-            $('[name=invest_interest_time]').on('change', function () {
+            $('[name=invest_interest_time]').on('change', function() {
                 let time = $(this).val();
                 var url = "{{ route('admin.invest.report.interest') }}";
                 $.get(url, {
                     time: time
-                }, function (response) {
+                }, function(response) {
                     $('.runningInvests').text(`${response.running_invests}`);
                     $('.expiredInvests').text(`${response.expired_invests}`);
                     $('.interests').text(`${response.interests}`);
                 });
             }).change();
 
-            $('[name=invest_interest_year]').on('change', function () {
+            $('[name=invest_interest_year]').on('change', function() {
                 let year = $('[name=invest_interest_year]').val();
                 let month = $('[name=invest_interest_month]').val();
                 let url = "{{ route('admin.invest.report.interest.chart') }}";
                 $.get(url, {
                     year: year,
                     month: month
-                }, function (response) {
+                }, function(response) {
 
                     var boundaryAreaID = document.getElementById("chartjs-boundary-area-chart")
                         .getContext('2d');
@@ -554,19 +553,19 @@
                         data: {
                             labels: response.keys,
                             datasets: [{
-                                backgroundColor: ["rgba(110, 129, 220,0.2)"],
-                                borderColor: ["#6e81dc"],
-                                pointBorderColor: ["#6e81dc", "#6e81dc", "#6e81dc",
-                                    "#6e81dc", "#6e81dc", "#6e81dc", "#6e81dc"
-                                ],
-                                pointBackgroundColor: ["#6e81dc", "#6e81dc", "#6e81dc",
-                                    "#6e81dc", "#6e81dc", "#6e81dc", "#6e81dc"
-                                ],
-                                pointBorderWidth: 0,
-                                data: response.invests,
-                                label: 'Invests',
-                                fill: 'start'
-                            },
+                                    backgroundColor: ["rgba(110, 129, 220,0.2)"],
+                                    borderColor: ["#6e81dc"],
+                                    pointBorderColor: ["#6e81dc", "#6e81dc", "#6e81dc",
+                                        "#6e81dc", "#6e81dc", "#6e81dc", "#6e81dc"
+                                    ],
+                                    pointBackgroundColor: ["#6e81dc", "#6e81dc", "#6e81dc",
+                                        "#6e81dc", "#6e81dc", "#6e81dc", "#6e81dc"
+                                    ],
+                                    pointBorderWidth: 0,
+                                    data: response.invests,
+                                    label: 'Invests',
+                                    fill: 'start'
+                                },
                                 {
                                     backgroundColor: ["rgba(252, 193, 0,0.2)"],
                                     borderColor: ["#fcc100"],
@@ -632,7 +631,7 @@
                 });
             }).change();
 
-            $('[name=invest_interest_month]').on('change', function () {
+            $('[name=invest_interest_month]').on('change', function() {
                 $('[name=invest_interest_year]').trigger('change');
             });
 
@@ -671,7 +670,7 @@
             });
 
             var planPointInterests = $('.projectPointInterest');
-            planPointInterests.each(function (key, projectPointInterest) {
+            planPointInterests.each(function(key, projectPointInterest) {
                 var projectPointInterest = $(projectPointInterest)
                 projectPointInterest.css('color', projectColors()[key])
             })
@@ -708,24 +707,24 @@
             let chartToggle = $('.chart-info-toggle');
             let chartContent = $(".chart-info-content");
             if (chartToggle || chartContent) {
-                chartToggle.each(function () {
-                    $(this).on("click", function (e) {
+                chartToggle.each(function() {
+                    $(this).on("click", function(e) {
                         e.preventDefault();
                         e.stopPropagation();
                         $(this).siblings().toggleClass("is-open");
                     });
                 });
-                chartContent.each(function () {
-                    $(this).on("click", function (e) {
+                chartContent.each(function() {
+                    $(this).on("click", function(e) {
                         e.stopPropagation();
                     });
                 });
-                $(document).on("click", function () {
+                $(document).on("click", function() {
                     chartContent.removeClass("is-open");
                 });
             }
 
-            $('.exit-btn').on('click', function () {
+            $('.exit-btn').on('click', function() {
                 $(this).toggleClass('active');
             });
 

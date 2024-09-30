@@ -1,7 +1,10 @@
 @php
-    $socialLinks = getContent('social_icon.element',false, orderById:true);
-    $topbarContents = getContent('top_bar.element',null, orderById:true);
+    $socialLinks = getContent('social_icon.element', false, orderById: true);
+    $topbarContents = getContent('top_bar.element', null, orderById: true);
 @endphp
+
+
+
 <header class="header" id="header">
     <div class="header-top d-none d-lg-block">
         <div class="container">
@@ -10,8 +13,7 @@
                     <ul class="social-list">
                         @foreach ($socialLinks as $socialLink)
                             <li class="social-list__item">
-                                <a href="{{ @$socialLink->data_values->url }}" class="social-list__link"
-                                   target="_blank">
+                                <a href="{{ @$socialLink->data_values->url }}" class="social-list__link" target="_blank">
                                     @php echo @$socialLink->data_values->social_icon @endphp
                                 </a>
                             </li>
@@ -35,10 +37,10 @@
                         @endphp
                         <div class="dropdown dropdown--lang">
                             <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                aria-expanded="false">
                                 <img class="dropdown-flag"
-                                     src="{{ getImage(getFilePath('language') . '/' . $selectedLang->image, getFileSize('language')) }}"
-                                     alt="@lang('Language Flag')">
+                                    src="{{ getImage(getFilePath('language') . '/' . $selectedLang->image, getFileSize('language')) }}"
+                                    alt="@lang('Language Flag')">
                                 <span>{{ __($selectedLang->name) }}</span>
                             </button>
 
@@ -46,8 +48,8 @@
                                 @foreach ($languages as $lang)
                                     <a class="dropdown-item" href="{{ route('lang', $lang->code) }}">
                                         <img class="dropdown-flag"
-                                             src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
-                                             alt="@lang('Language Flag')">
+                                            src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
+                                            alt="@lang('Language Flag')">
                                         <span>{{ __($lang->name) }}</span>
                                     </a>
                                 @endforeach
@@ -58,12 +60,13 @@
             </div>
         </div>
     </div>
-    @include($activeTemplate.'partials.header_responsive')
+    @include($activeTemplate . 'partials.header_responsive')
 </header>
+
 @push('script')
     <script>
-        $(document).ready(function () {
-            $('.header-top__text').each(function () {
+        $(document).ready(function() {
+            $('.header-top__text').each(function() {
                 var $heading = $(this);
                 var text = $heading.text().trim();
                 var words = text.split(' ');
@@ -77,7 +80,7 @@
 
                 var endIndex = Math.min(words.length, breakIndex + sLengthValue);
 
-                var coloredText = words.map(function (word, index) {
+                var coloredText = words.map(function(word, index) {
                     if (index >= breakIndex && index < endIndex) {
                         return '<span class="text--base">' + word + '</span>';
                     }
@@ -89,4 +92,3 @@
         });
     </script>
 @endpush
-
