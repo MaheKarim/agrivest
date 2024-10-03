@@ -2,7 +2,7 @@
     <div class="col-sm-6 col-lg-4">
         <article class="card card--blog">
             <a href="{{ route('blog.details', $blog->slug) }}" class="card-thumb">
-                <img src="{{ frontendImage('blog', 'thumb_' . $blog->data_values->image, '416x193') }}"
+                <img src="{{ frontendImage('blog', 'thumb_' . @$blog->data_values->image, '416x185') }}"
                     alt="{{ __($blog->data_values->title) }}">
             </a>
             <div class="card-body">

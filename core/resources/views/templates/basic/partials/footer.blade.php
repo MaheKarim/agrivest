@@ -24,6 +24,14 @@
                             <li class="footer-menu__item">
                                 <a class="footer-menu__link" href="{{ route('home') }}">@lang('Home')</a>
                             </li>
+
+                            @foreach ($pages as $page)
+                                <li class="footer-menu__item">
+                                    <a class="footer-menu__link"
+                                        href="{{ route('pages', [$page->slug]) }}">{{ __($page->name) }}</a>
+                                </li>
+                            @endforeach
+
                             <li class="footer-menu__item">
                                 <a class="footer-menu__link" href="{{ route('blogs') }}">@lang('Blogs')</a>
                             </li>

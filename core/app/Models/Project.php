@@ -51,6 +51,17 @@ class Project extends Model
         return $query->where('featured', Status::PROJECT_FEATURED);
     }
 
+
+    public function scopeLifetime($query)
+    {
+        return $query->where('return_type', Status::LIFETIME);
+    }
+
+    public function scopeRepeat($query)
+    {
+        return $query->where('return_type', Status::REPEAT);
+    }
+
     public function statusBadge(): Attribute
     {
         return new Attribute(function () {
@@ -62,6 +73,21 @@ class Project extends Model
                 $html = '<span class="badge badge--primary">' . trans('Closed') . '</span>';
             } else {
                 $html = '<span class="badge badge--danger">' . trans('Disabled') . '</span>';
+            }
+
+            return $html;
+        });
+    }
+
+    public function typeBadge(): Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+
+            if ($this->return_type == Status::LIFETIME) {
+                $html = '<span class="badge badge--info">' . trans('Lifetime') . '</span>';
+            } elseif ($this->return_type == Status::REPEAT) {
+                $html = '<span class="badge badge--primary">' . trans('Repeat') . '</span>';
             }
 
             return $html;

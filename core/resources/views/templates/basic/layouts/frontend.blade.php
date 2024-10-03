@@ -8,4 +8,6 @@
         @endif
         @yield('content')
     </main>
+
+    @include($activeTemplate . 'partials.footer')
 @endsection

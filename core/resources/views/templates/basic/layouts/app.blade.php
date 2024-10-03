@@ -34,8 +34,6 @@
 
     @yield('panel')
 
-    @include($activeTemplate . 'partials.footer')
-
     @include($activeTemplate . 'partials.cookie_card')
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

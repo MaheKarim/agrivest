@@ -64,9 +64,10 @@ Route::middleware('admin')->group(function () {
         Route::get('details/{id}', 'details')->name('details');
         Route::post('store/{id?}', 'store')->name('store');
         Route::post('invest/status/{id?}', 'investStatus')->name('status');
-        Route::get('invest/running', 'runningInvest')->name('running');
+        Route::get('invest/running', 'running')->name('running');
         Route::post('stop/returns/{id}', 'stopReturns')->name('stop.returns');
         Route::post('start/returns/{id}', 'startReturns')->name('start.returns');
+        Route::get('invest/completed', 'completed')->name('completed');
     });
 
     Route::controller('CategoryController')->name('category.')->prefix('category')->group(function () {
@@ -88,6 +89,9 @@ Route::middleware('admin')->group(function () {
         Route::get('seo/{id}', 'frontendSEO')->name('seo');
         Route::post('update/seo/{id}', 'updateSEO')->name('update.seo');
         Route::get('closed', 'closed')->name('closed');
+        Route::get('lifetime', 'lifetime')->name('lifetime');
+        Route::get('lifetime-return', 'lifetime')->name('lifetime');
+        Route::get('repeat-return', 'repeat')->name('repeat');
     });
     // Invest Report
     Route::controller('InvestReportController')->name('invest.report.')->prefix('invest/report')->group(function () {

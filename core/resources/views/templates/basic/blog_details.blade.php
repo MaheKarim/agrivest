@@ -1,83 +1,81 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
-    <section class="blog-details py-120">
+    <section class="blog py-120">
         <div class="container">
-            <div class="row gy-4">
-                <div class="col-lg-8 col-xl-9">
-                    <div class="blog-details__wrapper">
-                        <div class="blog-details__thumb">
-                            <img src="{{ frontendImage('blog', @$blog->data_values->image, '966x450') }}" class="w-100 mb-3"
-                                alt="Blog">
+            <div class="row gy-4 justify-content-center">
+                <div class="col-xl-8 col-lg-7">
+                    <div class="blog-item style-two bg-white">
+                        <div class="blog-item__thumb">
+                            <img src="{{ frontendImage('blog', @$blog->data_values->image, '830x420') }}" alt="blog_image">
                         </div>
-                        <h1 class="blog-details__title">
-                            {{ __($blog->data_values->title) }}
-                        </h1>
-                        <ul class="blog-meta">
-                            <li class="card-meta__item">
-                                <span class="blog-meta-item__icon"><i class="fas fa-calendar-days"></i></span>
-                                <span class="blog-meta-item__text">{{ __(showDateTime($blog->created_at)) }}</span>
-                            </li>
-                        </ul>
-                        <div class="blog-details__content">
-                            @php echo $blog->data_values->description @endphp
-                        </div>
-                        <div class="blog-details-share">
-                            <h6 class="blog-details-share__title">@lang('Share This')</h6>
-                            <ul class="social-list">
-                                <li class="social-list__item">
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
-                                        class="social-list__link flex-center" target="_blank">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://twitter.com/intent/tweet?text= {{ __(strLimit($blog->data_values->title, 150)) }}&amp;url={{ urlencode(url()->current()) }}"
-                                        class="social-list__link flex-center" target="_blank">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ urlencode(url()->current()) }}&amp;title={{ __(strLimit($blog->data_values->title, 150)) }}&amp;summary={{ __(strLimit(strip_tags(@$blog->data_values->description_nic), 300)) }}"
-                                        class="social-list__link flex-center" target="_blank">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(url()->current()) }}&description={{ __(@$blog->data_values->title) }}&media={{ frontendImage('blog', $blog->data_values->image, '966x450') }}"
-                                        class="social-list__link flex-center" target="_blank">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
+                        <div class="blog-item__content">
+                            <ul class="text-list inline">
+                                <li class="text-list__item">
+                                    <span class="text-list__item-icon"><i class="fas fa-calendar-alt"></i></span>
+                                    {{ showDateTime($blog->created_at, 'd M Y') }}
                                 </li>
                             </ul>
+                            <h5 class="blog-item__title">{{ __($blog->data_values->title) }}</h5>
+                            <div class="blog-details-content offer-details-desc">
+                                @php echo $blog->data_values->description @endphp
+                            </div>
                         </div>
                     </div>
-                    <div class="fb-comments" data-href="{{ route('blog.details', slug($blog->data_values->title)) }}"
-                        data-numposts="5"></div>
+
+                    <div class="blog-details__footer flex-wrap flex-column">
+                        <h4 class="caption">@lang('Share This Post')</h4>
+                        <ul class="social__links">
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
+                                    target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/intent/tweet?text={{ __($blog->data_values->title) }}&amp;url={{ urlencode(url()->current()) }}"
+                                    target="_blank"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://pinterest.com/pin/create/bookmarklet/?media={{ frontendImage('blog', @$blog->data_values->image, '1020x820') }}&url={{ urlencode(url()->current()) }}"
+                                    target="_blank"><i class="fab fa-pinterest-p"></i></a>
+                            </li>
+                            <li>
+                                <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ urlencode(url()->current()) }}"
+                                    target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fb-comments" data-href="{{ route('blog.details', $blog->slug) }}" data-numposts="5">
+                    </div>
                 </div>
 
-                <div class="col-lg-4 col-xl-3">
+                <div class="col-xl-4 col-lg-5">
                     <div class="blog-sidebar">
-                        <div class="blog-sidebar-block">
-                            <h6 class="blog-sidebar-block__title">@lang('Latest Blogs')</h6>
-                            <ul class="blog-list">
-                                @foreach ($latestBlogs as $blog)
-                                    <li class="blog-list-item">
-                                        <a class="blog-list-item__thumb" href="{{ route('blog.details', $blog->slug) }}">
-                                            <img class="blog-list-item__thumb"
-                                                src="{{ frontendImage('blog', 'thumb_' . $blog->data_values->image, '416x193') }}"
-                                                alt="@lang('Blog')">
-                                        </a>
-                                        <div class="blog-list-item__content">
-                                            <h6 class="blog-list-item__title">
-                                                <a
-                                                    href="{{ route('blog.details', $blog->slug) }}">{{ __($blog->data_values->title) }}</a>
-                                            </h6>
-                                            <span
-                                                class="blog-list-item__date">{{ __(showDateTime($blog->created_at)) }}</span>
+                        <h6 class="blog-sidebar__title">@lang('Latest Blog Posts')</h6>
+                        <div class="blog-sidebar__content">
+                            <div class="row gy-4">
+                                @foreach ($latestBlogs as $latestBlog)
+                                    <div class="col-md-12">
+                                        <div class="latest-blog">
+                                            <div class="latest-blog__thumb">
+                                                <a href="{{ route('blog.details', $latestBlog->slug) }}">
+                                                    <img src="{{ frontendImage('blog', 'thumb_' . @$latestBlog->data_values->image, '415x210') }}"
+                                                        alt="image">
+                                                </a>
+                                            </div>
+                                            <div class="latest-blog__content">
+                                                <h4 class="latest-blog__title">
+                                                    <a href="{{ route('blog.details', $latestBlog->slug) }}">
+                                                        {{ __($latestBlog->data_values->title) }}
+                                                    </a>
+                                                </h4>
+                                                <span class="latest-blog__date">
+                                                    {{ $latestBlog->created_at->format('d M Y') }}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </li>
+                                    </div>
                                 @endforeach
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,6 +83,7 @@
         </div>
     </section>
 @endsection
+
 @push('fbComment')
     @php echo loadExtension('fb-comment') @endphp
 @endpush

@@ -2,7 +2,7 @@
     $whyWeContent = getContent('choose_us.content', true);
     $whyWeElement = getContent('choose_us.element', orderById: true);
 @endphp
-<section class="why-invest bg--white pt-120 pb-120">
+<section class="why-invest bg--white pt-120 pb-70">
     <div class="container">
         <div class="row gy-5 gy-lg-0 justify-content-center">
             <div class="col-md-10 col-lg-6 col-xxl-7">

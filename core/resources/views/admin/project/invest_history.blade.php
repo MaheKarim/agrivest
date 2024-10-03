@@ -12,16 +12,20 @@
                                     <th>@lang('Project Name')</th>
                                     <th>@lang('User')</th>
                                     <th>@lang('Quantity')</th>
-                                    <th>@lang('Amount')</th>
                                     <th>@lang('Recurring Pay x Repeat Times')</th>
                                     <th>@lang('Paid')</th>
                                     <th>@lang('Status')</th>
+                                    <th>@lang('Action')</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($invests as $invest)
                                     <tr>
-                                        <td>{{ __($invest->project->title) }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.project.edit', $invest->project->id) }}">
+                                                {{ __($invest->project->title) }}
+                                            </a>
+                                        </td>
                                         <td>
                                             <span class="fw-bold">{{ $invest->user->fullname }}</span>
                                             <br>
@@ -30,12 +34,20 @@
                                             </span>
                                         </td>
                                         <td>{{ $invest->quantity }} @lang('Pcs')</td>
-                                        <td>{{ showAmount($invest->total_earning) }}</td>
-                                        <td>{{ $invest->project->return_type != -1 ? showAmount($invest->recurring_pay) . ' x ' . $invest->repeat_times : '**' }}
+                                        <td>{{ $invest->project->return_type != Status::LIFETIME ? showAmount($invest->recurring_pay) . ' x ' . $invest->repeat_times : '---' }}
                                         </td>
                                         <td>{{ showAmount($invest->paid) }}</td>
                                         <td>
                                             @php echo $invest->statusBadge @endphp
+                                        </td>
+                                        <td>
+                                           <div class="button-group">
+                                               <a class="btn btn-outline--primary btn-sm"
+                                                  href="{{ route('admin.invest.details', $invest->id) }}">
+                                                   <i class="las la-desktop"></i>
+                                                   @lang('Details')
+                                               </a>
+                                           </div>
                                         </td>
                                     </tr>
                                 @empty

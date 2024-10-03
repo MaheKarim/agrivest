@@ -704,6 +704,10 @@ button .spinner-border {
 
 }
 
+.payment-options .active-badge {
+    color: hsl(var(--white)) !important;
+}
+
 .payment-options-content h4 {
     font-size: 20px;
 }
@@ -771,9 +775,6 @@ label.required:after {
     margin-left: 2px;
 }
 
-.la-check:before {
-    color: white !important;
-}
 
 /* select2 css start here  */
 .select2-container:has(.select2-selection--single) {

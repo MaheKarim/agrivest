@@ -124,17 +124,19 @@
                 </button>
 
                 <h6 class="modal-title">@lang('Payment Details')</h6>
-
-                <ul class="amount-detail mt-3">
-                    <li class="amount-detail-item">
+                <div class="amount-detail mt-3">
+                    <div class="amount-detail-item">
                         <span class="amount-detail-item__label">@lang('Total Invest')</span>
                         <span class="amount-detail-item__value" id="total-invest-detail"></span>
-                    </li>
-                    <li class="amount-detail-item">
+                    </div>
+                    <div class="amount-detail-sperator">
+                        <i class="las la-long-arrow-alt-right"></i>
+                    </div>
+                    <div class="amount-detail-item">
                         <span class="amount-detail-item__label" id="label-profit"></span>
                         <span class="amount-detail-item__value" id="totalEarning"></span>
-                    </li>
-                </ul>
+                    </div>
+                </div>
 
                 <ul class="detail-list mt-4">
                     <li class="detail-list-item">

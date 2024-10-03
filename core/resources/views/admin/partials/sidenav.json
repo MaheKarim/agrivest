@@ -44,10 +44,12 @@
     "manage_invest": {
         "title": "Investments",
         "icon": "las la-hand-holding-usd",
+        "counters": ["runningInvestments"],
         "menu_active": [
             "admin.invest.index",
             "admin.invest.running",
-            "admin.invest.details"
+            "admin.invest.details",
+            "admin.invest.completed"
         ],
         "submenu": [
             {
@@ -72,9 +74,23 @@
                     "Running Investment",
                     "Investment activity"
                 ],
-                "title": "Running Investments",
+                "title": "Running",
+                "counter": "runningInvestments",
                 "route_name": "admin.invest.running",
-                "menu_active": "admin.invest.running"
+                "menu_active": "admin.invest.running*"
+            },
+            {
+                "keyword": [
+                    "Completed investments",
+                    "Manage Completed Investments",
+                    "Completed Investment management",
+                    "Investment control",
+                    "Completed Investment",
+                    "Investment activity"
+                ],
+                "title": "Completed",
+                "route_name": "admin.invest.completed",
+                "menu_active": "admin.invest.completed*"
             }
         ]
     },
@@ -129,6 +145,32 @@
                 "title": "All Projects",
                 "route_name": "admin.project.index",
                 "menu_active": "admin.project.index*"
+            },
+            {
+                "keyword": [
+                    "Lifetime projects",
+                    "Manage Lifetime Projects",
+                    "Lifetime Project Management",
+                    "Project control",
+                    "Lifetime Project",
+                    "Lifetime Project activity"
+                ],
+                "title": "Lifetime",
+                "route_name": "admin.project.lifetime",
+                "menu_active": "admin.project.lifetime"
+            },
+            {
+                "keyword": [
+                    "Lifetime projects",
+                    "Manage Lifetime Projects",
+                    "Lifetime Project Management",
+                    "Project control",
+                    "Lifetime Project",
+                    "Lifetime Project activity"
+                ],
+                "title": "Repeat",
+                "route_name": "admin.project.repeat",
+                "menu_active": "admin.project.repeat"
             },
             {
                 "keyword": [
@@ -278,9 +320,7 @@
     "deposits": {
         "title": "Deposits",
         "icon": "las la-file-invoice-dollar",
-        "counters": [
-            "pendingDepositsCount"
-        ],
+        "counters": ["pendingDepositsCount"],
         "menu_active": "admin.deposit*",
         "submenu": [
             {
@@ -376,9 +416,7 @@
     "withdrawals": {
         "title": "Withdrawals",
         "icon": "la la-bank",
-        "counters": [
-            "pendingWithdrawCount"
-        ],
+        "counters": ["pendingWithdrawCount"],
         "menu_active": "admin.withdraw.data*",
         "submenu": [
             {
@@ -446,9 +484,7 @@
     "support_ticket": {
         "title": "Support Ticket",
         "icon": "la la-ticket",
-        "counters": [
-            "pendingTicketCount"
-        ],
+        "counters": ["pendingTicketCount"],
         "menu_active": "admin.ticket*",
         "submenu": [
             {
@@ -626,9 +662,7 @@
         "title": "Extra",
         "icon": "la la-server",
         "menu_active": "admin.system*",
-        "counters": [
-            "updateAvailable"
-        ],
+        "counters": ["updateAvailable"],
         "submenu": [
             {
                 "keyword": [

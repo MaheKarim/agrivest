@@ -4,7 +4,7 @@
     $showMoreBtn = (clone $projects)->count() > 4;
     $projects = (clone $projects)->take(4)->get();
 @endphp
-<section class="our-offers py-120">
+<section class="our-offers py-70">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
@@ -28,14 +28,14 @@
                             <article class="card card--offer ">
                                 <div class="card-header">
                                     <a class="card-thumb" href="{{ route('project.details', $project->slug) }}">
-                                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFilePath('project')) }}"
+                                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image) }}"
                                             alt="{{ __($project->title) }}">
                                     </a>
 
                                     <div class="card-offer">
                                         <span class="card-offer__label">@lang('ROI')</span>
                                         <span
-                                            class="card-offer__percentage">{{ __(getAmount($project->roi_percentage)) }}%</span>
+                                            class="card-offer__percentage">{{ getAmount($project->roi_percentage) }}%</span>
                                     </div>
                                 </div>
 
@@ -52,11 +52,13 @@
                                                 {{ __(showAmount($project->share_amount)) }}</div>
                                         </div>
                                         <a href="{{ route('project.details', $project->slug) }}"
-                                            class="btn btn--xsm btn--outline">@lang('Book Now')</a>
+                                            class="btn btn--xsm btn--outline">@lang('Invest Now')</a>
                                     </div>
                                     <div class="card-bottom">
-                                        <span class="card-bottom__unit">@lang('Remaining:')
-                                            {{ __($project->available_share) }} @lang('Units')</span>
+                                        <span class="card-bottom__unit">
+                                            <i class="las la-boxes"></i>
+                                            {{ __($project->available_share) }} @lang('units')
+                                        </span>
                                         <span
                                             class="card-bottom__duration">{{ __(diffForHumans($project->end_date)) }}</span>
                                     </div>

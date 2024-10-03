@@ -104,7 +104,7 @@
                         <i class="las la-times"></i>
                     </button>
                 </div>
-                <form action="" method="POST">
+                <form method="POST">
                     @csrf
                     <div class="modal-body">
                         <p class="modal-detail"></p>

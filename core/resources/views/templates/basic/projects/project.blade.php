@@ -4,13 +4,12 @@
             <article class="card card--offer style-two">
                 <div class="card-header">
                     <a class="card-thumb" href="{{ route('project.details', $project->slug) }}">
-                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
-                            alt="@lang('Project Image')">
+                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image) }}" alt="@lang('Project Image')">
                     </a>
                     <div class="card-offer">
                         <span class="card-offer__label">@lang('ROI')</span>
                         <span
-                            class="card-offer__percentage">{{ __(getAmount($project->roi_percentage)) }}@lang('%')</span>
+                            class="card-offer__percentage">{{ getAmount($project->roi_percentage) }}@lang('%')</span>
                     </div>
                 </div>
 
@@ -29,8 +28,10 @@
                             class="btn btn--xsm btn--outline">@lang('Invest Now')</a>
                     </div>
                     <div class="card-bottom">
-                        <span class="card-bottom__unit">@lang('Remaining:') {{ __($project->available_share) }}
-                            @lang('Units')</span>
+                        <span class="card-bottom__unit">
+                            <i class="las la-boxes"></i>
+                            {{ __($project->available_share) }} @lang('units')
+                        </span>
                         <span class="card-bottom__duration">{{ __(diffForHumans($project->end_date)) }}</span>
                     </div>
                 </div>

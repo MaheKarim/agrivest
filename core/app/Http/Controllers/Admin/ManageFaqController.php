@@ -18,7 +18,7 @@ class ManageFaqController extends Controller
         return view('admin.project.faq', compact('pageTitle', 'faqs', 'project'));
     }
 
-    public function storeFaq(Request $request, $id=0)
+    public function storeFaq(Request $request, $id = 0)
     {
         $request->validate([
             'question' => 'required|string|max:255',
@@ -39,12 +39,10 @@ class ManageFaqController extends Controller
         $faq->save();
 
         return redirect()->route('admin.project.faq.add', ['id' => $faq->project_id])->withNotify($notify);
-
     }
 
     public function faqStatus($id)
     {
         return Faq::changeStatus($id);
     }
-
 }

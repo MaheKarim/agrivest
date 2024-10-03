@@ -21,7 +21,7 @@
                     <div class="project-slider__item">
                         <div class="project-card">
                             <a href="{{ route('project.details', $project->slug) }}" class="project-card__thumb">
-                                <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                                <img src="{{ getImage(getFilePath('project') . '/' . $project->image) }}"
                                     alt="{{ __($project->title) }}">
                             </a>
 
@@ -51,6 +51,8 @@
                 slidesToScroll: 1,
                 speed: 1000,
                 arrows: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
                 prevArrow: '<button type="button" class="slick-prev"><i class="las la-arrow-left"></i></button>',
                 nextArrow: '<button type="button" class="slick-next"><i class="las la-arrow-right"></i></button>',
                 responsive: [{
@@ -82,7 +84,7 @@
                         }
                     }
                 ],
-            })
+            });
         })(jQuery);
     </script>
 @endpush

@@ -37,7 +37,7 @@ class InvestController extends Controller
         $totalShare = $project->share_count;
 
         if ($project->return_type == Status::LIFETIME) {
-            $totalEarning = $recurringAmount * $project->project_duration;
+            $totalEarning = 0 ;
             $investClosed = Carbon::parse($project->maturity_date)->addMonths($project->project_duration);
         } elseif ($project->return_type == Status::REPEAT) {
             $totalEarning = $recurringAmount * $project->repeat_times;

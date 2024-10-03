@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card custom--card">
-            <div class="card-header card-header-bg d-flex flex-wrap justify-content-between align-items-center">
-                <h6 class="text-black mb-0">
+            <div class="card-header card-header-bg d-flex justify-content-between align-items-center">
+                <h6 class="text-black mb-0 support-title">
                     <div class="d-flex align-items-center gap-2">
                         @php echo $myTicket->statusBadge; @endphp
                         [@lang('Ticket')#{{ $myTicket->ticket }}] {{ $myTicket->subject }}
@@ -112,8 +112,8 @@
             }
 
             .user-message {
-                background-color: #f0f8ff;
-                border-left: 4px solid #007bff;
+                background-color: hsl(var(--base)/0.1);
+                border-left: 4px solid hsl(var(--base));
                 margin-right: auto;
                 margin-left: 0;
                 width: 80%;

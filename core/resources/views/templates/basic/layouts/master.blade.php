@@ -28,4 +28,6 @@
             </div>
         </section>
     </main>
+
+    @include($activeTemplate . 'partials.footer')
 @endsection

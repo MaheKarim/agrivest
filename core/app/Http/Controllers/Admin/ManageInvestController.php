@@ -13,7 +13,7 @@ class ManageInvestController extends Controller
     public function index()
     {
         $pageTitle = 'Manage Investments';
-        $invests = Invest::latest()->searchable(['invest_no'])->paginate(getPaginate());
+        $invests = Invest::latest()->searchable(['invest_no', 'project:title'])->paginate(getPaginate());
 
         return view('admin.invest.index', compact('pageTitle', 'invests'));
     }
@@ -49,10 +49,18 @@ class ManageInvestController extends Controller
     }
 
 
-    public function runningInvest()
+    public function running()
     {
         $pageTitle = 'Running Investments';
         $invests = $this->investData('running');
+
+        return view('admin.invest.index', compact('pageTitle', 'invests'));
+    }
+
+    public function completed()
+    {
+        $pageTitle = 'Completed Investments';
+        $invests = $this->investData('completed');
 
         return view('admin.invest.index', compact('pageTitle', 'invests'));
     }

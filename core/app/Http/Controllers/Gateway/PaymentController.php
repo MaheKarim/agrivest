@@ -35,7 +35,8 @@ class PaymentController extends Controller
 
     public function depositInsert(Request $request, $investId = 0)
     {
-        $isRequired = $investId && $request->gateway == "2" ? 'nullable' : 'required';
+        $isRequired = $investId && $request->gateway == "2" ? 'nullable' : 'required'; // 2 => wallet balance
+
         $request->validate([
             'amount'   => 'required|numeric|gt:0',
             'gateway'  => 'required',
@@ -43,6 +44,7 @@ class PaymentController extends Controller
         ]);
 
         $user   = auth()->user();
+
         $invest = $investId ? Invest::where('user_id', auth()->id())->where('payment_status', Status::PAYMENT_INITIATE)
             ->latest('created_at')->firstOrFail() : null;
 
@@ -55,27 +57,29 @@ class PaymentController extends Controller
             return back()->withNotify($notify);
         }
 
+        $amount = $invest ? $invest->total_price : $request->amount;
+
         if ($invest && $invest->total_price != $request->amount) {
             $notify[] = ['error', 'Invalid Request'];
             return back()->withNotify($notify);
         }
 
-        if ($gate->min_amount > $request->amount || $gate->max_amount < $request->amount) {
+        if ($gate->min_amount > $amount || $gate->max_amount < $amount) {
             $notify[] = ['error', 'Please follow deposit limit'];
             return back()->withNotify($notify);
         }
 
-        $charge      = $gate->fixed_charge + ($request->amount * $gate->percent_charge / 100);
-        $payable     = $request->amount + $charge;
+        $charge      = $gate->fixed_charge + ($amount * $gate->percent_charge / 100);
+        $payable     = $amount + $charge;
         $finalAmount = $payable * $gate->rate;
-        $amount      = $invest->total_price;
+
 
         $data                  = new Deposit();
         $data->user_id         = $user->id;
         $data->invest_id       = $investId ?? 0;
         $data->method_code     = $gate->method_code;
         $data->method_currency = strtoupper($gate->currency);
-        $data->amount          = $invest ? $amount : $request->amount;
+        $data->amount          = $amount;
         $data->charge          = $charge;
         $data->rate            = $gate->rate;
         $data->final_amount    = $finalAmount;
@@ -178,7 +182,7 @@ class PaymentController extends Controller
 
         notify($invest->user, 'INVEST_CONFIRMED', [
             'invest_id'    => $invest->invest_no,
-            'project_name' => $invest->project->title,
+            'project_title' => $invest->project->title,
             'start_date'   => $invest->project->start_date,
             'end_date'     => $invest->project->end_date,
             'price'        => showAmount($invest->total_price),

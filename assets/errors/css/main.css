@@ -178,11 +178,11 @@ a:hover {
 }
 
 .error .title {
-    font-size: 56px;
+    font-size: 45px;
     font-weight: 600;
     margin-top: 70px;
     margin-bottom: 15px;
-    color: #211742;
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .error.error-419 .title {
@@ -190,14 +190,15 @@ a:hover {
 }
 
 .error .description {
-    font-size: 18px;
-    color: #211742;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
 }
 
-.error-500-thumb{
+.error-500-thumb {
     position: relative;
 }
-.error-500-thumb-cat{
+
+.error-500-thumb-cat {
     position: absolute;
     bottom: 0;
     left: 60%;
@@ -207,14 +208,15 @@ a:hover {
 }
 
 @media screen and (max-width:480px) {
-    
-    .error-500-thumb-cat{
+
+    .error-500-thumb-cat {
         width: 80px;
         height: 80px;
     }
 }
+
 @media screen and (max-width:375px) {
-    .error-500-thumb-cat{
+    .error-500-thumb-cat {
         width: 50px;
         height: 50px;
     }
@@ -334,3 +336,79 @@ a:hover {
 /* Start Glow animation End */
 
 /* error-404 css end */
+
+
+
+/* Permanent Dark Mode Styles */
+body {
+    background-color: #121212;
+    /* Dark background */
+    color: #ffffff;
+    /* Light text color */
+}
+
+.error {
+    background-color: #fafafa;
+    /* Darker background for error section */
+    background-image: url(http://localhost/investOnTree/investOnTreeUpdated/assets/errors/images/bg-404-dark.png);
+    /* Optional dark mode image */
+    background-size: cover;
+}
+
+h2.title {
+    color: #e0e0e0;
+    /* Slightly lighter text for the title */
+}
+
+p.description {
+    color: #b0b0b0;
+    /* Light grey for description text */
+}
+
+.cmn-btn {
+    background-color: #333;
+    /* Darker button background */
+    color: #ffffff;
+    /* Light button text */
+    border: 1px solid #555;
+    /* Border for the button */
+}
+
+.cmn-btn:hover {
+    background-color: #444;
+    /* Slightly lighter background on hover */
+    border-color: #666;
+    /* Border color on hover */
+}
+
+.star-glow {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Light glow effect for stars */
+    background-blend-mode: screen;
+}
+
+.icon svg path {
+    fill: #ffffff;
+    /* White color for SVG icons */
+}
+
+/* Specific Dark Mode Styles for Bootstrap Components */
+.navbar,
+.dropdown-menu,
+.modal-content {
+    background-color: #212121;
+    /* Darker navbar and dropdown menu */
+    color: #e0e0e0;
+}
+
+.navbar a,
+.dropdown-menu a {
+    color: #e0e0e0;
+    /* Light text color for links */
+}
+
+.navbar a:hover,
+.dropdown-menu a:hover {
+    color: #ffffff;
+    /* Lighter color on hover */
+}

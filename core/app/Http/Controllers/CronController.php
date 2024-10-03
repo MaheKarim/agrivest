@@ -67,7 +67,6 @@ class CronController extends Controller
         }
     }
 
-
     public function interest()
     {
         try {
@@ -80,7 +79,6 @@ class CronController extends Controller
                 ->take(100)
                 ->get();
 
-            dump($invests);
             foreach ($invests as $invest) {
 
                 $this->processInvestment($invest, $now);
@@ -97,10 +95,13 @@ class CronController extends Controller
         $next    = $now->addHours($hours)->toDateTimeString();
 
         // Process investment
-        $invest->period   += 1;
-        $invest->paid     += $invest->recurring_pay;
-        $invest->next_time = $next;
-        $invest->last_time = $now;
+        $invest->period            += 1;
+        $invest->paid              += $invest->recurring_pay;
+        if ($invest->return_type == Status::LIFETIME) {
+            $invest->total_earning     += $invest->recurring_pay;
+        }
+        $invest->next_time          = $next;
+        $invest->last_time          = $now;
 
 
         // Update user's balance

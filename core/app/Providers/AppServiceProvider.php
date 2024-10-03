@@ -7,6 +7,7 @@ use App\Lib\Searchable;
 use App\Models\AdminNotification;
 use App\Models\Deposit;
 use App\Models\Frontend;
+use App\Models\Invest;
 use App\Models\SupportTicket;
 use App\Models\User;
 use App\Models\Withdrawal;
@@ -51,15 +52,17 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('admin.partials.sidenav', function ($view) {
             $view->with([
-                'bannedUsersCount'           => User::banned()->count(),
-                'emailUnverifiedUsersCount' => User::emailUnverified()->count(),
+                'bannedUsersCount'             => User::banned()->count(),
+                'emailUnverifiedUsersCount'    => User::emailUnverified()->count(),
                 'mobileUnverifiedUsersCount'   => User::mobileUnverified()->count(),
-                'kycUnverifiedUsersCount'   => User::kycUnverified()->count(),
-                'kycPendingUsersCount'   => User::kycPending()->count(),
-                'pendingTicketCount'         => SupportTicket::whereIN('status', [Status::TICKET_OPEN, Status::TICKET_REPLY])->count(),
-                'pendingDepositsCount'    => Deposit::pending()->count(),
-                'pendingWithdrawCount'    => Withdrawal::pending()->count(),
-                'updateAvailable'    => version_compare(gs('available_version'),systemDetails()['version'],'>') ? 'v'.gs('available_version') : false,
+                'kycUnverifiedUsersCount'      => User::kycUnverified()->count(),
+                'kycPendingUsersCount'         => User::kycPending()->count(),
+                'pendingTicketCount'           => SupportTicket::whereIN('status', [Status::TICKET_OPEN, Status::TICKET_REPLY])->count(),
+                'pendingDepositsCount'         => Deposit::pending()->count(),
+                'pendingWithdrawCount'         => Withdrawal::pending()->count(),
+                'runningInvestments'           => Invest::running()->count(),
+
+                'updateAvailable'    => version_compare(gs('available_version'), systemDetails()['version'], '>') ? 'v' . gs('available_version') : false,
             ]);
         });
 

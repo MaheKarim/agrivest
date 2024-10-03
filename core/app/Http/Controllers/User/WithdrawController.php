@@ -18,7 +18,7 @@ class WithdrawController extends Controller
     {
         $withdrawMethod = WithdrawMethod::active()->get();
         $pageTitle = 'Withdraw Money';
-        return view('Template::user.withdraw.methods', compact('pageTitle','withdrawMethod'));
+        return view('Template::user.withdraw.methods', compact('pageTitle', 'withdrawMethod'));
     }
 
     public function withdrawStore(Request $request)
@@ -55,7 +55,7 @@ class WithdrawController extends Controller
         $finalAmount = $afterCharge * $method->rate;
 
         $withdraw = new Withdrawal();
-        $withdraw->method_id = $method->id; // wallet method ID
+        $withdraw->method_id = $method->id;
         $withdraw->user_id = $user->id;
         $withdraw->amount = $request->amount;
         $withdraw->currency = $method->currency;
@@ -71,14 +71,14 @@ class WithdrawController extends Controller
 
     public function withdrawPreview()
     {
-        $withdraw = Withdrawal::with('method','user')->where('trx', session()->get('wtrx'))->where('status', Status::PAYMENT_INITIATE)->orderBy('id','desc')->firstOrFail();
+        $withdraw = Withdrawal::with('method', 'user')->where('trx', session()->get('wtrx'))->where('status', Status::PAYMENT_INITIATE)->orderBy('id', 'desc')->firstOrFail();
         $pageTitle = 'Withdraw Preview';
-        return view('Template::user.withdraw.preview', compact('pageTitle','withdraw'));
+        return view('Template::user.withdraw.preview', compact('pageTitle', 'withdraw'));
     }
 
     public function withdrawSubmit(Request $request)
     {
-        $withdraw = Withdrawal::with('method','user')->where('trx', session()->get('wtrx'))->where('status', Status::PAYMENT_INITIATE)->orderBy('id','desc')->firstOrFail();
+        $withdraw = Withdrawal::with('method', 'user')->where('trx', session()->get('wtrx'))->where('status', Status::PAYMENT_INITIATE)->orderBy('id', 'desc')->firstOrFail();
 
         $method = $withdraw->method;
         if ($method->status == Status::DISABLE) {
@@ -94,7 +94,7 @@ class WithdrawController extends Controller
 
         $user = auth()->user();
         if ($user->ts) {
-            $response = verifyG2fa($user,$request->authenticator_code);
+            $response = verifyG2fa($user, $request->authenticator_code);
             if (!$response) {
                 $notify[] = ['error', 'Wrong verification code'];
                 return back()->withNotify($notify)->withInput($request->all());
@@ -125,19 +125,19 @@ class WithdrawController extends Controller
 
         $adminNotification = new AdminNotification();
         $adminNotification->user_id = $user->id;
-        $adminNotification->title = 'New withdraw request from '.$user->username;
-        $adminNotification->click_url = urlPath('admin.withdraw.data.details',$withdraw->id);
+        $adminNotification->title = 'New withdraw request from ' . $user->username;
+        $adminNotification->click_url = urlPath('admin.withdraw.data.details', $withdraw->id);
         $adminNotification->save();
 
         notify($user, 'WITHDRAW_REQUEST', [
             'method_name' => $withdraw->method->name,
             'method_currency' => $withdraw->currency,
-            'method_amount' => showAmount($withdraw->final_amount,currencyFormat:false),
-            'amount' => showAmount($withdraw->amount,currencyFormat:false),
-            'charge' => showAmount($withdraw->charge,currencyFormat:false),
-            'rate' => showAmount($withdraw->rate,currencyFormat:false),
+            'method_amount' => showAmount($withdraw->final_amount, currencyFormat: false),
+            'amount' => showAmount($withdraw->amount, currencyFormat: false),
+            'charge' => showAmount($withdraw->charge, currencyFormat: false),
+            'rate' => showAmount($withdraw->rate, currencyFormat: false),
             'trx' => $withdraw->trx,
-            'post_balance' => showAmount($user->balance,currencyFormat:false),
+            'post_balance' => showAmount($user->balance, currencyFormat: false),
         ]);
 
         $notify[] = ['success', 'Withdraw request sent successfully'];
@@ -149,9 +149,9 @@ class WithdrawController extends Controller
         $pageTitle = "Withdrawal Log";
         $withdraws = Withdrawal::where('user_id', auth()->id())->where('status', '!=', Status::PAYMENT_INITIATE);
         if ($request->search) {
-            $withdraws = $withdraws->where('trx',$request->search);
+            $withdraws = $withdraws->where('trx', $request->search);
         }
-        $withdraws = $withdraws->with('method')->orderBy('id','desc')->paginate(getPaginate());
-        return view('Template::user.withdraw.log', compact('pageTitle','withdraws'));
+        $withdraws = $withdraws->with('method')->orderBy('id', 'desc')->paginate(getPaginate());
+        return view('Template::user.withdraw.log', compact('pageTitle', 'withdraws'));
     }
 }

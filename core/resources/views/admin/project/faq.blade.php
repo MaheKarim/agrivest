@@ -8,53 +8,49 @@
                     <div class="table-responsive--sm table-responsive">
                         <table class="table table--light style--two">
                             <thead>
-                            <tr>
-                                <th>@lang('Question')</th>
-                                <th>@lang('Answer')</th>
-                                <th>@lang('Status')</th>
-                                <th>@lang('Created At')</th>
-                                <th>@lang('Action')</th>
-                            </tr>
+                                <tr>
+                                    <th>@lang('Question')</th>
+                                    <th>@lang('Answer')</th>
+                                    <th>@lang('Status')</th>
+                                    <th>@lang('Created At')</th>
+                                    <th>@lang('Action')</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @forelse($faqs as $faq)
-                                <tr>
-                                    <td>{{ __($faq->question) }}</td>
-                                    <td>{{ __(Str::limit($faq->answer,35)) }}</td>
-                                    <td>@php echo $faq->statusBadge @endphp</td>
-                                    <td>{{ showDateTime($faq->created_at) }}</td>
-                                    <td>
-                                        <div class="button-group">
-                                            <button class="btn btn-outline--primary cuModalBtn btn-sm editBtn"
-                                                    data-modal_title="@lang('Edit FAQ')"
-                                                    data-resource="{{ $faq }}"
-                                            >
-                                                <i class="las la-pen"></i>@lang('Edit')
-                                            </button>
+                                @forelse($faqs as $faq)
+                                    <tr>
+                                        <td>{{ __($faq->question) }}</td>
+                                        <td>{{ __(Str::limit($faq->answer, 35)) }}</td>
+                                        <td>@php echo $faq->statusBadge @endphp</td>
+                                        <td>{{ showDateTime($faq->created_at) }}</td>
+                                        <td>
+                                            <div class="button-group">
+                                                <button class="btn btn-outline--primary cuModalBtn btn-sm editBtn"
+                                                    data-modal_title="@lang('Edit FAQ')" data-resource="{{ $faq }}">
+                                                    <i class="las la-pen"></i>@lang('Edit')
+                                                </button>
 
-                                            @if ($faq->status == Status::ENABLE)
-                                                <button
-                                                    class="btn btn-sm btn-outline--danger ms-1 confirmationBtn"
-                                                    data-question="@lang('Are you sure to disable this faqs?')"
-                                                    data-action="{{ route('admin.project.faq.status',$faq->id) }}">
-                                                    <i class="la la-eye-slash"></i> @lang('Disable')
-                                                </button>
-                                            @else
-                                                <button
-                                                    class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
-                                                    data-question="@lang('Are you sure to enable this faqs?')"
-                                                    data-action="{{ route('admin.project.faq.status',$faq->id) }}">
-                                                    <i class="la la-eye"></i> @lang('Enable')
-                                                </button>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
-                                </tr>
-                            @endforelse
+                                                @if ($faq->status == Status::ENABLE)
+                                                    <button class="btn btn-sm btn-outline--danger ms-1 confirmationBtn"
+                                                        data-question="@lang('Are you sure to disable this faqs?')"
+                                                        data-action="{{ route('admin.project.faq.status', $faq->id) }}">
+                                                        <i class="la la-eye-slash"></i> @lang('Disable')
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
+                                                        data-question="@lang('Are you sure to enable this faqs?')"
+                                                        data-action="{{ route('admin.project.faq.status', $faq->id) }}">
+                                                        <i class="la la-eye"></i> @lang('Enable')
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
+                                    </tr>
+                                @endforelse
 
                             </tbody>
                         </table>
@@ -88,12 +84,12 @@
                         <div class="form-group">
                             <label>@lang('Question')</label>
                             <input name="question" type="text" class="form-control bg--white pe-2"
-                                   placeholder="@lang('Question')" autocomplete="off" required>
+                                placeholder="@lang('Question')" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label>@lang('Answer')</label>
-                            <textarea name="answer" type="text" class="form-control bg--white pe-2"
-                                   placeholder="@lang('Answer')" autocomplete="off" required>
+                            <textarea name="answer" type="text" class="form-control bg--white pe-2" placeholder="@lang('Answer')"
+                                autocomplete="off" required>
                             </textarea>
                         </div>
                     </div>
@@ -104,13 +100,14 @@
             </div>
         </div>
     </div>
-    <x-confirmation-modal/>
+    <x-confirmation-modal />
 @endsection
 @push('breadcrumb-plugins')
     <x-search-form placeholder="Search here..." />
-    <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn"
-            data-modal_title="@lang('Create Faq')" type="button">
+    <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn" data-modal_title="@lang('Create Faq')"
+        type="button">
         <i class="las la-plus"></i>@lang('Add New')</button>
+    <x-back route="{{ route('admin.project.index') }}" />
 @endpush
 @push('script-lib')
     <script src="{{ asset('assets/global/js/cu-modal.js') }}"></script>

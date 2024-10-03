@@ -12,6 +12,7 @@
                                     <th>@lang('Start Date - End Date')</th>
                                     <th>@lang('Share Count - Available Share')</th>
                                     <th>@lang('ROI % - ROI Amount')</th>
+                                    <th>@lang('Type')</th>
                                     <th>@lang('Status')</th>
                                     <th>@lang('Action')</th>
                                 </tr>
@@ -49,6 +50,9 @@
                                             {{ showAmount($project->roi_amount) }}
                                         </td>
                                         <td>
+                                            @php echo $project->typeBadge @endphp
+                                        </td>
+                                        <td>
                                             @php echo $project->statusBadge @endphp
                                         </td>
                                         <td>
@@ -66,10 +70,12 @@
                                                         href="{{ route('admin.project.faq.add', $project->id) }}"><i
                                                             class="la la-question-circle"></i> @lang('FAQ')
                                                     </a>
-                                                    <a class="dropdown-item text--primary"
+
+                                                    <a class="dropdown-item text--info"
                                                         href="{{ route('admin.project.investHistory', $project->id) }}">
-                                                        <i class="la la-users"></i> @lang('Investors')
+                                                        <i class="las la-user-secret"></i> @lang('Investors')
                                                     </a>
+
                                                     <a class="dropdown-item text--info"
                                                         href="{{ route('admin.project.seo', $project->id) }}">
                                                         <i class="la la-cog"></i> @lang('SEO Setting')
@@ -99,6 +105,7 @@
                                                         </button>
                                                     @endif
                                                 @endif
+
                                             </div>
                                         </td>
                                     </tr>
@@ -128,7 +135,7 @@
                         <i class="las la-times"></i>
                     </button>
                 </div>
-                <form action="" method="POST">
+                <form method="POST">
                     @csrf
                     <div class="modal-body">
                         <p class="modal-detail"></p>
@@ -149,6 +156,14 @@
     <x-search-form placeholder="Title" />
     <a class="btn btn-sm btn-outline--primary" href="{{ route('admin.project.create') }}" type="button"><i
             class="las la-plus"></i> @lang('Add New')</a>
+@endpush
+
+@push('style')
+    <style>
+        .cancelOrderModal {
+            cursor: pointer;
+        }
+    </style>
 @endpush
 
 @push('script')

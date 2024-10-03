@@ -194,8 +194,8 @@
                                     </p>
                                 </div>
                                 <div class="interest-scheme__content text-sm-center">
-                                    <p class="mb-0 font-12">@lang('Closed Invest')</p>
-                                    <h5 class="mb-1 text-warning counter expiredInvests"></h5>
+                                    <p class="mb-0 font-12">@lang('Completed Invest')</p>
+                                    <h5 class="mb-1 text-warning counter completedInvests"></h5>
                                     <p class="mb-0">
                                         <a
                                             href="{{ route('admin.report.invest.history') }}?status={{ Status::INVEST_COMPLETED }}">
@@ -532,7 +532,7 @@
                     time: time
                 }, function(response) {
                     $('.runningInvests').text(`${response.running_invests}`);
-                    $('.expiredInvests').text(`${response.expired_invests}`);
+                    $('.completedInvests').text(`${response.completed_invests}`);
                     $('.interests').text(`${response.interests}`);
                 });
             }).change();

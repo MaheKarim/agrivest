@@ -2,7 +2,7 @@
     $ourVisionContent = getContent('our_vision.content', true);
     $ourVisionElement = getContent('our_vision.element', orderById: true);
 @endphp
-<section class="our-vision bg--white pt-120 pb-70">
+<section class="our-vision bg--white pt-70 pb-70">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">

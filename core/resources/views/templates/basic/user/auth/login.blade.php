@@ -5,7 +5,7 @@
 @section('panel')
     <section class="account">
         <div class="account-left bg-img"
-             data-background-image="{{ frontendImage('login_registration', @$authContent->data_values->image, '1168x1080') }}">
+            data-background-image="{{ frontendImage('login_registration', @$authContent->data_values->image, '1168x1080') }}">
             <a class="account-logo" href="{{ route('home') }}">
                 <img src="{{ siteLogo() }}" alt="logo">
             </a>
@@ -14,7 +14,7 @@
             <form class="account-form verify-gcaptcha" action="{{ route('user.login') }}" method="POST">
                 @csrf
                 <div class="account-form__header">
-                    <a class="account-logo d-lg-none" href="{{ route('home') }}">
+                    <a class="account-logo d-lg-none mb-4" href="{{ route('home') }}">
                         <img src="{{ siteLogo('dark') }}" alt="Logo">
                     </a>
                     <div class="account-form-headings">
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label class="form-label form--label">@lang('Username or Email')</label>
                         <input class="form-control form--control" type="text" name="username"
-                               value="{{ old('username') }}" required>
+                            value="{{ old('username') }}" required>
                     </div>
                     <div class="form-group">
                         <label class="form--label">@lang('Password')</label>
@@ -38,17 +38,16 @@
                             </button>
                         </div>
                     </div>
-                    <x-captcha/>
+                    <x-captcha />
                     <div class="form-group">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="form-check form--check">
                                 <input class="form-check-input" type="checkbox" name="remember" value="all"
-                                       id="remember-me" {{ old('remember') ? 'checked' : '' }}>
+                                    id="remember-me" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember-me"> @lang('Remember Me')
                                 </label>
                             </div>
-                            <a class="account-form__link"
-                               href="{{ route('user.password.request') }}">@lang('Forgot your password?')</a>
+                            <a class="account-form__link" href="{{ route('user.password.request') }}">@lang('Forgot your password?')</a>
                         </div>
                     </div>
                     <div class="form-group">

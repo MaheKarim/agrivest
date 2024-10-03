@@ -18,7 +18,7 @@ use Laramin\Utility\VugiChugi;
 
 function systemDetails()
 {
-    $system['name'] = 'viseradmin';
+    $system['name'] = 'agrivest';
     $system['version'] = '1.0';
     $system['build_version'] = '5.0.10';
     return $system;
@@ -207,15 +207,21 @@ function getPageSections($arr = false)
 }
 
 
-function getImage($image, $size = null)
+function getImage($image, $size = null, $avatar = false)
 {
     $clean = '';
     if (file_exists($image) && is_file($image)) {
         return asset($image) . $clean;
     }
+
+    if ($avatar) {
+        return asset('assets/images/avatar.png');
+    }
+
     if ($size) {
         return route('placeholder.image', $size);
     }
+
     return asset('assets/images/default.png');
 }
 

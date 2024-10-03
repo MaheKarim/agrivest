@@ -16,9 +16,7 @@ class ProjectController extends Controller
         $count      = $projects->count();
         $minProjectPrice = $projects->min('share_amount');
         $maxProjectPrice = $projects->max('share_amount');
-        $projects   = $projects->latest()->paginate(getPaginate());
-
-        // dd($maxProjectPrice);
+        $projects   = $projects->latest()->paginate(getPaginate(12));
 
         return view('Template::projects.index', compact('pageTitle', 'projects', 'categories', 'count', 'minProjectPrice', 'maxProjectPrice'));
     }
@@ -61,12 +59,11 @@ class ProjectController extends Controller
 
     public function filter(Request $request)
     {
-        $pageTitle  = 'Projects'; // Define $pageTitle
-        $categories = Category::active()->get(); // Define $categories
+        $pageTitle  = 'Projects';
+        $categories = Category::active()->get();
 
         $projects = Project::active()->searchable(['title'])->beforeEndDate()->available();
 
-        // Apply filters
         if ($request->has('category') && !empty($request->category)) {
             $projects = $this->filterItem($request, $projects, 'category');
         }
@@ -75,7 +72,6 @@ class ProjectController extends Controller
             $projects = $this->filterItem($request, $projects, 'return_type');
         }
 
-        // Price filtering
         if ($request->filled('min_price') || $request->filled('max_price')) {
             $minPrice = @$request->input('min_price') ?? 0;
             $maxPrice = @$request->input('max_price') ?? 0;
@@ -83,17 +79,15 @@ class ProjectController extends Controller
             $projects = $projects->whereBetween('share_amount', [$minPrice, $maxPrice]);
         }
 
-        // Get the min and max prices of the filtered projects
         $minProjectPrice = $projects->min('share_amount');
         $maxProjectPrice = $projects->max('share_amount');
 
-        $projects = $projects->latest()->paginate(getPaginate());
+        $projects = $projects->latest()->paginate(getPaginate(12));
 
         $viewType = $request->input('viewType', 'grid');
 
         session()->put('viewType', $viewType);
 
-        // Return the appropriate view based on viewType
         if ($viewType === 'list') {
             $view = view('Template::projects.list-project', compact('projects', 'categories'))->render();
         } else {

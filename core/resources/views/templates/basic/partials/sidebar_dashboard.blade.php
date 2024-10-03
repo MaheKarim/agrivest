@@ -5,7 +5,7 @@
     <div class="offcanvas-sidebar__header">
         <div class="user-info">
             <div class="user-info__thumb">
-                <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile'), avatar: true) }}"
                     alt="@lang('User Profile Image')">
             </div>
 

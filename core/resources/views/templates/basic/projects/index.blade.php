@@ -32,7 +32,7 @@
                                     <ul class="offers-btn-list ml-3 d-flex align-items-center">
                                         <li class="offers-btn-grid__item">
                                             <button type="button"
-                                                class="layout-switcher-btn list-grid-btn {{ session('viewType', 'grid') == 'grid' ? 'active' : '' }}"
+                                                class="layout-switcher-btn list-grid-btn {{ session('viewType', 'grid') == 'grid' || session('viewType', 'grid') == 'undefined' ? 'active' : '' }}"
                                                 title="Grid View" data-list-grid-class="col-sm-6 col-xl-4">
                                                 @include('components.grid-icon', ['class' => 'icon-class'])
                                             </button>
@@ -224,7 +224,6 @@
                 var minRange = $(".range-slider").find("#min-range");
                 var maxRange = $(".range-slider").find("#max-range");
 
-                // Initialize range slider
                 var rangeSlider = $(slide).slider({
                     range: true,
                     animate: false,
@@ -241,22 +240,18 @@
                         $(maxRange).val(ui.values[1]);
 
                         // Optional: You can trigger any additional actions when the slider changes, like updating filters.
-                        console.log("Min Price: " + ui.values[0] + ", Max Price: " + ui.values[1]);
                         $('#searchForm').submit();
                     }
                 });
 
                 // If you want to update the slider values when the input fields are manually changed:
                 $(minRange).on('change', function() {
-                    console.log(899);
                     var minValue = $(this).val();
                     var maxValue = $(maxRange).val();
                     $(slide).slider("values", [minValue, maxValue]);
                 });
 
                 $(maxRange).on('change', function() {
-                    console.log(999);
-
                     var minValue = $(minRange).val();
                     var maxValue = $(this).val();
                     $(slide).slider("values", [minValue, maxValue]);
@@ -276,22 +271,20 @@
                             // Update the result count
                             $('.offers-control__results span').text(response.totalProjects +
                                 ' @lang('Items Found')');
-
-                            console.log(response);
                         },
                         error: function(response) {
-                            console.log('Error:', response);
+                            notify('error', response);
                         }
                     });
                 }
                 // Pagination click event handling
                 $(document).on('click', '.pagination a', function(event) {
-                    event.preventDefault(); // Prevent default behavior
+                    event.preventDefault();
                     var page = $(this).attr('href').split('page=')[
-                        1]; // Get page number from the pagination link
+                        1];
                     var viewType = $('#viewType')
-                        .val(); // Get the current viewType (adjust according to your setup)
-                    fetchProjects(viewType, page); // Call fetchProjects with the page number
+                        .val();
+                    fetchProjects(viewType, page);
                 });
 
                 $('.search-icon').on('click', function(e) {

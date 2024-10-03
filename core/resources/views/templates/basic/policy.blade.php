@@ -5,7 +5,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="custom">
-                        <div class="body">
+                        <div class="body offer-details-desc">
                             @php
                                 echo $policy->data_values->details;
                             @endphp

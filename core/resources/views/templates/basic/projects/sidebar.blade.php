@@ -29,20 +29,20 @@
     <div class="offcanvas-sidebar__body">
         <div class="payment-form">
             <div class="payment-form__block">
-                <ul class="amount-detail">
-                    <li class="amount-detail-item">
+                <div class="amount-detail">
+                    <div class="amount-detail-item">
                         <span class="amount-detail-item__label">@lang('Total Invest')</span>
-                        <span class="amount-detail-item__value"
-                            id="total-payable">{{ gs('cur_sym') }}{{ getAmount($project->share_amount * $quantity) }}
-                        </span>
-                    </li>
-                    <li class="amount-detail-item">
+                        <span
+                            class="amount-detail-item__value">{{ gs('cur_sym') }}{{ getAmount($project->share_amount * $quantity) }}</span>
+                    </div>
+                    <div class="amount-detail-sperator">
+                        <i class="las la-long-arrow-alt-right"></i>
+                    </div>
+                    <div class="amount-detail-item">
                         <span class="amount-detail-item__label">{{ $label }}</span>
-                        <span class="amount-detail-item__value" id="total-earning">
-                            {{ __($profitMessage) }}
-                        </span>
-                    </li>
-                </ul>
+                        <span class="amount-detail-item__value" id="total-earning">{{ __($profitMessage) }}</span>
+                    </div>
+                </div>
             </div>
 
             <div class="payment-form__block">

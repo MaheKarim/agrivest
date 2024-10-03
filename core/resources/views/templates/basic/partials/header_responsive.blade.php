@@ -95,14 +95,14 @@
                         @endphp
                         <div class="dropdown dropdown--user">
                             <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                                <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile'), avatar: true) }}"
                                     alt="@lang('User Image')">
                             </div>
 
                             <div class="dropdown-menu dropdown-menu-end ">
                                 <div class="user-info">
                                     <div class="user-info__thumb">
-                                        <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
+                                        <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile'), avatar: true) }}"
                                             alt="@lang('User Image')">
                                     </div>
 

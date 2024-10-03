@@ -159,7 +159,7 @@
 
 </div>
 <div class="row">
-    <div class="col-md-4 return-type-wrapper">
+    <div class="col-md-6 return-type-wrapper">
         <label>
             @lang('Return Type')
             <i class="las la-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -171,7 +171,7 @@
             <option value="2" @selected(old('return_type', @$project->return_type) == 2 ? 'selected' : '')>@lang('Repeat')</option>
         </select>
     </div>
-    <div class="col-md-4 time-settings-wrapper">
+    <div class="col-md-6 time-settings-wrapper">
         <div class="form-group">
             <label>
                 @lang('Time')

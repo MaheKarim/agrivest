@@ -5,19 +5,18 @@
         <div class="container">
             <div class="offer-details-top">
                 <div class="offer-details-thumb">
-                    <a href="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
+                    <a href="{{ getImage(getFilePath('project') . '/' . $project->image) }}"
                         data-rel="lightcase:my-slideshow">
-                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image, getFileSize('project')) }}"
-                            alt="Project Image">
+                        <img src="{{ getImage(getFilePath('project') . '/' . $project->image) }}" alt="Project Image">
                     </a>
 
 
                     @if (!empty($project->gallery) && count($project->gallery) > 0)
                         @foreach ($project->gallery as $index => $gallery)
                             @if ($index < 5)
-                                <a href="{{ getImage(getFilePath('project') . '/' . $gallery, getFileSize('project')) }}"
+                                <a href="{{ getImage(getFilePath('project') . '/' . $gallery) }}"
                                     data-rel="lightcase:my-slideshow">
-                                    <img src="{{ getImage(getFilePath('project') . '/' . $gallery, getFileSize('project')) }}"
+                                    <img src="{{ getImage(getFilePath('project') . '/' . $gallery) }}"
                                         alt="Project Gallery Image"></a>
                             @endif
                         @endforeach
@@ -83,12 +82,12 @@
                                         @lang('Units')</span>
                                 </li>
                             </ul>
-
-                            <button class="btn btn--lg btn--base w-100 mt-4 d-lg-none" type="button"
-                                data-toggle="offcanvas-sidebar" data-target="#offer-details-offcanvas-sidebar">
-                                @lang('Check Details')
-                            </button>
-
+                            @if ($project->end_date > now() && $project->status != Status::PROJECT_END && $project->available_share > 0)
+                                <button class="btn btn--lg btn--base w-100 mt-4 d-lg-none" type="button"
+                                    data-toggle="offcanvas-sidebar" data-target="#offer-details-offcanvas-sidebar">
+                                    @lang('Check Details')
+                                </button>
+                            @endif
                             <div class="offer-details-desc">
                                 <p>
                                     @php echo $project->description; @endphp
@@ -133,7 +132,7 @@
                             @endif
                         </div>
                     </div>
-                    @if ($project->end_date > now())
+                    @if ($project->end_date > now() && $project->status != Status::PROJECT_END && $project->available_share > 0)
                         <div class="col-lg-4" id="sidebar-container">
                             @include($activeTemplate . 'projects.sidebar')
                         </div>

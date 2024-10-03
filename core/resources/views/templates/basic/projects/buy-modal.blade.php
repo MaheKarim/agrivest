@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">@lang('Product Title')</h5>
+                <h5 class="modal-title">@lang('Pay Via for ') {{ __($project->title) }}</h5>
                 <button class="btn-close modal-icon" data-bs-dismiss="modal" type="button" aria-label="Close">
                     <i class="las la-times"></i>
                 </button>

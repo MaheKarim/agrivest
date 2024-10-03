@@ -48,11 +48,10 @@ class Invest extends Model
         return $query->sum('total_earning');
     }
 
-    public function statusBadge()
-    : Attribute
+    public function statusBadge(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->badgeData(),
+            get: fn() => $this->badgeData(),
         );
     }
 
@@ -67,19 +66,21 @@ class Invest extends Model
             $html = '<span class="badge badge--status badge--primary">' . trans('Accepted') . '</span>';
         } elseif ($this->status == Status::INVEST_RUNNING) {
             $html = '<span class="badge badge--status badge--info">' . trans('Running') . '</span>';
+        } elseif ($this->status == Status::INVEST_CLOSED) {
+            $html = '<span class="badge badge--status badge--dark">' . trans('Closed') . '</span>';
         } else {
             $html = '<span class="badge badge--status badge--danger">' . trans('Canceled') . '</span>';
         }
         return $html;
     }
 
+
     public function scopeRunning($query)
     {
         return $query->where('status', Status::INVEST_RUNNING);
     }
 
-    public function paymentTypeBadge()
-    : Attribute
+    public function paymentTypeBadge(): Attribute
     {
         return new Attribute(function () {
             $html = '';
@@ -93,8 +94,7 @@ class Invest extends Model
         });
     }
 
-    public function paymentStatusBadge()
-    : Attribute
+    public function paymentStatusBadge(): Attribute
     {
         return new Attribute(function () {
             $html = '';
@@ -108,8 +108,7 @@ class Invest extends Model
         });
     }
 
-    public function capitalBackBadge()
-    : Attribute
+    public function capitalBackBadge(): Attribute
     {
         return new Attribute(function () {
             $html = '';
@@ -123,8 +122,7 @@ class Invest extends Model
         });
     }
 
-    public function isBackedBadge()
-    : Attribute
+    public function isBackedBadge(): Attribute
     {
         return new Attribute(function () {
             $html = '';
@@ -137,5 +135,4 @@ class Invest extends Model
             return $html;
         });
     }
-
 }

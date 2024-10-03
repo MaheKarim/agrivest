@@ -3,18 +3,24 @@
   /* ==================== Ready Function Start =================== */
 
   $(document).ready(function () {
-    /* ==================== Header Button Click JS Start =================== */
-    $(".header-button").on("click", function () {
-      $(".body-overlay").toggleClass("show");
-      $("body").toggleClass("scroll-hide-sm");
+    /* ==================== Header Navbar Collapse JS Start ===================== */
+    function hideNavbarCollapse() {
+      new bootstrap.Collapse($(".navbar-collapse")[0]).hide();
+      $(".navbar-collapse").trigger("hide.bs.collapse");
+    }
+    $(".navbar-collapse").on({
+      "show.bs.collapse": function () {
+        $("body").addClass("scroll-hide");
+        $(".body-overlay").addClass("show").on("click", hideNavbarCollapse);
+      },
+      "hide.bs.collapse": function () {
+        $("body").removeClass("scroll-hide");
+        $(".body-overlay")
+          .removeClass("show")
+          .unbind("click", hideNavbarCollapse);
+      },
     });
-
-    $(".body-overlay").on("click", function () {
-      $(".header-button").trigger("click");
-      $(this).removeClass("show");
-      $("body").removeClass("scroll-hide-sm");
-    });
-    /* ==================== Header Button Click JS End ===================== */
+    /* ==================== Header Navbar Collapse JS End ======================= */
 
     /* ==================== Add Background Image Js Start ===================== */
     $(".bg-img").css("background-image", function () {
@@ -108,12 +114,14 @@
         $(this).addClass("show");
         sidebar.addClass("show");
         sidebarOverlay.addClass("show");
+        $("body").addClass("scroll-hide");
       };
 
       var hideSidebar = function () {
         sidebar.removeClass("show");
         sidebarOverlay.removeClass("show");
         $(toggler).removeClass("show");
+        $("body").removeClass("scroll-hide");
       };
 
       $(toggler).on("click", showSidebar);

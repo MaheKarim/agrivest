@@ -8,7 +8,7 @@
                     <div class="p-3 bg--white">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <div>
-                                <img src="{{ getImage(getFilePath('userProfile') . '/' . @$invest->user->image, getFileSize('userProfile')) }}"
+                                <img src="{{ getImage(getFilePath('userProfile') . '/' . @$invest->user->image, getFileSize('userProfile'), avatar: true) }}"
                                     alt="@lang('Profile Image')" class="b-radius--10" style="max-width: 100px;">
                             </div>
                             <div>

@@ -73,6 +73,7 @@
                                     <th>@lang('Quantity')</th>
                                     <th>@lang('Amount')</th>
                                     <th>@lang('Profit')</th>
+                                    <th>@lang('Return Type')</th>
                                     <th>@lang('To Pay')</th>
                                     <th>@lang('Paid')</th>
                                     <th>@lang('Status')</th>
@@ -93,7 +94,8 @@
                                         <td>{{ __($invest->quantity) }} @lang('Units')</td>
                                         <td>{{ showAmount($invest->total_price) }}</td>
                                         <td>{{ showAmount($invest->total_earning) }}</td>
-                                        <td>{{ $invest->project->return_type != -1 ? showAmount($invest->recurring_pay) : '**' }}
+                                        <td> @php echo $invest->project->typeBadge @endphp </td>
+                                        <td>{{ $invest->project->return_type != Status::LIFETIME ? showAmount($invest->recurring_pay) : '**' }}
                                         </td>
                                         <td>{{ showAmount($invest->paid) }}</td>
                                         <td>

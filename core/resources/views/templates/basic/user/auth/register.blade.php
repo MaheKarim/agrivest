@@ -6,17 +6,17 @@
     @if (gs('registration'))
         <section class="account">
             <div class="account-left bg-img"
-                 data-background-image="{{ frontendImage('login_registration', @$authContent->data_values->image, '1168x1080') }}">
+                data-background-image="{{ frontendImage('login_registration', @$authContent->data_values->image, '1168x1080') }}">
                 <a class="account-logo" href="{{ route('home') }}">
                     <img src="{{ siteLogo() }}" alt="Logo">
                 </a>
             </div>
             <div class="account-right">
                 <form class="account-form verify-gcaptcha disableSubmission" action="{{ route('user.register') }}"
-                      method="POST">
+                    method="POST">
                     @csrf
                     <div class="account-form__header">
-                        <a class="account-logo d-lg-none" href="{{ route('home') }}">
+                        <a class="account-logo d-lg-none mb-4" href="{{ route('home') }}">
                             <img src="{{ siteLogo('dark') }}" alt="Logo">
                         </a>
 
@@ -30,17 +30,17 @@
                             <div class="col-xsm-6 col-sm-6">
                                 <label class="form-label form--label">@lang('First Name')</label>
                                 <input class="form-control form--control" type="text" name="firstname"
-                                       value="{{ old('firstname') }}" required>
+                                    value="{{ old('firstname') }}" required>
                             </div>
                             <div class="col-xsm-6 col-sm-6">
                                 <label class="form-label form--label">@lang('Last Name')</label>
                                 <input class="form-control form--control" type="text" name="lastname"
-                                       value="{{ old('lastname') }}" required>
+                                    value="{{ old('lastname') }}" required>
                             </div>
                             <div class="col-sm-12">
                                 <label class="form-label form--label">@lang('E-Mail Address')</label>
                                 <input class="form-control form--control checkUser" type="email" name="email"
-                                       value="{{ old('email') }}" required>
+                                    value="{{ old('email') }}" required>
                             </div>
                             <div class="col-xsm-6 col-sm-6">
                                 <label class="form--label">@lang('Password')</label>
@@ -56,16 +56,15 @@
                             <div class="col-xsm-6 col-sm-6">
                                 <label class="form--label">@lang('Confirm Password')</label>
                                 <div class="input-group input--group input--group-password">
-                                    <input class="form-control form--control" type="password"
-                                           name="password_confirmation"
-                                           required>
+                                    <input class="form-control form--control" type="password" name="password_confirmation"
+                                        required>
                                     <button class="input-group-text input-group-btn" type="button">
                                         <i class="fas fa-eye-slash"></i>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <x-captcha/>
+                                <x-captcha />
 
                                 @if (gs('agree'))
                                     @php
@@ -74,13 +73,12 @@
 
                                     <div class="form-check form--check">
                                         <input class="form-check-input" type="checkbox" name="agree"
-                                               @checked(old('agree')) id="remember-me">
+                                            @checked(old('agree')) id="remember-me">
                                         <label class="form-check-label" for="remember-me">@lang('I agree with')</label>
                                         <span>
                                             @foreach ($policyPages as $policy)
-                                                <a href="{{ route('policy.pages', $policy->slug) }}"
-                                                   target="_blank"
-                                                   class="text--base">{{ __($policy->data_values->title) }}</a>
+                                                <a href="{{ route('policy.pages', $policy->slug) }}" target="_blank"
+                                                    class="text--base">{{ __($policy->data_values->title) }}</a>
                                                 @if (!$loop->last)
                                                     ,
                                                 @endif
@@ -103,15 +101,14 @@
 
                         <p class="account-form__cta-text">
                             @lang('Already have an account?') <a class="account-form__link"
-                                                                 href="{{ route('user.login') }}">@lang('Sign In')</a>
+                                href="{{ route('user.login') }}">@lang('Sign In')</a>
                         </p>
                     </div>
                 </form>
             </div>
         </section>
-        <div class="modal fade" id="existModalCenter" tabindex="-1" role="dialog"
-             aria-labelledby="existModalCenterTitle"
-             aria-hidden="true">
+        <div class="modal fade" id="existModalCenter" tabindex="-1" role="dialog" aria-labelledby="existModalCenterTitle"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -125,7 +122,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark btn-sm"
-                                data-bs-dismiss="modal">@lang('Close')</button>
+                            data-bs-dismiss="modal">@lang('Close')</button>
                         <a href="{{ route('user.login') }}" class="btn btn--base btn-sm">@lang('Login')</a>
                     </div>
                 </div>
@@ -146,9 +143,9 @@
     @push('script')
         <script>
             "use strict";
-            (function ($) {
+            (function($) {
 
-                $('.checkUser').on('focusout', function (e) {
+                $('.checkUser').on('focusout', function(e) {
                     var url = '{{ route('user.checkUser') }}';
                     var value = $(this).val();
                     var token = '{{ csrf_token() }}';
@@ -158,7 +155,7 @@
                         _token: token
                     }
 
-                    $.post(url, data, function (response) {
+                    $.post(url, data, function(response) {
                         if (response.data != false) {
                             $('#existModalCenter').modal('show');
                         }

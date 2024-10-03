@@ -3,8 +3,6 @@
     $topbarContents = getContent('top_bar.element', null, orderById: true);
 @endphp
 
-
-
 <header class="header" id="header">
     <div class="header-top d-none d-lg-block">
         <div class="container">

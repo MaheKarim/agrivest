@@ -111,12 +111,12 @@ class InvestReportController extends Controller
         }
 
         $runningInvests = Invest::where('status', Status::INVEST_RUNNING)->where('created_at', '>=', $time)->sum('total_price');
-        $expiredInvests = Invest::where('status', Status::INVEST_CLOSED)->where('created_at', '>=', $time)->sum('total_price');
+        $expiredInvests = Invest::where('status', Status::INVEST_COMPLETED)->where('created_at', '>=', $time)->sum('total_price');
         $interests = Transaction::where('remark', 'profit')->where('created_at', '>=', $time)->sum('amount');
 
         return [
             'running_invests' => showAmount($runningInvests),
-            'expired_invests' => showAmount($expiredInvests),
+            'completed_invests' => showAmount($expiredInvests),
             'interests' => showAmount($interests),
         ];
     }

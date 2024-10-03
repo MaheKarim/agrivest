@@ -101,11 +101,6 @@
 
 
                 function clearIfGoalEmpty(goal) {
-                    // if (goal === '') {
-                    //     $('.share_count, .share_amount').val('');
-                    //     notify('error', 'Please enter project goal value first');
-                    //     return true;
-                    // }
                     return false;
                 }
 
@@ -118,18 +113,12 @@
                         return;
                     }
 
-                    if (invalidInputPattern.test(goal) || invalidInputPattern.test(shareCount)) {
-                        // notify('error', 'Please enter valid values');
-                        // return;
-                    }
-
                     goal = parseFloat(goal);
                     shareCount = parseFloat(shareCount);
 
                     if (!isNaN(goal) && !isNaN(shareCount) && shareCount > 0) {
                         let shareAmount = Math.round(goal / shareCount);
                         if (shareAmount <= 0.00) {
-                            // notify('error', 'Share amount must be greater than 0');
                             $('.share_amount').val('');
                         } else {
                             $('.share_amount').val(shareAmount.toFixed(2));
@@ -153,7 +142,6 @@
                     }
 
                     if (invalidInputPattern.test(goal) || invalidInputPattern.test(shareAmount)) {
-                        // notify('error', 'Please enter valid values');
                         return;
                     }
 
